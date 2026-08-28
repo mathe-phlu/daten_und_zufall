@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="de">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Aufgabe 2.2 · Daten und Zufall</title>
+<link rel="stylesheet" href="../../gemeinsam/lernlandschaft.css?f=c77c6724">
+<body data-farbe="zugang">
+<div class="stationskopf"><span class="wort">AUFGABE</span><span class="roemisch">2.2</span><h1>Daten und Zufall</h1><span class="wechsel wortweise"><a href="../../index.html">Startseite</a><a href="../index.html">Alle Aufgaben</a></span></div>
+<main>
+<h2 class="etappentitel"><span class="stand">Aufgabe 2.2</span></h2><div class="aufgabenblatt"><p>In einer Urne befinden sich zwei rote Kugeln, eine blaue und eine
+  grüne.
+  <ol class="klammer-a"><li>Es werden zufällig zwei Kugeln nacheinander entnommen, wobei
+    die erste in die Urne zurückgelegt wird. Geben Sie einen
+    geeignete Ergebnismenge $\Omega$ an.</li><li>Wie ist $\Omega$ zu wählen, wenn die Kugeln gleichzeitig
+    entnommen werden?</li></ol></p><div class="stufen"><div class="reiter"><button type="button" data-stufe="starthilfe" aria-expanded="false">Starthilfe</button><button type="button" data-stufe="loesung" aria-expanded="false">Lösung</button><button type="button" data-stufe="video" aria-expanded="false">Video</button></div><div class="faltung" data-stufe="starthilfe" hidden><ul><li>Bei (a): Die erste Kugel wird zurückgelegt - was bedeutet das für die zweite Ziehung?</li><li>Bei (a): Spielt die Reihenfolge eine Rolle? Verwenden Sie geordnete Paare</li><li>Bei (b): «Gleichzeitig» bedeutet ohne Reihenfolge - verwenden Sie Mengen</li><li>Beachten Sie: Es gibt zwei rote Kugeln - wie wirkt sich das aus?</li></ul></div><div class="faltung" data-stufe="loesung" hidden><p><strong>Ausgangssituation:</strong> 2 rote Kugeln (r), 1 blaue Kugel (b), 1 grüne Kugel (g) → insgesamt 4 Kugeln</p>
+<p><strong>Teil (a): Mit Zurücklegen, nacheinander</strong></p>
+<p>Beim Ziehen mit Zurücklegen wird die erste Kugel zurückgelegt → bei der zweiten Ziehung sind wieder alle 4 Kugeln in der Urne. Die Reihenfolge ist wichtig (nacheinander!), dieselbe Kugel kann zweimal gezogen werden.</p>
+<p>Situation «mit Reihenfolge und mit Wiederholung» → geordnete Paare:
+$$\Omega = \{(r|r), (r|b), (r|g), (b|r), (b|b), (b|g), (g|r), (g|b), (g|g)\}$$</p>
+<p><strong>Warum diese 9 Elemente?</strong> Erste Ziehung: 3 Möglichkeiten (r, b oder g), zweite Ziehung: wieder 3 Möglichkeiten. Nach dem Zählprinzip: $3 \cdot 3 = 9$ verschiedene Ergebnisse.
+Beachte: $(r|b) \neq (b|r)$ - die Reihenfolge macht einen Unterschied!</p>
+<p><strong>Alternative Modellierung:</strong> Man könnte die beiden roten Kugeln unterscheiden (z.B. $r_1$ und $r_2$). Dann hätte $\Omega$ sogar $4 \cdot 4 = 16$ Elemente. Da die roten Kugeln aber nicht unterscheidbar sind, ist obige Darstellung angemessener.</p>
+<p><strong>Teil (b): Gleichzeitiges Ziehen (ohne Zurücklegen)</strong></p>
+<p>«Gleichzeitig» bedeutet: Reihenfolge spielt keine Rolle, keine Kugel kann doppelt gezogen werden, wir ziehen 2 aus 4 Kugeln.</p>
+<p>Situation «ohne Reihenfolge und ohne Wiederholung» → Mengen:
+$$\Omega = \{\{r, r\}, \{r, b\}, \{r, g\}, \{b, g\}\}$$</p>
+<p><strong>Warum nur diese 4 Elemente?</strong>
+$\{r, r\}$: Beide roten Kugeln werden gezogen  $\{r, b\}$: Eine rote und die blaue Kugel  $\{r, g\}$: Eine rote und die grüne Kugel  $\{b, g\}$: Die blaue und die grüne Kugel.</p>
+<p>Es gibt keine weiteren Möglichkeiten, da: $\{b, b\}$ unmöglich ist (nur eine blaue Kugel), $\{g, g\}$ unmöglich ist (nur eine grüne Kugel), $\{b, r\} = \{r, b\}$ (Reihenfolge in Mengen irrelevant).</p>
+<p><strong>Zusammenfassung der Unterschiede:</strong></p>
+<div class="tabelle"><table><tr><td class="l sl so"></td><td class="c sl so"><strong>Teil (a)</strong></td><td class="c sl sr so"><strong>Teil (b)</strong></td></tr><tr><td class="l sl so">Zurücklegen</td><td class="c sl so">Ja</td><td class="c sl sr so">Nein</td></tr><tr><td class="l sl">Reihenfolge</td><td class="c sl">Wichtig</td><td class="c sl sr">Unwichtig</td></tr><tr><td class="l sl">Notation</td><td class="c sl">Tupel $(x|y)$</td><td class="c sl sr">Mengen $\{x, y\}$</td></tr><tr><td class="su l sl">Anzahl Ergebnisse</td><td class="su c sl">9</td><td class="su c sl sr">4</td></tr></table></div>
+<p>Diese Aufgabe zeigt eindrücklich, wie die Art des Ziehens (mit/ohne Zurücklegen, mit/ohne Beachtung der Reihenfolge) die Ergebnismenge bestimmt!</p></div><div class="faltung" data-stufe="video" hidden><div class="rahmen"><video class="spieler" controls preload="metadata" src="https://api.cast.switch.ch/p/110/sp/11000/playManifest/entryId/0_azvxsokz/format/url/protocol/https/video.mp4"></video></div></div></div></div><p class="fundort">Im Video: <a href="../../lernweg-2/unterschiedliche-astlaengen/index.html">Etappe 4 · Unterschiedliche Astlängen</a> <span class="zeit">bei 3:14</span></p><p class="heimknopf"><a href="../../index.html"><span class="haus" aria-hidden="true">⌂</span>Material</a></p>
+</main>
+<footer><div class="seitenfuss"><span class="wo"><b>MA01.07 · MA01.08</b> Daten und Zufall</span><span class="wer">Henrike Allmendinger · Herbstsemester 2026<a class="pinnwand" href="https://www.taskcards.de/#/board/c1b7fe7b-28eb-41b2-bf38-60c4264a9f8c" target="_blank" rel="noopener">Feedback</a></span></div></footer>
+<script src="../../gemeinsam/seite.js?f=c77c6724"></script>
+
+<script>window.MathJax={tex:{inlineMath:[['$','$'],['\\(','\\)']],
+  displayMath:[['\\[','\\]'],['$$','$$']],processEscapes:true,
+  macros:{cc:'\\mathbb{C}',rr:'\\mathbb{R}',nn:'\\mathbb{N}',
+          zz:'\\mathbb{Z}',qq:'\\mathbb{Q}',cis:'\\operatorname{cis}',
+          Log:'\\operatorname{Log}',dd:'\\mathrm{d}',
+          glqq:'\\text{„}',grqq:'\\text{“}',
+          // Aus dem Vorspann von MA01.03 (`Preambel/Styles.tex`):
+          // ein Gleichheitszeichen mit Dach, «entspricht».
+          equalhat:'\\mathrel{\\stackrel{\\wedge}{=}}',
+          // `\vv` kommt aus dem Paket `esvect` (Vektorpfeil) und ist
+          // MathJax unbekannt — ohne diese Zeile setzt es den Befehl
+          // rot als Fehler. Gefunden am 26.08. in Kapitel 3 von
+          // MA01.03 («schultypische Beispiele», 4 Stellen).
+          vv:['\\overrightarrow{#1}',1]}},
+  options:{skipHtmlTags:['script','noscript','style','textarea','pre']}};</script>
+<script defer src="../../gemeinsam/fremd/tex-svg.js"></script>
+</body>
+</html>

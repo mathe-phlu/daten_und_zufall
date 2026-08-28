@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="de">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Aufgabe 1.5 · Daten und Zufall</title>
+<link rel="stylesheet" href="../../gemeinsam/lernlandschaft.css?f=c77c6724">
+<body data-farbe="fach">
+<div class="stationskopf"><span class="wort">AUFGABE</span><span class="roemisch">1.5</span><h1>Daten und Zufall</h1><span class="wechsel wortweise"><a href="../../index.html">Startseite</a><a href="../index.html">Alle Aufgaben</a></span></div>
+<main>
+<h2 class="etappentitel"><span class="stand">Aufgabe 1.5</span></h2><div class="aufgabenblatt"><p>11 Lipizzaner-Schimmelhengste stehen mit ihren Reitern in einer
+  Reihe.</p>
+<figure style="--bildbreite:0.70"><img src="../../bilder/913cafce0422abfc.png" alt=""></figure>
+<ol class="klammer-a"><li>Auf wie viele Arten können die Pferde in der Reihe stehen?</li><li>Das Pferd des Hauptmanns soll immer in der Mitte stehen. Wie
+    viele
+    Anordnungen sind jetzt möglich?</li><li>Wie viele Anordnungen sind
+    möglich, wenn nur die Pferde
+<p>auf der linken bzw. rechten Seite
+    des Hauptmannpferdes ihre Plätze wechseln können?</li></ol></p><div class="stufen"><div class="reiter"><button type="button" data-stufe="starthilfe" aria-expanded="false">Starthilfe</button><button type="button" data-stufe="loesung" aria-expanded="false">Lösung</button></div><div class="faltung" data-stufe="starthilfe" hidden><ul><li>Bei (a): Wie viele Möglichkeiten gibt es, n verschiedene Objekte anzuordnen?</li><li>Bei (b): Wenn eine Position fest ist, wie viele Positionen bleiben für die anderen?</li><li>Bei (c): Können Sie das Problem in zwei unabhängige Teilprobleme aufteilen?</li><li>Nutzen Sie das Multiplikationsprinzip für unabhängige Entscheidungen</li></ul></div><div class="faltung" data-stufe="loesung" hidden><p><strong>Teil (a): Alle Pferde können beliebig stehen</strong></p>
+<p>Wir haben 11 unterscheidbare Pferde, die in einer Reihe angeordnet werden sollen. Dies ist eine klassische Permutation von 11 Elementen.</p>
+<p>Die Anzahl der Permutationen von $n$ verschiedenen Objekten ist $n!$.</p>
+<p>Für 11 Pferde:
+$$11! = 11 \cdot 10 \cdot 9 \cdot 8 \cdot 7 \cdot 6 \cdot 5 \cdot 4 \cdot 3 \cdot 2 \cdot 1 = 39'916'800$$</p>
+<p>Es gibt also fast 40 Millionen verschiedene Anordnungen!</p>
+<p><strong>Teil (b): Hauptmannspferd steht in der Mitte</strong></p>
+<p>Bei 11 Pferden ist die mittlere Position die 6. Position (5 links, 5 rechts).</p>
+<p>Wenn das Hauptmannspferd fest auf Position 6 steht:
+<ul><li>Diese Position ist besetzt → keine Wahl mehr</li><li>Die restlichen 10 Pferde können auf die verbleibenden 10 Positionen verteilt werden</li><li>Das ist eine Permutation von 10 Elementen</li></ul></p>
+<p>$$10! = 10 \cdot 9 \cdot 8 \cdot 7 \cdot 6 \cdot 5 \cdot 4 \cdot 3 \cdot 2 \cdot 1 = 3'628'800$$</p>
+<p><strong>Teil (c): Nur Seitenwechsel innerhalb der Hälften</strong></p>
+<p>Das Hauptmannspferd steht wieder in der Mitte. Die anderen Pferde sind in zwei Gruppen aufgeteilt:</p>
+<figure class="zeichnung"><img src="../../bilder/zeichnung-4f371b602773.svg" alt=""></figure>
+<p>Die Bedingung bedeutet:
+<ul><li>Die 5 Pferde links vom Hauptmann können nur untereinander die Plätze tauschen</li><li>Die 5 Pferde rechts vom Hauptmann können nur untereinander die Plätze tauschen</li><li>Kein Pferd kann von links nach rechts (oder umgekehrt) wechseln</li></ul></p>
+<p>Nach dem Zählprinzip (Multiplikationsregel für unabhängige Ereignisse):
+<ul><li>Anordnungen der linken 5 Pferde: $5! = 120$</li><li>Anordnungen der rechten 5 Pferde: $5! = 120$</li><li>Gesamtzahl: $5! \cdot 5! = 120 \cdot 120 = 14'400$</li></ul></p></div></div></div><p class="heimknopf"><a href="../../index.html"><span class="haus" aria-hidden="true">⌂</span>Material</a></p>
+</main>
+<footer><div class="seitenfuss"><span class="wo"><b>MA01.07 · MA01.08</b> Daten und Zufall</span><span class="wer">Henrike Allmendinger · Herbstsemester 2026<a class="pinnwand" href="https://www.taskcards.de/#/board/c1b7fe7b-28eb-41b2-bf38-60c4264a9f8c" target="_blank" rel="noopener">Feedback</a></span></div></footer>
+<script src="../../gemeinsam/seite.js?f=c77c6724"></script>
+
+<script>window.MathJax={tex:{inlineMath:[['$','$'],['\\(','\\)']],
+  displayMath:[['\\[','\\]'],['$$','$$']],processEscapes:true,
+  macros:{cc:'\\mathbb{C}',rr:'\\mathbb{R}',nn:'\\mathbb{N}',
+          zz:'\\mathbb{Z}',qq:'\\mathbb{Q}',cis:'\\operatorname{cis}',
+          Log:'\\operatorname{Log}',dd:'\\mathrm{d}',
+          glqq:'\\text{„}',grqq:'\\text{“}',
+          // Aus dem Vorspann von MA01.03 (`Preambel/Styles.tex`):
+          // ein Gleichheitszeichen mit Dach, «entspricht».
+          equalhat:'\\mathrel{\\stackrel{\\wedge}{=}}',
+          // `\vv` kommt aus dem Paket `esvect` (Vektorpfeil) und ist
+          // MathJax unbekannt — ohne diese Zeile setzt es den Befehl
+          // rot als Fehler. Gefunden am 26.08. in Kapitel 3 von
+          // MA01.03 («schultypische Beispiele», 4 Stellen).
+          vv:['\\overrightarrow{#1}',1]}},
+  options:{skipHtmlTags:['script','noscript','style','textarea','pre']}};</script>
+<script defer src="../../gemeinsam/fremd/tex-svg.js"></script>
+</body>
+</html>

@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="de">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Aufgabe 3.5 · Daten und Zufall</title>
+<link rel="stylesheet" href="../../gemeinsam/lernlandschaft.css?f=c77c6724">
+<body data-farbe="fach">
+<div class="stationskopf"><span class="wort">AUFGABE</span><span class="roemisch">3.5</span><h1>Daten und Zufall</h1><span class="wechsel wortweise"><a href="../../index.html">Startseite</a><a href="../index.html">Alle Aufgaben</a></span></div>
+<main>
+<h2 class="etappentitel"><span class="stand">Aufgabe 3.5</span></h2><div class="aufgabenblatt"><p>Fünf Personen sollen sich eine der Ziffern 0 bis 9 merken. Mit
+      welcher Wahrscheinlichkeit wählen (mindestens) zwei Personen die
+      gleiche Ziffer?</p><div class="stufen"><div class="reiter"><button type="button" data-stufe="starthilfe" aria-expanded="false">Starthilfe</button><button type="button" data-stufe="loesung" aria-expanded="false">Lösung</button><button type="button" data-stufe="video" aria-expanded="false">Video</button></div><div class="faltung" data-stufe="starthilfe" hidden><ul><li>Dies ist eine Variante des klassischen Geburtstagsproblems</li><li>«Mindestens zwei gleich» ist schwer direkt zu zählen</li><li>Betrachten Sie das Gegenereignis: «Alle wählen verschiedene Ziffern»</li><li>Nutzen Sie das Zählprinzip für die Anzahl der Möglichkeiten</li></ul></div><div class="faltung" data-stufe="loesung" hidden><p><strong>Das Geburtstagsproblem in neuem Gewand</strong></p>
+<p>Diese Aufgabe ist strukturell identisch zum klassischen Geburtstagsproblem, nur mit:
+<ul><li>5 Personen statt 23</li><li>10 mögliche «Geburtstage» (Ziffern 0-9) statt 365</li></ul></p>
+<p><strong>Ereignisse definieren:</strong></p>
+<p>$Z$ = «Mindestens zwei Personen wählen die gleiche Ziffer»
+$\overline{Z}$ = «Alle Personen wählen verschiedene Ziffern»</p>
+<p><strong>Anzahl aller möglichen Wahlen:</strong></p>
+<p>Jede der 5 Personen kann unabhängig eine der 10 Ziffern wählen:
+$$|\Omega| = 10^5 = 100'000$$</p>
+<p><strong>Strategie über das Gegenereignis:</strong></p>
+<p>Es ist einfacher, $\overline{Z}$ zu zählen als $Z$ direkt.</p>
+<p><strong>Anzahl der Fälle, wo alle verschiedene Ziffern wählen:</strong></p>
+<ul><li>Person 1: 10 Möglichkeiten</li><li>Person 2: 9 Möglichkeiten (eine Ziffer schon vergeben)</li><li>Person 3: 8 Möglichkeiten</li><li>Person 4: 7 Möglichkeiten</li><li>Person 5: 6 Möglichkeiten</li></ul>
+<p>Nach dem Zählprinzip:
+$$|\overline{Z}| = 10 \cdot 9 \cdot 8 \cdot 7 \cdot 6 = 30'240$$</p>
+<p>Dies ist auch die Anzahl der 5-Permutationen aus 10 Elementen:
+$$|\overline{Z}| = \frac{10!}{(10-5)!} = \frac{10!}{5!} = 30'240$$</p>
+<p><strong>Berechnung der Wahrscheinlichkeiten:</strong></p>
+<p>$$P(\overline{Z}) = \frac{30'240}{100'000} = 0.3024 = 30.24\%$$</p>
+<p>$$P(Z) = 1 - P(\overline{Z}) = 1 - 0.3024 = 0.6976 = 69.76\% \approx 69.8\%$$</p>
+<p><strong>Interpretation:</strong></p>
+<p>Mit fast 70% Wahrscheinlichkeit werden mindestens zwei Personen dieselbe Ziffer wählen! Das mag überraschend hoch erscheinen, aber es zeigt die Kraft des Geburtstagsprinzips.</p>
+<p><strong>Intuitive Erklärung:</strong></p>
+<p>Es gibt nur 10 verschiedene Ziffern, aber $\binom{5}{2} = 10$ verschiedene Paare von Personen. Jedes dieser Paare könnte dieselbe Ziffer gewählt haben. Die vielen Möglichkeiten für Übereinstimmungen machen das Ereignis wahrscheinlich.</p></div><div class="faltung" data-stufe="video" hidden><div class="rahmen"><video class="spieler" controls preload="metadata" src="https://api.cast.switch.ch/p/110/sp/11000/playManifest/entryId/0_8jhbn6r0/format/url/protocol/https/video.mp4"></video></div></div></div></div><p class="heimknopf"><a href="../../index.html"><span class="haus" aria-hidden="true">⌂</span>Material</a></p>
+</main>
+<footer><div class="seitenfuss"><span class="wo"><b>MA01.07 · MA01.08</b> Daten und Zufall</span><span class="wer">Henrike Allmendinger · Herbstsemester 2026<a class="pinnwand" href="https://www.taskcards.de/#/board/c1b7fe7b-28eb-41b2-bf38-60c4264a9f8c" target="_blank" rel="noopener">Feedback</a></span></div></footer>
+<script src="../../gemeinsam/seite.js?f=c77c6724"></script>
+
+<script>window.MathJax={tex:{inlineMath:[['$','$'],['\\(','\\)']],
+  displayMath:[['\\[','\\]'],['$$','$$']],processEscapes:true,
+  macros:{cc:'\\mathbb{C}',rr:'\\mathbb{R}',nn:'\\mathbb{N}',
+          zz:'\\mathbb{Z}',qq:'\\mathbb{Q}',cis:'\\operatorname{cis}',
+          Log:'\\operatorname{Log}',dd:'\\mathrm{d}',
+          glqq:'\\text{„}',grqq:'\\text{“}',
+          // Aus dem Vorspann von MA01.03 (`Preambel/Styles.tex`):
+          // ein Gleichheitszeichen mit Dach, «entspricht».
+          equalhat:'\\mathrel{\\stackrel{\\wedge}{=}}',
+          // `\vv` kommt aus dem Paket `esvect` (Vektorpfeil) und ist
+          // MathJax unbekannt — ohne diese Zeile setzt es den Befehl
+          // rot als Fehler. Gefunden am 26.08. in Kapitel 3 von
+          // MA01.03 («schultypische Beispiele», 4 Stellen).
+          vv:['\\overrightarrow{#1}',1]}},
+  options:{skipHtmlTags:['script','noscript','style','textarea','pre']}};</script>
+<script defer src="../../gemeinsam/fremd/tex-svg.js"></script>
+</body>
+</html>

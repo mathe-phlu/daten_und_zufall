@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="de">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Aufgabe 6.9 · Daten und Zufall</title>
+<link rel="stylesheet" href="../../gemeinsam/lernlandschaft.css?f=c77c6724">
+<body data-farbe="fach">
+<div class="stationskopf"><span class="wort">AUFGABE</span><span class="roemisch">6.9</span><h1>Daten und Zufall</h1><span class="wechsel wortweise"><a href="../../index.html">Startseite</a><a href="../index.html">Alle Aufgaben</a></span></div>
+<main>
+<h2 class="etappentitel"><span class="stand">Aufgabe 6.9</span></h2><div class="aufgabenblatt"><ol class="klammer-a"><li>Die vier Seiten eines gleichmässigen Tetraederwürfels sind mit
+    $1$, $2$, $3$ und $4$ nummeriert. Wir würfeln zweimal und betrachten die beiden
+    Zufallsgrössen:
+    <ul><li></li><li>$X =$ „Summe der beiden Augenzahlen" (also $a + b$)</li><li>$Y =$ „Betrag der Differenz beider Augenzahlen" (also $|a - b|$)</li></ul>
+<p>Bestimmen Sie jeweils die Verteilung von $X$ und $Y$ und berechnen Sie
+    daraus die Erwartungswerte $E(X)$ bzw. $E(Y)$ sowie die Varianzen
+    $\operatorname{Var}(X)$ bzw. $\operatorname{Var}(Y)$.</li><li>Betrachten Sie nun die zusammengesetzte
+    Zufallsgrösse $Z = X + Y$, d. h. für ein Ergebnis $\omega$ werden die Werte
+    von $X$ und $Y$ addiert, das Resultat ist der Wert von $Z$.</p>
+<p>Beispiel: $\omega
+    = (2|3)$ dann ist $X(\omega) = 5$, $Y(\omega) = 1$, $Z(\omega) = 6$.  Welche Verteilung besitzt</p>
+<p>nun $Z$ und wie gross ist $E(Z)$? Vergleichen Sie diesen Wert mit dem
+    von $E(X)$ und $E(Y)$.</li></ol></p><div class="stufen"><div class="reiter"><button type="button" data-stufe="starthilfe" aria-expanded="false">Starthilfe</button><button type="button" data-stufe="loesung" aria-expanded="false">Lösung</button><button type="button" data-stufe="video" aria-expanded="false">Video</button></div><div class="faltung" data-stufe="starthilfe" hidden><ul><li>Erstellen Sie eine Tabelle aller 16 möglichen Ergebnisse $(a,b)$ mit $a,b \in \{1,2,3,4\}$</li><li>Berechnen Sie für jedes Ergebnis $X = a+b$, $Y = |a-b|$ und $Z = X+Y$</li><li>Jedes der 16 Ergebnisse hat Wahrscheinlichkeit $\frac{1}{16}$</li><li>Gruppieren Sie die Ergebnisse nach den Werten von $X$, $Y$ und $Z$</li><li>Nutzen Sie für die Varianz: $\operatorname{Var}(X) = E[X^2] - (E[X])^2$</li></ul></div><div class="faltung" data-stufe="loesung" hidden><h4>(a) Vollständige Ergebnistabelle</h4>
+<p>Alle möglichen Ergebnisse beim zweimaligen Würfeln mit einem Tetraeder:</p>
+<div class="tabelle"><table><tr style="background:#f2f2f2"><td class="c sl so">$a$</td><td class="c sl so">$b$</td><td class="c sl2 so">$X = a+b$</td><td class="c sl so">$Y = |a-b|$</td><td class="c sl so">$Z = X+Y$</td><td class="c sl2 sr so">$P(\omega)$</td></tr><tr><td class="c sl so">1</td><td class="c sl so">1</td><td class="c sl2 so">2</td><td class="c sl so">0</td><td class="c sl so">2</td><td class="c sl2 sr so">$\frac{1}{16}$</td></tr><tr><td class="c sl">1</td><td class="c sl">2</td><td class="c sl2">3</td><td class="c sl">1</td><td class="c sl">4</td><td class="c sl2 sr">$\frac{1}{16}$</td></tr><tr><td class="c sl">1</td><td class="c sl">3</td><td class="c sl2">4</td><td class="c sl">2</td><td class="c sl">6</td><td class="c sl2 sr">$\frac{1}{16}$</td></tr><tr><td class="c sl">1</td><td class="c sl">4</td><td class="c sl2">5</td><td class="c sl">3</td><td class="c sl">8</td><td class="c sl2 sr">$\frac{1}{16}$</td></tr><tr><td class="c sl so">2</td><td class="c sl so">1</td><td class="c sl2 so">3</td><td class="c sl so">1</td><td class="c sl so">4</td><td class="c sl2 sr so">$\frac{1}{16}$</td></tr><tr><td class="c sl">2</td><td class="c sl">2</td><td class="c sl2">4</td><td class="c sl">0</td><td class="c sl">4</td><td class="c sl2 sr">$\frac{1}{16}$</td></tr><tr><td class="c sl">2</td><td class="c sl">3</td><td class="c sl2">5</td><td class="c sl">1</td><td class="c sl">6</td><td class="c sl2 sr">$\frac{1}{16}$</td></tr><tr><td class="c sl">2</td><td class="c sl">4</td><td class="c sl2">6</td><td class="c sl">2</td><td class="c sl">8</td><td class="c sl2 sr">$\frac{1}{16}$</td></tr><tr><td class="c sl so">3</td><td class="c sl so">1</td><td class="c sl2 so">4</td><td class="c sl so">2</td><td class="c sl so">6</td><td class="c sl2 sr so">$\frac{1}{16}$</td></tr><tr><td class="c sl">3</td><td class="c sl">2</td><td class="c sl2">5</td><td class="c sl">1</td><td class="c sl">6</td><td class="c sl2 sr">$\frac{1}{16}$</td></tr><tr><td class="c sl">3</td><td class="c sl">3</td><td class="c sl2">6</td><td class="c sl">0</td><td class="c sl">6</td><td class="c sl2 sr">$\frac{1}{16}$</td></tr><tr><td class="c sl">3</td><td class="c sl">4</td><td class="c sl2">7</td><td class="c sl">1</td><td class="c sl">8</td><td class="c sl2 sr">$\frac{1}{16}$</td></tr><tr><td class="c sl so">4</td><td class="c sl so">1</td><td class="c sl2 so">5</td><td class="c sl so">3</td><td class="c sl so">8</td><td class="c sl2 sr so">$\frac{1}{16}$</td></tr><tr><td class="c sl">4</td><td class="c sl">2</td><td class="c sl2">6</td><td class="c sl">2</td><td class="c sl">8</td><td class="c sl2 sr">$\frac{1}{16}$</td></tr><tr><td class="c sl">4</td><td class="c sl">3</td><td class="c sl2">7</td><td class="c sl">1</td><td class="c sl">8</td><td class="c sl2 sr">$\frac{1}{16}$</td></tr><tr><td class="su c sl">4</td><td class="su c sl">4</td><td class="su c sl2">8</td><td class="su c sl">0</td><td class="su c sl">8</td><td class="su c sl2 sr">$\frac{1}{16}$</td></tr></table></div>
+<h4>Verteilung von X (Summe):</h4>
+<div class="tabelle"><table><tr style="background:#f2f2f2"><td class="l sl so">$k$</td><td class="c sl so">2</td><td class="c sl so">3</td><td class="c sl so">4</td><td class="c sl so">5</td><td class="c sl so">6</td><td class="c sl so">7</td><td class="c sl sr so">8</td></tr><tr><td class="l sl so">Häufigkeit</td><td class="c sl so">1</td><td class="c sl so">2</td><td class="c sl so">3</td><td class="c sl so">4</td><td class="c sl so">3</td><td class="c sl so">2</td><td class="c sl sr so">1</td></tr><tr><td class="su l sl so">$P(X=k)$</td><td class="su c sl so">$\frac{1}{16}$</td><td class="su c sl so">$\frac{2}{16}$</td><td class="su c sl so">$\frac{3}{16}$</td><td class="su c sl so">$\frac{4}{16}$</td><td class="su c sl so">$\frac{3}{16}$</td><td class="su c sl so">$\frac{2}{16}$</td><td class="su c sl sr so">$\frac{1}{16}$</td></tr></table></div>
+<p>Erwartungswert von X:
+\begin{align*}
+E[X] &amp;= 2 \cdot \frac{1}{16} + 3 \cdot \frac{2}{16} + 4 \cdot \frac{3}{16} + 5 \cdot \frac{4}{16} + 6 \cdot \frac{3}{16} + 7 \cdot \frac{2}{16} + 8 \cdot \frac{1}{16}\\
+&amp;= \frac{2 + 6 + 12 + 20 + 18 + 14 + 8}{16} = \frac{80}{16} = 5
+\end{align*}</p>
+<p>Für die Varianz berechnen wir $E[X^2]$:
+\begin{align*}
+E[X^2] &amp;= 4 \cdot \frac{1}{16} + 9 \cdot \frac{2}{16} + 16 \cdot \frac{3}{16} + 25 \cdot \frac{4}{16} + 36 \cdot \frac{3}{16} + 49 \cdot \frac{2}{16} + 64 \cdot \frac{1}{16}\\
+&amp;= \frac{4 + 18 + 48 + 100 + 108 + 98 + 64}{16} = \frac{440}{16} = 27.5
+\end{align*}</p>
+<p>$$\operatorname{Var}(X) = E[X^2] - (E[X])^2 = 27.5 - 25 = 2.5$$</p>
+<h4>Verteilung von Y (Betrag der Differenz):</h4>
+<div class="tabelle"><table><tr style="background:#f2f2f2"><td class="l sl so">$k$</td><td class="c sl so">0</td><td class="c sl so">1</td><td class="c sl so">2</td><td class="c sl sr so">3</td></tr><tr><td class="l sl so">Häufigkeit</td><td class="c sl so">4</td><td class="c sl so">6</td><td class="c sl so">4</td><td class="c sl sr so">2</td></tr><tr><td class="su l sl so">$P(Y=k)$</td><td class="su c sl so">$\frac{4}{16}$</td><td class="su c sl so">$\frac{6}{16}$</td><td class="su c sl so">$\frac{4}{16}$</td><td class="su c sl sr so">$\frac{2}{16}$</td></tr></table></div>
+<p>Erwartungswert von Y:
+\begin{align*}
+E[Y] &amp;= 0 \cdot \frac{4}{16} + 1 \cdot \frac{6}{16} + 2 \cdot \frac{4}{16} + 3 \cdot \frac{2}{16}\\
+&amp;= \frac{0 + 6 + 8 + 6}{16} = \frac{20}{16} = 1.25
+\end{align*}</p>
+<p>Für die Varianz:
+\begin{align*}
+E[Y^2] &amp;= 0 \cdot \frac{4}{16} + 1 \cdot \frac{6}{16} + 4 \cdot \frac{4}{16} + 9 \cdot \frac{2}{16}\\
+&amp;= \frac{0 + 6 + 16 + 18}{16} = \frac{40}{16} = 2.5
+\end{align*}</p>
+<p>$$\operatorname{Var}(Y) = E[Y^2] - (E[Y])^2 = 2.5 - 1.5625 = 0.9375 \approx 0.94$$</p>
+<h4>(b) Verteilung von Z = X + Y</h4>
+<p>Aus der Tabelle oben ergibt sich:</p>
+<div class="tabelle"><table><tr style="background:#f2f2f2"><td class="l sl so">$k$</td><td class="c sl so">2</td><td class="c sl so">4</td><td class="c sl so">6</td><td class="c sl sr so">8</td></tr><tr><td class="l sl so">Häufigkeit</td><td class="c sl so">1</td><td class="c sl so">3</td><td class="c sl so">5</td><td class="c sl sr so">7</td></tr><tr><td class="su l sl so">$P(Z=k)$</td><td class="su c sl so">$\frac{1}{16}$</td><td class="su c sl so">$\frac{3}{16}$</td><td class="su c sl so">$\frac{5}{16}$</td><td class="su c sl sr so">$\frac{7}{16}$</td></tr></table></div>
+<p>Erwartungswert von Z:
+\begin{align*}
+E[Z] &amp;= 2 \cdot \frac{1}{16} + 4 \cdot \frac{3}{16} + 6 \cdot \frac{5}{16} + 8 \cdot \frac{7}{16}\\
+&amp;= \frac{2 + 12 + 30 + 56}{16} = \frac{100}{16} = 6.25
+\end{align*}</p>
+<h4>Vergleich der Erwartungswerte:</h4>
+<ul><li>$E[X] = 5$</li><li>$E[Y] = 1.25$</li><li>$E[Z] = E[X+Y] = 6.25 = 5 + 1.25 = E[X] + E[Y]$ ✓</li></ul>
+<p><strong>Wichtige Erkenntnis:</strong> Der Erwartungswert der Summe zweier Zufallsgrössen ist gleich der Summe ihrer Erwartungswerte. Diese Eigenschaft gilt <strong>immer</strong>, unabhängig davon, ob die Zufallsgrössen unabhängig sind oder nicht!</p></div><div class="faltung" data-stufe="video" hidden><div class="rahmen"><video class="spieler" controls preload="metadata" src="https://api.cast.switch.ch/p/110/sp/11000/playManifest/entryId/0_7sgqh3ac/format/url/protocol/https/video.mp4"></video></div></div></div></div><p class="heimknopf"><a href="../../index.html"><span class="haus" aria-hidden="true">⌂</span>Material</a></p>
+</main>
+<footer><div class="seitenfuss"><span class="wo"><b>MA01.07 · MA01.08</b> Daten und Zufall</span><span class="wer">Henrike Allmendinger · Herbstsemester 2026<a class="pinnwand" href="https://www.taskcards.de/#/board/c1b7fe7b-28eb-41b2-bf38-60c4264a9f8c" target="_blank" rel="noopener">Feedback</a></span></div></footer>
+<script src="../../gemeinsam/seite.js?f=c77c6724"></script>
+
+<script>window.MathJax={tex:{inlineMath:[['$','$'],['\\(','\\)']],
+  displayMath:[['\\[','\\]'],['$$','$$']],processEscapes:true,
+  macros:{cc:'\\mathbb{C}',rr:'\\mathbb{R}',nn:'\\mathbb{N}',
+          zz:'\\mathbb{Z}',qq:'\\mathbb{Q}',cis:'\\operatorname{cis}',
+          Log:'\\operatorname{Log}',dd:'\\mathrm{d}',
+          glqq:'\\text{„}',grqq:'\\text{“}',
+          // Aus dem Vorspann von MA01.03 (`Preambel/Styles.tex`):
+          // ein Gleichheitszeichen mit Dach, «entspricht».
+          equalhat:'\\mathrel{\\stackrel{\\wedge}{=}}',
+          // `\vv` kommt aus dem Paket `esvect` (Vektorpfeil) und ist
+          // MathJax unbekannt — ohne diese Zeile setzt es den Befehl
+          // rot als Fehler. Gefunden am 26.08. in Kapitel 3 von
+          // MA01.03 («schultypische Beispiele», 4 Stellen).
+          vv:['\\overrightarrow{#1}',1]}},
+  options:{skipHtmlTags:['script','noscript','style','textarea','pre']}};</script>
+<script defer src="../../gemeinsam/fremd/tex-svg.js"></script>
+</body>
+</html>

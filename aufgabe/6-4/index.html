@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="de">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Aufgabe 6.4 · Daten und Zufall</title>
+<link rel="stylesheet" href="../../gemeinsam/lernlandschaft.css?f=c77c6724">
+<body data-farbe="fach">
+<div class="stationskopf"><span class="wort">AUFGABE</span><span class="roemisch">6.4</span><h1>Daten und Zufall</h1><span class="wechsel wortweise"><a href="../../index.html">Startseite</a><a href="../index.html">Alle Aufgaben</a></span></div>
+<main>
+<h2 class="etappentitel"><span class="stand">Aufgabe 6.4</span></h2><div class="aufgabenblatt"><p>Welchen Einfluss auf die Ungleichung hat die Zahl $\varepsilon$?</p><div class="stufen"><div class="reiter"><button type="button" data-stufe="starthilfe" aria-expanded="false">Starthilfe</button><button type="button" data-stufe="loesung" aria-expanded="false">Lösung</button></div><div class="faltung" data-stufe="starthilfe" hidden><ul><li>Die Tschebyschew-Ungleichung lautet: $P(|X-\mu| \geq \varepsilon) \leq \frac{\operatorname{Var}(X)}{\varepsilon^2}$</li><li>Umgeformt: $P(|X-\mu| &lt; \varepsilon) \geq 1 - \frac{\operatorname{Var}(X)}{\varepsilon^2}$</li><li>Untersuchen Sie, was bei kleinem bzw. grossem $\varepsilon$ passiert</li><li>Überlegen Sie, wann die Ungleichung eine sinnvolle Aussage liefert</li></ul></div><div class="faltung" data-stufe="loesung" hidden><h4>Die Tschebyschew-Ungleichung:</h4>
+<p>Für eine Zufallsgrösse $X$ mit Erwartungswert $\mu$ und Varianz $\operatorname{Var}(X) = \sigma^2$ gilt:
+$$P(|X - \mu| &lt; \varepsilon) \geq 1 - \frac{\sigma^2}{\varepsilon^2}$$</p>
+<p>Diese Ungleichung gibt eine untere Schranke für die Wahrscheinlichkeit an, dass $X$ in einem $\varepsilon$-Intervall um den Erwartungswert liegt.</p>
+<h4>Grafische Darstellung des Einflusses von $\varepsilon$:</h4>
+<figure class="zeichnung"><img src="../../bilder/zeichnung-d603a76de3ea.svg" alt=""></figure>
+<p>Die y-Achse zeigt die untere Schranke für $P(|X-\mu| &lt; \varepsilon)$</p>
+<p>Markierungen bei: $\sigma$, $\sqrt{2}\sigma$, $2\sigma$, $3\sigma$</p>
+<p><strong>Erklärung der Visualisierung:</strong></p>
+<p><strong>Wie liest man diese Grafik?</strong>
+<ul><li>Die <strong>x-Achse</strong> zeigt $\varepsilon$ als Vielfache der Standardabweichung $\sigma$</li><li>Die <strong>y-Achse</strong> zeigt die untere Schranke für die Wahrscheinlichkeit, dass $X$ im Intervall $[\mu - \varepsilon, \mu + \varepsilon]$ liegt</li><li>Die <strong>blaue Kurve</strong> ist die Funktion $f(\varepsilon) = 1 - \frac{\sigma^2}{\varepsilon^2}$ für $\varepsilon &gt; \sigma$</li><li>Die <strong>roten Punkte</strong> markieren wichtige Werte:
+  <ul><li></li><li>Bei $\varepsilon = 1\sigma$: Schranke = 0 (keine Garantie)</li><li>Bei $\varepsilon = \sqrt{2}\sigma$: Mindestens 50% im Intervall</li><li>Bei $\varepsilon = 2\sigma$: Mindestens 75% im Intervall</li><li>Bei $\varepsilon = 3\sigma$: Mindestens 88.9% im Intervall</li></ul></li><li>Je weiter rechts auf der x-Achse (grösseres $\varepsilon$), desto höher die garantierte Mindestwahrscheinlichkeit</li><li>Die Kurve nähert sich asymptotisch dem Wert 1, erreicht ihn aber nie</li></ul></p>
+<h4>Analyse des Einflusses von $\varepsilon$:</h4>
+<p><strong>Fall 1: Kleines $\varepsilon$</strong>
+<ul><li>Wenn $\varepsilon$ klein ist, wird $\varepsilon^2$ noch kleiner</li><li>Der Bruch $\frac{\sigma^2}{\varepsilon^2}$ wird gross</li><li>Die untere Schranke $1 - \frac{\sigma^2}{\varepsilon^2}$ wird klein oder sogar negativ</li><li>Für $\varepsilon \leq \sigma$ ist die Schranke nicht aussagekräftig</li></ul></p>
+<p><strong>Fall 2: Grosses $\varepsilon$</strong>
+<ul><li>Wenn $\varepsilon$ gross ist, wird $\varepsilon^2$ sehr gross</li><li>Der Bruch $\frac{\sigma^2}{\varepsilon^2}$ wird klein</li><li>Die untere Schranke $1 - \frac{\sigma^2}{\varepsilon^2}$ nähert sich 1</li><li>Fast die gesamte Wahrscheinlichkeitsmasse liegt im Intervall</li></ul></p>
+<h4>Konkrete Beispiele:</h4>
+<p>Sei $X$ eine Zufallsgrösse mit $\mu = 100$ und $\sigma = 10$.</p>
+<div class="tabelle"><table><tr style="background:#f2f2f2"><td class="c sl so">$\varepsilon$</td><td class="c sl so">Intervall</td><td class="c sl so">Tschebyschew-Schranke</td><td class="c sl sr so">Interpretation</td></tr><tr><td class="c sl so">$10 = 1\sigma$</td><td class="c sl so">$[90, 110]$</td><td class="c sl so">$\geq 0$</td><td class="c sl sr so">trivial</td></tr><tr><td class="c sl">$14.14 = \sqrt{2}\sigma$</td><td class="c sl">$[85.86, 114.14]$</td><td class="c sl">$\geq 0.5$</td><td class="c sl sr">50% garantiert</td></tr><tr><td class="c sl">$20 = 2\sigma$</td><td class="c sl">$[80, 120]$</td><td class="c sl">$\geq 0.75$</td><td class="c sl sr">75% garantiert</td></tr><tr><td class="c sl">$30 = 3\sigma$</td><td class="c sl">$[70, 130]$</td><td class="c sl">$\geq 0.889$</td><td class="c sl sr">89% garantiert</td></tr><tr><td class="su c sl">$40 = 4\sigma$</td><td class="su c sl">$[60, 140]$</td><td class="su c sl">$\geq 0.9375$</td><td class="su c sl sr">94% garantiert</td></tr></table></div>
+<h4>Vergleich mit der Normalverteilung:</h4>
+<p>Für eine normalverteilte Zufallsgrösse gelten die bekannten Regeln:
+<ul><li>$P(|X - \mu| &lt; 1\sigma) \approx 0.683$ (Tschebyschew: $\geq 0$)</li><li>$P(|X - \mu| &lt; 2\sigma) \approx 0.954$ (Tschebyschew: $\geq 0.75$)</li><li>$P(|X - \mu| &lt; 3\sigma) \approx 0.997$ (Tschebyschew: $\geq 0.889$)</li></ul></p>
+<p>Die Tschebyschew-Ungleichung ist universell gültig, aber oft konservativ.</p>
+<h4>Zusammenfassung des Einflusses:</h4>
+<ol><li>Je <strong>kleiner</strong> $\varepsilon$, desto <strong>schwächer</strong> wird die Aussage der Ungleichung</li><li>Je <strong>grösser</strong> $\varepsilon$, desto <strong>stärker</strong> wird die Aussage</li><li>Die Ungleichung liefert nur sinnvolle Schranken, wenn $\varepsilon &gt; \sigma$</li><li>Für $\varepsilon = k\sigma$ mit $k &gt; 1$ gilt: $P(|X - \mu| &lt; k\sigma) \geq 1 - \frac{1}{k^2}$</li></ol>
+<h4>Praktische Anwendung:</h4>
+<p><strong>Beispiel Qualitätskontrolle:</strong>
+Eine Maschine produziert Schrauben mit mittlerer Länge $\mu = 50$ mm und Standardabweichung $\sigma = 0.5$ mm.</p>
+<p>Die Tschebyschew-Ungleichung garantiert:
+<ul><li>Mindestens 75% der Schrauben liegen im Intervall $[49, 51]$ mm ($\varepsilon = 2\sigma = 1$ mm)</li><li>Mindestens 89% der Schrauben liegen im Intervall $[48.5, 51.5]$ mm ($\varepsilon = 3\sigma = 1.5$ mm)</li></ul></p>
+<p>Diese Garantien gelten unabhängig von der tatsächlichen Verteilung der Schraubenlängen!</p></div></div></div><p class="heimknopf"><a href="../../index.html"><span class="haus" aria-hidden="true">⌂</span>Material</a></p>
+</main>
+<footer><div class="seitenfuss"><span class="wo"><b>MA01.07 · MA01.08</b> Daten und Zufall</span><span class="wer">Henrike Allmendinger · Herbstsemester 2026<a class="pinnwand" href="https://www.taskcards.de/#/board/c1b7fe7b-28eb-41b2-bf38-60c4264a9f8c" target="_blank" rel="noopener">Feedback</a></span></div></footer>
+<script src="../../gemeinsam/seite.js?f=c77c6724"></script>
+
+<script>window.MathJax={tex:{inlineMath:[['$','$'],['\\(','\\)']],
+  displayMath:[['\\[','\\]'],['$$','$$']],processEscapes:true,
+  macros:{cc:'\\mathbb{C}',rr:'\\mathbb{R}',nn:'\\mathbb{N}',
+          zz:'\\mathbb{Z}',qq:'\\mathbb{Q}',cis:'\\operatorname{cis}',
+          Log:'\\operatorname{Log}',dd:'\\mathrm{d}',
+          glqq:'\\text{„}',grqq:'\\text{“}',
+          // Aus dem Vorspann von MA01.03 (`Preambel/Styles.tex`):
+          // ein Gleichheitszeichen mit Dach, «entspricht».
+          equalhat:'\\mathrel{\\stackrel{\\wedge}{=}}',
+          // `\vv` kommt aus dem Paket `esvect` (Vektorpfeil) und ist
+          // MathJax unbekannt — ohne diese Zeile setzt es den Befehl
+          // rot als Fehler. Gefunden am 26.08. in Kapitel 3 von
+          // MA01.03 («schultypische Beispiele», 4 Stellen).
+          vv:['\\overrightarrow{#1}',1]}},
+  options:{skipHtmlTags:['script','noscript','style','textarea','pre']}};</script>
+<script defer src="../../gemeinsam/fremd/tex-svg.js"></script>
+</body>
+</html>

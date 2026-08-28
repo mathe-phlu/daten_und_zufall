@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="de">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Aufgabe 2.3 · Daten und Zufall</title>
+<link rel="stylesheet" href="../../gemeinsam/lernlandschaft.css?f=c77c6724">
+<body data-farbe="zugang">
+<div class="stationskopf"><span class="wort">AUFGABE</span><span class="roemisch">2.3</span><h1>Daten und Zufall</h1><span class="wechsel wortweise"><a href="../../index.html">Startseite</a><a href="../index.html">Alle Aufgaben</a></span></div>
+<main>
+<h2 class="etappentitel"><span class="stand">Aufgabe 2.3</span></h2><div class="aufgabenblatt"><div class="neben">
+  Drei nicht unterscheidbare Kugeln werden nach dem Zufallsprinzip auf
+  drei Fächer verteilt  dabei kann jedes Fach bis zu drei Kugeln
+  aufnehmen.
+</div>
+<div class="neben">
+<figure style="--bildbreite:0.90"><img src="../../bilder/a027bdf6814614e6.png" alt=""></figure>
+</div>
+<p>Wählen Sie ein geeignetes $\Omega$ als Modellgrundlage. Wie viele
+  verschiedene Ergebnisse hat das Zufallsexperiment? Wie ist $\Omega$
+  zu modifizieren, wenn selbst die Fächer nicht mehr unterscheidbar
+  sind (indem man sie beispielsweise im Kreis anordnet)?</p><div class="stufen"><div class="reiter"><button type="button" data-stufe="starthilfe" aria-expanded="false">Starthilfe</button><button type="button" data-stufe="loesung" aria-expanded="false">Lösung</button></div><div class="faltung" data-stufe="starthilfe" hidden><ul><li>Die Kugeln sind nicht unterscheidbar - es zählt nur, wie viele in welchem Fach sind</li><li>Jedes Fach kann 0, 1, 2 oder 3 Kugeln enthalten</li><li>Nutzen Sie die Analogie zu «Kinokarten auf Sitzreihen verteilen»</li><li>Bei nicht unterscheidbaren Fächern: Welche verschiedenen Verteilungsmuster gibt es?</li></ul></div><div class="faltung" data-stufe="loesung" hidden><p><strong>Situation verstehen:</strong> 3 identische Kugeln, 3 unterscheidbare Fächer (nummeriert 1, 2, 3), jedes Fach kann 0 bis 3 Kugeln aufnehmen.</p>
+<p><strong>Wahl der Ergebnismenge:</strong></p>
+<p>Da die Kugeln nicht unterscheidbar sind, interessiert uns nur, wie viele Kugeln in welchem Fach landen. Ein Ergebnis lässt sich als Multiset darstellen: $\omega = \{1, 1, 2\}$ bedeutet: 2 Kugeln in Fach 1, 1 Kugel in Fach 2, 0 Kugeln in Fach 3.</p>
+<p>Der vollständige Ergebnismenge ist:
+\begin{align*}
+\Omega = \{&amp;\{1,1,1\}, \{1,1,2\}, \{1,1,3\}, \{1,2,2\}, \{1,2,3\},\\
+&amp;\{1,3,3\}, \{2,2,2\}, \{2,2,3\}, \{2,3,3\}, \{3,3,3\}\}
+\end{align*}</p>
+<p><strong>Anzahl der Ergebnisse berechnen:</strong></p>
+<p>Dies ist das klassische Problem «3 gleiche Objekte auf 3 unterscheidbare Behälter verteilen» - eine Kombination mit Wiederholung:
+$$|\Omega| = \binom{3+3-1}{3} = \binom{5}{3} = \frac{5!}{3! \cdot 2!} = \frac{5 \cdot 4}{2} = 10$$</p>
+<p><strong>Die 10 Verteilungen systematisch:</strong></p>
+<div class="tabelle"><table><tr><td class="c sl so">Fach 1</td><td class="c sl so">Fach 2</td><td class="c sl so">Fach 3</td><td class="c sl so">Multiset</td><td class="l sl sr so">Bedeutung</td></tr><tr><td class="c sl so">3</td><td class="c sl so">0</td><td class="c sl so">0</td><td class="c sl so">$\{1,1,1\}$</td><td class="l sl sr so">Alle in Fach 1</td></tr><tr><td class="c sl">2</td><td class="c sl">1</td><td class="c sl">0</td><td class="c sl">$\{1,1,2\}$</td><td class="l sl sr">2 in Fach 1, 1 in Fach 2</td></tr><tr><td class="c sl">2</td><td class="c sl">0</td><td class="c sl">1</td><td class="c sl">$\{1,1,3\}$</td><td class="l sl sr">2 in Fach 1, 1 in Fach 3</td></tr><tr><td class="c sl">1</td><td class="c sl">2</td><td class="c sl">0</td><td class="c sl">$\{1,2,2\}$</td><td class="l sl sr">1 in Fach 1, 2 in Fach 2</td></tr><tr><td class="c sl">1</td><td class="c sl">1</td><td class="c sl">1</td><td class="c sl">$\{1,2,3\}$</td><td class="l sl sr">Je 1 in jedem Fach</td></tr><tr><td class="c sl">1</td><td class="c sl">0</td><td class="c sl">2</td><td class="c sl">$\{1,3,3\}$</td><td class="l sl sr">1 in Fach 1, 2 in Fach 3</td></tr><tr><td class="c sl">0</td><td class="c sl">3</td><td class="c sl">0</td><td class="c sl">$\{2,2,2\}$</td><td class="l sl sr">Alle in Fach 2</td></tr><tr><td class="c sl">0</td><td class="c sl">2</td><td class="c sl">1</td><td class="c sl">$\{2,2,3\}$</td><td class="l sl sr">2 in Fach 2, 1 in Fach 3</td></tr><tr><td class="c sl">0</td><td class="c sl">1</td><td class="c sl">2</td><td class="c sl">$\{2,3,3\}$</td><td class="l sl sr">1 in Fach 2, 2 in Fach 3</td></tr><tr><td class="su c sl">0</td><td class="su c sl">0</td><td class="su c sl">3</td><td class="su c sl">$\{3,3,3\}$</td><td class="su l sl sr">Alle in Fach 3</td></tr></table></div>
+<p><strong>Nicht unterscheidbare Fächer:</strong></p>
+<p>Wenn auch die Fächer nicht unterscheidbar sind (z.B. im Kreis angeordnet), zählen nur noch die verschiedenen Verteilungsmuster:
+<ol><li><strong>Muster 1</strong>: Alle 3 Kugeln in einem Fach (3-0-0)</li><li><strong>Muster 2</strong>: 2 Kugeln in einem Fach, 1 in einem anderen (2-1-0)</li><li><strong>Muster 3</strong>: Je 1 Kugel in jedem Fach (1-1-1)</li></ol></p>
+<p>Der reduzierte Ergebnismenge wäre dann: $\Omega' = \{1, 2, 3\}$ wobei $\omega = 1$ bedeutet: Verteilungsmuster (3-0-0), $\omega = 2$ bedeutet: Verteilungsmuster (2-1-0), $\omega = 3$ bedeutet: Verteilungsmuster (1-1-1).</p>
+<p><strong>Zusammenfassung:</strong> Mit unterscheidbaren Fächern: 10 verschiedene Ergebnisse. Mit nicht unterscheidbaren Fächern: 3 verschiedene Verteilungsmuster.</p>
+<p>Dies zeigt, wie stark die Unterscheidbarkeit der Objekte (hier: Fächer) die Anzahl der möglichen Ergebnisse beeinflusst!</p></div></div></div><p class="fundort">Im Video: <a href="../../lernweg-2/unterschiedliche-astlaengen/index.html">Etappe 4 · Unterschiedliche Astlängen</a> <span class="zeit">bei 3:46</span></p><p class="heimknopf"><a href="../../index.html"><span class="haus" aria-hidden="true">⌂</span>Material</a></p>
+</main>
+<footer><div class="seitenfuss"><span class="wo"><b>MA01.07 · MA01.08</b> Daten und Zufall</span><span class="wer">Henrike Allmendinger · Herbstsemester 2026<a class="pinnwand" href="https://www.taskcards.de/#/board/c1b7fe7b-28eb-41b2-bf38-60c4264a9f8c" target="_blank" rel="noopener">Feedback</a></span></div></footer>
+<script src="../../gemeinsam/seite.js?f=c77c6724"></script>
+
+<script>window.MathJax={tex:{inlineMath:[['$','$'],['\\(','\\)']],
+  displayMath:[['\\[','\\]'],['$$','$$']],processEscapes:true,
+  macros:{cc:'\\mathbb{C}',rr:'\\mathbb{R}',nn:'\\mathbb{N}',
+          zz:'\\mathbb{Z}',qq:'\\mathbb{Q}',cis:'\\operatorname{cis}',
+          Log:'\\operatorname{Log}',dd:'\\mathrm{d}',
+          glqq:'\\text{„}',grqq:'\\text{“}',
+          // Aus dem Vorspann von MA01.03 (`Preambel/Styles.tex`):
+          // ein Gleichheitszeichen mit Dach, «entspricht».
+          equalhat:'\\mathrel{\\stackrel{\\wedge}{=}}',
+          // `\vv` kommt aus dem Paket `esvect` (Vektorpfeil) und ist
+          // MathJax unbekannt — ohne diese Zeile setzt es den Befehl
+          // rot als Fehler. Gefunden am 26.08. in Kapitel 3 von
+          // MA01.03 («schultypische Beispiele», 4 Stellen).
+          vv:['\\overrightarrow{#1}',1]}},
+  options:{skipHtmlTags:['script','noscript','style','textarea','pre']}};</script>
+<script defer src="../../gemeinsam/fremd/tex-svg.js"></script>
+</body>
+</html>

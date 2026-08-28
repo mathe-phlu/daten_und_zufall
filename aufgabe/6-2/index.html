@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="de">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Aufgabe 6.2 · Daten und Zufall</title>
+<link rel="stylesheet" href="../../gemeinsam/lernlandschaft.css?f=c77c6724">
+<body data-farbe="fach">
+<div class="stationskopf"><span class="wort">AUFGABE</span><span class="roemisch">6.2</span><h1>Daten und Zufall</h1><span class="wechsel wortweise"><a href="../../index.html">Startseite</a><a href="../index.html">Alle Aufgaben</a></span></div>
+<main>
+<h2 class="etappentitel"><span class="stand">Aufgabe 6.2</span></h2><div class="aufgabenblatt"><p>A zahlt 5 Franken Spieleinsatz  bei gerader Augenzahl zahlt B den Betrag dieser Zahl aus, sonst das Doppelte.</p>
+<p>Ist das Spiel <strong>fair</strong>?</p><div class="stufen"><div class="reiter"><button type="button" data-stufe="starthilfe" aria-expanded="false">Starthilfe</button><button type="button" data-stufe="loesung" aria-expanded="false">Lösung</button><button type="button" data-stufe="video" aria-expanded="false">Video</button></div><div class="faltung" data-stufe="starthilfe" hidden><ul><li>Ein Spiel ist fair, wenn der Erwartungswert der Auszahlung dem Einsatz entspricht</li><li>Beziehen Sie sich auf das Glücksrad aus Aufgabe 6.1</li><li>Berechnen Sie den Erwartungswert mit $E[X] = \sum_{k} k \cdot P(X=k)$</li><li>Vergleichen Sie den Erwartungswert mit einem möglichen Einsatz</li></ul></div><div class="faltung" data-stufe="loesung" hidden><h4>Bezug zur vorherigen Aufgabe:</h4>
+<p>Das Spiel bezieht sich auf das Glücksrad aus Aufgabe 6.1 mit der Zufallsgrösse $X$ = Ziffernsumme nach zweimaligem Drehen.</p>
+<p>Aus Aufgabe 6.1 kennen wir die Verteilung:</p>
+<div class="tabelle"><table><tr style="background:#f2f2f2"><td class="l sl so">$k$</td><td class="c sl so">2</td><td class="c sl so">3</td><td class="c sl so">4</td><td class="c sl so">5</td><td class="c sl sr so">6</td></tr><tr><td class="su l sl so">$P(X=k)$</td><td class="su c sl so">$\frac{1}{4}$</td><td class="su c sl so">$\frac{1}{3}$</td><td class="su c sl so">$\frac{5}{18}$</td><td class="su c sl so">$\frac{1}{9}$</td><td class="su c sl sr so">$\frac{1}{36}$</td></tr></table></div>
+<h4>Berechnung des Erwartungswerts:</h4>
+<p>Der Erwartungswert berechnet sich als gewichtetes Mittel aller möglichen Ausgänge:</p>
+<p>\begin{align*}
+E[X] &amp;= \sum_{k} k \cdot P(X=k)\\
+&amp;= 2 \cdot \frac{1}{4} + 3 \cdot \frac{1}{3} + 4 \cdot \frac{5}{18} + 5 \cdot \frac{1}{9} + 6 \cdot \frac{1}{36}\\
+&amp;= \frac{2}{4} + \frac{3}{3} + \frac{20}{18} + \frac{5}{9} + \frac{6}{36}\\
+&amp;= \frac{1}{2} + 1 + \frac{10}{9} + \frac{5}{9} + \frac{1}{6}
+\end{align*}</p>
+<p>Bringen wir alles auf den gemeinsamen Nenner 18:
+\begin{align*}
+E[X] &amp;= \frac{9}{18} + \frac{18}{18} + \frac{20}{18} + \frac{10}{18} + \frac{3}{18}\\
+&amp;= \frac{9 + 18 + 20 + 10 + 3}{18} = \frac{60}{18} = \frac{10}{3} = 3\frac{1}{3}
+\end{align*}</p>
+<h4>Visualisierung der Fairness:</h4>
+<p>Die folgende Grafik zeigt den erwarteten Gewinn (Auszahlung minus Einsatz) für verschiedene Einsätze:</p>
+<figure class="zeichnung"><img src="../../bilder/zeichnung-72801f868600.svg" alt=""></figure>
+<p><strong>Erklärung der Visualisierung:</strong>
+<ul><li>Die Balken zeigen den erwarteten Gewinn für verschiedene Einsätze</li><li>Bei Einsätzen unter 3.33 Fr. ist der erwartete Gewinn positiv (Spieler gewinnt langfristig)</li><li>Bei Einsätzen über 3.33 Fr. ist der erwartete Gewinn negativ (Spieler verliert langfristig)</li><li>Die grüne Linie bei Gewinn = 0 markiert die Fairness-Grenze</li><li>Bei genau 3.33 Fr. Einsatz ist der erwartete Gewinn null – das Spiel ist fair</li></ul></p>
+<h4>Interpretation der Fairness:</h4>
+<p>Der Erwartungswert beträgt $E[X] = \frac{10}{3} \approx 3.33$ Einheiten.</p>
+<p><strong>Das Spiel ist fair, wenn:</strong>
+<ul><li>Die Auszahlung der Ziffernsumme entspricht (2 bis 6 Einheiten)</li><li>Der Einsatz genau $\frac{10}{3}$ Einheiten beträgt</li></ul></p>
+<p>Bei diesem Einsatz gilt:
+$$E[\text{Gewinn}] = E[\text{Auszahlung}] - \text{Einsatz} = \frac{10}{3} - \frac{10}{3} = 0$$</p>
+<h4>Verschiedene Fairness-Konzepte:</h4>
+<ol><li><strong>Mathematische Fairness:</strong> $E[\text{Gewinn}] = 0$ für beide Spieler</li><li><strong>Symmetrische Fairness:</strong> Beide Spieler haben gleiche Chancen</li><li><strong>Subjektive Fairness:</strong> Spieler empfinden das Spiel als gerecht</li></ol>
+<p>In unserem Fall liegt mathematische Fairness vor bei einem Einsatz von 3.33 Fr.</p>
+<h4>Fazit:</h4>
+<p>Ja, das Spiel ist fair, wenn der Einsatz genau dem Erwartungswert der Auszahlung entspricht. Bei einem Einsatz von 3.33 Einheiten hat langfristig weder der Spieler noch der Veranstalter einen Vorteil.</p></div><div class="faltung" data-stufe="video" hidden><div class="rahmen vorschau" data-video="r6-eP8A6d6A"><img class="standbild" alt="" src="../../gemeinsam/standbilder/r6-eP8A6d6A.jpg"><button type="button" class="starten" aria-label="Video abspielen"><span class="dreieck"></span></button></div><p class="ausweichen"><a href="https://www.youtube.com/watch?v=r6-eP8A6d6A" target="_blank" rel="noopener">Auf YouTube öffnen</a></p></div></div></div><p class="fundort">Im Video: <a href="../../lernweg-6/erwartungswert/index.html">Etappe 4 · Erwartungswert</a> <span class="zeit">bei 7:22</span></p><p class="heimknopf"><a href="../../index.html"><span class="haus" aria-hidden="true">⌂</span>Material</a></p>
+</main>
+<footer><div class="seitenfuss"><span class="wo"><b>MA01.07 · MA01.08</b> Daten und Zufall</span><span class="wer">Henrike Allmendinger · Herbstsemester 2026<a class="pinnwand" href="https://www.taskcards.de/#/board/c1b7fe7b-28eb-41b2-bf38-60c4264a9f8c" target="_blank" rel="noopener">Feedback</a></span></div></footer>
+<script src="../../gemeinsam/seite.js?f=c77c6724"></script>
+
+<script>window.MathJax={tex:{inlineMath:[['$','$'],['\\(','\\)']],
+  displayMath:[['\\[','\\]'],['$$','$$']],processEscapes:true,
+  macros:{cc:'\\mathbb{C}',rr:'\\mathbb{R}',nn:'\\mathbb{N}',
+          zz:'\\mathbb{Z}',qq:'\\mathbb{Q}',cis:'\\operatorname{cis}',
+          Log:'\\operatorname{Log}',dd:'\\mathrm{d}',
+          glqq:'\\text{„}',grqq:'\\text{“}',
+          // Aus dem Vorspann von MA01.03 (`Preambel/Styles.tex`):
+          // ein Gleichheitszeichen mit Dach, «entspricht».
+          equalhat:'\\mathrel{\\stackrel{\\wedge}{=}}',
+          // `\vv` kommt aus dem Paket `esvect` (Vektorpfeil) und ist
+          // MathJax unbekannt — ohne diese Zeile setzt es den Befehl
+          // rot als Fehler. Gefunden am 26.08. in Kapitel 3 von
+          // MA01.03 («schultypische Beispiele», 4 Stellen).
+          vv:['\\overrightarrow{#1}',1]}},
+  options:{skipHtmlTags:['script','noscript','style','textarea','pre']}};</script>
+<script defer src="../../gemeinsam/fremd/tex-svg.js"></script>
+</body>
+</html>

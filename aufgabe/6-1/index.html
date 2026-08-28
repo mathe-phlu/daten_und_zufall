@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="de">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Aufgabe 6.1 · Daten und Zufall</title>
+<link rel="stylesheet" href="../../gemeinsam/lernlandschaft.css?f=c77c6724">
+<body data-farbe="fach">
+<div class="stationskopf"><span class="wort">AUFGABE</span><span class="roemisch">6.1</span><h1>Daten und Zufall</h1><span class="wechsel wortweise"><a href="../../index.html">Startseite</a><a href="../index.html">Alle Aufgaben</a></span></div>
+<main>
+<h2 class="etappentitel"><span class="stand">Aufgabe 6.1</span></h2><div class="aufgabenblatt"><p>Auf einem Glücksrad sind die Sektoren mit den Ziffern $1$, $2$ und
+  $3$ so aufgeteilt, dass $P(1) = \frac{1}{2}$ , $P(2) = \frac{1}{3}$
+  und $P(3) = \frac{1}{6}$.  Man bestimme die Verteilung der
+  Zufallsgrösse $X =$ «Ziffernsumme nach zweimaligem Drehen» und
+  stelle sie in einem Histogramm dar.</p><div class="stufen"><div class="reiter"><button type="button" data-stufe="starthilfe" aria-expanded="false">Starthilfe</button><button type="button" data-stufe="loesung" aria-expanded="false">Lösung</button></div><div class="faltung" data-stufe="starthilfe" hidden><ul><li>Erstellen Sie eine Tabelle aller möglichen Ergebnisse $(i,j)$ beim zweimaligen Drehen</li><li>Berechnen Sie für jedes Paar die Wahrscheinlichkeit als Produkt $P(i) \cdot P(j)$</li><li>Gruppieren Sie die Ergebnisse nach ihrer Ziffernsumme $i + j$</li><li>Addieren Sie die Wahrscheinlichkeiten für gleiche Summen</li><li>Überprüfen Sie am Ende, ob die Summe aller Wahrscheinlichkeiten 1 ergibt</li></ul></div><div class="faltung" data-stufe="loesung" hidden><h4>Schritt 1: Visualisierung des Glücksrads</h4>
+<figure class="zeichnung"><img src="../../bilder/zeichnung-cc1bf48db529.svg" alt=""></figure>
+<h4>Schritt 2: Baumdiagramm für zweimaliges Drehen</h4>
+<figure class="zeichnung"><img src="../../bilder/zeichnung-a704a7bf0cc6.svg" alt=""></figure>
+<h4>Schritt 3: Alle möglichen Ergebnisse beim zweimaligen Drehen</h4>
+<p>Bei zwei Drehungen gibt es $3 \cdot 3 = 9$ mögliche Ergebnispaare $(i,j)$. Da die Drehungen unabhängig sind, gilt:
+$$P((i,j)) = P(i) \cdot P(j)$$</p>
+<div class="tabelle"><table><tr style="background:#f2f2f2"><td class="c sl so">1. Dreh</td><td class="c sl so">2. Dreh</td><td class="c sl so">Summe</td><td class="c sl so">Wahrscheinlichkeit</td><td class="c sl sr so">Berechnung</td></tr><tr><td class="c sl so">1</td><td class="c sl so">1</td><td class="c sl so" style="background:#e6e6ff">2</td><td class="c sl so">$\frac{1}{2} \cdot \frac{1}{2} = \frac{1}{4}$</td><td class="c sl sr so"></td></tr><tr><td class="c sl so">1</td><td class="c sl so">2</td><td class="c sl so" style="background:#e6f2e6">3</td><td class="c sl so">$\frac{1}{2} \cdot \frac{1}{3} = \frac{1}{6}$</td><td class="c sl sr so"></td></tr><tr><td class="c sl">1</td><td class="c sl">3</td><td class="c sl" style="background:#ffffe6">4</td><td class="c sl">$\frac{1}{2} \cdot \frac{1}{6} = \frac{1}{12}$</td><td class="c sl sr"></td></tr><tr><td class="c sl so">2</td><td class="c sl so">1</td><td class="c sl so" style="background:#e6f2e6">3</td><td class="c sl so">$\frac{1}{3} \cdot \frac{1}{2} = \frac{1}{6}$</td><td class="c sl sr so"></td></tr><tr><td class="c sl">2</td><td class="c sl">2</td><td class="c sl" style="background:#ffffe6">4</td><td class="c sl">$\frac{1}{3} \cdot \frac{1}{3} = \frac{1}{9}$</td><td class="c sl sr"></td></tr><tr><td class="c sl">2</td><td class="c sl">3</td><td class="c sl" style="background:#fff6e6">5</td><td class="c sl">$\frac{1}{3} \cdot \frac{1}{6} = \frac{1}{18}$</td><td class="c sl sr"></td></tr><tr><td class="c sl so">3</td><td class="c sl so">1</td><td class="c sl so" style="background:#ffffe6">4</td><td class="c sl so">$\frac{1}{6} \cdot \frac{1}{2} = \frac{1}{12}$</td><td class="c sl sr so"></td></tr><tr><td class="c sl">3</td><td class="c sl">2</td><td class="c sl" style="background:#fff6e6">5</td><td class="c sl">$\frac{1}{6} \cdot \frac{1}{3} = \frac{1}{18}$</td><td class="c sl sr"></td></tr><tr><td class="su c sl">3</td><td class="su c sl">3</td><td class="su c sl" style="background:#ffe6e6">6</td><td class="su c sl">$\frac{1}{6} \cdot \frac{1}{6} = \frac{1}{36}$</td><td class="su c sl sr"></td></tr></table></div>
+<h4>Schritt 4: Bestimmung der Verteilung von X</h4>
+<p>Nun fassen wir die Wahrscheinlichkeiten für gleiche Summen zusammen:</p>
+<ul><li>$P(X=2) = P((1,1)) = \frac{1}{4}$</li><li>$P(X=3) = P((1,2)) + P((2,1)) = \frac{1}{6} + \frac{1}{6} = \frac{2}{6} = \frac{1}{3}$</li><li>$P(X=4) = P((1,3)) + P((2,2)) + P((3,1)) = \frac{1}{12} + \frac{1}{9} + \frac{1}{12}$</li><li>$P(X=5) = P((2,3)) + P((3,2)) = \frac{1}{18} + \frac{1}{18} = \frac{2}{18} = \frac{1}{9}$</li><li>$P(X=6) = P((3,3)) = \frac{1}{36}$</li></ul>
+<p>Für $P(X=4)$ müssen wir die Brüche gleichnamig machen:
+$$P(X=4) = \frac{1}{12} + \frac{1}{9} + \frac{1}{12} = \frac{2}{12} + \frac{1}{9} = \frac{6}{36} + \frac{4}{36} = \frac{10}{36} = \frac{5}{18}$$</p>
+<h4>Schritt 5: Kontrolle und Verteilungstabelle</h4>
+<p>Kontrolle der Summe:
+$$\frac{1}{4} + \frac{1}{3} + \frac{5}{18} + \frac{1}{9} + \frac{1}{36} = \frac{9}{36} + \frac{12}{36} + \frac{10}{36} + \frac{4}{36} + \frac{1}{36} = \frac{36}{36} = 1 \checkmark$$</p>
+<p><strong>Verteilungstabelle:</strong></p>
+<div class="tabelle"><table><tr style="background:#f2f2f2"><td class="l sl so">$k$</td><td class="c sl so">2</td><td class="c sl so">3</td><td class="c sl so">4</td><td class="c sl so">5</td><td class="c sl sr so">6</td></tr><tr><td class="l sl so">$P(X=k)$</td><td class="c sl so">$\frac{1}{4}$</td><td class="c sl so">$\frac{1}{3}$</td><td class="c sl so">$\frac{5}{18}$</td><td class="c sl so">$\frac{1}{9}$</td><td class="c sl sr so">$\frac{1}{36}$</td></tr><tr><td class="su l sl so">$P(X=k)$ dezimal</td><td class="su c sl so">0.250</td><td class="su c sl so">0.333</td><td class="su c sl so">0.278</td><td class="su c sl so">0.111</td><td class="su c sl sr so">0.028</td></tr></table></div>
+<h4>Schritt 6: Histogramm</h4>
+<figure class="zeichnung"><img src="../../bilder/zeichnung-db08a64883d7.svg" alt=""></figure>
+<h4>Berechnung von Erwartungswert und Varianz:</h4>
+<p><strong>Erwartungswert:</strong>
+\begin{align*}
+E[X] &amp;= \sum_{k=2}^{6} k \cdot P(X=k)\\
+&amp;= 2 \cdot \frac{1}{4} + 3 \cdot \frac{1}{3} + 4 \cdot \frac{5}{18} + 5 \cdot \frac{1}{9} + 6 \cdot \frac{1}{36}\\
+&amp;= \frac{1}{2} + 1 + \frac{10}{9} + \frac{5}{9} + \frac{1}{6}\\
+&amp;= \frac{9}{18} + \frac{18}{18} + \frac{20}{18} + \frac{10}{18} + \frac{3}{18} = \frac{60}{18} = \frac{10}{3} \approx 3.33
+\end{align*}</p>
+<p><strong>Varianz:</strong>
+\begin{align*}
+E[X^2] &amp;= 4 \cdot \frac{1}{4} + 9 \cdot \frac{1}{3} + 16 \cdot \frac{5}{18} + 25 \cdot \frac{1}{9} + 36 \cdot \frac{1}{36}\\
+&amp;= 1 + 3 + \frac{80}{18} + \frac{50}{18} + 1 = 5 + \frac{130}{18} = \frac{220}{18}\\
+\operatorname{Var}(X) &amp;= E[X^2] - (E[X])^2 = \frac{220}{18} - \left(\frac{10}{3}\right)^2 = \frac{220}{18} - \frac{100}{9} = \frac{20}{18} = \frac{10}{9}
+\end{align*}</p>
+<h4>Beobachtungen:</h4>
+<ul><li>Die Verteilung ist linkssteil mit Maximum bei $X=3$</li><li>Die häufigste Summe ist 3 (mit Wahrscheinlichkeit $\frac{1}{3}$)</li><li>Die ungleichen Sektorwahrscheinlichkeiten führen zu einer asymmetrischen Verteilung</li><li>Kleine Summen sind wahrscheinlicher als grosse, da die 1 mit $P(1)=\frac{1}{2}$ die grösste Wahrscheinlichkeit hat</li></ul></div></div></div><p class="fundort">Im Video: <a href="../../lernweg-6/histogramme/index.html">Etappe 3 · Histogramme</a> <span class="zeit">bei 2:36</span></p><p class="heimknopf"><a href="../../index.html"><span class="haus" aria-hidden="true">⌂</span>Material</a></p>
+</main>
+<footer><div class="seitenfuss"><span class="wo"><b>MA01.07 · MA01.08</b> Daten und Zufall</span><span class="wer">Henrike Allmendinger · Herbstsemester 2026<a class="pinnwand" href="https://www.taskcards.de/#/board/c1b7fe7b-28eb-41b2-bf38-60c4264a9f8c" target="_blank" rel="noopener">Feedback</a></span></div></footer>
+<script src="../../gemeinsam/seite.js?f=c77c6724"></script>
+
+<script>window.MathJax={tex:{inlineMath:[['$','$'],['\\(','\\)']],
+  displayMath:[['\\[','\\]'],['$$','$$']],processEscapes:true,
+  macros:{cc:'\\mathbb{C}',rr:'\\mathbb{R}',nn:'\\mathbb{N}',
+          zz:'\\mathbb{Z}',qq:'\\mathbb{Q}',cis:'\\operatorname{cis}',
+          Log:'\\operatorname{Log}',dd:'\\mathrm{d}',
+          glqq:'\\text{„}',grqq:'\\text{“}',
+          // Aus dem Vorspann von MA01.03 (`Preambel/Styles.tex`):
+          // ein Gleichheitszeichen mit Dach, «entspricht».
+          equalhat:'\\mathrel{\\stackrel{\\wedge}{=}}',
+          // `\vv` kommt aus dem Paket `esvect` (Vektorpfeil) und ist
+          // MathJax unbekannt — ohne diese Zeile setzt es den Befehl
+          // rot als Fehler. Gefunden am 26.08. in Kapitel 3 von
+          // MA01.03 («schultypische Beispiele», 4 Stellen).
+          vv:['\\overrightarrow{#1}',1]}},
+  options:{skipHtmlTags:['script','noscript','style','textarea','pre']}};</script>
+<script defer src="../../gemeinsam/fremd/tex-svg.js"></script>
+</body>
+</html>

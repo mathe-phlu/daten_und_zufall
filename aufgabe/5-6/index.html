@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="de">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Aufgabe 5.6 · Daten und Zufall</title>
+<link rel="stylesheet" href="../../gemeinsam/lernlandschaft.css?f=c77c6724">
+<body data-farbe="fach">
+<div class="stationskopf"><span class="wort">AUFGABE</span><span class="roemisch">5.6</span><h1>Daten und Zufall</h1><span class="wechsel wortweise"><a href="../../index.html">Startseite</a><a href="../index.html">Alle Aufgaben</a></span></div>
+<main>
+<h2 class="etappentitel"><span class="stand">Aufgabe 5.6</span></h2><div class="aufgabenblatt"><p>Die <em>Luzerner Zeitung</em> meldet, dass jeder 10. Arbeitsplatz in der
+  Schweiz als «prekär» anzusehen ist, was die soziale Absicherung
+  betrifft. Frauen sollen davon besonders betroffen
+  sein. Untersuchen Sie diese Behauptung genauer, indem Sie als weitere Daten benutzen, dass
+  $40\%$ der arbeitenden Bevölkerung Frauen sind. Davon stehen
+  $82\%$ in einem Arbeitsverhältnis mit ausreichender sozialer Absicherung.
+  Welcher Anteil der prekären Verhältnisse entfällt auf die Frauen im
+  Gegensatz zu den Männern?</p><div class="stufen"><div class="reiter"><button type="button" data-stufe="starthilfe" aria-expanded="false">Starthilfe</button><button type="button" data-stufe="loesung" aria-expanded="false">Lösung</button></div><div class="faltung" data-stufe="starthilfe" hidden><ul><li>Definieren Sie F (Frau), M (Mann) und P (prekär)</li><li>Nutzen Sie «82% der Frauen haben gute Absicherung» zur Berechnung von $P_F(P)$</li><li>Erstellen Sie eine Vierfeldertafel und nutzen Sie die Randsummen</li><li>Berechnen Sie aus $P(P) = 0.10$ und $P(F \cap P)$ den Anteil $P(M \cap P)$</li></ul></div><div class="faltung" data-stufe="loesung" hidden><p><strong>Gegeben:</strong>
+<ul><li>$P(P) = 0.10$ (10% aller Arbeitsplätze sind prekär)</li><li>$P(F) = 0.40$ (40% der Arbeitenden sind Frauen)</li><li>$P_F(\overline{P}) = 0.82$ (82% der Frauen haben gute Absicherung)</li></ul></p>
+<p><strong>Gesucht:</strong>
+<ul><li>Anteil der Frauen an allen prekären Verhältnissen: $P_P(F)$</li><li>Vergleich der Risiken für Frauen und Männer</li></ul></p>
+<p><strong>Vorbereitende Berechnungen:</strong>
+<ul><li>$P_F(P) = 1 - P_F(\overline{P}) = 1 - 0.82 = 0.18$</li><li>$P(F \cap P) = P_F(P) \cdot P(F) = 0.18 \cdot 0.40 = 0.072$</li><li>$P(M) = 1 - P(F) = 0.60$</li><li>$P(M \cap P) = P(P) - P(F \cap P) = 0.10 - 0.072 = 0.028$</li></ul></p>
+<p><strong>Lösungsweg 1: Mit Vierfeldertafel</strong></p>
+<figure class="zeichnung"><img src="../../bilder/zeichnung-1355dc321479.svg" alt=""></figure>
+<p><strong>Lösungsweg 2: Mit Baumdiagramm</strong></p>
+<figure class="zeichnung"><img src="../../bilder/zeichnung-e775133015e6.svg" alt=""></figure>
+<p>Berechnung von $P_M(P)$: Da $P(M \cap P) = 0.028$ und $P(M) = 0.60$:
+$$P_M(P) = \frac{0.028}{0.60} = 0.047 = 4.7\%$$</p>
+<p><strong>Auswertung der Ergebnisse:</strong></p>
+<p><strong>1. Anteil der Frauen an allen prekären Verhältnissen:</strong>
+$$P_P(F) = \frac{P(F \cap P)}{P(P)} = \frac{0.072}{0.10} = 0.72 = 72\%$$</p>
+<p><strong>2. Vergleich der Risiken:</strong>
+<ul><li>Frauen: $P_F(P) = 18\%$</li><li>Männer: $P_M(P) = 4.7\%$</li><li>Relatives Risiko: $\frac{18\%}{4.7\%} \approx 3.8$</li></ul></p>
+<p><strong>Fazit:</strong></p>
+<p>Die Behauptung der Luzerner Zeitung wird bestätigt:
+<ul><li>Obwohl Frauen nur 40% der Arbeitenden ausmachen, stellen sie 72% aller prekär Beschäftigten</li><li>Berufstätige Frauen haben ein fast viermal so hohes Risiko wie Männer</li><li>Von allen prekären Arbeitsverhältnissen entfallen 72% auf Frauen und nur 28% auf Männer</li></ul></p></div></div></div><p class="heimknopf"><a href="../../index.html"><span class="haus" aria-hidden="true">⌂</span>Material</a></p>
+</main>
+<footer><div class="seitenfuss"><span class="wo"><b>MA01.07 · MA01.08</b> Daten und Zufall</span><span class="wer">Henrike Allmendinger · Herbstsemester 2026<a class="pinnwand" href="https://www.taskcards.de/#/board/c1b7fe7b-28eb-41b2-bf38-60c4264a9f8c" target="_blank" rel="noopener">Feedback</a></span></div></footer>
+<script src="../../gemeinsam/seite.js?f=c77c6724"></script>
+
+<script>window.MathJax={tex:{inlineMath:[['$','$'],['\\(','\\)']],
+  displayMath:[['\\[','\\]'],['$$','$$']],processEscapes:true,
+  macros:{cc:'\\mathbb{C}',rr:'\\mathbb{R}',nn:'\\mathbb{N}',
+          zz:'\\mathbb{Z}',qq:'\\mathbb{Q}',cis:'\\operatorname{cis}',
+          Log:'\\operatorname{Log}',dd:'\\mathrm{d}',
+          glqq:'\\text{„}',grqq:'\\text{“}',
+          // Aus dem Vorspann von MA01.03 (`Preambel/Styles.tex`):
+          // ein Gleichheitszeichen mit Dach, «entspricht».
+          equalhat:'\\mathrel{\\stackrel{\\wedge}{=}}',
+          // `\vv` kommt aus dem Paket `esvect` (Vektorpfeil) und ist
+          // MathJax unbekannt — ohne diese Zeile setzt es den Befehl
+          // rot als Fehler. Gefunden am 26.08. in Kapitel 3 von
+          // MA01.03 («schultypische Beispiele», 4 Stellen).
+          vv:['\\overrightarrow{#1}',1]}},
+  options:{skipHtmlTags:['script','noscript','style','textarea','pre']}};</script>
+<script defer src="../../gemeinsam/fremd/tex-svg.js"></script>
+</body>
+</html>

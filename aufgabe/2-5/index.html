@@ -1,0 +1,121 @@
+<!doctype html>
+<html lang="de">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Aufgabe 2.5 · Daten und Zufall</title>
+<link rel="stylesheet" href="../../gemeinsam/lernlandschaft.css?f=c77c6724">
+<body data-farbe="fach">
+<div class="stationskopf"><span class="wort">AUFGABE</span><span class="roemisch">2.5</span><h1>Daten und Zufall</h1><span class="wechsel wortweise"><a href="../../index.html">Startseite</a><a href="../index.html">Alle Aufgaben</a></span></div>
+<main>
+<h2 class="etappentitel"><span class="stand">Aufgabe 2.5</span></h2><div class="aufgabenblatt"><p>$A$, $B$, $C$ bezeichnen drei Ereignisse der Ergebnismenge
+  $\Omega$. Man beschreibe folgende zusammengesetzten Ereignisse
+  mengenalgebraisch.</p>
+<div class="spalten">
+    <ol class="klammer-a"><li>Alle drei Ereignisse treten ein.</li><li>Keines der drei Ereignisse tritt ein.</li><li>Genau eines der drei Ereignisse tritt ein.</li><li>Mindestens ein Ereignis tritt ein.</li><li>Höchstens ein Ereignis tritt ein.</li><li>Genau zwei Ereignisse treten ein.</li><li>Mindestens zwei Ereignisse treten ein.</li><li>Höchstens zwei Ereignisse treten ein.</li><li>Nur die Ereignisse B und C treten ein.</li><li>Nur das Ereignis C tritt ein.</li></ol>
+  </div><div class="stufen"><div class="reiter"><button type="button" data-stufe="starthilfe" aria-expanded="false">Starthilfe</button><button type="button" data-stufe="loesung" aria-expanded="false">Lösung</button><button type="button" data-stufe="video" aria-expanded="false">Video</button></div><div class="faltung" data-stufe="starthilfe" hidden><ul><li>«Genau k» bedeutet: Exakt k Ereignisse treten ein, nicht mehr und nicht weniger</li><li>«Mindestens k» bedeutet: k oder mehr Ereignisse treten ein</li><li>«Höchstens k» bedeutet: k oder weniger Ereignisse treten ein</li><li>«Nur X tritt ein» bedeutet: X tritt ein, alle anderen nicht</li><li>Nutzen Sie die Komplemente $\overline{A}$, $\overline{B}$, $\overline{C}$ für «tritt nicht ein»</li></ul></div><div class="faltung" data-stufe="loesung" hidden><p><strong>Systematisches Vorgehen mit Venn-Diagrammen:</strong></p>
+<p><strong>(a) Alle drei Ereignisse treten ein</strong></p>
+<div class="neben">
+<figure class="zeichnung"><img src="../../bilder/zeichnung-f86800ab22da.svg" alt=""></figure>
+</div>
+<div class="neben">
+A tritt ein UND B tritt ein UND C tritt ein.
+$$\boxed{A \cap B \cap C}$$
+</div>
+<p><strong>(b) Keines der drei Ereignisse tritt ein</strong></p>
+<div class="neben">
+<figure class="zeichnung"><img src="../../bilder/zeichnung-204dbd7d74af.svg" alt=""></figure>
+</div>
+<div class="neben">
+A tritt nicht ein UND B tritt nicht ein UND C tritt nicht ein.
+$$\boxed{\overline{A} \cap \overline{B} \cap \overline{C}}$$
+Alternative (mit De Morgan): $\overline{A \cup B \cup C}$
+</div>
+<p><strong>(c) Genau eines der drei Ereignisse tritt ein</strong></p>
+<div class="neben">
+<figure class="zeichnung"><img src="../../bilder/zeichnung-0712aeadac8a.svg" alt=""></figure>
+</div>
+<div class="neben">
+Nur A ODER nur B ODER nur C.
+$$\boxed{(A \cap \overline{B} \cap \overline{C}) \cup (\overline{A} \cap B \cap \overline{C}) \cup (\overline{A} \cap \overline{B} \cap C)}$$
+</div>
+<p><strong>(d) Mindestens ein Ereignis tritt ein</strong></p>
+<div class="neben">
+<figure class="zeichnung"><img src="../../bilder/zeichnung-06de7fcdd321.svg" alt=""></figure>
+</div>
+<div class="neben">
+A tritt ein ODER B tritt ein ODER C tritt ein (oder mehrere).
+$$\boxed{A \cup B \cup C}$$
+</div>
+<p><strong>(e) Höchstens ein Ereignis tritt ein</strong></p>
+<div class="neben">
+<figure class="zeichnung"><img src="../../bilder/zeichnung-0287c4d95474.svg" alt=""></figure>
+</div>
+<div class="neben">
+Kein Ereignis ODER genau ein Ereignis.
+<p>Sei $D = (A \cap \overline{B} \cap \overline{C}) \cup (\overline{A} \cap B \cap \overline{C}) \cup (\overline{A} \cap \overline{B} \cap C)$
+$$\boxed{(\overline{A} \cap \overline{B} \cap \overline{C}) \cup D}$$
+</p></div>
+<p><strong>(f) Genau zwei Ereignisse treten ein</strong></p>
+<div class="neben">
+<figure class="zeichnung"><img src="../../bilder/zeichnung-55c5ec7ba35e.svg" alt=""></figure>
+</div>
+<div class="neben">
+A und B (nicht C) ODER A und C (nicht B) ODER B und C (nicht A).
+$$\boxed{(A \cap B \cap \overline{C}) \cup (A \cap \overline{B} \cap C) \cup (\overline{A} \cap B \cap C)}$$
+</div>
+<p><strong>(g) Mindestens zwei Ereignisse treten ein</strong></p>
+<div class="neben">
+<figure class="zeichnung"><img src="../../bilder/zeichnung-3aac58cb5d17.svg" alt=""></figure>
+</div>
+<div class="neben">
+Genau zwei ODER alle drei Ereignisse.
+<p>Sei $E = (A \cap B \cap \overline{C}) \cup (A \cap \overline{B} \cap C) \cup (\overline{A} \cap B \cap C)$
+$$\boxed{(A \cap B \cap C) \cup E}$$
+</p></div>
+<p><strong>(h) Höchstens zwei Ereignisse treten ein</strong></p>
+<div class="neben">
+<figure class="zeichnung"><img src="../../bilder/zeichnung-0ed2a339e7f6.svg" alt=""></figure>
+</div>
+<div class="neben">
+Nicht alle drei Ereignisse treten ein.
+$$\boxed{\overline{A \cap B \cap C}}$$
+Alternative (mit De Morgan): $\overline{A} \cup \overline{B} \cup \overline{C}$
+</div>
+<p><strong>(i) Nur die Ereignisse B und C treten ein</strong></p>
+<div class="neben">
+<figure class="zeichnung"><img src="../../bilder/zeichnung-d2a4b8db14b7.svg" alt=""></figure>
+</div>
+<div class="neben">
+«Nur B und C» bedeutet: B tritt ein UND C tritt ein UND A tritt NICHT ein.
+$$\boxed{\overline{A} \cap B \cap C}$$
+</div>
+<p><strong>(j) Nur das Ereignis C tritt ein</strong></p>
+<div class="neben">
+<figure class="zeichnung"><img src="../../bilder/zeichnung-372269a611a0.svg" alt=""></figure>
+</div>
+<div class="neben">
+«Nur C» bedeutet: C tritt ein UND A tritt nicht ein UND B tritt nicht ein.
+$$\boxed{\overline{A} \cap \overline{B} \cap C}$$
+</div></div><div class="faltung" data-stufe="video" hidden><div class="rahmen"><video class="spieler" controls preload="metadata" src="https://api.cast.switch.ch/p/110/sp/11000/playManifest/entryId/0_7gwedc0u/format/url/protocol/https/video.mp4"></video></div></div></div></div><p class="heimknopf"><a href="../../index.html"><span class="haus" aria-hidden="true">⌂</span>Material</a></p>
+</main>
+<footer><div class="seitenfuss"><span class="wo"><b>MA01.07 · MA01.08</b> Daten und Zufall</span><span class="wer">Henrike Allmendinger · Herbstsemester 2026<a class="pinnwand" href="https://www.taskcards.de/#/board/c1b7fe7b-28eb-41b2-bf38-60c4264a9f8c" target="_blank" rel="noopener">Feedback</a></span></div></footer>
+<script src="../../gemeinsam/seite.js?f=c77c6724"></script>
+
+<script>window.MathJax={tex:{inlineMath:[['$','$'],['\\(','\\)']],
+  displayMath:[['\\[','\\]'],['$$','$$']],processEscapes:true,
+  macros:{cc:'\\mathbb{C}',rr:'\\mathbb{R}',nn:'\\mathbb{N}',
+          zz:'\\mathbb{Z}',qq:'\\mathbb{Q}',cis:'\\operatorname{cis}',
+          Log:'\\operatorname{Log}',dd:'\\mathrm{d}',
+          glqq:'\\text{„}',grqq:'\\text{“}',
+          // Aus dem Vorspann von MA01.03 (`Preambel/Styles.tex`):
+          // ein Gleichheitszeichen mit Dach, «entspricht».
+          equalhat:'\\mathrel{\\stackrel{\\wedge}{=}}',
+          // `\vv` kommt aus dem Paket `esvect` (Vektorpfeil) und ist
+          // MathJax unbekannt — ohne diese Zeile setzt es den Befehl
+          // rot als Fehler. Gefunden am 26.08. in Kapitel 3 von
+          // MA01.03 («schultypische Beispiele», 4 Stellen).
+          vv:['\\overrightarrow{#1}',1]}},
+  options:{skipHtmlTags:['script','noscript','style','textarea','pre']}};</script>
+<script defer src="../../gemeinsam/fremd/tex-svg.js"></script>
+</body>
+</html>

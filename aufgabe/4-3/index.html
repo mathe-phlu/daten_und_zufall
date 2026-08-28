@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="de">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Aufgabe 4.3 · Daten und Zufall</title>
+<link rel="stylesheet" href="../../gemeinsam/lernlandschaft.css?f=c77c6724">
+<body data-farbe="fach">
+<div class="stationskopf"><span class="wort">AUFGABE</span><span class="roemisch">4.3</span><h1>Daten und Zufall</h1><span class="wechsel wortweise"><a href="../../index.html">Startseite</a><a href="../index.html">Alle Aufgaben</a></span></div>
+<main>
+<h2 class="etappentitel"><span class="stand">Aufgabe 4.3</span></h2><div class="aufgabenblatt"><p>Wie gross ist die statistische Wahrscheinlichkeit, dass eine
+  30-jährige das (derzeitige) Pensionsalter erreicht? (= Ereignis $P$)</p><div class="stufen"><div class="reiter"><button type="button" data-stufe="starthilfe" aria-expanded="false">Starthilfe</button><button type="button" data-stufe="loesung" aria-expanded="false">Lösung</button></div><div class="faltung" data-stufe="starthilfe" hidden><ul><li>Verwenden Sie die Sterbetafel für die Berechnung</li><li>Beachten Sie, dass die Person bereits das 30. Lebensjahr erreicht hat</li><li>Berechnen Sie den Anteil der 65-Jährigen unter den 30-jährigen</li><li>Dies ist eine Wahrscheinlichkeit unter einer Bedingung</li></ul></div><div class="faltung" data-stufe="loesung" hidden><p><strong>Daten aus der Sterbetafel:</strong>
+<ul><li>Von 100'000 Frauen erreichen 98'461 das 30. Lebensjahr</li><li>Von 100'000 Frauen erreichen 89'986 das 65. Lebensjahr (Pensionsalter)</li></ul></p>
+<p><strong>Berechnung der gesuchten Wahrscheinlichkeit:</strong></p>
+<p>Wir suchen die Wahrscheinlichkeit, dass eine Frau 65 wird, wenn wir wissen, dass sie bereits 30 ist.</p>
+<p>Der Anteil der 65-Jährigen in der Gruppe derjenigen, die das 30. Lebensjahr erreicht haben:</p>
+<p>$$h_n(P) = \frac{\text{Anzahl der 65-Jährigen}}{\text{Anzahl der 30-Jährigen}} = \frac{89'986}{98'461} = 0.9139 = 91.39\% \approx 91.4\%$$</p>
+<p><strong>Wichtiger Unterschied:</strong></p>
+<p>Die Wahrscheinlichkeit, 65 zu werden (von Geburt an):
+$$P(\text{erreicht 65}) = \frac{89'986}{100'000} = 89.99\%$$</p>
+<p>Die Wahrscheinlichkeit für eine 30-Jährige, 65 zu werden:
+$$P(\text{erreicht 65, wenn bereits 30}) = \frac{89'986}{98'461} = 91.39\%$$</p>
+<p><strong>Interpretation:</strong></p>
+<ul><li>Eine 30-jährige Frau hat eine statistische Wahrscheinlichkeit von etwa 91.4%, das Pensionsalter zu erreichen</li><li>Die kritischen Jahre (mit höherer Sterblichkeit) liegen oft in der frühen Kindheit - wer 30 wird, hat diese bereits überstanden</li><li>Diese Berechnung basiert auf aktuellen Sterbetafeln und berücksichtigt nicht zukünftige medizinische Fortschritte</li></ul>
+<p><strong>Anmerkung:</strong> Wir sprechen hier von einer Wahrscheinlichkeit unter der Bedingung, dass die Person bereits 30 ist, verwenden aber noch nicht die formale Notation der bedingten Wahrscheinlichkeit, die erst in Kapitel 5 eingeführt wird.</p></div></div></div><p class="fundort">Im Video: <a href="../../lernweg-4/beispiele/index.html">Etappe 2 · Beispiele</a> <span class="zeit">bei 6:57</span></p><p class="heimknopf"><a href="../../index.html"><span class="haus" aria-hidden="true">⌂</span>Material</a></p>
+</main>
+<footer><div class="seitenfuss"><span class="wo"><b>MA01.07 · MA01.08</b> Daten und Zufall</span><span class="wer">Henrike Allmendinger · Herbstsemester 2026<a class="pinnwand" href="https://www.taskcards.de/#/board/c1b7fe7b-28eb-41b2-bf38-60c4264a9f8c" target="_blank" rel="noopener">Feedback</a></span></div></footer>
+<script src="../../gemeinsam/seite.js?f=c77c6724"></script>
+
+<script>window.MathJax={tex:{inlineMath:[['$','$'],['\\(','\\)']],
+  displayMath:[['\\[','\\]'],['$$','$$']],processEscapes:true,
+  macros:{cc:'\\mathbb{C}',rr:'\\mathbb{R}',nn:'\\mathbb{N}',
+          zz:'\\mathbb{Z}',qq:'\\mathbb{Q}',cis:'\\operatorname{cis}',
+          Log:'\\operatorname{Log}',dd:'\\mathrm{d}',
+          glqq:'\\text{„}',grqq:'\\text{“}',
+          // Aus dem Vorspann von MA01.03 (`Preambel/Styles.tex`):
+          // ein Gleichheitszeichen mit Dach, «entspricht».
+          equalhat:'\\mathrel{\\stackrel{\\wedge}{=}}',
+          // `\vv` kommt aus dem Paket `esvect` (Vektorpfeil) und ist
+          // MathJax unbekannt — ohne diese Zeile setzt es den Befehl
+          // rot als Fehler. Gefunden am 26.08. in Kapitel 3 von
+          // MA01.03 («schultypische Beispiele», 4 Stellen).
+          vv:['\\overrightarrow{#1}',1]}},
+  options:{skipHtmlTags:['script','noscript','style','textarea','pre']}};</script>
+<script defer src="../../gemeinsam/fremd/tex-svg.js"></script>
+</body>
+</html>

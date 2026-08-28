@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="de">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Aufgabe 5.8 · Daten und Zufall</title>
+<link rel="stylesheet" href="../../gemeinsam/lernlandschaft.css?f=c77c6724">
+<body data-farbe="zugang">
+<div class="stationskopf"><span class="wort">AUFGABE</span><span class="roemisch">5.8</span><h1>Daten und Zufall</h1><span class="wechsel wortweise"><a href="../../index.html">Startseite</a><a href="../index.html">Alle Aufgaben</a></span></div>
+<main>
+<h2 class="etappentitel"><span class="stand">Aufgabe 5.8</span></h2><div class="aufgabenblatt"><p>Man zeige, dass das Mass der bedingten Wahrscheinlichkeit $P_A$ ein Wahrscheinlichkeitsmass im Sinne der Kolmogorow-Axiome ist (also K1 bis K3 erfüllt).</p><div class="stufen"><div class="reiter"><button type="button" data-stufe="starthilfe" aria-expanded="false">Starthilfe</button><button type="button" data-stufe="loesung" aria-expanded="false">Lösung</button><button type="button" data-stufe="video" aria-expanded="false">Video</button></div><div class="faltung" data-stufe="starthilfe" hidden><ul><li>Erinnern Sie sich an die Definition: $P_A(B) = \frac{P(A \cap B)}{P(A)}$ mit $P(A) &gt; 0$</li><li>K1: Zeigen Sie $P_A(B) \geq 0$ für alle Ereignisse B</li><li>K2: Zeigen Sie $P_A(\Omega) = 1$</li><li>K3: Zeigen Sie die Additivität für disjunkte Ereignisse</li><li>Nutzen Sie bei K3 das Distributivgesetz für Mengen</li></ul></div><div class="faltung" data-stufe="loesung" hidden><p><strong>Vorbemerkung:</strong></p>
+<p>Wir zeigen, dass für ein festes Ereignis $A$ mit $P(A) &gt; 0$ die bedingte Wahrscheinlichkeit
+$$P_A(B) = \frac{P(A \cap B)}{P(A)}$$
+alle drei Kolmogorow-Axiome erfüllt und somit selbst ein Wahrscheinlichkeitsmass ist.</p>
+<p><strong>Beweis von K1 (Nichtnegativität):</strong></p>
+<p>Zu zeigen: $P_A(B) \geq 0$ für alle Ereignisse $B \subseteq \Omega$.</p>
+<ul><li>Da $P$ ein Wahrscheinlichkeitsmass ist, gilt $P(A \cap B) \geq 0$ für alle $B$</li><li>Mit $P(A) &gt; 0$ (Voraussetzung) folgt:
+$$P_A(B) = \frac{P(A \cap B)}{P(A)} \geq \frac{0}{P(A)} = 0$$</li></ul>
+<p>Damit ist K1 erfüllt. $\checkmark$</p>
+<p><strong>Beweis von K2 (Normiertheit):</strong></p>
+<p>Zu zeigen: $P_A(\Omega) = 1$</p>
+<ul><li>Für jedes Ereignis $A \subseteq \Omega$ gilt: $A \cap \Omega = A$</li><li>Daher:
+$$P_A(\Omega) = \frac{P(A \cap \Omega)}{P(A)} = \frac{P(A)}{P(A)} = 1$$</li></ul>
+<p>Damit ist K2 erfüllt. $\checkmark$</p>
+<p><strong>Beweis von K3 (Additivität):</strong></p>
+<p>Zu zeigen: Für disjunkte Ereignisse $E_1, E_2 \subseteq \Omega$ (d.h. $E_1 \cap E_2 = \emptyset$) gilt:
+$$P_A(E_1 \cup E_2) = P_A(E_1) + P_A(E_2)$$</p>
+<p><strong>Schritt 1:</strong> Linke Seite
+$$P_A(E_1 \cup E_2) = \frac{P(A \cap (E_1 \cup E_2))}{P(A)}$$</p>
+<p><strong>Schritt 2:</strong> Distributivgesetz anwenden
+$$A \cap (E_1 \cup E_2) = (A \cap E_1) \cup (A \cap E_2)$$</p>
+<p><strong>Schritt 3:</strong> Disjunktheit übertragen</p>
+<p>Wenn $E_1 \cap E_2 = \emptyset$, dann sind auch $(A \cap E_1)$ und $(A \cap E_2)$ disjunkt:
+$$(A \cap E_1) \cap (A \cap E_2) = A \cap (E_1 \cap E_2) = A \cap \emptyset = \emptyset$$</p>
+<p><strong>Schritt 4:</strong> Additivität von $P$ nutzen</p>
+<p>Da $P$ selbst K3 erfüllt und $(A \cap E_1)$, $(A \cap E_2)$ disjunkt sind:
+\begin{align*}
+P_A(E_1 \cup E_2) &amp;= \frac{P((A \cap E_1) \cup (A \cap E_2))}{P(A)}\\
+&amp;= \frac{P(A \cap E_1) + P(A \cap E_2)}{P(A)}\\
+&amp;= \frac{P(A \cap E_1)}{P(A)} + \frac{P(A \cap E_2)}{P(A)}\\
+&amp;= P_A(E_1) + P_A(E_2)
+\end{align*}</p>
+<p>Damit ist K3 erfüllt. $\checkmark$</p>
+<p><strong>Schlussfolgerung:</strong></p>
+<p>Da $P_A$ alle drei Kolmogorow-Axiome erfüllt, ist es ein Wahrscheinlichkeitsmass auf $\Omega$. Dies rechtfertigt die Bezeichnung «bedingte Wahrscheinlichkeit» und erlaubt uns, alle Sätze der Wahrscheinlichkeitstheorie auch für $P_A$ anzuwenden.</p></div><div class="faltung" data-stufe="video" hidden><div class="rahmen"><video class="spieler" controls preload="metadata" src="https://api.cast.switch.ch/p/110/sp/11000/playManifest/entryId/0_58hkbdhl/format/url/protocol/https/video.mp4"></video></div></div></div></div><p class="fundort">Im Video: <a href="../../lernweg-5/bedingte-wahrscheinlichkeit/index.html">Etappe 3 · Bedingte Wahrscheinlichkeit</a> <span class="zeit">bei 8:22</span></p><p class="heimknopf"><a href="../../index.html"><span class="haus" aria-hidden="true">⌂</span>Material</a></p>
+</main>
+<footer><div class="seitenfuss"><span class="wo"><b>MA01.07 · MA01.08</b> Daten und Zufall</span><span class="wer">Henrike Allmendinger · Herbstsemester 2026<a class="pinnwand" href="https://www.taskcards.de/#/board/c1b7fe7b-28eb-41b2-bf38-60c4264a9f8c" target="_blank" rel="noopener">Feedback</a></span></div></footer>
+<script src="../../gemeinsam/seite.js?f=c77c6724"></script>
+
+<script>window.MathJax={tex:{inlineMath:[['$','$'],['\\(','\\)']],
+  displayMath:[['\\[','\\]'],['$$','$$']],processEscapes:true,
+  macros:{cc:'\\mathbb{C}',rr:'\\mathbb{R}',nn:'\\mathbb{N}',
+          zz:'\\mathbb{Z}',qq:'\\mathbb{Q}',cis:'\\operatorname{cis}',
+          Log:'\\operatorname{Log}',dd:'\\mathrm{d}',
+          glqq:'\\text{„}',grqq:'\\text{“}',
+          // Aus dem Vorspann von MA01.03 (`Preambel/Styles.tex`):
+          // ein Gleichheitszeichen mit Dach, «entspricht».
+          equalhat:'\\mathrel{\\stackrel{\\wedge}{=}}',
+          // `\vv` kommt aus dem Paket `esvect` (Vektorpfeil) und ist
+          // MathJax unbekannt — ohne diese Zeile setzt es den Befehl
+          // rot als Fehler. Gefunden am 26.08. in Kapitel 3 von
+          // MA01.03 («schultypische Beispiele», 4 Stellen).
+          vv:['\\overrightarrow{#1}',1]}},
+  options:{skipHtmlTags:['script','noscript','style','textarea','pre']}};</script>
+<script defer src="../../gemeinsam/fremd/tex-svg.js"></script>
+</body>
+</html>

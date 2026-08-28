@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="de">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Aufgabe 9.1 · Daten und Zufall</title>
+<link rel="stylesheet" href="../../gemeinsam/lernlandschaft.css?f=c77c6724">
+<body data-farbe="fach">
+<div class="stationskopf"><span class="wort">AUFGABE</span><span class="roemisch">9.1</span><h1>Daten und Zufall</h1><span class="wechsel wortweise"><a href="../../index.html">Startseite</a><a href="../index.html">Alle Aufgaben</a></span></div>
+<main>
+<h2 class="etappentitel"><span class="stand">Aufgabe 9.1</span></h2><div class="aufgabenblatt"><p>[][https://mathe-phlu.github.io/daten_und_zufall/aufgabe/9-1/index.html]
+Drei Monate nach einer Wahl, in der die Partei B $22\%$ der Stimmen erhielt, wird eine
+Umfrage unter 800 Personen durchgeführt. Eine der Frage lautet: «Wenn am nächsten
+Sonntag Wahlen wären, würden Sie Partei B (wieder) wählen?». 153 der Befragten
+antworten mit «Ja».</p>
+<p>Hat die Partei B in nur drei Monaten an Stimmen verloren? ($\alpha = 5\%$)</p><div class="stufen"><div class="reiter"><button type="button" data-stufe="starthilfe" aria-expanded="false">Starthilfe</button><button type="button" data-stufe="loesung" aria-expanded="false">Lösung</button></div><div class="faltung" data-stufe="starthilfe" hidden><ul><li>Formulieren Sie $H_0: p \geq 0.22$ (kein Stimmenverlust)</li><li>Bei einseitigem Test mit $\alpha = 5\%$ ist der kritische Wert $z = 1.64$</li><li>Berechnen Sie das Annahmeintervall unter $H_0$</li><li>Vergleichen Sie das Stichprobenergebnis mit dem kritischen Bereich</li></ul></div><div class="faltung" data-stufe="loesung" hidden><div class="tabelle"><table><tr><td class="c sr"></td><td class="l sl so" style="background:#f2f2f2"><strong>Daten</strong></td><td class="l sl sr so" style="background:#f2f2f2"><strong>Hypothesen</strong></td></tr><tr><td class="c sr"></td><td class="l sl so">Wahlergebnis vor 3 Monaten: 22%</td><td class="l sl sr so">$H_0: p \geq 0.22$ (kein Verlust)</td></tr><tr><td class="c sr"></td><td class="l sl">Stichprobengrösse: $n = 800$</td><td class="l sl sr">$H_1: p &lt; 0.22$ (Stimmenverlust)</td></tr><tr><td class="c sr"></td><td class="l sl">Ja-Stimmen in Umfrage: 153</td><td class="l sl sr">Signifikanzniveau: $\alpha = 5\%$</td></tr><tr><td class="c sr"></td><td class="l sl">Anteil in Stichprobe: $\frac{153}{800} = 19.1\%$</td><td class="l sl sr">Testrichtung: einseitig links</td></tr></table></div>
+<h4>Testaufbau und Hypothesen:</h4>
+<p>Wir testen, ob die Partei B signifikant an Zustimmung verloren hat. Die Nullhypothese besagt, dass kein Stimmenverlust vorliegt, die Alternative behauptet einen Verlust.</p>
+<aside class="merksatz"><strong>Wichtig:</strong> Bei einem einseitigen Test links lehnen wir $H_0$ ab, wenn das Stichprobenergebnis signifikant <em>kleiner</em> als erwartet ist.</aside>
+<h4>Berechnung der Teststatistik unter $H_0$:</h4>
+<p>Unter der Annahme $p_0 = 0.22$ (Grenzfall der Nullhypothese) berechnen wir:
+<ul><li><strong>Erwartete Ja-Stimmen:</strong> $\mu = n \cdot p_0 = 800 \cdot 0.22 = 176$</li><li><strong>Standardabweichung:</strong> $\sigma = \sqrt{n \cdot p_0 \cdot (1-p_0)} = \sqrt{800 \cdot 0.22 \cdot 0.78} = \sqrt{137.28} = 11.72$</li></ul></p>
+<h4>Bestimmung des kritischen Bereichs:</h4>
+<p>Bei einem einseitigen Test links mit $\alpha = 5\%$ ist der kritische Wert $z = -1.64$.</p>
+<p>Der Annahmebereich für $H_0$ ist:
+\begin{align*}
+X &amp;\geq \mu - 1.64\sigma\\
+X &amp;\geq 176 - 1.64 \cdot 11.72\\
+X &amp;\geq 176 - 19.2 = 156.8
+\end{align*}</p>
+<p>Gerundet: $H_0$ wird angenommen, wenn $X \geq 157$ Ja-Stimmen vorliegen.</p>
+<aside class="merksatz"><strong>Kritischer Bereich:</strong> $X &lt; 157$ (Ablehnungsbereich für $H_0$)
+<p><strong>Annahmebereich:</strong> $X \geq 157$ (Beibehaltung von $H_0$)</p></aside>
+<h4>Testentscheidung:</h4>
+<ul><li><strong>Beobachteter Wert:</strong> $X = 153$ Ja-Stimmen</li><li><strong>Kritischer Wert:</strong> 157 Ja-Stimmen</li><li>Da $153 &lt; 157$, liegt das Ergebnis im Ablehnungsbereich</li></ul>
+<h4>Interpretation des Ergebnisses:</h4>
+<p>Der beobachtete Anteil von 19.1% liegt signifikant unter den erwarteten 22%.</p>
+<aside class="merksatz"><strong>Schlussfolgerung:</strong> Wir verwerfen $H_0$ auf dem 5%-Signifikanzniveau. Die Partei B hat mit hoher Wahrscheinlichkeit Stimmen verloren. Der Rückgang von 22% auf etwa 19% ist statistisch signifikant.</aside>
+<h4>Zusätzliche Überlegung:</h4>
+<p>Die Differenz von 2.9 Prozentpunkten mag klein erscheinen, aber bei einer Stichprobe von 800 Personen ist sie statistisch bedeutsam. Dies zeigt die Wichtigkeit ausreichend grosser Stichproben für verlässliche Aussagen.</p></div></div></div><p class="heimknopf"><a href="../../index.html"><span class="haus" aria-hidden="true">⌂</span>Material</a></p>
+</main>
+<footer><div class="seitenfuss"><span class="wo"><b>MA01.07 · MA01.08</b> Daten und Zufall</span><span class="wer">Henrike Allmendinger · Herbstsemester 2026<a class="pinnwand" href="https://www.taskcards.de/#/board/c1b7fe7b-28eb-41b2-bf38-60c4264a9f8c" target="_blank" rel="noopener">Feedback</a></span></div></footer>
+<script src="../../gemeinsam/seite.js?f=c77c6724"></script>
+
+<script>window.MathJax={tex:{inlineMath:[['$','$'],['\\(','\\)']],
+  displayMath:[['\\[','\\]'],['$$','$$']],processEscapes:true,
+  macros:{cc:'\\mathbb{C}',rr:'\\mathbb{R}',nn:'\\mathbb{N}',
+          zz:'\\mathbb{Z}',qq:'\\mathbb{Q}',cis:'\\operatorname{cis}',
+          Log:'\\operatorname{Log}',dd:'\\mathrm{d}',
+          glqq:'\\text{„}',grqq:'\\text{“}',
+          // Aus dem Vorspann von MA01.03 (`Preambel/Styles.tex`):
+          // ein Gleichheitszeichen mit Dach, «entspricht».
+          equalhat:'\\mathrel{\\stackrel{\\wedge}{=}}',
+          // `\vv` kommt aus dem Paket `esvect` (Vektorpfeil) und ist
+          // MathJax unbekannt — ohne diese Zeile setzt es den Befehl
+          // rot als Fehler. Gefunden am 26.08. in Kapitel 3 von
+          // MA01.03 («schultypische Beispiele», 4 Stellen).
+          vv:['\\overrightarrow{#1}',1]}},
+  options:{skipHtmlTags:['script','noscript','style','textarea','pre']}};</script>
+<script defer src="../../gemeinsam/fremd/tex-svg.js"></script>
+</body>
+</html>

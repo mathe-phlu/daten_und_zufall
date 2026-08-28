@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="de">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Aufgabe 1.6 · Daten und Zufall</title>
+<link rel="stylesheet" href="../../gemeinsam/lernlandschaft.css?f=c77c6724">
+<body data-farbe="fach">
+<div class="stationskopf"><span class="wort">AUFGABE</span><span class="roemisch">1.6</span><h1>Daten und Zufall</h1><span class="wechsel wortweise"><a href="../../index.html">Startseite</a><a href="../index.html">Alle Aufgaben</a></span></div>
+<main>
+<h2 class="etappentitel"><span class="stand">Aufgabe 1.6</span></h2><div class="aufgabenblatt"><p>In der Blindenschrift bestehen Buchstaben und Zeichen aus
+    Punkten, die an sechs möglichen Stellen in dickeres Papier
+    geprägt sind und somit ertastet werden können.  Wie viele</p>
+<p>verschiedene Symbole kann man auf diese Weise erzeugen?</p><div class="stufen"><div class="reiter"><button type="button" data-stufe="starthilfe" aria-expanded="false">Starthilfe</button><button type="button" data-stufe="loesung" aria-expanded="false">Lösung</button><button type="button" data-stufe="video" aria-expanded="false">Video</button></div><div class="faltung" data-stufe="starthilfe" hidden><ul><li>Jede der 6 Stellen kann zwei Zustände haben: geprägt oder nicht geprägt</li><li>Denken Sie an ein 6-Tupel aus den Elementen {0, 1}</li><li>Alternative: Wie viele Möglichkeiten gibt es, aus 6 Stellen 0, 1, 2, ..., oder 6 auszuwählen?</li><li>Beachten Sie: Auch «kein Punkt geprägt» ist ein mögliches Symbol</li></ul></div><div class="faltung" data-stufe="loesung" hidden><p><strong>Die Blindenschrift (Braille-Schrift)</strong></p>
+<p>In der Blindenschrift werden Zeichen durch erhabene Punkte dargestellt, die in einem $2 \times 3$-Raster angeordnet sind:</p>
+<figure class="zeichnung"><img src="../../bilder/zeichnung-81aee2ed98a5.svg" alt=""></figure>
+<p><strong>Lösungsweg 1: Als 6-Tupel</strong></p>
+<p>Jede der 6 Positionen kann zwei Zustände annehmen:
+<ul><li>0 = nicht geprägt (leere Stelle)</li><li>1 = geprägt (erhabener Punkt)</li></ul></p>
+<p>Ein Braille-Zeichen lässt sich als 6-Tupel darstellen. Zum Beispiel:
+<ul><li>Buchstabe S: $(0, 1, 1, 1, 0, 0)$ (Positionen 2, 3 und 4 sind geprägt)</li><li>Leerzeichen: $(0, 0, 0, 0, 0, 0)$ (keine Position geprägt)</li></ul></p>
+<p>Da jede Position 2 Möglichkeiten hat und die Entscheidungen unabhängig sind:
+$$|\Omega| = 2 \cdot 2 \cdot 2 \cdot 2 \cdot 2 \cdot 2 = 2^6 = 64$$</p>
+<p><strong>Lösungsweg 2: Als Auswahl von Positionen</strong></p>
+<p>Alternativ können wir fragen: Aus den 6 möglichen Positionen wählen wir eine bestimmte Anzahl zum Prägen aus.</p>
+<ul><li>0 Positionen prägen: $\binom{6}{0} = 1$ Möglichkeit (Leerzeichen)</li><li>1 Position prägen: $\binom{6}{1} = 6$ Möglichkeiten</li><li>2 Positionen prägen: $\binom{6}{2} = 15$ Möglichkeiten</li><li>3 Positionen prägen: $\binom{6}{3} = 20$ Möglichkeiten</li><li>4 Positionen prägen: $\binom{6}{4} = 15$ Möglichkeiten</li><li>5 Positionen prägen: $\binom{6}{5} = 6$ Möglichkeiten</li><li>6 Positionen prägen: $\binom{6}{6} = 1$ Möglichkeit</li></ul>
+<p>Summe: $1 + 6 + 15 + 20 + 15 + 6 + 1 = 64$</p>
+<p>Dies bestätigt unser Ergebnis und zeigt gleichzeitig den binomischen Lehrsatz:
+$$\sum_{k=0}^{6} \binom{6}{k} = 2^6 = 64$$</p></div><div class="faltung" data-stufe="video" hidden><div class="rahmen"><video class="spieler" controls preload="metadata" src="https://api.cast.switch.ch/p/110/sp/11000/playManifest/entryId/0_iajefxky/format/url/protocol/https/video.mp4"></video></div></div></div></div><p class="heimknopf"><a href="../../index.html"><span class="haus" aria-hidden="true">⌂</span>Material</a></p>
+</main>
+<footer><div class="seitenfuss"><span class="wo"><b>MA01.07 · MA01.08</b> Daten und Zufall</span><span class="wer">Henrike Allmendinger · Herbstsemester 2026<a class="pinnwand" href="https://www.taskcards.de/#/board/c1b7fe7b-28eb-41b2-bf38-60c4264a9f8c" target="_blank" rel="noopener">Feedback</a></span></div></footer>
+<script src="../../gemeinsam/seite.js?f=c77c6724"></script>
+
+<script>window.MathJax={tex:{inlineMath:[['$','$'],['\\(','\\)']],
+  displayMath:[['\\[','\\]'],['$$','$$']],processEscapes:true,
+  macros:{cc:'\\mathbb{C}',rr:'\\mathbb{R}',nn:'\\mathbb{N}',
+          zz:'\\mathbb{Z}',qq:'\\mathbb{Q}',cis:'\\operatorname{cis}',
+          Log:'\\operatorname{Log}',dd:'\\mathrm{d}',
+          glqq:'\\text{„}',grqq:'\\text{“}',
+          // Aus dem Vorspann von MA01.03 (`Preambel/Styles.tex`):
+          // ein Gleichheitszeichen mit Dach, «entspricht».
+          equalhat:'\\mathrel{\\stackrel{\\wedge}{=}}',
+          // `\vv` kommt aus dem Paket `esvect` (Vektorpfeil) und ist
+          // MathJax unbekannt — ohne diese Zeile setzt es den Befehl
+          // rot als Fehler. Gefunden am 26.08. in Kapitel 3 von
+          // MA01.03 («schultypische Beispiele», 4 Stellen).
+          vv:['\\overrightarrow{#1}',1]}},
+  options:{skipHtmlTags:['script','noscript','style','textarea','pre']}};</script>
+<script defer src="../../gemeinsam/fremd/tex-svg.js"></script>
+</body>
+</html>

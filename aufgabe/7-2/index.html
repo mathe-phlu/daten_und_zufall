@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="de">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Aufgabe 7.2 · Daten und Zufall</title>
+<link rel="stylesheet" href="../../gemeinsam/lernlandschaft.css?f=c77c6724">
+<body data-farbe="beweis">
+<div class="stationskopf"><span class="wort">AUFGABE</span><span class="roemisch">7.2</span><h1>Daten und Zufall</h1><span class="wechsel wortweise"><a href="../../index.html">Startseite</a><a href="../index.html">Alle Aufgaben</a></span></div>
+<main>
+<h2 class="etappentitel"><span class="stand">Aufgabe 7.2</span></h2><div class="aufgabenblatt"><p>In einem Tennismatch habe Spieler A gegen Spieler B eine konstante
+  Erfolgsquote von 65% für einen Satzgewinn. Mit welcher
+  Wahrscheinlichkeit gewinnt A den Match, wenn auf drei gewonnene
+  Sätze gespielt wird?</p>
+<aside class="merksatz"><strong>Einschätzung vorab:</strong> Wird A's Chance auf den <em>Matchgewinn</em> höher
+  oder niedriger ausfallen als seine Chance auf einen
+  <em>Satzgewinn</em>? </aside><div class="stufen"><div class="reiter"><button type="button" data-stufe="starthilfe" aria-expanded="false">Starthilfe</button><button type="button" data-stufe="loesung" aria-expanded="false">Lösung</button></div><div class="faltung" data-stufe="starthilfe" hidden><ul><li>A gewinnt den Match, wenn er als erster 3 Sätze gewinnt</li><li>Unterscheiden Sie die Fälle: Match endet nach 3, 4 oder 5 Sätzen</li><li>Bei 4 Sätzen muss A in den ersten 3 Sätzen genau 2 gewinnen</li><li>Nutzen Sie systematisches Zählen für die Anzahl der Möglichkeiten</li></ul></div><div class="faltung" data-stufe="loesung" hidden><div class="tabelle"><table><tr><td class="l sl so" style="background:#f2f2f2"><strong>Gegeben</strong></td><td class="l sl sr so" style="background:#f2f2f2"><strong>Gesucht</strong></td></tr><tr><td class="l sl so">Spieler A: Erfolgsquote 65% pro Satz</td><td class="l sl sr so">Wahrscheinlichkeit</td></tr><tr><td class="l sl">Spieler B: Erfolgsquote 35% pro Satz</td><td class="l sl sr">für Matchgewinn von A</td></tr><tr><td class="l sl">Match auf 3 gewonnene Sätze («Best of 5»)</td><td class="l sl sr"></td></tr><tr><td class="su l sl so">$p = 0.65$, $q = 0.35$</td><td class="su l sl sr so">$P(\text{A gewinnt den Match})$</td></tr></table></div>
+<p><strong>Einschätzung vorab:</strong>
+Da A der bessere Spieler ist (65% > 50%), wird seine Chance auf den Matchgewinn höher als 65% sein. Je länger das Match-Format, desto mehr setzt sich der bessere Spieler durch.</p>
+<p><strong>Vollständiger Wahrscheinlichkeitsbaum:</strong></p>
+<figure class="zeichnung"><img src="../../bilder/zeichnung-2a3312ca611e.svg" alt=""></figure>
+<p><strong>Fallunterscheidung mit Berechnungen:</strong></p>
+<aside class="merksatz">
+<div class="tabelle"><table><tr><td class="c sl so"><strong>Match-</strong></td><td class="c sl so"><strong>Beispiel</strong></td><td class="c sl so"><strong>Bedingung für</strong></td><td class="c sl so"><strong>Anzahl</strong></td><td class="c sl sr so"><strong>Wahrscheinlichkeit</strong></td></tr><tr><td class="c sl"><strong>ende</strong></td><td class="c sl"><strong>Satzfolge</strong></td><td class="c sl"><strong>ersten n-1 Sätze</strong></td><td class="c sl"><strong>Möglichkeiten</strong></td><td class="c sl sr"></td></tr><tr><td class="c sl so">3:0</td><td class="c sl so">(A,A,A)</td><td class="c sl so">-</td><td class="c sl so">1</td><td class="c sl sr so">$0.65^3 = 0.2746$</td></tr><tr><td class="c sl so">3:1</td><td class="c sl so">(A,A,B,A)</td><td class="c sl so">2 von 3 für A</td><td class="c sl so">3</td><td class="c sl sr so">$3 \cdot 0.65^3 \cdot 0.35 = 0.2884$</td></tr><tr><td class="c sl so">3:2</td><td class="c sl so">(A,B,A,B,A)</td><td class="c sl so">2 von 4 für A</td><td class="c sl so">6</td><td class="c sl sr so">$6 \cdot 0.65^3 \cdot 0.35^2 = 0.2019$</td></tr><tr><td class="su r sl sr so" colspan="4"><strong>Summe:</strong></td><td class="su c sl sr so"><strong>0.7648 = 76.5%</strong></td></tr></table></div>
+</aside>
+<p><strong>Detaillierte Berechnungen:</strong></p>
+<p><strong>Fall 1: Match endet 3:0</strong>
+<ul><li>A gewinnt alle drei Sätze direkt: (A,A,A)</li><li>Wahrscheinlichkeit: $P(3:0) = 0.65 \cdot 0.65 \cdot 0.65 = 0.65^3 = 0.274625$</li></ul></p>
+<p><strong>Fall 2: Match endet 3:1</strong>
+<ul><li>A gewinnt den 4. Satz (mit Wahrscheinlichkeit 0.65)</li><li>In den ersten 3 Sätzen hat A genau 2 gewonnen</li><li>Mögliche Verläufe: (AAB)A, (ABA)A, (BAA)A → 3 Möglichkeiten</li><li>Wahrscheinlichkeit für einen Verlauf: $0.65^2 \cdot 0.35 \cdot 0.65 = 0.65^3 \cdot 0.35$</li><li>Gesamtwahrscheinlichkeit: $P(3:1) = 3 \cdot 0.65^3 \cdot 0.35 = 0.288356$</li></ul></p>
+<p><strong>Fall 3: Match endet 3:2</strong>
+<ul><li>A gewinnt den 5. Satz (mit Wahrscheinlichkeit 0.65)</li><li>In den ersten 4 Sätzen hat A genau 2 gewonnen</li><li>Anzahl der Möglichkeiten: 6 verschiedene Anordnungen</li><li>Wahrscheinlichkeit: $P(3:2) = 6 \cdot 0.65^2 \cdot 0.35^2 \cdot 0.65 = 6 \cdot 0.65^3 \cdot 0.35^2 = 0.201850$</li></ul></p>
+<p><strong>Gesamtwahrscheinlichkeit für Matchgewinn:</strong></p>
+<aside class="merksatz">\begin{align*}
+P(\text{A gewinnt}) &amp;= P(3:0) + P(3:1) + P(3:2)\\
+&amp;= 0.65^3 + 3 \cdot 0.65^3 \cdot 0.35 + 6 \cdot 0.65^3 \cdot 0.35^2\\
+&amp;= 0.274625 + 0.288356 + 0.201850\\
+&amp;= \boxed{0.7648 \approx 76.5\%}
+\end{align*}</aside>
+<p><strong>Interpretation:</strong></p>
+<aside class="merksatz">Die Matchgewinn-Wahrscheinlichkeit von 76.5% liegt deutlich über der Satzgewinn-Wahrscheinlichkeit von 65%. Dies zeigt:
+<ul><li>Der bessere Spieler profitiert vom längeren Format</li><li>Je mehr Sätze gespielt werden, desto unwahrscheinlicher wird ein Zufallssieg des schwächeren Spielers</li><li>Dies erklärt, warum in wichtigen Turnieren oft längere Formate gespielt werden</li></ul></aside></div></div></div><p class="fundort">Im Video: <a href="../../lernweg-7/bernoulliketten/index.html">Etappe 2 · Bernoulliketten</a> <span class="zeit">bei 5:01</span></p><p class="heimknopf"><a href="../../index.html"><span class="haus" aria-hidden="true">⌂</span>Material</a></p>
+</main>
+<footer><div class="seitenfuss"><span class="wo"><b>MA01.07 · MA01.08</b> Daten und Zufall</span><span class="wer">Henrike Allmendinger · Herbstsemester 2026<a class="pinnwand" href="https://www.taskcards.de/#/board/c1b7fe7b-28eb-41b2-bf38-60c4264a9f8c" target="_blank" rel="noopener">Feedback</a></span></div></footer>
+<script src="../../gemeinsam/seite.js?f=c77c6724"></script>
+
+<script>window.MathJax={tex:{inlineMath:[['$','$'],['\\(','\\)']],
+  displayMath:[['\\[','\\]'],['$$','$$']],processEscapes:true,
+  macros:{cc:'\\mathbb{C}',rr:'\\mathbb{R}',nn:'\\mathbb{N}',
+          zz:'\\mathbb{Z}',qq:'\\mathbb{Q}',cis:'\\operatorname{cis}',
+          Log:'\\operatorname{Log}',dd:'\\mathrm{d}',
+          glqq:'\\text{„}',grqq:'\\text{“}',
+          // Aus dem Vorspann von MA01.03 (`Preambel/Styles.tex`):
+          // ein Gleichheitszeichen mit Dach, «entspricht».
+          equalhat:'\\mathrel{\\stackrel{\\wedge}{=}}',
+          // `\vv` kommt aus dem Paket `esvect` (Vektorpfeil) und ist
+          // MathJax unbekannt — ohne diese Zeile setzt es den Befehl
+          // rot als Fehler. Gefunden am 26.08. in Kapitel 3 von
+          // MA01.03 («schultypische Beispiele», 4 Stellen).
+          vv:['\\overrightarrow{#1}',1]}},
+  options:{skipHtmlTags:['script','noscript','style','textarea','pre']}};</script>
+<script defer src="../../gemeinsam/fremd/tex-svg.js"></script>
+</body>
+</html>

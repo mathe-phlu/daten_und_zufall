@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="de">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Aufgabe 1.8 · Daten und Zufall</title>
+<link rel="stylesheet" href="../../gemeinsam/lernlandschaft.css?f=c77c6724">
+<body data-farbe="fach">
+<div class="stationskopf"><span class="wort">AUFGABE</span><span class="roemisch">1.8</span><h1>Daten und Zufall</h1><span class="wechsel wortweise"><a href="../../index.html">Startseite</a><a href="../index.html">Alle Aufgaben</a></span></div>
+<main>
+<h2 class="etappentitel"><span class="stand">Aufgabe 1.8</span></h2><div class="aufgabenblatt"><p>Einer Klasse von 15 Schülerinnen und Schülern werden 3 Eintrittskarten für
+    einen Fussballmatch
+    angeboten. Auf wie viele Arten können die Karten verteilt
+    werden, wenn die Karten für</p>
+<div class="spalten">
+      <ol class="klammer-a"><li>nummerierte Sitzplätze gelten,</li><li>für unnummerierte Stehplätze?</li></ol>
+    </div>
+<p>Berücksichtigen Sie ferner den Fall, dass die
+      Schülerinnen und Schüler jeweils nur eine Karte nehmen können oder auch mehrere.</p><div class="stufen"><div class="reiter"><button type="button" data-stufe="starthilfe" aria-expanded="false">Starthilfe</button><button type="button" data-stufe="loesung" aria-expanded="false">Lösung</button></div><div class="faltung" data-stufe="starthilfe" hidden><ul><li>Nummerierte Sitzplätze: Die Reihenfolge ist wichtig (Platz 1 ≠ Platz 2)</li><li>Unnummerierte Stehplätze: Die Reihenfolge ist egal (alle Plätze gleich)</li><li>«Nur eine Karte»: Keine Wiederholung (jeder Schüler höchstens einmal)</li><li>«Auch mehrere»: Mit Wiederholung (ein Schüler kann mehrere Karten bekommen)</li></ul></div><div class="faltung" data-stufe="loesung" hidden><p>Diese Aufgabe zeigt systematisch alle vier kombinatorischen Grundsituationen. Wir haben zwei unabhängige Merkmale:
+<ul><li><strong>Reihenfolge wichtig?</strong> Ja bei Sitzplätzen (nummeriert), Nein bei Stehplätzen</li><li><strong>Wiederholung möglich?</strong> Nein bei «nur eine Karte», Ja bei «auch mehrere»</li></ul></p>
+<p><strong>(a) Nummerierte Sitzplätze</strong></p>
+<p>Die Karten sind für Platz 1, Platz 2 und Platz 3. Die Reihenfolge ist wichtig!</p>
+<p><strong>Fall 1: Nur eine Karte pro Schüler (ohne Wiederholung)</strong></p>
+<p>Beispiel: $\omega = (11, 3, 7)$ bedeutet:
+<ul><li>Schüler 11 bekommt Karte für Platz 1</li><li>Schüler 3 bekommt Karte für Platz 2</li><li>Schüler 7 bekommt Karte für Platz 3</li></ul></p>
+<p>Das ist eine <strong>3-Permutation aus 15 Elementen</strong>:
+<ul><li>Für Platz 1: 15 Möglichkeiten</li><li>Für Platz 2: 14 Möglichkeiten (einer schon vergeben)</li><li>Für Platz 3: 13 Möglichkeiten</li></ul></p>
+<p>$$|\Omega| = 15 \cdot 14 \cdot 13 = \frac{15!}{(15-3)!} = \frac{15!}{12!} = 2730$$</p>
+<p><strong>Fall 2: Mehrere Karten möglich (mit Wiederholung)</strong></p>
+<p>Beispiel: $\omega = (3, 3, 7)$ bedeutet:
+<ul><li>Schüler 3 bekommt Karten für Platz 1 und 2</li><li>Schüler 7 bekommt Karte für Platz 3</li></ul></p>
+<p>Das ist ein <strong>3-Tupel aus 15 Elementen</strong>:
+<ul><li>Für jede der 3 Karten: 15 Möglichkeiten</li><li>Die Auswahlen sind unabhängig</li></ul></p>
+<p>$$|\Omega| = 15^3 = 3375$$</p>
+<p><strong>(b) Unnummerierte Stehplätze</strong></p>
+<p>Alle Stehplätze sind gleich. Wir müssen nur wissen, welche Schüler eine Karte bekommen.</p>
+<p><strong>Fall 3: Nur eine Karte pro Schüler (ohne Wiederholung)</strong></p>
+<p>Beispiel: $\omega = \{3, 7, 11\}$ bedeutet: Die Schüler 3, 7 und 11 bekommen je eine Karte.</p>
+<p>Das ist eine <strong>3-Kombination aus 15 Elementen</strong>:</p>
+<p>$$|\Omega| = \binom{15}{3} = \frac{15!}{3! \cdot 12!} = \frac{15 \cdot 14 \cdot 13}{3 \cdot 2 \cdot 1} = 455$$</p>
+<p><strong>Fall 4: Mehrere Karten möglich (mit Wiederholung)</strong></p>
+<p>Beispiel: $\omega = \{3, 3, 7\}$ oder besser dargestellt als «2 Karten für Schüler 3, 1 Karte für Schüler 7».</p>
+<p>Das ist eine <strong>3-Kombination mit Wiederholung aus 15 Elementen</strong>:</p>
+<p>$$|\Omega| = \binom{3+15-1}{3} = \binom{17}{3} = \frac{17 \cdot 16 \cdot 15}{3 \cdot 2 \cdot 1} = 680$$</p></div></div></div><p class="heimknopf"><a href="../../index.html"><span class="haus" aria-hidden="true">⌂</span>Material</a></p>
+</main>
+<footer><div class="seitenfuss"><span class="wo"><b>MA01.07 · MA01.08</b> Daten und Zufall</span><span class="wer">Henrike Allmendinger · Herbstsemester 2026<a class="pinnwand" href="https://www.taskcards.de/#/board/c1b7fe7b-28eb-41b2-bf38-60c4264a9f8c" target="_blank" rel="noopener">Feedback</a></span></div></footer>
+<script src="../../gemeinsam/seite.js?f=c77c6724"></script>
+
+<script>window.MathJax={tex:{inlineMath:[['$','$'],['\\(','\\)']],
+  displayMath:[['\\[','\\]'],['$$','$$']],processEscapes:true,
+  macros:{cc:'\\mathbb{C}',rr:'\\mathbb{R}',nn:'\\mathbb{N}',
+          zz:'\\mathbb{Z}',qq:'\\mathbb{Q}',cis:'\\operatorname{cis}',
+          Log:'\\operatorname{Log}',dd:'\\mathrm{d}',
+          glqq:'\\text{„}',grqq:'\\text{“}',
+          // Aus dem Vorspann von MA01.03 (`Preambel/Styles.tex`):
+          // ein Gleichheitszeichen mit Dach, «entspricht».
+          equalhat:'\\mathrel{\\stackrel{\\wedge}{=}}',
+          // `\vv` kommt aus dem Paket `esvect` (Vektorpfeil) und ist
+          // MathJax unbekannt — ohne diese Zeile setzt es den Befehl
+          // rot als Fehler. Gefunden am 26.08. in Kapitel 3 von
+          // MA01.03 («schultypische Beispiele», 4 Stellen).
+          vv:['\\overrightarrow{#1}',1]}},
+  options:{skipHtmlTags:['script','noscript','style','textarea','pre']}};</script>
+<script defer src="../../gemeinsam/fremd/tex-svg.js"></script>
+</body>
+</html>

@@ -1,0 +1,105 @@
+<!doctype html>
+<html lang="de">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Aufgabe 2.6 · Daten und Zufall</title>
+<link rel="stylesheet" href="../../gemeinsam/lernlandschaft.css?f=c77c6724">
+<body data-farbe="fach">
+<div class="stationskopf"><span class="wort">AUFGABE</span><span class="roemisch">2.6</span><h1>Daten und Zufall</h1><span class="wechsel wortweise"><a href="../../index.html">Startseite</a><a href="../index.html">Alle Aufgaben</a></span></div>
+<main>
+<h2 class="etappentitel"><span class="stand">Aufgabe 2.6</span></h2><div class="aufgabenblatt"><p>Unter den Teilnehmern einer Versammlung wird eine Person zufällig
+  ausgewählt. Folgende Ereignisse seien definiert: 
+M: «Die ausgewählte Person ist männlich», R: «Die Person raucht», V: «Die
+  Person ist verheiratet».</p>
+<ol class="klammer-a"><li>Was bedeuten dann die Aussagen: $M = R$, $M \cap R = M$, $M\cap  R \cap
+    V = M$?</li><li>Beschreiben Sie das Ereignis «Die ausgewählte Person
+    ist männlich, sie raucht nicht und ist nicht verheiratet»
+    mengenalgebraisch.</li><li>Drücken Sie die Ereignisse $M \cap (R \cap V)$, $R
+    \cap (V \cup M)$ und $(R \cap V) \cup M$ in Worten aus.</li></ol><div class="stufen"><div class="reiter"><button type="button" data-stufe="starthilfe" aria-expanded="false">Starthilfe</button><button type="button" data-stufe="loesung" aria-expanded="false">Lösung</button></div><div class="faltung" data-stufe="starthilfe" hidden><ul><li>$A = B$ bedeutet: Die Ereignisse A und B sind identisch (treffen für dieselben Personen zu)</li><li>$A \cap B = A$ bedeutet: A ist eine Teilmenge von B (wenn A eintritt, tritt auch B ein)</li><li>Beachten Sie die Reihenfolge der Operationen: Klammern zuerst!</li><li>Übersetzen Sie schrittweise von innen nach außen</li></ul></div><div class="faltung" data-stufe="loesung" hidden><p><strong>Teil (a): Interpretation der Gleichheiten mit Venn-Diagrammen</strong></p>
+<p><strong>1. $M = R$: «Männlich = Raucher»:</strong> Die Menge der Männer ist identisch mit der Menge der Raucher.</p>
+<div class="neben">
+<figure class="zeichnung"><img src="../../bilder/zeichnung-9879b8e5dfa2.svg" alt=""></figure>
+</div>
+<div class="neben">
+<p><strong>Bedeutung:</strong>
+<ul><li>Jeder Mann in der Versammlung raucht</li><li>Jeder Raucher ist ein Mann</li><li>Keine rauchenden Frauen, keine nichtrauchenden Männer</li></ul></p>
+</div>
+<p>Kurz: «Alle Männer sind Raucher und alle Raucher sind Männer.»</p>
+<p><strong>2. $M \cap R = M$: «Männlich und Raucher = Männlich»:</strong> M ist eine Teilmenge von R.</p>
+<div class="neben">
+<figure class="zeichnung"><img src="../../bilder/zeichnung-177591a7fb12.svg" alt=""></figure>
+</div>
+<div class="neben">
+<p><strong>Bedeutung:</strong>
+<ul><li>Jeder Mann raucht</li><li>Aber: Es können auch Frauen rauchen</li><li>Die Eigenschaft «männlich» impliziert «Raucher»</li></ul></p>
+</div>
+<p>Kurz: «Alle Männer rauchen.» (Über Frauen wird nichts ausgesagt!)</p>
+<p><strong>3. $M \cap R \cap V = M$: «Männlich und Raucher und Verheiratet = Männlich»:</strong> M ist eine Teilmenge von R und eine Teilmeng von V</p>
+<div class="neben">
+<figure class="zeichnung"><img src="../../bilder/zeichnung-1625cadd827b.svg" alt=""></figure>
+</div>
+<div class="neben">
+<p><strong>Bedeutung:</strong>
+<ul><li>Jeder Mann raucht UND ist verheiratet</li><li>Keine unverheirateten Männer</li><li>Keine nichtrauchenden Männer</li></ul>
+</p></div>
+<p>Kurz: «Jeder Mann raucht und ist verheiratet.»</p>
+<p><strong>Teil (b): Mengenalgebraische Beschreibung</strong></p>
+<p>«Die ausgewählte Person ist männlich, sie raucht nicht und ist nicht verheiratet»</p>
+<div class="neben">
+<figure class="zeichnung"><img src="../../bilder/zeichnung-b6b73da6cca5.svg" alt=""></figure>
+</div>
+<div class="neben">
+<p>Übersetzung schrittweise:
+<ul><li>«ist männlich»: $\in M$</li><li>«raucht nicht»: $\in \overline{R}$</li><li>«ist nicht verheiratet»: $\in \overline{V}$</li><li>Alle drei Bedingungen: UND-Verknüpfung</li></ul></p>
+</div>
+<p>Mengenalgebraisch: $$\boxed{M \cap \overline{R} \cap \overline{V}}$$</p>
+<p><strong>Teil (c): Sprachliche Interpretation mit Visualisierung</strong></p>
+<p><strong>1. $M \cap (R \cap V)$</strong></p>
+<div class="neben">
+<figure class="zeichnung"><img src="../../bilder/zeichnung-2f41095b25ce.svg" alt=""></figure>
+</div>
+<div class="neben">
+Klammer zuerst: $R \cap V$ = «raucht und ist verheiratet»
+<p>Dann: $M \cap (R \cap V)$ = «männlich und (raucht und ist verheiratet)»</p>
+<p><strong>In Worten:</strong> «Die ausgewählte Person ist männlich, raucht und ist verheiratet.»
+</p></div>
+<p><strong>2. $R \cap (V \cup M)$</strong></p>
+<div class="neben">
+<figure class="zeichnung"><img src="../../bilder/zeichnung-48c653b9d76f.svg" alt=""></figure>
+</div>
+<div class="neben">
+Klammer zuerst: $V \cup M$ = «verheiratet oder männlich»
+<p>Dann: $R \cap (V \cup M)$ = «raucht und (ist verheiratet oder männlich)»</p>
+<p><strong>In Worten:</strong> «Die Person raucht und ist entweder verheiratet oder männlich (oder beides).»
+</p></div>
+<p><strong>3. $(R \cap V) \cup M$</strong></p>
+<div class="neben">
+<figure class="zeichnung"><img src="../../bilder/zeichnung-45d98ded3568.svg" alt=""></figure>
+</div>
+<div class="neben">
+Klammer zuerst: $R \cap V$ = «raucht und ist verheiratet»
+<p>Dann: $(R \cap V) \cup M$ = «(raucht und ist verheiratet) oder männlich»</p>
+<p><strong>In Worten:</strong> «Die Person ist entweder männlich oder sie raucht und ist gleichzeitig verheiratet (oder beides).»
+</p></div></div></div></div><p class="heimknopf"><a href="../../index.html"><span class="haus" aria-hidden="true">⌂</span>Material</a></p>
+</main>
+<footer><div class="seitenfuss"><span class="wo"><b>MA01.07 · MA01.08</b> Daten und Zufall</span><span class="wer">Henrike Allmendinger · Herbstsemester 2026<a class="pinnwand" href="https://www.taskcards.de/#/board/c1b7fe7b-28eb-41b2-bf38-60c4264a9f8c" target="_blank" rel="noopener">Feedback</a></span></div></footer>
+<script src="../../gemeinsam/seite.js?f=c77c6724"></script>
+
+<script>window.MathJax={tex:{inlineMath:[['$','$'],['\\(','\\)']],
+  displayMath:[['\\[','\\]'],['$$','$$']],processEscapes:true,
+  macros:{cc:'\\mathbb{C}',rr:'\\mathbb{R}',nn:'\\mathbb{N}',
+          zz:'\\mathbb{Z}',qq:'\\mathbb{Q}',cis:'\\operatorname{cis}',
+          Log:'\\operatorname{Log}',dd:'\\mathrm{d}',
+          glqq:'\\text{„}',grqq:'\\text{“}',
+          // Aus dem Vorspann von MA01.03 (`Preambel/Styles.tex`):
+          // ein Gleichheitszeichen mit Dach, «entspricht».
+          equalhat:'\\mathrel{\\stackrel{\\wedge}{=}}',
+          // `\vv` kommt aus dem Paket `esvect` (Vektorpfeil) und ist
+          // MathJax unbekannt — ohne diese Zeile setzt es den Befehl
+          // rot als Fehler. Gefunden am 26.08. in Kapitel 3 von
+          // MA01.03 («schultypische Beispiele», 4 Stellen).
+          vv:['\\overrightarrow{#1}',1]}},
+  options:{skipHtmlTags:['script','noscript','style','textarea','pre']}};</script>
+<script defer src="../../gemeinsam/fremd/tex-svg.js"></script>
+</body>
+</html>

@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="de">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Aufgabe 9.3 · Daten und Zufall</title>
+<link rel="stylesheet" href="../../gemeinsam/lernlandschaft.css?f=c77c6724">
+<body data-farbe="fach">
+<div class="stationskopf"><span class="wort">AUFGABE</span><span class="roemisch">9.3</span><h1>Daten und Zufall</h1><span class="wechsel wortweise"><a href="../../index.html">Startseite</a><a href="../index.html">Alle Aufgaben</a></span></div>
+<main>
+<h2 class="etappentitel"><span class="stand">Aufgabe 9.3</span></h2><div class="aufgabenblatt"><p><span class="kapitaelchen">Der Spiegel</span> meldet: Linkshänder leben riskant . (Strick 1998, S. 96)</p>
+<p><blockquote>
+    «Ob Cäsar Gallier jagte oder Franz Josef Strauss Büffel in
+    Tansania – ihre Opfer wurden mit links erledigt. [...] Doch jetzt droht zusätzliches Ungemach: Der
+    Psychologie-Professor Stanley Coren aus Vancouver attestiert
+    Linkshändern ein hohes Verletzungsrisiko und eine kürzere
+    Lebenserwartung. [...] Corens Horrortheorie wird, wie er glaubt, durch eine
+    neue Untersuchung gestützt. Der Psychologe befragte 2000
+    Hochschüler ($90.5\%$ Rechtshänder, $9.5\%$ Linkshänder) nach
+    erlittenen Verletzungen und schweren Unfällen. [...] Als besonders gefährliches Pflaster
+    erwies sich der Umfrage zufolge der Strassenverkehr. Während nur
+    $7.8\%$ der befragten Rechtshänder in den letzten zwei Jahren beim
+    Auto und Moped fahren Blessuren erlitten hatten, lag die Quote der
+    Linkshänder mit $16.8\%$ mehr als doppelt so hoch.»
+  </blockquote></p>
+<ol class="klammer-a"><li>Berechnen Sie – getrennt nach Rechts- und Linkshändern – je ein $95\%$-Konfidenzintervall für den Anteil der Personen, die in den letzten zwei Jahren Verletzungen
+beim Auto oder Moped fahren erlitten.</li><li>Interpretieren Sie Ihr Ergebnis im Hinblick auf die These des Psychologie-
+Professors.</li></ol><div class="stufen"><div class="reiter"><button type="button" data-stufe="starthilfe" aria-expanded="false">Starthilfe</button><button type="button" data-stufe="loesung" aria-expanded="false">Lösung</button></div><div class="faltung" data-stufe="starthilfe" hidden><ul><li>Berechnen Sie separate 95%-Konfidenzintervalle für beide Gruppen</li><li>Verwenden Sie die Formel $\hat{p} \pm 1.96 \cdot \sqrt{\frac{\hat{p}(1-\hat{p})}{n}}$</li><li>Prüfen Sie, ob sich die Intervalle überschneiden</li><li>Interpretieren Sie die praktische Bedeutung der Unterschiede</li></ul></div><div class="faltung" data-stufe="loesung" hidden><div class="tabelle"><table><tr><td class="c sr"></td><td class="l sl so" style="background:#f2f2f2"><strong>Daten</strong></td><td class="l sl sr so" style="background:#f2f2f2"><strong>Gesucht</strong></td></tr><tr><td class="c sr"></td><td class="l sl so">Gesamtstichprobe: 2000 Studenten</td><td class="l sl sr so">95%-Konfidenzintervalle</td></tr><tr><td class="c sr"></td><td class="l sl">Rechtshänder: 90.5% = 1810 Personen</td><td class="l sl sr">für Unfallraten</td></tr><tr><td class="c sr"></td><td class="l sl">Linkshänder: 9.5% = 190 Personen</td><td class="l sl sr">beider Gruppen</td></tr><tr><td class="l sr"><strong>Unfallraten:</strong></td><td class="l sl so">Rechtshänder: 7.8%</td><td class="l sl sr so">Interpretation der</td></tr><tr><td class="c sr"></td><td class="l sl">Linkshänder: 16.8%</td><td class="l sl sr">Unterschiede</td></tr></table></div>
+<h4>(a) Konfidenzintervalle berechnen:</h4>
+<aside class="merksatz"><strong>Konfidenzintervall:</strong> Ein 95%-Konfidenzintervall gibt den Bereich an, in dem der wahre Anteil mit 95% Wahrscheinlichkeit liegt.</aside>
+<h4>Rechtshänder (n = 1810):</h4>
+<p><strong>Schätzung des Anteils:</strong> $\hat{p} = 0.078$</p>
+<p><strong>Standardfehler:</strong> Der Standardfehler misst die Unsicherheit unserer Schätzung:
+$$SE = \sqrt{\frac{\hat{p}(1-\hat{p})}{n}} = \sqrt{\frac{0.078 \cdot 0.922}{1810}} = \sqrt{\frac{0.0719}{1810}} = 0.0063$$</p>
+<p><strong>95%-Konfidenzintervall:</strong>
+\begin{align*}
+\hat{p} \pm 1.96 \cdot SE &amp;= 0.078 \pm 1.96 \cdot 0.0063\\
+&amp;= 0.078 \pm 0.0124\\
+&amp;= [0.0656; 0.0904]
+\end{align*}</p>
+<aside class="merksatz"><strong>Rechtshänder:</strong> Die wahre Unfallrate liegt mit 95% Sicherheit zwischen 6.7% und 9.1%.</aside>
+<h4>Linkshänder (n = 190):</h4>
+<p><strong>Schätzung des Anteils:</strong> $\hat{p} = 0.168$</p>
+<p><strong>Standardfehler:</strong> Bei kleinerer Stichprobe ist der Standardfehler grösser:
+$$SE = \sqrt{\frac{0.168 \cdot 0.832}{190}} = \sqrt{\frac{0.1398}{190}} = 0.0271$$</p>
+<p><strong>95%-Konfidenzintervall:</strong>
+\begin{align*}
+0.168 \pm 1.96 \cdot 0.0271 &amp;= 0.168 \pm 0.0531\\
+&amp;= [0.1149; 0.2211]
+\end{align*}</p>
+<p>Nach Rundung: $[0.114; 0.222]$</p>
+<aside class="merksatz"><strong>Linkshänder:</strong> Die wahre Unfallrate liegt mit 95% Sicherheit zwischen 11.4% und 22.2%.</aside>
+<h4>(b) Interpretation der Ergebnisse:</h4>
+<h4>Überschneidung der Konfidenzintervalle:</h4>
+<div class="tabelle"><table><tr style="background:#f2f2f2"><td class="l sl so"><strong>Gruppe</strong></td><td class="c sl so"><strong>Konfidenzintervall</strong></td><td class="c sl sr so"><strong>Breite des Intervalls</strong></td></tr><tr><td class="l sl so">Rechtshänder</td><td class="c sl so">[6.5%  9.1%]</td><td class="c sl sr so">2.6 Prozentpunkte</td></tr><tr><td class="su l sl">Linkshänder</td><td class="su c sl">[11.4%  22.2%]</td><td class="su c sl sr">10.8 Prozentpunkte</td></tr></table></div>
+<p><strong>Wichtige Beobachtung:</strong> Die Konfidenzintervalle sind disjunkt - sie überschneiden sich nicht!</p>
+<h4>Statistische Bewertung:</h4>
+<ul><li>Die Nicht-Überschneidung bedeutet einen statistisch signifikanten Unterschied</li><li>Es gibt kein gemeinsames $p$, das beide Stichprobenergebnisse erklären könnte</li><li>Das relative Risiko beträgt: $\frac{16.8}{7.8} = 2.15$ (mehr als doppelt so hoch)</li></ul>
+<h4>Praktische Bedeutung:</h4>
+<ul><li>Selbst im günstigsten Fall (untere Grenze Links vs. obere Grenze Rechts): $\frac{11.4}{9.1} = 1.25$-faches Risiko</li><li>Im ungünstigsten Fall: $\frac{22.2}{6.5} = 3.42$-faches Risiko</li><li>Die kleine Stichprobe bei Linkshändern (n = 190) führt zu grösserer Unsicherheit</li></ul>
+<aside class="merksatz"><strong>Schlussfolgerung:</strong> Die Daten stützen Professor Corens These eindeutig. Linkshänder haben ein signifikant höheres Unfallrisiko im Strassenverkehr. Mögliche Erklärungen: Fahrzeuge und Verkehrsführung sind für Rechtshänder optimiert.</aside></div></div></div><p class="heimknopf"><a href="../../index.html"><span class="haus" aria-hidden="true">⌂</span>Material</a></p>
+</main>
+<footer><div class="seitenfuss"><span class="wo"><b>MA01.07 · MA01.08</b> Daten und Zufall</span><span class="wer">Henrike Allmendinger · Herbstsemester 2026<a class="pinnwand" href="https://www.taskcards.de/#/board/c1b7fe7b-28eb-41b2-bf38-60c4264a9f8c" target="_blank" rel="noopener">Feedback</a></span></div></footer>
+<script src="../../gemeinsam/seite.js?f=c77c6724"></script>
+
+<script>window.MathJax={tex:{inlineMath:[['$','$'],['\\(','\\)']],
+  displayMath:[['\\[','\\]'],['$$','$$']],processEscapes:true,
+  macros:{cc:'\\mathbb{C}',rr:'\\mathbb{R}',nn:'\\mathbb{N}',
+          zz:'\\mathbb{Z}',qq:'\\mathbb{Q}',cis:'\\operatorname{cis}',
+          Log:'\\operatorname{Log}',dd:'\\mathrm{d}',
+          glqq:'\\text{„}',grqq:'\\text{“}',
+          // Aus dem Vorspann von MA01.03 (`Preambel/Styles.tex`):
+          // ein Gleichheitszeichen mit Dach, «entspricht».
+          equalhat:'\\mathrel{\\stackrel{\\wedge}{=}}',
+          // `\vv` kommt aus dem Paket `esvect` (Vektorpfeil) und ist
+          // MathJax unbekannt — ohne diese Zeile setzt es den Befehl
+          // rot als Fehler. Gefunden am 26.08. in Kapitel 3 von
+          // MA01.03 («schultypische Beispiele», 4 Stellen).
+          vv:['\\overrightarrow{#1}',1]}},
+  options:{skipHtmlTags:['script','noscript','style','textarea','pre']}};</script>
+<script defer src="../../gemeinsam/fremd/tex-svg.js"></script>
+</body>
+</html>

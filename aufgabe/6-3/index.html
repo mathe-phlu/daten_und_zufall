@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="de">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Aufgabe 6.3 · Daten und Zufall</title>
+<link rel="stylesheet" href="../../gemeinsam/lernlandschaft.css?f=c77c6724">
+<body data-farbe="fach">
+<div class="stationskopf"><span class="wort">AUFGABE</span><span class="roemisch">6.3</span><h1>Daten und Zufall</h1><span class="wechsel wortweise"><a href="../../index.html">Startseite</a><a href="../index.html">Alle Aufgaben</a></span></div>
+<main>
+<h2 class="etappentitel"><span class="stand">Aufgabe 6.3</span></h2><div class="aufgabenblatt"><p>Wem diese alternative Darstellung noch nicht ganz geheuer ist, der überlege
+  sich die Bedeutung der Formel anhand des Beispiels mit dem
+  Glücksrad.</p><div class="stufen"><div class="reiter"><button type="button" data-stufe="starthilfe" aria-expanded="false">Starthilfe</button><button type="button" data-stufe="loesung" aria-expanded="false">Lösung</button><button type="button" data-stufe="video" aria-expanded="false">Video</button></div><div class="faltung" data-stufe="starthilfe" hidden><ul><li>Der Grundraum $\Omega$ besteht aus allen 9 Paaren $(i,j)$ mit $i,j \in \{1,2,3\}$</li><li>Berechnen Sie für jedes $\omega=(i,j)$ die Wahrscheinlichkeit $P(\omega)$</li><li>Bestimmen Sie für jedes $\omega$ den Funktionswert $X(\omega) = i + j$</li><li>Wenden Sie die Formel $E[X] = \sum_{\omega \in \Omega} X(\omega) \cdot P(\omega)$ an</li><li>Vergleichen Sie mit der Standardformel aus Aufgabe 6.1</li></ul></div><div class="faltung" data-stufe="loesung" hidden><figure class="zeichnung"><img src="../../bilder/zeichnung-cc1bf48db529.svg" alt=""></figure>
+<h4>Die zwei äquivalenten Formeln für den Erwartungswert:</h4>
+<figure class="zeichnung"><img src="../../bilder/zeichnung-5972df892cad.svg" alt=""></figure>
+<h4>Gegenüberstellung der beiden Berechnungsweisen:</h4>
+<div class="neben">
+<strong>Methode 1: Standard-Formel</strong>
+<p>(aus Aufgabe 6.1)</p>
+<p>Verteilung von $X$:</p>
+<div class="tabelle"><table><tr><td class="c sl so">$k$</td><td class="c sl sr so">$P(X=k)$</td></tr><tr><td class="c sl so">2</td><td class="c sl sr so">$\frac{1}{4}$</td></tr><tr><td class="c sl">3</td><td class="c sl sr">$\frac{1}{3}$</td></tr><tr><td class="c sl">4</td><td class="c sl sr">$\frac{5}{18}$</td></tr><tr><td class="c sl">5</td><td class="c sl sr">$\frac{1}{9}$</td></tr><tr><td class="su c sl">6</td><td class="su c sl sr">$\frac{1}{36}$</td></tr></table></div>
+</div>
+<div class="neben">
+<strong>Methode 2: Alternative Formel</strong>
+<p>(über Elementarereignisse)</p>
+<p>Alle 9 Elementarereignisse:</p>
+<div class="tabelle"><table><tr><td class="c sl so">$\omega$</td><td class="c sl so">$P(\omega)$</td><td class="c sl sr so">$X(\omega)$</td></tr><tr><td class="c sl so">(1,1)</td><td class="c sl so">$\frac{1}{4}$</td><td class="c sl sr so">2</td></tr><tr><td class="c sl">(1,2)</td><td class="c sl">$\frac{1}{6}$</td><td class="c sl sr">3</td></tr><tr><td class="c sl">(1,3)</td><td class="c sl">$\frac{1}{12}$</td><td class="c sl sr">4</td></tr><tr><td class="c sl">(2,1)</td><td class="c sl">$\frac{1}{6}$</td><td class="c sl sr">3</td></tr><tr><td class="c sl">(2,2)</td><td class="c sl">$\frac{1}{9}$</td><td class="c sl sr">4</td></tr><tr><td class="c sl">(2,3)</td><td class="c sl">$\frac{1}{18}$</td><td class="c sl sr">5</td></tr><tr><td class="c sl">(3,1)</td><td class="c sl">$\frac{1}{12}$</td><td class="c sl sr">4</td></tr><tr><td class="c sl">(3,2)</td><td class="c sl">$\frac{1}{18}$</td><td class="c sl sr">5</td></tr><tr><td class="su c sl">(3,3)</td><td class="su c sl">$\frac{1}{36}$</td><td class="su c sl sr">6</td></tr></table></div>
+</div>
+<div class="neben">
+ \begin{align*}
+E[X] &amp;= 2 \cdot \frac{1}{4} + 3 \cdot \frac{1}{3} + 4 \cdot \frac{5}{18}\\
+&amp;\quad + 5 \cdot \frac{1}{9} + 6 \cdot \frac{1}{36}\\
+&amp;= \frac{60}{18} = \frac{10}{3}
+\end{align*}
+</div>
+<div class="neben">
+\begin{align*}
+E[X] &amp;= 2 \cdot \frac{1}{4} + 3 \cdot \frac{1}{6} + 4 \cdot \frac{1}{6}\\
+&amp;\quad + \ldots + 6 \cdot \frac{1}{36}\\
+&amp;= \frac{60}{18} = \frac{10}{3}
+\end{align*}
+</div>
+<h4>Detaillierte Berechnung mit der alternativen Formel:</h4>
+<p>\begin{align*}
+E[X] &amp;= \sum_{\omega \in \Omega} X(\omega) \cdot P(\omega)\\
+&amp;= 2 \cdot \frac{1}{4} + 3 \cdot \frac{1}{6} + 4 \cdot \frac{1}{12} + 3 \cdot \frac{1}{6} + 4 \cdot \frac{1}{9}\\
+&amp;\quad + 5 \cdot \frac{1}{18} + 4 \cdot \frac{1}{12} + 5 \cdot \frac{1}{18} + 6 \cdot \frac{1}{36}\\
+&amp;= \frac{1}{2} + \frac{1}{2} + \frac{1}{3} + \frac{1}{2} + \frac{4}{9} + \frac{5}{18} + \frac{1}{3} + \frac{5}{18} + \frac{1}{6}
+\end{align*}</p>
+<p>Bringen wir alles auf den Nenner 18:
+\begin{align*}
+E[X] &amp;= \frac{9}{18} + \frac{9}{18} + \frac{6}{18} + \frac{9}{18} + \frac{8}{18} + \frac{5}{18} + \frac{6}{18} + \frac{5}{18} + \frac{3}{18}\\
+&amp;= \frac{60}{18} = \frac{10}{3} \approx 3.33
+\end{align*}</p>
+<h4>Vergleich und Interpretation:</h4>
+<p>Beide Methoden liefern dasselbe Ergebnis: $E[X] = \frac{10}{3}$</p>
+<p><strong>Wann ist welche Formel vorteilhaft?</strong></p>
+<ul><li><strong>Standard-Formel:</strong> Vorteilhaft, wenn die Verteilung von $X$ bereits bekannt ist oder leicht zu bestimmen ist</li><li><strong>Alternative Formel:</strong> Vorteilhaft bei:
+  <ul><li></li><li>Komplexen Funktionen $X(\omega)$</li><li>Wenn die Verteilung schwer zu bestimmen ist</li><li>Theoretischen Beweisen</li></ul></li></ul>
+<h4>Theoretische Einordnung:</h4>
+<p>Die alternative Formel zeigt, dass der Erwartungswert ein <em>gewichtetes Mittel</em> über alle möglichen Ausgänge ist. Jeder Ausgang wird mit seiner Wahrscheinlichkeit gewichtet. Dies ist die grundlegende Definition des Erwartungswerts und bildet die Basis für allgemeinere Konzepte in der Wahrscheinlichkeitstheorie.</p></div><div class="faltung" data-stufe="video" hidden><div class="rahmen"><video class="spieler" controls preload="metadata" src="https://api.cast.switch.ch/p/110/sp/11000/playManifest/entryId/0_9rsw1al1/format/url/protocol/https/video.mp4"></video></div></div></div></div><p class="fundort">Im Video: <a href="../../lernweg-6/alternative-darstellung/index.html">Bonus · Alternative Darstellung</a> <span class="zeit">bei 6:25</span></p><p class="heimknopf"><a href="../../index.html"><span class="haus" aria-hidden="true">⌂</span>Material</a></p>
+</main>
+<footer><div class="seitenfuss"><span class="wo"><b>MA01.07 · MA01.08</b> Daten und Zufall</span><span class="wer">Henrike Allmendinger · Herbstsemester 2026<a class="pinnwand" href="https://www.taskcards.de/#/board/c1b7fe7b-28eb-41b2-bf38-60c4264a9f8c" target="_blank" rel="noopener">Feedback</a></span></div></footer>
+<script src="../../gemeinsam/seite.js?f=c77c6724"></script>
+
+<script>window.MathJax={tex:{inlineMath:[['$','$'],['\\(','\\)']],
+  displayMath:[['\\[','\\]'],['$$','$$']],processEscapes:true,
+  macros:{cc:'\\mathbb{C}',rr:'\\mathbb{R}',nn:'\\mathbb{N}',
+          zz:'\\mathbb{Z}',qq:'\\mathbb{Q}',cis:'\\operatorname{cis}',
+          Log:'\\operatorname{Log}',dd:'\\mathrm{d}',
+          glqq:'\\text{„}',grqq:'\\text{“}',
+          // Aus dem Vorspann von MA01.03 (`Preambel/Styles.tex`):
+          // ein Gleichheitszeichen mit Dach, «entspricht».
+          equalhat:'\\mathrel{\\stackrel{\\wedge}{=}}',
+          // `\vv` kommt aus dem Paket `esvect` (Vektorpfeil) und ist
+          // MathJax unbekannt — ohne diese Zeile setzt es den Befehl
+          // rot als Fehler. Gefunden am 26.08. in Kapitel 3 von
+          // MA01.03 («schultypische Beispiele», 4 Stellen).
+          vv:['\\overrightarrow{#1}',1]}},
+  options:{skipHtmlTags:['script','noscript','style','textarea','pre']}};</script>
+<script defer src="../../gemeinsam/fremd/tex-svg.js"></script>
+</body>
+</html>

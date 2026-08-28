@@ -1,0 +1,85 @@
+<!doctype html>
+<html lang="de">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Aufgabe 8.5 · Daten und Zufall</title>
+<link rel="stylesheet" href="../../gemeinsam/lernlandschaft.css?f=c77c6724">
+<body data-farbe="fach">
+<div class="stationskopf"><span class="wort">AUFGABE</span><span class="roemisch">8.5</span><h1>Daten und Zufall</h1><span class="wechsel wortweise"><a href="../../index.html">Startseite</a><a href="../index.html">Alle Aufgaben</a></span></div>
+<main>
+<h2 class="etappentitel"><span class="stand">Aufgabe 8.5</span></h2><div class="aufgabenblatt"><p><span class="kapitaelchen">Frankfurter Rundschau</span>: Rechts und links . (Strick 1998, S. 86)</p>
+<p>{</p>
+<p><blockquote>
+    <span class="kapitaelchen">Wageningen</span>, 25. April (dpa). An den niederländischen
+    Stränden würden mehr linke als rechte Schuhe angespült  in
+    Schottland sei es umgekehrt. Das habe eine Untersuchung
+    niederländischer Biologen ergeben, teilte das Institut für Wald-
+    und Naturforschung in Wageningen am Freitag mit.  Die
+    Wissenschaftler hätten auf der holländischen Nordseeinsel Texel 68
+    linke und 39 rechte Schuhe gefunden, auf den schottischen
+    Shetlandinseln dagegen 63 linke und 93 rechte Schuhe. Mit der
+    Untersuchung wollte der Biologe Mardik Leopold beweisen, dass zwei
+    ähnliche Gegenstände mit unterschiedlicher Form im Meer in
+    verschiedene Richtungen treiben. Deswegen spülten an bestimmten
+    Stränden auch mehr rechte und an anderen mehr linke Muschelhälften
+    an. Als seine Theorie angezweifelt wurde, bat Leopold andere
+    Wissenschaftler, die Probe aufs Exempel zu machen. Mit besagtem
+    Ergebnis.
+  </blockquote></p>
+<p>}</p>
+<p>Was ist aus statistischer Sicht von der Behauptung des Biologen zu halten?</p><div class="stufen"><div class="reiter"><button type="button" data-stufe="starthilfe" aria-expanded="false">Starthilfe</button><button type="button" data-stufe="loesung" aria-expanded="false">Lösung</button></div><div class="faltung" data-stufe="starthilfe" hidden><ul><li>Testen Sie $H_0: p = 0.5$ (kein Unterschied zwischen links und rechts)</li><li>Bei zweiseitigem Test mit $\alpha = 5\%$ ist $z = 1.96$</li><li>Führen Sie den Test separat für Holland und Schottland durch</li><li>Beachten Sie die unterschiedlichen Stichprobengrössen</li></ul></div><div class="faltung" data-stufe="loesung" hidden><div class="tabelle"><table><tr><td class="c sr"></td><td class="l sl so" style="background:#f2f2f2"><strong>Daten</strong></td><td class="l sl sr so" style="background:#f2f2f2"><strong>Hypothesen</strong></td></tr><tr><td class="c sr"></td><td class="l sl so">Holland: 68 linke, 39 rechte Schuhe</td><td class="l sl sr so">$H_0: p = 0.5$ (Zufall)</td></tr><tr><td class="c sr"></td><td class="l sl">Schottland: 63 linke, 93 rechte Schuhe</td><td class="l sl sr">$H_1: p \neq 0.5$ (Form wirkt)</td></tr><tr><td class="c sr"></td><td class="l sl">Holland gesamt: $n = 107$</td><td class="l sl sr">Signifikanzniveau: $\alpha = 5\%$</td></tr><tr><td class="c sr"></td><td class="l sl">Schottland gesamt: $n = 156$</td><td class="l sl sr">Testrichtung: zweiseitig</td></tr></table></div>
+<h4>Die biologische Hypothese:</h4>
+<p>Der Biologe behauptet, dass die Form der Schuhe ihre Treibrichtung im Meer beeinflusst. Wenn diese Hypothese stimmt, sollten wir an verschiedenen Stränden signifikante Abweichungen vom Verhältnis 50:50 finden.</p>
+<h4>Test für Holland (n = 107):</h4>
+<p><strong>Berechnung unter $H_0$ mit $p = 0.5$:</strong>
+<ul><li><strong>Erwartungswert:</strong> $\mu = n \cdot p = 107 \cdot 0.5 = 53.5$ linke Schuhe</li><li><strong>Standardabweichung:</strong> $\sigma = \sqrt{n \cdot p \cdot (1-p)} = \sqrt{107 \cdot 0.5 \cdot 0.5} = \sqrt{26.75} = 5.17$</li></ul></p>
+<p><strong>95%-Annahmebereich (zweiseitig, $z = 1.96$):</strong>
+\begin{align*}
+\mu - 1.96\sigma &amp;\leq X \leq \mu + 1.96\sigma\\
+53.5 - 1.96 \cdot 5.17 &amp;\leq X \leq 53.5 + 1.96 \cdot 5.17\\
+43.4 &amp;\leq X \leq 63.6
+\end{align*}</p>
+<p>Gerundet: $43 \leq X \leq 64$ linke Schuhe</p>
+<p><strong>Testentscheidung:</strong> Beobachtet wurden $X = 68$ linke Schuhe.</p>
+<p>Da $68 &gt; 64$, liegt das Ergebnis ausserhalb des Annahmebereichs.</p>
+<aside class="merksatz"><strong>Holland:</strong> Das Ergebnis ist signifikant! Es werden überdurchschnittlich viele linke Schuhe angespült (63.6% links).</aside>
+<h4>Test für Schottland (n = 156):</h4>
+<p><strong>Berechnung unter $H_0$ mit $p = 0.5$:</strong>
+<ul><li><strong>Erwartungswert:</strong> $\mu = 156 \cdot 0.5 = 78$ linke Schuhe</li><li><strong>Standardabweichung:</strong> $\sigma = \sqrt{156 \cdot 0.5 \cdot 0.5} = \sqrt{39} = 6.24$</li></ul></p>
+<p><strong>95%-Annahmebereich:</strong>
+\begin{align*}
+78 - 1.96 \cdot 6.24 &amp;\leq X \leq 78 + 1.96 \cdot 6.24\\
+65.8 &amp;\leq X \leq 90.2
+\end{align*}</p>
+<p>Gerundet: $65 \leq X \leq 91$ linke Schuhe</p>
+<p><strong>Testentscheidung:</strong> Beobachtet wurden $X = 63$ linke Schuhe.</p>
+<p>Da $63 &lt; 65$, liegt auch dieses Ergebnis ausserhalb des Annahmebereichs.</p>
+<aside class="merksatz"><strong>Schottland:</strong> Das Ergebnis ist ebenfalls signifikant! Es werden unterdurchschnittlich viele linke Schuhe angespült (40.4% links).</aside>
+<h4>Gesamtbewertung:</h4>
+<div class="tabelle"><table><tr style="background:#f2f2f2"><td class="l sl so"><strong>Ort</strong></td><td class="c sl so"><strong>Anteil links</strong></td><td class="c sl so"><strong>Signifikant?</strong></td><td class="c sl sr so"><strong>Interpretation</strong></td></tr><tr><td class="l sl so">Holland</td><td class="c sl so">63.6%</td><td class="c sl so">Ja</td><td class="c sl sr so">Mehr linke Schuhe</td></tr><tr><td class="su l sl">Schottland</td><td class="su c sl">40.4%</td><td class="su c sl">Ja</td><td class="su c sl sr">Mehr rechte Schuhe</td></tr></table></div>
+<h4>Schlussfolgerung:</h4>
+<p>Die Nullhypothese wird in beiden Fällen verworfen. Die Daten stützen Leopolds Theorie:
+<ul><li>Die Form der Schuhe beeinflusst tatsächlich ihre Treibrichtung</li><li>Verschiedene Strömungsmuster führen zu gegensätzlichen Ergebnissen</li><li>Die Beobachtung ist kein Zufall, sondern ein physikalisches Phänomen</li></ul></p>
+<aside class="merksatz"><strong>Methodische Stärke:</strong> Die Replikation an verschiedenen Orten mit gegensätzlichen Ergebnissen macht die Theorie besonders überzeugend.</aside></div></div></div><p class="heimknopf"><a href="../../index.html"><span class="haus" aria-hidden="true">⌂</span>Material</a></p>
+</main>
+<footer><div class="seitenfuss"><span class="wo"><b>MA01.07 · MA01.08</b> Daten und Zufall</span><span class="wer">Henrike Allmendinger · Herbstsemester 2026<a class="pinnwand" href="https://www.taskcards.de/#/board/c1b7fe7b-28eb-41b2-bf38-60c4264a9f8c" target="_blank" rel="noopener">Feedback</a></span></div></footer>
+<script src="../../gemeinsam/seite.js?f=c77c6724"></script>
+
+<script>window.MathJax={tex:{inlineMath:[['$','$'],['\\(','\\)']],
+  displayMath:[['\\[','\\]'],['$$','$$']],processEscapes:true,
+  macros:{cc:'\\mathbb{C}',rr:'\\mathbb{R}',nn:'\\mathbb{N}',
+          zz:'\\mathbb{Z}',qq:'\\mathbb{Q}',cis:'\\operatorname{cis}',
+          Log:'\\operatorname{Log}',dd:'\\mathrm{d}',
+          glqq:'\\text{„}',grqq:'\\text{“}',
+          // Aus dem Vorspann von MA01.03 (`Preambel/Styles.tex`):
+          // ein Gleichheitszeichen mit Dach, «entspricht».
+          equalhat:'\\mathrel{\\stackrel{\\wedge}{=}}',
+          // `\vv` kommt aus dem Paket `esvect` (Vektorpfeil) und ist
+          // MathJax unbekannt — ohne diese Zeile setzt es den Befehl
+          // rot als Fehler. Gefunden am 26.08. in Kapitel 3 von
+          // MA01.03 («schultypische Beispiele», 4 Stellen).
+          vv:['\\overrightarrow{#1}',1]}},
+  options:{skipHtmlTags:['script','noscript','style','textarea','pre']}};</script>
+<script defer src="../../gemeinsam/fremd/tex-svg.js"></script>
+</body>
+</html>

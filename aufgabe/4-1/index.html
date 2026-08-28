@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="de">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Aufgabe 4.1 · Daten und Zufall</title>
+<link rel="stylesheet" href="../../gemeinsam/lernlandschaft.css?f=c77c6724">
+<body data-farbe="fach">
+<div class="stationskopf"><span class="wort">AUFGABE</span><span class="roemisch">4.1</span><h1>Daten und Zufall</h1><span class="wechsel wortweise"><a href="../../index.html">Startseite</a><a href="../index.html">Alle Aufgaben</a></span></div>
+<main>
+<h2 class="etappentitel"><span class="stand">Aufgabe 4.1</span></h2><div class="aufgabenblatt"><p>Man verwende Excel, um die Entwicklung der relativen Häufigkeiten
+  darzustellen und gebe einen Schätzwert für die Wahrscheinlichkeit
+  der beiden Ergebnisse an.</p><div class="stufen"><div class="reiter"><button type="button" data-stufe="starthilfe" aria-expanded="false">Starthilfe</button><button type="button" data-stufe="loesung" aria-expanded="false">Lösung</button></div><div class="faltung" data-stufe="starthilfe" hidden><ul><li>Erstellen Sie eine Excel-Tabelle mit den Versuchsergebnissen</li><li>Berechnen Sie die relativen Häufigkeiten nach jeder Serie</li><li>Erstellen Sie ein Diagramm, das die Entwicklung zeigt</li><li>Beobachten Sie, ob sich die Werte stabilisieren</li></ul></div><div class="faltung" data-stufe="loesung" hidden><p><strong>Berechnung der relativen Häufigkeiten:</strong></p>
+<p>Die relative Häufigkeit berechnet sich als:
+$$h_n(\text{Kopf}) = \frac{\text{Anzahl Kopf}}{\text{Gesamtanzahl Würfe}} \quad \text{und} \quad h_n(\text{Spitze}) = \frac{\text{Anzahl Spitze}}{\text{Gesamtanzahl Würfe}}$$</p>
+<p><strong>Entwicklung der relativen Häufigkeiten:</strong></p>
+<figure class="zeichnung"><img src="../../bilder/zeichnung-6a26420577c2.svg" alt=""></figure>
+<p>Nach insgesamt 1250 Würfen (50 Serien à 25 Würfe) ergeben sich:
+<ul><li>Kopf ($\perp$): $h_{1250}(\perp) = \frac{604}{1250} = 0.4832 \approx 48.3\%$</li><li>Spitze ($&lt;$): $h_{1250}(&lt;) = \frac{646}{1250} = 0.5168 \approx 51.7\%$</li></ul></p>
+<p><strong>Interpretation und Schätzwerte:</strong></p>
+<p>Die relativen Häufigkeiten stabilisieren sich nach etwa 500-750 Würfen bei:
+<ul><li>$P(\text{Kopf}) \approx 0.48$</li><li>$P(\text{Spitze}) \approx 0.52$</li></ul></p>
+<p>Die leichte Asymmetrie (Spitze häufiger als Kopf) ist physikalisch plausibel, da der Schwerpunkt des Nagels nicht in der Mitte liegt. Das empirische Gesetz der grossen Zahlen zeigt sich darin, dass die anfänglichen Schwankungen mit zunehmender Versuchszahl abnehmen und sich die Werte um einen festen Wert einpendeln.</p></div></div></div><p class="fundort">Im Video: <a href="../../lernweg-4/beispiele/index.html">Etappe 2 · Beispiele</a> <span class="zeit">bei 2:43</span></p><p class="heimknopf"><a href="../../index.html"><span class="haus" aria-hidden="true">⌂</span>Material</a></p>
+</main>
+<footer><div class="seitenfuss"><span class="wo"><b>MA01.07 · MA01.08</b> Daten und Zufall</span><span class="wer">Henrike Allmendinger · Herbstsemester 2026<a class="pinnwand" href="https://www.taskcards.de/#/board/c1b7fe7b-28eb-41b2-bf38-60c4264a9f8c" target="_blank" rel="noopener">Feedback</a></span></div></footer>
+<script src="../../gemeinsam/seite.js?f=c77c6724"></script>
+
+<script>window.MathJax={tex:{inlineMath:[['$','$'],['\\(','\\)']],
+  displayMath:[['\\[','\\]'],['$$','$$']],processEscapes:true,
+  macros:{cc:'\\mathbb{C}',rr:'\\mathbb{R}',nn:'\\mathbb{N}',
+          zz:'\\mathbb{Z}',qq:'\\mathbb{Q}',cis:'\\operatorname{cis}',
+          Log:'\\operatorname{Log}',dd:'\\mathrm{d}',
+          glqq:'\\text{„}',grqq:'\\text{“}',
+          // Aus dem Vorspann von MA01.03 (`Preambel/Styles.tex`):
+          // ein Gleichheitszeichen mit Dach, «entspricht».
+          equalhat:'\\mathrel{\\stackrel{\\wedge}{=}}',
+          // `\vv` kommt aus dem Paket `esvect` (Vektorpfeil) und ist
+          // MathJax unbekannt — ohne diese Zeile setzt es den Befehl
+          // rot als Fehler. Gefunden am 26.08. in Kapitel 3 von
+          // MA01.03 («schultypische Beispiele», 4 Stellen).
+          vv:['\\overrightarrow{#1}',1]}},
+  options:{skipHtmlTags:['script','noscript','style','textarea','pre']}};</script>
+<script defer src="../../gemeinsam/fremd/tex-svg.js"></script>
+</body>
+</html>

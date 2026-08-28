@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="de">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Aufgabe 3.1 · Daten und Zufall</title>
+<link rel="stylesheet" href="../../gemeinsam/lernlandschaft.css?f=c77c6724">
+<body data-farbe="beweis">
+<div class="stationskopf"><span class="wort">AUFGABE</span><span class="roemisch">3.1</span><h1>Daten und Zufall</h1><span class="wechsel wortweise"><a href="../../index.html">Startseite</a><a href="../index.html">Alle Aufgaben</a></span></div>
+<main>
+<h2 class="etappentitel"><span class="stand">Aufgabe 3.1</span></h2><div class="aufgabenblatt"><p>Ein Würfel wird zweimal geworfen und nach jedem Wurf die Augenzahl
+  notiert. Wie gross ist die Wahrscheinlichkeit der Ereignisse</p>
+<div class="spalten">
+    <ol><li>«im ersten Wurf eine Drei»</li><li>«die Augensumme ist acht»</li><li>«mindestens eine Sechs»</li><li>«höchstens eine Sechs»</li><li>«die maximale Augenzahl ist eine Vier»?</li></ol>
+  </div><div class="stufen"><div class="reiter"><button type="button" data-stufe="starthilfe" aria-expanded="false">Starthilfe</button><button type="button" data-stufe="loesung" aria-expanded="false">Lösung</button><button type="button" data-stufe="video" aria-expanded="false">Video</button></div><div class="faltung" data-stufe="starthilfe" hidden><ul><li>Der Ergebnismenge hat $6 \cdot 6 = 36$ gleichwahrscheinliche Elemente</li><li>Nutzen Sie eine systematische Tabelle oder Liste aller Möglichkeiten</li><li>Bei «mindestens» oder «höchstens»: Überlegen Sie, ob das Gegenereignis einfacher ist</li><li>«Maximale Augenzahl ist 4» bedeutet: beide Würfe zeigen höchstens 4, aber mindestens einer zeigt 4</li></ul></div><div class="faltung" data-stufe="loesung" hidden><p><strong>Grundlagen:</strong></p>
+<p>Beim zweimaligen Würfeln gibt es $6 \cdot 6 = 36$ gleichwahrscheinliche Ergebnisse.
+Wir notieren ein Ergebnis als $(i|j)$, wobei $i$ die Augenzahl des ersten und $j$ die des zweiten Wurfs ist.</p>
+<p><strong>A: «Im ersten Wurf eine Drei»</strong></p>
+<p>Das Ereignis A besteht aus allen Paaren $(3|j)$ mit $j \in \{1,2,3,4,5,6\}$:
+$$A = \{(3|1), (3|2), (3|3), (3|4), (3|5), (3|6)\}$$</p>
+<p>Es gibt 6 günstige Fälle.
+$$P(A) = \frac{6}{36} = \frac{1}{6}$$</p>
+<p><strong>B: «Die Augensumme ist acht»</strong></p>
+<p>Wir suchen alle Paare $(i|j)$ mit $i + j = 8$:</p>
+<div class="tabelle"><table><tr><td class="c sl so">1. Wurf</td><td class="c sl so">2. Wurf</td><td class="c sl sr so">Summe</td></tr><tr><td class="c sl so">2</td><td class="c sl so">6</td><td class="c sl sr so">8</td></tr><tr><td class="c sl">3</td><td class="c sl">5</td><td class="c sl sr">8</td></tr><tr><td class="c sl">4</td><td class="c sl">4</td><td class="c sl sr">8</td></tr><tr><td class="c sl">5</td><td class="c sl">3</td><td class="c sl sr">8</td></tr><tr><td class="su c sl">6</td><td class="su c sl">2</td><td class="su c sl sr">8</td></tr></table></div>
+<p>$$B = \{(2|6), (3|5), (4|4), (5|3), (6|2)\}$$</p>
+<p>Es gibt 5 günstige Fälle.
+$$P(B) = \frac{5}{36}$$</p>
+<p><strong>C: «Mindestens eine Sechs»</strong></p>
+<p><strong>Methode 1 - Direkt:</strong>
+- Genau eine 6 im ersten Wurf: $(6|1), (6|2), (6|3), (6|4), (6|5)$ → 5 Fälle
+- Genau eine 6 im zweiten Wurf: $(1|6), (2|6), (3|6), (4|6), (5|6)$ → 5 Fälle  
+- Zwei Sechsen: $(6|6)$ → 1 Fall</p>
+<p>Insgesamt: $5 + 5 + 1 = 11$ günstige Fälle.</p>
+<p><strong>Methode 2 - Über das Gegenereignis (eleganter):</strong>
+$\overline{C}$ = «keine Sechs» = «beide Würfe zeigen 1 bis 5»</p>
+<p>Anzahl der Fälle ohne Sechs: $5 \cdot 5 = 25$</p>
+<p>$$P(C) = 1 - P(\overline{C}) = 1 - \frac{25}{36} = \frac{11}{36}$$</p>
+<p><strong>D: «Höchstens eine Sechs»</strong></p>
+<p>$\overline{D}$ = «mehr als eine Sechs» = «genau zwei Sechsen» = $\{(6|6)\}$</p>
+<p>$$P(D) = 1 - P(\overline{D}) = 1 - \frac{1}{36} = \frac{35}{36}$$</p>
+<p><strong>E: «Die maximale Augenzahl ist eine Vier»</strong></p>
+<p>Dies bedeutet:
+- Beide Würfe zeigen höchstens 4 (also aus $\{1,2,3,4\}$)
+- UND mindestens ein Wurf zeigt genau 4</p>
+<p><strong>Zählstrategie:</strong>
+1. Anzahl Paare mit beiden Würfen $\leq 4$: $4 \cdot 4 = 16$
+2. Davon abziehen: Paare mit beiden Würfen $\leq 3$: $3 \cdot 3 = 9$
+3. Ergebnis: $16 - 9 = 7$ günstige Fälle</p>
+<p>Die 7 Fälle explizit:
+$$E = \{(4|1), (4|2), (4|3), (4|4), (1|4), (2|4), (3|4)\}$$</p>
+<p>$$P(E) = \frac{7}{36}$$</p>
+<p>Diese Aufgabe zeigt verschiedene wichtige Techniken:
+- Systematisches Abzählen
+- Nutzung des Gegenereignisses
+- Geschickte Zählstrategien (Inklusion-Exklusion)</p></div><div class="faltung" data-stufe="video" hidden><div class="rahmen vorschau" data-video="5q7Umnmm4hQ"><img class="standbild" alt="" src="../../gemeinsam/standbilder/5q7Umnmm4hQ.jpg"><button type="button" class="starten" aria-label="Video abspielen"><span class="dreieck"></span></button></div><p class="ausweichen"><a href="https://www.youtube.com/watch?v=5q7Umnmm4hQ" target="_blank" rel="noopener">Auf YouTube öffnen</a></p></div></div></div><p class="fundort">Im Video: <a href="../../lernweg-3/laplace-und-die-anteilsregel/index.html">Etappe 1 · Laplace und die Anteilsregel</a> <span class="zeit">bei 7:12</span></p><p class="heimknopf"><a href="../../index.html"><span class="haus" aria-hidden="true">⌂</span>Material</a></p>
+</main>
+<footer><div class="seitenfuss"><span class="wo"><b>MA01.07 · MA01.08</b> Daten und Zufall</span><span class="wer">Henrike Allmendinger · Herbstsemester 2026<a class="pinnwand" href="https://www.taskcards.de/#/board/c1b7fe7b-28eb-41b2-bf38-60c4264a9f8c" target="_blank" rel="noopener">Feedback</a></span></div></footer>
+<script src="../../gemeinsam/seite.js?f=c77c6724"></script>
+
+<script>window.MathJax={tex:{inlineMath:[['$','$'],['\\(','\\)']],
+  displayMath:[['\\[','\\]'],['$$','$$']],processEscapes:true,
+  macros:{cc:'\\mathbb{C}',rr:'\\mathbb{R}',nn:'\\mathbb{N}',
+          zz:'\\mathbb{Z}',qq:'\\mathbb{Q}',cis:'\\operatorname{cis}',
+          Log:'\\operatorname{Log}',dd:'\\mathrm{d}',
+          glqq:'\\text{„}',grqq:'\\text{“}',
+          // Aus dem Vorspann von MA01.03 (`Preambel/Styles.tex`):
+          // ein Gleichheitszeichen mit Dach, «entspricht».
+          equalhat:'\\mathrel{\\stackrel{\\wedge}{=}}',
+          // `\vv` kommt aus dem Paket `esvect` (Vektorpfeil) und ist
+          // MathJax unbekannt — ohne diese Zeile setzt es den Befehl
+          // rot als Fehler. Gefunden am 26.08. in Kapitel 3 von
+          // MA01.03 («schultypische Beispiele», 4 Stellen).
+          vv:['\\overrightarrow{#1}',1]}},
+  options:{skipHtmlTags:['script','noscript','style','textarea','pre']}};</script>
+<script defer src="../../gemeinsam/fremd/tex-svg.js"></script>
+</body>
+</html>

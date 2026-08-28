@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="de">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Aufgabe 6.8 · Daten und Zufall</title>
+<link rel="stylesheet" href="../../gemeinsam/lernlandschaft.css?f=c77c6724">
+<body data-farbe="fach">
+<div class="stationskopf"><span class="wort">AUFGABE</span><span class="roemisch">6.8</span><h1>Daten und Zufall</h1><span class="wechsel wortweise"><a href="../../index.html">Startseite</a><a href="../index.html">Alle Aufgaben</a></span></div>
+<main>
+<h2 class="etappentitel"><span class="stand">Aufgabe 6.8</span></h2><div class="aufgabenblatt"><p>Im Zahlenfeld 1 - 42 des neuen Swiss Lotto sind sechs Zahlen
+   anzukreuzen, zusätzlich ist eine „Glückszahl" aus 1 - 6 zu wählen.</p>
+<div class="neben">
+    <ol class="klammer-a"><li>Wie gross ist die Wahrscheinlichkeit bei einem Tipp genau
+      zwei richtige Zahlen im Zahlenfeld anzukreuzen? (ohne
+      Berücksichtigung der Glückszahl)</li><li>Wie gross ist die Wahrscheinlichkeit bei einem Tipp genau
+      vier richtige Zahlen anzukreuzen inklusive der Glückszahl?</li></ol>
+ </div>
+<div class="neben">
+<figure style="--bildbreite:0.78"><img src="../../bilder/b0cf309e5e6c3695.png" alt=""></figure>
+</div>
+<ol class="klammer-a"><li>Nachfolgend sehen sie die
+    Gewinnquoten einer Ziehung von Swiss Lotto, in der der
+    Jackpot mit 10 Millionen gefüllt war. Bestimmen Sie die Wahrscheinlichkeiten der 8 Gewinnränge und daraus die Gewinnerwartung für einen Tipp. In Swiss Lotto müssen pro Spiel mindestens zwei
+Tipps abgegeben werden, derzeit zu Kosten von 5 Fr. Welche Gewinnerwartung besteht daher pro eingesetzten Franken?</li></ol>
+<figure style="--bildbreite:0.60"><img src="../../bilder/f938926ececc0d8f.png" alt=""></figure><div class="stufen"><div class="reiter"><button type="button" data-stufe="starthilfe" aria-expanded="false">Starthilfe</button><button type="button" data-stufe="loesung" aria-expanded="false">Lösung</button></div><div class="faltung" data-stufe="starthilfe" hidden><ul><li>Nutzen Sie Binomialkoeffizienten: $\binom{n}{k}$ für die Anzahl der Möglichkeiten</li><li>Bei Teil (a): $\binom{6}{2}$ für richtige, $\binom{36}{4}$ für falsche Zahlen</li><li>Bei Teil (b): Berücksichtigen Sie sowohl Zahlenfeld als auch Glückszahl</li></ul></div><div class="faltung" data-stufe="loesung" hidden><h4>Swiss Lotto System:</h4>
+<ul><li>6 aus 42 Zahlen im Hauptfeld</li><li>1 aus 6 als Glückszahl</li><li>Gesamtzahl Kombinationen: $\binom{42}{6} \cdot \binom{6}{1} = 5'245'786 \cdot 6 = 31'474'716$</li></ul>
+<h4>(a) Wahrscheinlichkeit für genau 2 Richtige (ohne Glückszahl)</h4>
+<p>Wir müssen berechnen:
+<ul><li>2 richtige Zahlen aus den 6 gezogenen: $\binom{6}{2} = 15$</li><li>4 falsche Zahlen aus den 36 nicht gezogenen: $\binom{36}{4} = 58'905$</li><li>Gesamtzahl Möglichkeiten im Zahlenfeld: $\binom{42}{6} = 5'245'786$</li></ul></p>
+<p>Wahrscheinlichkeit:
+$$P(\text{genau 2 Richtige}) = \frac{\binom{6}{2} \cdot \binom{36}{4}}{\binom{42}{6}} = \frac{15 \cdot 58'905}{5'245'786} = \frac{883'575}{5'245'786} \approx 0.1684 = 16.84\%$$</p>
+<h4>(b) Wahrscheinlichkeit für 4 Richtige + Glückszahl</h4>
+<p>Wir müssen berechnen:
+<ul><li>4 richtige Zahlen aus 6: $\binom{6}{4} = 15$</li><li>2 falsche Zahlen aus 36: $\binom{36}{2} = 630$</li><li>Richtige Glückszahl: $\binom{1}{1} = 1$ (aus 6 möglichen)</li><li>Gesamtmöglichkeiten: $\binom{42}{6} \cdot \binom{6}{1} = 31'474'716$</li></ul></p>
+<p>Wahrscheinlichkeit:
+$$P(\text{4R + GZ}) = \frac{15 \cdot 630 \cdot 1}{31'474'716} = \frac{9'450}{31'474'716} \approx 0.0003\% = 0.03\%$$</p>
+<h4>(c) Systematische Berechnung aller Gewinnränge:</h4>
+<p>Für k richtige Zahlen und Glückszahl (GZ):
+$$P(k\text{R + GZ}) = \frac{\binom{6}{k} \cdot \binom{36}{6-k} \cdot 1}{31'474'716}$$</p>
+<p>Für k richtige Zahlen ohne Glückszahl:
+$$P(k\text{R}) = \frac{\binom{6}{k} \cdot \binom{36}{6-k} \cdot 5}{31'474'716}$$</p>
+<div class="tabelle"><table><tr style="background:#f2f2f2"><td class="c sl so">Rang</td><td class="l sl so">Bedingung</td><td class="r sl so">Anzahl Kombinationen</td><td class="r sl so">Wahrscheinlichkeit</td><td class="r sl sr so">Gewinnquote</td></tr><tr><td class="c sl so">1</td><td class="l sl so">6R + GZ</td><td class="r sl so">1</td><td class="r sl so">$3.18 \times 10^{-8}$</td><td class="r sl sr so">10'000'000 Fr</td></tr><tr><td class="c sl">2</td><td class="l sl">6R</td><td class="r sl">5</td><td class="r sl">$1.59 \times 10^{-7}$</td><td class="r sl sr">467'072 Fr</td></tr><tr><td class="c sl">3</td><td class="l sl">5R + GZ</td><td class="r sl">216</td><td class="r sl">$6.86 \times 10^{-6}$</td><td class="r sl sr">7'341 Fr</td></tr><tr><td class="c sl">4</td><td class="l sl">5R</td><td class="r sl">1'080</td><td class="r sl">$3.43 \times 10^{-5}$</td><td class="r sl sr">628 Fr</td></tr><tr><td class="c sl">5</td><td class="l sl">4R + GZ</td><td class="r sl">9'450</td><td class="r sl">$3.00 \times 10^{-4}$</td><td class="r sl sr">151 Fr</td></tr><tr><td class="c sl">6</td><td class="l sl">4R</td><td class="r sl">47'250</td><td class="r sl">$1.50 \times 10^{-3}$</td><td class="r sl sr">36 Fr</td></tr><tr><td class="c sl">7</td><td class="l sl">3R + GZ</td><td class="r sl">142'800</td><td class="r sl">$4.54 \times 10^{-3}$</td><td class="r sl sr">21 Fr</td></tr><tr><td class="su c sl">8</td><td class="su l sl">3R</td><td class="su r sl">714'000</td><td class="su r sl">$2.27 \times 10^{-2}$</td><td class="su r sl sr">10 Fr</td></tr></table></div>
+<h4>Erwartungswert pro Tipp:</h4>
+<p>\begin{align*}
+E[X] &amp;= \sum_{i=1}^{8} P(\text{Rang } i) \cdot \text{Gewinnquote}_i\\
+&amp;= 3.18 \times 10^{-8} \cdot 10'000'000 + 1.59 \times 10^{-7} \cdot 467'072 + \ldots\\
+
+&amp;\approx 0.318 + 0.074 + 0.050 + 0.022 + 0.045 + 0.054 + 0.095 + 0.227\\
+&amp;\approx 0.89 \text{ Fr}
+\end{align*}</p>
+<p>Bei diesem (optimistischen) Jackpot beträgt die Gewinnerwartung etwa 0.89 Fr pro Tipp.</p>
+<h4>Gewinnerwartung pro eingesetzten Franken:</h4>
+<ul><li>Kosten für 2 Tipps (Mindestspiel): 5 Fr</li><li>Gewinnerwartung für 2 Tipps: ca. $2 \cdot 0.89 = 1.77$ Fr</li><li>Pro eingesetzten Franken: $\frac{1.77}{5} = 0.35$ Fr</li></ul></div></div></div><p class="heimknopf"><a href="../../index.html"><span class="haus" aria-hidden="true">⌂</span>Material</a></p>
+</main>
+<footer><div class="seitenfuss"><span class="wo"><b>MA01.07 · MA01.08</b> Daten und Zufall</span><span class="wer">Henrike Allmendinger · Herbstsemester 2026<a class="pinnwand" href="https://www.taskcards.de/#/board/c1b7fe7b-28eb-41b2-bf38-60c4264a9f8c" target="_blank" rel="noopener">Feedback</a></span></div></footer>
+<script src="../../gemeinsam/seite.js?f=c77c6724"></script>
+
+<script>window.MathJax={tex:{inlineMath:[['$','$'],['\\(','\\)']],
+  displayMath:[['\\[','\\]'],['$$','$$']],processEscapes:true,
+  macros:{cc:'\\mathbb{C}',rr:'\\mathbb{R}',nn:'\\mathbb{N}',
+          zz:'\\mathbb{Z}',qq:'\\mathbb{Q}',cis:'\\operatorname{cis}',
+          Log:'\\operatorname{Log}',dd:'\\mathrm{d}',
+          glqq:'\\text{„}',grqq:'\\text{“}',
+          // Aus dem Vorspann von MA01.03 (`Preambel/Styles.tex`):
+          // ein Gleichheitszeichen mit Dach, «entspricht».
+          equalhat:'\\mathrel{\\stackrel{\\wedge}{=}}',
+          // `\vv` kommt aus dem Paket `esvect` (Vektorpfeil) und ist
+          // MathJax unbekannt — ohne diese Zeile setzt es den Befehl
+          // rot als Fehler. Gefunden am 26.08. in Kapitel 3 von
+          // MA01.03 («schultypische Beispiele», 4 Stellen).
+          vv:['\\overrightarrow{#1}',1]}},
+  options:{skipHtmlTags:['script','noscript','style','textarea','pre']}};</script>
+<script defer src="../../gemeinsam/fremd/tex-svg.js"></script>
+</body>
+</html>

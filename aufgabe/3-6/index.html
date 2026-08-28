@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="de">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Aufgabe 3.6 · Daten und Zufall</title>
+<link rel="stylesheet" href="../../gemeinsam/lernlandschaft.css?f=c77c6724">
+<body data-farbe="fach">
+<div class="stationskopf"><span class="wort">AUFGABE</span><span class="roemisch">3.6</span><h1>Daten und Zufall</h1><span class="wechsel wortweise"><a href="../../index.html">Startseite</a><a href="../index.html">Alle Aufgaben</a></span></div>
+<main>
+<h2 class="etappentitel"><span class="stand">Aufgabe 3.6</span></h2><div class="aufgabenblatt"><p>In einem Speisewagen gibt es fünf Tische mit je vier
+      Plätzen. Der Kellner, der durch den Zug geht und die
+      Reservierungswünsche der Fahrgäste entgegennimmt, führt
+      anschliessend die Verteilung nach dem Zufallsprinzip aus.  Wie
+      wahrscheinlich ist es, dass die ersten beiden Personen, die eine
+      Reservierung wünschen, am gleichen Tisch zu sitzen kommen?</p><div class="stufen"><div class="reiter"><button type="button" data-stufe="starthilfe" aria-expanded="false">Starthilfe</button><button type="button" data-stufe="loesung" aria-expanded="false">Lösung</button><button type="button" data-stufe="video" aria-expanded="false">Video</button></div><div class="faltung" data-stufe="starthilfe" hidden><ul><li>«Nach dem Zufallsprinzip» kann verschieden interpretiert werden</li><li>Methode 1: Der Kellner vergibt zufällig Sitzplätze</li><li>Methode 2: Der Kellner weist zufällig Tische zu (ohne spezifische Plätze)</li><li>Berechnen Sie für beide Interpretationen die Wahrscheinlichkeit</li><li>Welche Interpretation erscheint Ihnen realistischer?</li></ul></div><div class="faltung" data-stufe="loesung" hidden><p><strong>Die Tücke liegt im Detail: Was bedeutet «Zufallsprinzip»?</strong></p>
+<p>Diese Aufgabe zeigt, wie wichtig die präzise Interpretation der Aufgabenstellung ist. Je nachdem, wie der Kellner die «zufällige» Verteilung durchführt, erhalten wir unterschiedliche Wahrscheinlichkeiten.</p>
+<p><strong>Ausgangssituation:</strong>
+<ul><li>5 Tische mit je 4 Plätzen = 20 Sitzplätze insgesamt</li><li>2 Personen wollen reservieren</li><li>Ereignis $T$: «Die beiden Personen sitzen am gleichen Tisch»</li></ul></p>
+<p><strong>Lösung 1: Kellner reserviert über die Sitzplätze</strong></p>
+<p>Der Kellner weist jeder Person einen spezifischen Sitzplatz zu.</p>
+<p><strong>Modellierung:</strong>
+<ul><li>Person 1 bekommt einen der 20 Plätze</li><li>Person 2 bekommt einen der verbleibenden 19 Plätze</li><li>Anzahl aller möglichen Reservierungen: $|\Omega| = 20 \cdot 19 = 380$</li></ul></p>
+<p><strong>Günstige Fälle:</strong>
+Person 1 sitzt an einem Tisch. Damit Person 2 am gleichen Tisch sitzt, muss sie einen der 3 verbleibenden Plätze an diesem Tisch bekommen.</p>
+<p>Systematisch:
+<ul><li>Person 1 an Tisch 1 (4 Möglichkeiten) → Person 2 auch an Tisch 1 (3 Möglichkeiten) → $4 \cdot 3 = 12$</li><li>Person 1 an Tisch 2 (4 Möglichkeiten) → Person 2 auch an Tisch 2 (3 Möglichkeiten) → $4 \cdot 3 = 12$</li><li>... und so weiter für alle 5 Tische</li></ul></p>
+<p>Insgesamt: $|T| = 5 \cdot 4 \cdot 3 = 60$</p>
+<p><strong>Wahrscheinlichkeit:</strong>
+$$P_1(T) = \frac{60}{380} = \frac{3}{19} \approx 0.1579 = 15.79\% \approx 15.8\%$$</p>
+<p><hr></p>
+<p><strong>Lösung 2: Kellner reserviert über die Tische</strong></p>
+<p>Der Kellner weist jeder Person nur einen Tisch zu, nicht einen spezifischen Platz.</p>
+<p><strong>Modellierung:</strong>
+<ul><li>Person 1 bekommt einen der 5 Tische zugewiesen</li><li>Person 2 bekommt einen der 5 Tische zugewiesen (kann derselbe sein!)</li><li>Anzahl aller möglichen Reservierungen: $|\Omega| = 5 \cdot 5 = 25$</li></ul></p>
+<p><strong>Günstige Fälle:</strong>
+Die beiden Personen sitzen am gleichen Tisch:
+<ul><li>Beide an Tisch 1: $(1,1)$</li><li>Beide an Tisch 2: $(2,2)$</li><li>Beide an Tisch 3: $(3,3)$</li><li>Beide an Tisch 4: $(4,4)$</li><li>Beide an Tisch 5: $(5,5)$</li></ul></p>
+<p>Also: $|T| = 5$</p>
+<p><strong>Wahrscheinlichkeit:</strong>
+$$P_2(T) = \frac{5}{25} = \frac{1}{5} = 0.20 = 20\%$$</p>
+<p><hr></p>
+<p><strong>Vergleich der beiden Lösungen:</strong></p>
+<div class="tabelle"><table><tr><td class="l sl so"></td><td class="c sl so"><strong>Platzzuweisung</strong></td><td class="c sl sr so"><strong>Tischzuweisung</strong></td></tr><tr><td class="l sl so">Ergebnismenge</td><td class="c sl so">380 Möglichkeiten</td><td class="c sl sr so">25 Möglichkeiten</td></tr><tr><td class="l sl">Günstige Fälle</td><td class="c sl">60</td><td class="c sl sr">5</td></tr><tr><td class="su l sl">Wahrscheinlichkeit</td><td class="su c sl">15.8%</td><td class="su c sl sr">20%</td></tr></table></div>
+<p><strong>Welche Interpretation ist realistischer?</strong></p>
+<p>In der Praxis würde ein Kellner vermutlich:
+<ul><li>Bei wenigen Gästen: Eher Tische zuweisen (Lösung 2)</li><li>Bei vielen Gästen: Spezifische Plätze zuweisen (Lösung 1)</li><li>Die genaue Vorgehensweise hängt vom Restaurant ab!</li></ul></p>
+<p><strong>Lehre aus dieser Aufgabe:</strong></p>
+<p>Die Formulierung «nach dem Zufallsprinzip» ist mehrdeutig. In der Stochastik muss man stets präzise klären:
+<ul><li>Was genau wird zufällig zugeordnet?</li><li>Wie sieht die Ergebnismenge aus?</li><li>Sind alle Elementarereignisse gleichwahrscheinlich?</li></ul></p>
+<p>Unterschiedliche, gleichermaßen plausible Interpretationen können zu verschiedenen Ergebnissen führen!</p></div><div class="faltung" data-stufe="video" hidden><div class="rahmen"><video class="spieler" controls preload="metadata" src="https://api.cast.switch.ch/p/110/sp/11000/playManifest/entryId/0_00pizz7c/format/url/protocol/https/video.mp4"></video></div></div></div></div><p class="heimknopf"><a href="../../index.html"><span class="haus" aria-hidden="true">⌂</span>Material</a></p>
+</main>
+<footer><div class="seitenfuss"><span class="wo"><b>MA01.07 · MA01.08</b> Daten und Zufall</span><span class="wer">Henrike Allmendinger · Herbstsemester 2026<a class="pinnwand" href="https://www.taskcards.de/#/board/c1b7fe7b-28eb-41b2-bf38-60c4264a9f8c" target="_blank" rel="noopener">Feedback</a></span></div></footer>
+<script src="../../gemeinsam/seite.js?f=c77c6724"></script>
+
+<script>window.MathJax={tex:{inlineMath:[['$','$'],['\\(','\\)']],
+  displayMath:[['\\[','\\]'],['$$','$$']],processEscapes:true,
+  macros:{cc:'\\mathbb{C}',rr:'\\mathbb{R}',nn:'\\mathbb{N}',
+          zz:'\\mathbb{Z}',qq:'\\mathbb{Q}',cis:'\\operatorname{cis}',
+          Log:'\\operatorname{Log}',dd:'\\mathrm{d}',
+          glqq:'\\text{„}',grqq:'\\text{“}',
+          // Aus dem Vorspann von MA01.03 (`Preambel/Styles.tex`):
+          // ein Gleichheitszeichen mit Dach, «entspricht».
+          equalhat:'\\mathrel{\\stackrel{\\wedge}{=}}',
+          // `\vv` kommt aus dem Paket `esvect` (Vektorpfeil) und ist
+          // MathJax unbekannt — ohne diese Zeile setzt es den Befehl
+          // rot als Fehler. Gefunden am 26.08. in Kapitel 3 von
+          // MA01.03 («schultypische Beispiele», 4 Stellen).
+          vv:['\\overrightarrow{#1}',1]}},
+  options:{skipHtmlTags:['script','noscript','style','textarea','pre']}};</script>
+<script defer src="../../gemeinsam/fremd/tex-svg.js"></script>
+</body>
+</html>

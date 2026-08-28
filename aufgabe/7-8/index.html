@@ -1,0 +1,93 @@
+<!doctype html>
+<html lang="de">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Aufgabe 7.8 · Daten und Zufall</title>
+<link rel="stylesheet" href="../../gemeinsam/lernlandschaft.css?f=c77c6724">
+<body data-farbe="beweis">
+<div class="stationskopf"><span class="wort">AUFGABE</span><span class="roemisch">7.8</span><h1>Daten und Zufall</h1><span class="wechsel wortweise"><a href="../../index.html">Startseite</a><a href="../index.html">Alle Aufgaben</a></span></div>
+<main>
+<h2 class="etappentitel"><span class="stand">Aufgabe 7.8</span></h2><div class="aufgabenblatt"><p>Während der Erwartungswert $\mu$ einer binomialverteilten Zufallsgrösse $X$ einfach zu
+interpretieren ist als durchschnittliche Trefferzahl, liegt die Bedeutung der Standardabweichung $\sigma$ nicht sofort auf der Hand («Was sagt mir das $\sigma$?»). Das nachfolgende Experiment gibt hier eine Deutungshilfe.</p>
+<ol class="klammer-a"><li>Es soll folgende Tabelle erstellt werden (TR, Excel oder
+  GeoGebra):
+<figure style="--bildbreite:0.45"><img src="../../bilder/3e6f0ff5fd12ea57.png" alt=""></figure>
+<p>Trefferwahrscheinlichkeit $p$ und die Anzahl der Versuche sind gegeben
+  (und können nachträglich variiert werden). Erwartungswert $\mu$ und
+  Standardabweichung $\sigma$ werden jeweils anhand der Formeln
+  berechnet.</p>
+<p>Bestimmen Sie nun in der Tabelle die jeweilige
+  Wahrscheinlichkeit, dass die Zufallsgrösse $X$ bei $n$ Versuchen
+  höchstens um eine, 1.5 oder zwei Standardabweichungen von ihrem
+  erwarteten Wert abweicht.</p>
+<p>Beispiel: $p = 0.4$, $n = 500$ Versuche, also $\mu
+  = 200$, $\sigma = 10.95$</p>
+<p>Wahrscheinlichkeit, dass $X$ höchstens um 1.5
+  Standardabweichungen von $\mu$ abweicht:</p>
+<p>\begin{align*}
+P( \mu - 1.5 \cdot \sigma
+  \leq X&amp; \leq \mu + 1.5 \cdot \sigma ) \\
+&amp; = P(200 - 1.5 \cdot 10.95
+  \leq X \leq 200 + 1.5 \cdot 10.95) \\
+&amp; = P(184 \leq X \leq 216)
+  \approx 86.8\%
+  \end{align*}</li><li>Variieren Sie $p$ und vergleichen Sie in jeder Zeile die
+  berechneten Wahrscheinlichkeiten miteinander. Beobachtung?</li></ol></p><div class="stufen"><div class="reiter"><button type="button" data-stufe="starthilfe" aria-expanded="false">Starthilfe</button><button type="button" data-stufe="loesung" aria-expanded="false">Lösung</button></div><div class="faltung" data-stufe="starthilfe" hidden><ul><li>Berechnen Sie für jede Kombination von n und p die Werte μ = np und σ = √(np(1-p))</li><li>Bestimmen Sie die Intervalle [μ - k·σ, μ + k·σ] für k = 1, 1.5, 2</li><li>Runden Sie die Intervallgrenzen auf ganze Zahlen</li><li>Berechnen Sie P(a ≤ X ≤ b) mit der Binomialverteilung</li></ul></div><div class="faltung" data-stufe="loesung" hidden><h4>(a) Erstellung der Tabelle:</h4>
+<p><strong>Formeln für die Berechnung:</strong></p>
+<aside class="merksatz"><ul><li>Erwartungswert: $\mu = n \cdot p$</li><li>Varianz: $\sigma^2 = n \cdot p \cdot (1-p)$</li><li>Standardabweichung: $\sigma = \sqrt{n \cdot p \cdot (1-p)}$</li></ul></aside>
+<p><strong>Beispielrechnung für p = 0.4, n = 500:</strong>
+\begin{align*}
+\mu &amp;= 500 \cdot 0.4 = 200\\
+\sigma^2 &amp;= 500 \cdot 0.4 \cdot 0.6 = 120\\
+\sigma &amp;= \sqrt{120} \approx 10.95
+\end{align*}</p>
+<p><strong>Berechnung der Sigma-Umgebungen:</strong></p>
+<p>Für die 1.5σ-Umgebung:</p>
+<aside class="merksatz">\begin{align*}
+\text{Untere Grenze:} \quad \mu - 1.5\sigma &amp;= 200 - 1.5 \cdot 10.95 = 183.57 \approx 184\\
+\text{Obere Grenze:} \quad \mu + 1.5\sigma &amp;= 200 + 1.5 \cdot 10.95 = 216.43 \approx 216
+\end{align*}
+<p>$$P(184 \leq X \leq 216) = \sum_{k=184}^{216} \binom{500}{k} \cdot 0.4^k \cdot 0.6^{500-k} \approx 86.8\%$$</p></aside>
+<p><strong>Vollständige Tabelle:</strong></p>
+<div class="tabelle"><table><tr style="background:#f2f2f2"><td class="c sl so">$p$</td><td class="c sl so">$n$</td><td class="c sl so">$\mu$</td><td class="c sl so">$\sigma$</td><td class="c sl2 so">$P(|X-\mu| &lt; \sigma)$</td><td class="c sl so">$P(|X-\mu| &lt; 1.5\sigma)$</td><td class="c sl sr so">$P(|X-\mu| &lt; 2\sigma)$</td></tr><tr><td class="c sl so">0.1</td><td class="c sl so">100</td><td class="c sl so">10</td><td class="c sl so">3.00</td><td class="c sl2 so">68.3%</td><td class="c sl so">86.6%</td><td class="c sl sr so">95.4%</td></tr><tr><td class="c sl">0.1</td><td class="c sl">500</td><td class="c sl">50</td><td class="c sl">6.71</td><td class="c sl2">68.3%</td><td class="c sl">86.6%</td><td class="c sl sr">95.4%</td></tr><tr><td class="c sl">0.1</td><td class="c sl">1000</td><td class="c sl">100</td><td class="c sl">9.49</td><td class="c sl2">68.3%</td><td class="c sl">86.6%</td><td class="c sl sr">95.4%</td></tr><tr><td class="c sl so">0.3</td><td class="c sl so">100</td><td class="c sl so">30</td><td class="c sl so">4.58</td><td class="c sl2 so">68.2%</td><td class="c sl so">86.6%</td><td class="c sl sr so">95.4%</td></tr><tr><td class="c sl">0.3</td><td class="c sl">500</td><td class="c sl">150</td><td class="c sl">10.25</td><td class="c sl2">68.3%</td><td class="c sl">86.6%</td><td class="c sl sr">95.4%</td></tr><tr><td class="c sl">0.3</td><td class="c sl">1000</td><td class="c sl">300</td><td class="c sl">14.49</td><td class="c sl2">68.3%</td><td class="c sl">86.6%</td><td class="c sl sr">95.4%</td></tr><tr><td class="c sl so">0.4</td><td class="c sl so">100</td><td class="c sl so">40</td><td class="c sl so">4.90</td><td class="c sl2 so">68.3%</td><td class="c sl so">86.6%</td><td class="c sl sr so">95.3%</td></tr><tr><td class="c sl">0.4</td><td class="c sl">500</td><td class="c sl">200</td><td class="c sl">10.95</td><td class="c sl2">68.3%</td><td class="c sl">86.8%</td><td class="c sl sr">95.4%</td></tr><tr><td class="c sl">0.4</td><td class="c sl">1000</td><td class="c sl">400</td><td class="c sl">15.49</td><td class="c sl2">68.3%</td><td class="c sl">86.6%</td><td class="c sl sr">95.4%</td></tr><tr><td class="c sl so">0.5</td><td class="c sl so">100</td><td class="c sl so">50</td><td class="c sl so">5.00</td><td class="c sl2 so">68.3%</td><td class="c sl so">86.4%</td><td class="c sl sr so">95.4%</td></tr><tr><td class="c sl">0.5</td><td class="c sl">500</td><td class="c sl">250</td><td class="c sl">11.18</td><td class="c sl2">68.3%</td><td class="c sl">86.6%</td><td class="c sl sr">95.4%</td></tr><tr><td class="su c sl">0.5</td><td class="su c sl">1000</td><td class="su c sl">500</td><td class="su c sl">15.81</td><td class="su c sl2">68.3%</td><td class="su c sl">86.6%</td><td class="su c sl sr">95.4%</td></tr></table></div>
+<h4>(b) Beobachtungen:</h4>
+<p><strong>Erstaunliche Entdeckung:</strong>
+Unabhängig von den konkreten Werten von $n$ und $p$ ergeben sich nahezu konstante Wahrscheinlichkeiten!</p>
+<aside class="merksatz"><strong>Die universellen Wahrscheinlichkeiten:</strong>
+<ul><li><strong>1σ-Umgebung:</strong> $P(\mu - \sigma &lt; X &lt; \mu + \sigma) \approx 68\%$</li><li><strong>1.5σ-Umgebung:</strong> $P(\mu - 1.5\sigma &lt; X &lt; \mu + 1.5\sigma) \approx 87\%$</li><li><strong>2σ-Umgebung:</strong> $P(\mu - 2\sigma &lt; X &lt; \mu + 2\sigma) \approx 95\%$</li></ul></aside>
+<h4>Graphische Darstellung:</h4>
+<figure class="zeichnung"><img src="../../bilder/zeichnung-d6e29ecb5cdf.svg" alt=""></figure>
+<aside class="merksatz"><strong>Was bedeutet diese Entdeckung?</strong>
+<p>Sie haben gerade eine fundamentale Gesetzmässigkeit der Stochastik entdeckt! Diese konstanten Wahrscheinlichkeiten sind kein Zufall, sondern zeigen einen tiefliegenden Zusammenhang:</p>
+<ol><li>Bei grossen $n$ nähert sich die Binomialverteilung einer bestimmten Form an</li><li>Die Standardabweichung ist ein universelles Mass für die Streuung</li><li>Diese Entdeckung wird im nächsten Kapitel als «Normalverteilung» genauer untersucht</li></ol>
+<p>Diese Gesetzmässigkeit ist zentral für die gesamte Statistik und wird uns im nächsten Kapitel wieder begegnen!</p></aside>
+<h4>Praktische Bedeutung der 68-95-Regel:</h4>
+<ol><li><strong>Qualitätskontrolle:</strong> 
+   <ul><li></li><li>Werte innerhalb $\mu \pm 2\sigma$: Normal</li><li>Werte ausserhalb $\mu \pm 3\sigma$: Untersuchung nötig</li></ul></li><li><strong>Statistische Tests:</strong>
+   <ul><li></li><li>95%-Konfidenzintervalle basieren auf der 2σ-Regel</li><li>Signifikanzniveau 5% entspricht Werten ausserhalb 2σ</li></ul></li><li><strong>Six Sigma:</strong>
+   <ul><li></li><li>Prozessqualität mit Fehlerrate < 3.4 pro Million</li><li>Basiert auf 6σ-Abweichungen</li></ul></li></ol>
+<aside class="merksatz"><strong>Interpretation:</strong>
+Die Standardabweichung ist ein natürliches Mass für die Streuung:
+<ul><li>Etwa 2/3 aller Werte liegen innerhalb einer Standardabweichung vom Erwartungswert</li><li>Praktisch alle Werte (95%) liegen innerhalb von zwei Standardabweichungen</li><li>Diese Regel gilt für grosse $n$ universell und macht $\sigma$ zu einem praktischen Streuungsmass</li></ul></aside></div></div></div><p class="fundort">Im Video: <a href="../../lernweg-7/erwartungswert-und-varianz/index.html">Etappe 5 · Erwartungswert und Varianz</a> <span class="zeit">bei 9:35</span></p><p class="heimknopf"><a href="../../index.html"><span class="haus" aria-hidden="true">⌂</span>Material</a></p>
+</main>
+<footer><div class="seitenfuss"><span class="wo"><b>MA01.07 · MA01.08</b> Daten und Zufall</span><span class="wer">Henrike Allmendinger · Herbstsemester 2026<a class="pinnwand" href="https://www.taskcards.de/#/board/c1b7fe7b-28eb-41b2-bf38-60c4264a9f8c" target="_blank" rel="noopener">Feedback</a></span></div></footer>
+<script src="../../gemeinsam/seite.js?f=c77c6724"></script>
+
+<script>window.MathJax={tex:{inlineMath:[['$','$'],['\\(','\\)']],
+  displayMath:[['\\[','\\]'],['$$','$$']],processEscapes:true,
+  macros:{cc:'\\mathbb{C}',rr:'\\mathbb{R}',nn:'\\mathbb{N}',
+          zz:'\\mathbb{Z}',qq:'\\mathbb{Q}',cis:'\\operatorname{cis}',
+          Log:'\\operatorname{Log}',dd:'\\mathrm{d}',
+          glqq:'\\text{„}',grqq:'\\text{“}',
+          // Aus dem Vorspann von MA01.03 (`Preambel/Styles.tex`):
+          // ein Gleichheitszeichen mit Dach, «entspricht».
+          equalhat:'\\mathrel{\\stackrel{\\wedge}{=}}',
+          // `\vv` kommt aus dem Paket `esvect` (Vektorpfeil) und ist
+          // MathJax unbekannt — ohne diese Zeile setzt es den Befehl
+          // rot als Fehler. Gefunden am 26.08. in Kapitel 3 von
+          // MA01.03 («schultypische Beispiele», 4 Stellen).
+          vv:['\\overrightarrow{#1}',1]}},
+  options:{skipHtmlTags:['script','noscript','style','textarea','pre']}};</script>
+<script defer src="../../gemeinsam/fremd/tex-svg.js"></script>
+</body>
+</html>

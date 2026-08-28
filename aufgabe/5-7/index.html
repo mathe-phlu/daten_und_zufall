@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="de">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Aufgabe 5.7 · Daten und Zufall</title>
+<link rel="stylesheet" href="../../gemeinsam/lernlandschaft.css?f=c77c6724">
+<body data-farbe="fach">
+<div class="stationskopf"><span class="wort">AUFGABE</span><span class="roemisch">5.7</span><h1>Daten und Zufall</h1><span class="wechsel wortweise"><a href="../../index.html">Startseite</a><a href="../index.html">Alle Aufgaben</a></span></div>
+<main>
+<h2 class="etappentitel"><span class="stand">Aufgabe 5.7</span></h2><div class="aufgabenblatt"><p>Fahrstuhleffekt im Schulsystem? 
+  In Deutschland besuchen
+  $37\%$ aller 10- bis 16-Jährigen das Gymnasium. Jedoch nur
+  $35\%$ dieser Jugendlichen haben Eltern, die das
+  Gymnasium selber kennen. Umgekehrt findet man unter den Schülerinnen
+  und Schülern, die eine Haupt- oder Realschule (CH: Real-
+  bzw. Sekundarschule) besuchen, nur
+  $8\%$, deren Eltern ein Gymnasium absolvierten.</p>
+<p>Man bereite die Daten in einer Vierfeldertafel auf und werte eigene
+  Fragestellungen aus.</p><div class="stufen"><div class="reiter"><button type="button" data-stufe="starthilfe" aria-expanded="false">Starthilfe</button><button type="button" data-stufe="loesung" aria-expanded="false">Lösung</button></div><div class="faltung" data-stufe="starthilfe" hidden><ul><li>Definieren Sie G (Gymnasium) und E (gymnasiale Eltern) als Ereignisse</li><li>Nutzen Sie die Formel der totalen Wahrscheinlichkeit</li><li>Berechnen Sie zuerst $P(E)$, dann alle Schnittwahrscheinlichkeiten</li><li>Formulieren Sie eigene Fragen wie: «Wie wahrscheinlich ist Gymnasiumsbesuch bei gymnasialen Eltern?»</li></ul></div><div class="faltung" data-stufe="loesung" hidden><p><strong>Gegeben:</strong>
+<ul><li>$P(G) = 0.37$ (37% besuchen Gymnasium)</li><li>$P_G(E) = 0.35$ (35% der Gymnasiasten haben gymnasiale Eltern)</li><li>$P_{\overline{G}}(E) = 0.08$ (8% der Nicht-Gymnasiasten haben gymnasiale Eltern)</li></ul></p>
+<p><strong>Schritt 1: Berechnung der Gesamtwahrscheinlichkeit $P(E)$</strong></p>
+<p>Mit der Formel der totalen Wahrscheinlichkeit:
+$$P(E) = P_G(E) \cdot P(G) + P_{\overline{G}}(E) \cdot P(\overline{G})$$
+$$P(E) = 0.35 \cdot 0.37 + 0.08 \cdot 0.63 = 0.1295 + 0.0504 = 0.1799$$</p>
+<p><strong>Schritt 2: Berechnung aller Schnittwahrscheinlichkeiten</strong></p>
+<ul><li>$P(E \cap G) = P_G(E) \cdot P(G) = 0.35 \cdot 0.37 = 0.1295$</li><li>$P(E \cap \overline{G}) = P_{\overline{G}}(E) \cdot P(\overline{G}) = 0.08 \cdot 0.63 = 0.0504$</li><li>$P(\overline{E} \cap G) = P(G) - P(E \cap G) = 0.37 - 0.1295 = 0.2405$</li><li>$P(\overline{E} \cap \overline{G}) = P(\overline{G}) - P(E \cap \overline{G}) = 0.63 - 0.0504 = 0.5796$</li></ul>
+<p><strong>Lösungsweg 1: Vierfeldertafel</strong></p>
+<figure class="zeichnung"><img src="../../bilder/zeichnung-eb5f189c1676.svg" alt=""></figure>
+<p><strong>Lösungsweg 2: Baumdiagramm</strong></p>
+<figure class="zeichnung"><img src="../../bilder/zeichnung-798aa25abdfb.svg" alt=""></figure>
+<p><strong>Analyse des Fahrstuhleffekts:</strong></p>
+<p><strong>1. Zentrale Frage:</strong> Wie gross ist die Chance von Kindern gymnasialer Eltern, selbst das Gymnasium zu besuchen?</p>
+<p>$$P_E(G) = \frac{P(E \cap G)}{P(E)} = \frac{0.1295}{0.1799} = 0.720 = 72.0\%$$</p>
+<p>Im Vergleich bei nicht-gymnasialen Eltern:
+$$P_{\overline{E}}(G) = \frac{P(\overline{E} \cap G)}{P(\overline{E})} = \frac{0.2405}{0.8201} = 0.293 = 29.3\%$$</p>
+<p><strong>2. Relatives Risiko:</strong>
+$$\frac{P_E(G)}{P_{\overline{E}}(G)} = \frac{72.0\%}{29.3\%} = 2.46$$</p>
+<p>Kinder gymnasialer Eltern haben eine 2.5-fach höhere Chance!</p>
+<p><strong>3. Weitere interessante Auswertungen:</strong></p>
+<ul><li><strong>Bildungsaufsteiger:</strong> 65% der Gymnasiasten haben nicht-gymnasiale Eltern</li><li><strong>Bildungsabsteiger:</strong> 28% der Kinder gymnasialer Eltern besuchen nicht das Gymnasium</li><li><strong>Reproduktion:</strong> Nur 12.95% aller Schüler haben gymnasiale Eltern UND besuchen das Gymnasium</li></ul>
+<p><strong>Fazit:</strong></p>
+<p>Der «Fahrstuhleffekt» ist deutlich nachweisbar. Trotz formaler Chancengleichheit haben Kinder aus gymnasialen Elternhäusern eine 2.5-mal höhere Chance auf Gymnasiumsbesuch. Dennoch zeigt sich auch Bildungsmobilität in beide Richtungen.</p></div></div></div><p class="heimknopf"><a href="../../index.html"><span class="haus" aria-hidden="true">⌂</span>Material</a></p>
+</main>
+<footer><div class="seitenfuss"><span class="wo"><b>MA01.07 · MA01.08</b> Daten und Zufall</span><span class="wer">Henrike Allmendinger · Herbstsemester 2026<a class="pinnwand" href="https://www.taskcards.de/#/board/c1b7fe7b-28eb-41b2-bf38-60c4264a9f8c" target="_blank" rel="noopener">Feedback</a></span></div></footer>
+<script src="../../gemeinsam/seite.js?f=c77c6724"></script>
+
+<script>window.MathJax={tex:{inlineMath:[['$','$'],['\\(','\\)']],
+  displayMath:[['\\[','\\]'],['$$','$$']],processEscapes:true,
+  macros:{cc:'\\mathbb{C}',rr:'\\mathbb{R}',nn:'\\mathbb{N}',
+          zz:'\\mathbb{Z}',qq:'\\mathbb{Q}',cis:'\\operatorname{cis}',
+          Log:'\\operatorname{Log}',dd:'\\mathrm{d}',
+          glqq:'\\text{„}',grqq:'\\text{“}',
+          // Aus dem Vorspann von MA01.03 (`Preambel/Styles.tex`):
+          // ein Gleichheitszeichen mit Dach, «entspricht».
+          equalhat:'\\mathrel{\\stackrel{\\wedge}{=}}',
+          // `\vv` kommt aus dem Paket `esvect` (Vektorpfeil) und ist
+          // MathJax unbekannt — ohne diese Zeile setzt es den Befehl
+          // rot als Fehler. Gefunden am 26.08. in Kapitel 3 von
+          // MA01.03 («schultypische Beispiele», 4 Stellen).
+          vv:['\\overrightarrow{#1}',1]}},
+  options:{skipHtmlTags:['script','noscript','style','textarea','pre']}};</script>
+<script defer src="../../gemeinsam/fremd/tex-svg.js"></script>
+</body>
+</html>

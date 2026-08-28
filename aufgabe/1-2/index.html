@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="de">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Aufgabe 1.2 · Daten und Zufall</title>
+<link rel="stylesheet" href="../../gemeinsam/lernlandschaft.css?f=c77c6724">
+<body data-farbe="aktion">
+<div class="stationskopf"><span class="wort">AUFGABE</span><span class="roemisch">1.2</span><h1>Daten und Zufall</h1><span class="wechsel wortweise"><a href="../../index.html">Startseite</a><a href="../index.html">Alle Aufgaben</a></span></div>
+<main>
+<h2 class="etappentitel"><span class="stand">Aufgabe 1.2</span></h2><div class="aufgabenblatt"><p>Man probiere diesen Befehl unverzüglich aus und liste der Reihe
+   nach die Werte $\binom{10}{k}$ für $k = 0, 1, 2, ... , 10$
+   auf. Beobachtung? Erklärung?</p><div class="stufen"><div class="reiter"><button type="button" data-stufe="starthilfe" aria-expanded="false">Starthilfe</button><button type="button" data-stufe="loesung" aria-expanded="false">Lösung</button><button type="button" data-stufe="video" aria-expanded="false">Video</button></div><div class="faltung" data-stufe="starthilfe" hidden><ul><li>Berechnen Sie systematisch alle Werte $\binom{10}{k}$ für $k = 0$ bis $10$</li><li>Vergleichen Sie die Werte von $\binom{10}{k}$ und $\binom{10}{10-k}$</li><li>Denken Sie an das Auswählen von Objekten: Was ist der Unterschied zwischen «$k$ auswählen» und «$n-k$ übrig lassen»?</li><li>Nutzen Sie die Formel $\binom{n}{k} = \frac{n!}{k!(n-k)!}$ für einen algebraischen Beweis</li></ul></div><div class="faltung" data-stufe="loesung" hidden><p><strong>Berechnung der Binomialkoeffizienten:</strong></p>
+<div class="tabelle"><table><tr><td class="c">$k:$</td><td class="c">0</td><td class="c">1</td><td class="c">2</td><td class="c">3</td><td class="c">4</td><td class="c">5</td><td class="c">6</td><td class="c">7</td><td class="c">8</td><td class="c">9</td><td class="c">10</td></tr><tr><td class="c">$\binom{10}{k}:$</td><td class="c">\(\boxed{1}\)</td><td class="c">\(\boxed{10}\)</td><td class="c">\(\boxed{45}\)</td><td class="c">\(\boxed{120}\)</td><td class="c">\(\boxed{210}\)</td><td class="c">\(\boxed{252}\)</td><td class="c">\(\boxed{210}\)</td><td class="c">\(\boxed{120}\)</td><td class="c">\(\boxed{45}\)</td><td class="c">\(\boxed{10}\)</td><td class="c">\(\boxed{1}\)</td></tr><tr><td class="c" colspan="12">$\underbrace{\hspace{5.5cm}}_{\text{aufsteigend}} \quad \underbrace{\hspace{0.8cm}}_{\text{Max}} \quad \underbrace{\hspace{5.5cm}}_{\text{absteigend}}$</td></tr></table></div>
+<p><strong>Beobachtung - Perfekte Symmetrie:</strong>
+\begin{align*}
+\binom{10}{0} = \binom{10}{10} &amp;= 1\\
+\binom{10}{1} = \binom{10}{9} &amp;= 10\\
+\binom{10}{2} = \binom{10}{8} &amp;= 45\\
+\binom{10}{3} = \binom{10}{7} &amp;= 120\\
+\binom{10}{4} = \binom{10}{6} &amp;= 210\\
+\binom{10}{5} &amp;= 252 \quad \text{(Mitte)}
+\end{align*}</p>
+<p>Allgemein gilt: $\boxed{\binom{10}{k} = \binom{10}{10-k}}$</p>
+<p><strong>Kombinatorische Erklärung:</strong>
+Aus 10 Objekten 2 auswählen bedeutet gleichzeitig, 8 Objekte <em>nicht</em> auszuwählen. Jede Auswahl definiert automatisch ihr Komplement: Wähle ich 2 Kugeln aus 10, bleiben genau 8 übrig. Daher: $\binom{10}{2} = \binom{10}{8}$.</p>
+<p><strong>Algebraischer Beweis:</strong>
+Für $\binom{n}{n-k}$ gilt:
+$$\binom{n}{n-k} = \frac{n!}{(n-k)![n-(n-k)]!} = \frac{n!}{(n-k)! \cdot k!} = \frac{n!}{k!(n-k)!} = \binom{n}{k}$$</p>
+<p>Die Symmetrie $\binom{n}{k} = \binom{n}{n-k}$ ist damit allgemein bewiesen und fundamental für das Pascal'sche Dreieck.</p></div><div class="faltung" data-stufe="video" hidden><div class="rahmen vorschau" data-video="_rVjKXI_EIw"><img class="standbild" alt="" src="../../gemeinsam/standbilder/_rVjKXI_EIw.jpg"><button type="button" class="starten" aria-label="Video abspielen"><span class="dreieck"></span></button></div><p class="ausweichen"><a href="https://www.youtube.com/watch?v=_rVjKXI_EIw" target="_blank" rel="noopener">Auf YouTube öffnen</a></p></div></div></div><p class="fundort">Im Video: <a href="../../lernweg-1/ohne-wiederholung-2/index.html">Etappe 5 · Ohne Wiederholung</a> <span class="zeit">bei 7:12</span></p><p class="heimknopf"><a href="../../index.html"><span class="haus" aria-hidden="true">⌂</span>Material</a></p>
+</main>
+<footer><div class="seitenfuss"><span class="wo"><b>MA01.07 · MA01.08</b> Daten und Zufall</span><span class="wer">Henrike Allmendinger · Herbstsemester 2026<a class="pinnwand" href="https://www.taskcards.de/#/board/c1b7fe7b-28eb-41b2-bf38-60c4264a9f8c" target="_blank" rel="noopener">Feedback</a></span></div></footer>
+<script src="../../gemeinsam/seite.js?f=c77c6724"></script>
+
+<script>window.MathJax={tex:{inlineMath:[['$','$'],['\\(','\\)']],
+  displayMath:[['\\[','\\]'],['$$','$$']],processEscapes:true,
+  macros:{cc:'\\mathbb{C}',rr:'\\mathbb{R}',nn:'\\mathbb{N}',
+          zz:'\\mathbb{Z}',qq:'\\mathbb{Q}',cis:'\\operatorname{cis}',
+          Log:'\\operatorname{Log}',dd:'\\mathrm{d}',
+          glqq:'\\text{„}',grqq:'\\text{“}',
+          // Aus dem Vorspann von MA01.03 (`Preambel/Styles.tex`):
+          // ein Gleichheitszeichen mit Dach, «entspricht».
+          equalhat:'\\mathrel{\\stackrel{\\wedge}{=}}',
+          // `\vv` kommt aus dem Paket `esvect` (Vektorpfeil) und ist
+          // MathJax unbekannt — ohne diese Zeile setzt es den Befehl
+          // rot als Fehler. Gefunden am 26.08. in Kapitel 3 von
+          // MA01.03 («schultypische Beispiele», 4 Stellen).
+          vv:['\\overrightarrow{#1}',1]}},
+  options:{skipHtmlTags:['script','noscript','style','textarea','pre']}};</script>
+<script defer src="../../gemeinsam/fremd/tex-svg.js"></script>
+</body>
+</html>

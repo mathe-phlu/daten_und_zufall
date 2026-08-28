@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="de">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Aufgabe 6.6 · Daten und Zufall</title>
+<link rel="stylesheet" href="../../gemeinsam/lernlandschaft.css?f=c77c6724">
+<body data-farbe="fach">
+<div class="stationskopf"><span class="wort">AUFGABE</span><span class="roemisch">6.6</span><h1>Daten und Zufall</h1><span class="wechsel wortweise"><a href="../../index.html">Startseite</a><a href="../index.html">Alle Aufgaben</a></span></div>
+<main>
+<h2 class="etappentitel"><span class="stand">Aufgabe 6.6</span></h2><div class="aufgabenblatt"><p>Spieler A und B vereinbaren, eine Münze so lange zu werfen, bis Wappen erscheint,
+maximal jedoch fünf Mal. A zahlt an B für jeden notwendigen Wurf 2 Fr. Ist nach dem
+5. Wurf noch kein Wappen eingetreten, muss A 14 Fr bezahlen. Wie gross muss der
+Einsatz von B sein, damit das Spiel fair ist?</p><div class="stufen"><div class="reiter"><button type="button" data-stufe="starthilfe" aria-expanded="false">Starthilfe</button><button type="button" data-stufe="loesung" aria-expanded="false">Lösung</button></div><div class="faltung" data-stufe="starthilfe" hidden><ul><li>Bestimmen Sie die möglichen Auszahlungen: 2, 4, 6, 8, 10 oder 14 Fr</li><li>Berechnen Sie die Wahrscheinlichkeit für k Würfe bis zum ersten Wappen (geometrische Verteilung)</li><li>Beachten Sie die Sonderregel: Nach 5 Würfen ohne Wappen zahlt A 14 Fr statt 10 Fr</li><li>Der faire Einsatz von B entspricht dem Erwartungswert der Auszahlung von A</li></ul></div><div class="faltung" data-stufe="loesung" hidden><h4>Spielregeln:</h4>
+<ul><li>Münze werfen bis Wappen erscheint, maximal 5 Mal</li><li>A zahlt an B: 2 Fr pro Wurf</li><li>Sonderfall: Kein Wappen nach 5 Würfen → A zahlt 14 Fr (statt 10 Fr)</li></ul>
+<h4>Baumdiagramm des Spielverlaufs:</h4>
+<figure class="zeichnung"><img src="../../bilder/zeichnung-4287428b066a.svg" alt=""></figure>
+<h4>Bestimmung der Wahrscheinlichkeiten:</h4>
+<p>Sei W = Wappen, Z = Zahl. Die Wahrscheinlichkeit für jeden Ausgang ist $\frac{1}{2}$.</p>
+<div class="spalten">
+<strong>Fall 1: Wappen beim 1. Wurf</strong>
+<ul><li>Ereignis: W</li><li>Wahrscheinlichkeit:
+<p>$P = \frac{1}{2}$</li><li>Auszahlung: 2 Fr</li></ul></p>
+<p><strong>Fall 2: Wappen beim 2. Wurf</strong>
+<ul><li>Ereignis: ZW</li><li>Wahrscheinlichkeit:</p>
+<p>$P = \frac{1}{2} \cdot \frac{1}{2} = \frac{1}{4}$</li><li>Auszahlung: 4 Fr</li></ul></p>
+<p><strong>Fall 3: Wappen beim 3. Wurf</strong>
+<ul><li>Ereignis: ZZW</li><li>Wahrscheinlichkeit:</p>
+<p>$P = \frac{1}{2} \cdot \frac{1}{2} \cdot \frac{1}{2} = \frac{1}{8}$</li><li>Auszahlung: 6 Fr</li></ul></p>
+<p><strong>Fall 4: Wappen beim 4. Wurf</strong>
+<ul><li>Ereignis: ZZZW</li><li>Wahrscheinlichkeit:</p>
+<p>$P = \left(\frac{1}{2}\right)^4 = \frac{1}{16}$</li><li>Auszahlung: 8 Fr</li></ul></p>
+<p><strong>Fall 5: Wappen beim 5. Wurf</strong>
+<ul><li>Ereignis: ZZZZW</li><li>Wahrscheinlichkeit:</p>
+<p>$P = \left(\frac{1}{2}\right)^5 = \frac{1}{32}$</li><li>Auszahlung: 10 Fr</li></ul></p>
+<p><strong>Fall 6: Kein Wappen in 5 Würfen</strong>
+<ul><li>Ereignis: ZZZZZ</li><li>Wahrscheinlichkeit:</p>
+<p>$P = \left(\frac{1}{2}\right)^5 = \frac{1}{32}$</li><li>Auszahlung: 14 Fr (Sonderregel!)</li></ul>
+</p></div>
+<h4>Verteilung der Auszahlung X:</h4>
+<div class="tabelle"><table><tr style="background:#f2f2f2"><td class="l sl so">$k$</td><td class="c sl so">2</td><td class="c sl so">4</td><td class="c sl so">6</td><td class="c sl so">8</td><td class="c sl so">10</td><td class="c sl sr so">14</td></tr><tr><td class="su l sl so">$P(X=k)$</td><td class="su c sl so">$\frac{1}{2}$</td><td class="su c sl so">$\frac{1}{4}$</td><td class="su c sl so">$\frac{1}{8}$</td><td class="su c sl so">$\frac{1}{16}$</td><td class="su c sl so">$\frac{1}{32}$</td><td class="su c sl sr so">$\frac{1}{32}$</td></tr></table></div>
+<h4>Kontrolle:</h4>
+<p>$$\frac{1}{2} + \frac{1}{4} + \frac{1}{8} + \frac{1}{16} + \frac{1}{32} + \frac{1}{32} = \frac{16 + 8 + 4 + 2 + 1 + 1}{32} = \frac{32}{32} = 1 \checkmark$$</p>
+<h4>Berechnung des Erwartungswerts:</h4>
+<p>\begin{align*}
+E[X] &amp;= 2 \cdot \frac{1}{2} + 4 \cdot \frac{1}{4} + 6 \cdot \frac{1}{8} + 8 \cdot \frac{1}{16} + 10 \cdot \frac{1}{32} + 14 \cdot \frac{1}{32}\\
+&amp;= 1 + 1 + \frac{3}{4} + \frac{1}{2} + \frac{5}{16} + \frac{7}{16}\\
+&amp;= 2 + \frac{3}{4} + \frac{1}{2} + \frac{12}{16}\\
+&amp;= 2 + \frac{3}{4} + \frac{1}{2} + \frac{3}{4}\\
+&amp;= 2 + \frac{3}{4} + \frac{2}{4} + \frac{3}{4} = 2 + \frac{8}{4} = 4
+\end{align*}</p>
+<h4>Fazit:</h4>
+<p>Der Erwartungswert der Auszahlung beträgt 4 Fr. Damit das Spiel fair ist, muss B einen Einsatz von <strong>4 Fr</strong> zahlen. Bei diesem Einsatz ist der erwartete Gewinn für beide Spieler gleich Null.</p></div></div></div><p class="heimknopf"><a href="../../index.html"><span class="haus" aria-hidden="true">⌂</span>Material</a></p>
+</main>
+<footer><div class="seitenfuss"><span class="wo"><b>MA01.07 · MA01.08</b> Daten und Zufall</span><span class="wer">Henrike Allmendinger · Herbstsemester 2026<a class="pinnwand" href="https://www.taskcards.de/#/board/c1b7fe7b-28eb-41b2-bf38-60c4264a9f8c" target="_blank" rel="noopener">Feedback</a></span></div></footer>
+<script src="../../gemeinsam/seite.js?f=c77c6724"></script>
+
+<script>window.MathJax={tex:{inlineMath:[['$','$'],['\\(','\\)']],
+  displayMath:[['\\[','\\]'],['$$','$$']],processEscapes:true,
+  macros:{cc:'\\mathbb{C}',rr:'\\mathbb{R}',nn:'\\mathbb{N}',
+          zz:'\\mathbb{Z}',qq:'\\mathbb{Q}',cis:'\\operatorname{cis}',
+          Log:'\\operatorname{Log}',dd:'\\mathrm{d}',
+          glqq:'\\text{„}',grqq:'\\text{“}',
+          // Aus dem Vorspann von MA01.03 (`Preambel/Styles.tex`):
+          // ein Gleichheitszeichen mit Dach, «entspricht».
+          equalhat:'\\mathrel{\\stackrel{\\wedge}{=}}',
+          // `\vv` kommt aus dem Paket `esvect` (Vektorpfeil) und ist
+          // MathJax unbekannt — ohne diese Zeile setzt es den Befehl
+          // rot als Fehler. Gefunden am 26.08. in Kapitel 3 von
+          // MA01.03 («schultypische Beispiele», 4 Stellen).
+          vv:['\\overrightarrow{#1}',1]}},
+  options:{skipHtmlTags:['script','noscript','style','textarea','pre']}};</script>
+<script defer src="../../gemeinsam/fremd/tex-svg.js"></script>
+</body>
+</html>

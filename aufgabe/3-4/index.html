@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="de">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Aufgabe 3.4 · Daten und Zufall</title>
+<link rel="stylesheet" href="../../gemeinsam/lernlandschaft.css?f=c77c6724">
+<body data-farbe="fach">
+<div class="stationskopf"><span class="wort">AUFGABE</span><span class="roemisch">3.4</span><h1>Daten und Zufall</h1><span class="wechsel wortweise"><a href="../../index.html">Startseite</a><a href="../index.html">Alle Aufgaben</a></span></div>
+<main>
+<h2 class="etappentitel"><span class="stand">Aufgabe 3.4</span></h2><div class="aufgabenblatt"><p>12 Damen und 12 Herren sollen nach dem Zufallsprinzip in zwei       gleich starke Tanzgruppen aufgeteilt werden. Mit welcher
+      Wahrscheinlichkeit ergibt sich dabei eine «tanzklassische»
+      Aufteilung (d. h. gleich viele Männer wie Frauen in den
+      Gruppen)?</p><div class="stufen"><div class="reiter"><button type="button" data-stufe="starthilfe" aria-expanded="false">Starthilfe</button><button type="button" data-stufe="loesung" aria-expanded="false">Lösung</button><button type="button" data-stufe="video" aria-expanded="false">Video</button></div><div class="faltung" data-stufe="starthilfe" hidden><ul><li>Insgesamt sind 24 Personen in zwei 12er-Gruppen aufzuteilen</li><li>«Tanzklassisch» bedeutet: Jede Gruppe hat 6 Damen und 6 Herren</li><li>Zählen Sie zuerst alle möglichen Aufteilungen</li><li>Dann die Anzahl der tanzklassischen Aufteilungen</li><li>Nutzen Sie das Zählprinzip: Erst Damen verteilen, dann Herren</li></ul></div><div class="faltung" data-stufe="loesung" hidden><p><strong>Aufgabenstellung verstehen:</strong></p>
+<ul><li>24 Personen total: 12 Damen und 12 Herren</li><li>Aufteilung in zwei gleich große Gruppen (je 12 Personen)</li><li>«Tanzklassisch»: Jede Gruppe hat 6 Damen und 6 Herren</li><li>Gesucht: Wahrscheinlichkeit für eine tanzklassische Aufteilung</li></ul>
+<p><strong>Anzahl aller möglichen Aufteilungen:</strong></p>
+<p>Wir wählen 12 Personen für Gruppe 1 aus (die restlichen 12 gehen automatisch in Gruppe 2):</p>
+<p>$$|\Omega| = \binom{24}{12}= \frac{24!}{12! \cdot 12!} = 2'704'156$$</p>
+<p><strong>Anzahl der tanzklassischen Aufteilungen:</strong></p>
+<p>Für eine tanzklassische Aufteilung müssen wir:
+1. 6 der 12 Damen für Gruppe 1 auswählen
+2. 6 der 12 Herren für Gruppe 1 auswählen</p>
+<p>Die restlichen gehen automatisch in Gruppe 2.</p>
+<p>Nach dem Zählprinzip:</p>
+<p>$$\binom{12}{6} = \frac{12!}{6! \cdot 6!} = \frac{665'280}{720} = 924$$
+Damit ist die Anzahl der tanzklassischen Aufteilungen das Produkt
+$$|\text{tanzklassisch}| = \binom{12}{6} \cdot \binom{12}{6} = 924 \cdot 924 = 853'776.$$</p>
+<p>Also:</p>
+<p><strong>Berechnung der Wahrscheinlichkeit:</strong></p>
+<p>$$P(\text{tanzklassisch}) = \frac{|\text{tanzklassisch}|}{|\Omega|} = \frac{853'776}{2'704'156} \approx 31.6\%$$</p>
+<p><strong>Alternative Betrachtung:</strong></p>
+<p>Man kann die Aufgabe auch so sehen:
+- Zuerst werden alle 24 Personen in eine Reihe gestellt
+- Die ersten 12 bilden Gruppe 1, die letzten 12 Gruppe 2
+- Tanzklassisch ist es, wenn in den ersten 12 Plätzen genau 6 Damen sind</p>
+<p><strong>Interpretation:</strong></p>
+<p>Die Wahrscheinlichkeit von etwa 31.6% ist bemerkenswert hoch! Fast jede dritte zufällige Aufteilung führt zu einer ausgewogenen Geschlechterverteilung.</p>
+<p>Dies liegt daran, dass die tanzklassische Aufteilung die «mittlere» Verteilung ist. Extreme Aufteilungen (z.B. 12 Damen in einer Gruppe) sind viel unwahrscheinlicher.</p></div><div class="faltung" data-stufe="video" hidden><div class="rahmen"><video class="spieler" controls preload="metadata" src="https://api.cast.switch.ch/p/110/sp/11000/playManifest/entryId/0_jiajzhew/format/url/protocol/https/video.mp4"></video></div></div></div></div><p class="heimknopf"><a href="../../index.html"><span class="haus" aria-hidden="true">⌂</span>Material</a></p>
+</main>
+<footer><div class="seitenfuss"><span class="wo"><b>MA01.07 · MA01.08</b> Daten und Zufall</span><span class="wer">Henrike Allmendinger · Herbstsemester 2026<a class="pinnwand" href="https://www.taskcards.de/#/board/c1b7fe7b-28eb-41b2-bf38-60c4264a9f8c" target="_blank" rel="noopener">Feedback</a></span></div></footer>
+<script src="../../gemeinsam/seite.js?f=c77c6724"></script>
+
+<script>window.MathJax={tex:{inlineMath:[['$','$'],['\\(','\\)']],
+  displayMath:[['\\[','\\]'],['$$','$$']],processEscapes:true,
+  macros:{cc:'\\mathbb{C}',rr:'\\mathbb{R}',nn:'\\mathbb{N}',
+          zz:'\\mathbb{Z}',qq:'\\mathbb{Q}',cis:'\\operatorname{cis}',
+          Log:'\\operatorname{Log}',dd:'\\mathrm{d}',
+          glqq:'\\text{„}',grqq:'\\text{“}',
+          // Aus dem Vorspann von MA01.03 (`Preambel/Styles.tex`):
+          // ein Gleichheitszeichen mit Dach, «entspricht».
+          equalhat:'\\mathrel{\\stackrel{\\wedge}{=}}',
+          // `\vv` kommt aus dem Paket `esvect` (Vektorpfeil) und ist
+          // MathJax unbekannt — ohne diese Zeile setzt es den Befehl
+          // rot als Fehler. Gefunden am 26.08. in Kapitel 3 von
+          // MA01.03 («schultypische Beispiele», 4 Stellen).
+          vv:['\\overrightarrow{#1}',1]}},
+  options:{skipHtmlTags:['script','noscript','style','textarea','pre']}};</script>
+<script defer src="../../gemeinsam/fremd/tex-svg.js"></script>
+</body>
+</html>

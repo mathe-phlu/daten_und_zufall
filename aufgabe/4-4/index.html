@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="de">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Aufgabe 4.4 · Daten und Zufall</title>
+<link rel="stylesheet" href="../../gemeinsam/lernlandschaft.css?f=c77c6724">
+<body data-farbe="fach">
+<div class="stationskopf"><span class="wort">AUFGABE</span><span class="roemisch">4.4</span><h1>Daten und Zufall</h1><span class="wechsel wortweise"><a href="../../index.html">Startseite</a><a href="../index.html">Alle Aufgaben</a></span></div>
+<main>
+<h2 class="etappentitel"><span class="stand">Aufgabe 4.4</span></h2><div class="aufgabenblatt"><p>Man entwickle eine Additionsformel für drei (nicht notwendig disjunkte) Ereignisse $A$, $B$
+und $C$ (sogenannte «Formel von Sylvester» für $n = 3$):</p>
+<p>\[h_n(A\cup B\cup C)=?\]</p><div class="stufen"><div class="reiter"><button type="button" data-stufe="starthilfe" aria-expanded="false">Starthilfe</button><button type="button" data-stufe="loesung" aria-expanded="false">Lösung</button><button type="button" data-stufe="video" aria-expanded="false">Video</button></div><div class="faltung" data-stufe="starthilfe" hidden><ul><li>Nutzen Sie die bekannte Formel für zwei Ereignisse als Ausgangspunkt</li><li>Setzen Sie $X = A \cup B$ und wenden Sie die Formel für zwei Ereignisse an</li><li>Beachten Sie, welche Anteile mehrfach gezählt werden</li><li>Ein Venn-Diagramm kann bei der Visualisierung helfen</li></ul></div><div class="faltung" data-stufe="loesung" hidden><p>Mit $X = A \cup B$ spielen wir die Frage auf Bekanntes zurück:</p>
+<p>\begin{align*}
+h_n(A \cup B \cup C) &amp;= h_n(X \cup C)\\
+&amp;= h_n(X) + h_n(C) - h_n(X \cap C)\\
+&amp;= h_n(A \cup B) + h_n(C) - h_n((A \cup B) \cap C)\\
+&amp;= h_n(A) + h_n(B) - h_n(A \cap B) + h_n(C) - h_n((A \cap C) \cup (B \cap C))\\
+&amp;= h_n(A) + h_n(B) - h_n(A \cap B) + h_n(C)\\
+&amp;\quad - [h_n(A \cap C) + h_n(B \cap C) - h_n(A \cap B \cap C)]
+\end{align*}</p>
+<p><strong>Endergebnis:</strong>
+\begin{align*}
+h_n(A \cup B \cup C) = &amp;\; h_n(A) + h_n(B) + h_n(C)\\
+&amp;- h_n(A \cap B) - h_n(A \cap C) - h_n(B \cap C)\\
+&amp;+ h_n(A \cap B \cap C)
+\end{align*}</p>
+<p><strong>Visualisierung mit farbigem Venn-Diagramm:</strong></p>
+<figure class="zeichnung"><img src="../../bilder/zeichnung-eab0a97d8cf4.svg" alt=""></figure>
+<p><strong>Erklärung des Inklusions-Exklusions-Prinzips:</strong></p>
+<ul><li><strong>Schritt 1:</strong> $h_n(A) + h_n(B) + h_n(C)$ 
+  - Alle drei Bereiche werden gezählt
+  - Überlappungen werden mehrfach gezählt</li><li><strong>Schritt 2:</strong> $- h_n(A \cap B) - h_n(A \cap C) - h_n(B \cap C)$
+  - Zweifach-Überlappungen werden abgezogen
+  - Der zentrale Bereich $A \cap B \cap C$ wird dreimal abgezogen</li><li><strong>Schritt 3:</strong> $+ h_n(A \cap B \cap C)$
+  - Der zentrale Bereich wird wieder hinzugefügt
+  - Jetzt ist jeder Bereich genau einmal gezählt</li></ul></div><div class="faltung" data-stufe="video" hidden><div class="rahmen"><video class="spieler" controls preload="metadata" src="https://api.cast.switch.ch/p/110/sp/11000/playManifest/entryId/0_ur3wz0vy/format/url/protocol/https/video.mp4"></video></div></div></div></div><p class="fundort">Im Video: <a href="../../lernweg-4/die-additionsregel/index.html">Etappe 4 · Die Additionsregel</a> <span class="zeit">bei 10:02</span></p><p class="heimknopf"><a href="../../index.html"><span class="haus" aria-hidden="true">⌂</span>Material</a></p>
+</main>
+<footer><div class="seitenfuss"><span class="wo"><b>MA01.07 · MA01.08</b> Daten und Zufall</span><span class="wer">Henrike Allmendinger · Herbstsemester 2026<a class="pinnwand" href="https://www.taskcards.de/#/board/c1b7fe7b-28eb-41b2-bf38-60c4264a9f8c" target="_blank" rel="noopener">Feedback</a></span></div></footer>
+<script src="../../gemeinsam/seite.js?f=c77c6724"></script>
+
+<script>window.MathJax={tex:{inlineMath:[['$','$'],['\\(','\\)']],
+  displayMath:[['\\[','\\]'],['$$','$$']],processEscapes:true,
+  macros:{cc:'\\mathbb{C}',rr:'\\mathbb{R}',nn:'\\mathbb{N}',
+          zz:'\\mathbb{Z}',qq:'\\mathbb{Q}',cis:'\\operatorname{cis}',
+          Log:'\\operatorname{Log}',dd:'\\mathrm{d}',
+          glqq:'\\text{„}',grqq:'\\text{“}',
+          // Aus dem Vorspann von MA01.03 (`Preambel/Styles.tex`):
+          // ein Gleichheitszeichen mit Dach, «entspricht».
+          equalhat:'\\mathrel{\\stackrel{\\wedge}{=}}',
+          // `\vv` kommt aus dem Paket `esvect` (Vektorpfeil) und ist
+          // MathJax unbekannt — ohne diese Zeile setzt es den Befehl
+          // rot als Fehler. Gefunden am 26.08. in Kapitel 3 von
+          // MA01.03 («schultypische Beispiele», 4 Stellen).
+          vv:['\\overrightarrow{#1}',1]}},
+  options:{skipHtmlTags:['script','noscript','style','textarea','pre']}};</script>
+<script defer src="../../gemeinsam/fremd/tex-svg.js"></script>
+</body>
+</html>

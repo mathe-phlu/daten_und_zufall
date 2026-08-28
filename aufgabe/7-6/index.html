@@ -1,0 +1,85 @@
+<!doctype html>
+<html lang="de">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Aufgabe 7.6 · Daten und Zufall</title>
+<link rel="stylesheet" href="../../gemeinsam/lernlandschaft.css?f=c77c6724">
+<body data-farbe="fach">
+<div class="stationskopf"><span class="wort">AUFGABE</span><span class="roemisch">7.6</span><h1>Daten und Zufall</h1><span class="wechsel wortweise"><a href="../../index.html">Startseite</a><a href="../index.html">Alle Aufgaben</a></span></div>
+<main>
+<h2 class="etappentitel"><span class="stand">Aufgabe 7.6</span></h2><div class="aufgabenblatt"><p>Auf einem Flughafen werden die aufgegebenen Gepäckstücke unabhängig
+voneinander auf ein Förderband gelegt. Die Wahrscheinlichkeit, dass ein Gepäckstück Zürich
+als Zielflughafen hat, sei p.</p>
+<ol class="klammer-a"><li>Berechnen Sie p aus der Beobachtung, dass von zwei aufeinander
+  folgenden Gepäckstücken mindestens eines mit der
+  Wahrscheinlichkeit von 93.75% nicht nach
+  Zürich geht.</li><li>Nun werden 10 aufeinander folgende Gepäckstücke
+  betrachtet. Bestimmen Sie die Wahrscheinlichkeit folgender
+  Ereignisse:
+<p><dl><dt>A:</dt><dd>Exakt drei Gepäckstücke haben Zürich als Ziel.</dd><dt>B:</dt><dd>Das
+    10. Gepäckstück ist das dritte nach Zürich.</dd><dt>C:</dt><dd>Genau drei
+    Gepäckstücke haben das Ziel Zürich und kommen direkt hintereinander</dd></dl></li></ol></p><div class="stufen"><div class="reiter"><button type="button" data-stufe="starthilfe" aria-expanded="false">Starthilfe</button><button type="button" data-stufe="loesung" aria-expanded="false">Lösung</button></div><div class="faltung" data-stufe="starthilfe" hidden><ul><li>Für (a): Nutzen Sie, dass «mindestens eines nicht nach Zürich» das Komplement zu «beide nach Zürich» ist</li><li>Für (b)A: Standardanwendung der Binomialverteilung</li><li>Für (b)B: Das 10. muss nach Zürich, von den ersten 9 genau 2</li><li>Für (b)C: Überlegen Sie, wo die drei aufeinanderfolgenden Gepäckstücke beginnen können</li></ul></div><div class="faltung" data-stufe="loesung" hidden><h4>(a) Bestimmung von p:</h4>
+<p><strong>Gegeben:</strong> $P(\text{mindestens 1 von 2 nicht nach Zürich}) = 0.9375$</p>
+<h4>Wahrscheinlichkeitsbaum für 2 Gepäckstücke:</h4>
+<figure class="zeichnung"><img src="../../bilder/zeichnung-5668c88fa26c.svg" alt=""></figure>
+<p>Das Gegenereignis ist: «Beide Gepäckstücke gehen nach Zürich»</p>
+<aside class="merksatz">\begin{align*}
+P(\text{beide nach Zürich}) &amp;= 1 - 0.9375 = 0.0625 = \frac{1}{16}\\
+p^2 &amp;= 0.0625\\
+p &amp;= \sqrt{0.0625} = 0.25 = 25\%
+\end{align*}</aside>
+<h4>(b) Wahrscheinlichkeiten mit p = 0.25:</h4>
+<div class="tabelle"><table><tr><td class="l sl so" style="background:#f2f2f2"><strong>Gegeben</strong></td><td class="l sl sr so" style="background:#f2f2f2"><strong>Gesucht</strong></td></tr><tr><td class="l sl so">$p = 0.25$ (aus Teil a)</td><td class="l sl sr so">Wahrscheinlichkeiten für</td></tr><tr><td class="l sl">$n = 10$ Gepäckstücke</td><td class="l sl sr">verschiedene Ereignisse A, B, C</td></tr><tr><td class="su l sl so">$X \sim B(10, 0.25)$</td><td class="su l sl sr so">$P(A)$, $P(B)$, $P(C)$</td></tr></table></div>
+<h4>Einheitliche Visualisierung der Gepäckanordnungen:</h4>
+<figure class="zeichnung"><img src="../../bilder/zeichnung-d4063071ecfe.svg" alt=""></figure>
+<p><strong>Ereignis A: Exakt drei Gepäckstücke haben Zürich als Ziel</strong></p>
+<aside class="merksatz">\begin{align*}
+P(A) &amp;= \binom{10}{3} \cdot 0.25^3 \cdot 0.75^7\\
+&amp;= 120 \cdot 0.015625 \cdot 0.133484\\
+&amp;= 0.2503 \approx 25.0\%
+\end{align*}</aside>
+<p><strong>Ereignis B: Das 10. Gepäckstück ist das dritte nach Zürich</strong></p>
+<p>Visualisierung:</p>
+<figure class="zeichnung"><img src="../../bilder/zeichnung-8ec9b5474e1a.svg" alt=""></figure>
+<aside class="merksatz">\begin{align*}
+P(B) &amp;= P(\text{genau 2 von 9 nach Z}) \cdot P(\text{10. nach Z})\\
+&amp;= \binom{9}{2} \cdot 0.25^2 \cdot 0.75^7 \cdot 0.25\\
+&amp;= 36 \cdot 0.0625 \cdot 0.133484 \cdot 0.25\\
+&amp;= 0.0751 \approx 7.5\%
+\end{align*}</aside>
+<p><strong>Ereignis C: Genau drei nach Zürich, direkt hintereinander</strong></p>
+<p>Die drei aufeinanderfolgenden Gepäckstücke können an 8 verschiedenen Positionen beginnen:</p>
+<figure class="zeichnung"><img src="../../bilder/zeichnung-7c08bd231974.svg" alt=""></figure>
+<aside class="merksatz">\begin{align*}
+P(C) &amp;= 8 \cdot 0.25^3 \cdot 0.75^7\\
+&amp;= 8 \cdot 0.015625 \cdot 0.133484\\
+&amp;= 0.0167 \approx 1.7\%
+\end{align*}</aside>
+<h4>Vergleich der Ereignisse:</h4>
+<div class="tabelle"><table><tr style="background:#f2f2f2"><td class="l sl so"><strong>Ereignis</strong></td><td class="l sl so"><strong>Beschreibung</strong></td><td class="c sl sr so"><strong>Wahrscheinlichkeit</strong></td></tr><tr><td class="l sl so">A</td><td class="l sl so">3 nach Zürich (beliebige Anordnung)</td><td class="c sl sr so">25.0%</td></tr><tr><td class="l sl">B</td><td class="l sl">10. ist das dritte nach Zürich</td><td class="c sl sr">7.5%</td></tr><tr><td class="su l sl">C</td><td class="su l sl">3 nach Zürich (konsekutiv)</td><td class="su c sl sr">1.7%</td></tr></table></div>
+<aside class="merksatz"><strong>Interpretation:</strong> 
+Die Wahrscheinlichkeit sinkt deutlich, je spezifischer die Anforderungen an die Anordnung werden:
+<ul><li>Ereignis A mit beliebiger Anordnung ist am wahrscheinlichsten</li><li>Ereignis B mit spezieller Bedingung hat nur noch 7.5%</li><li>Ereignis C mit der speziellen konsekutiven Anordnung hat nur eine sehr geringe Wahrscheinlichkeit von 1.7%</li></ul>
+Dies zeigt, wie stark zusätzliche Bedingungen die Wahrscheinlichkeit reduzieren.</aside></div></div></div><p class="heimknopf"><a href="../../index.html"><span class="haus" aria-hidden="true">⌂</span>Material</a></p>
+</main>
+<footer><div class="seitenfuss"><span class="wo"><b>MA01.07 · MA01.08</b> Daten und Zufall</span><span class="wer">Henrike Allmendinger · Herbstsemester 2026<a class="pinnwand" href="https://www.taskcards.de/#/board/c1b7fe7b-28eb-41b2-bf38-60c4264a9f8c" target="_blank" rel="noopener">Feedback</a></span></div></footer>
+<script src="../../gemeinsam/seite.js?f=c77c6724"></script>
+
+<script>window.MathJax={tex:{inlineMath:[['$','$'],['\\(','\\)']],
+  displayMath:[['\\[','\\]'],['$$','$$']],processEscapes:true,
+  macros:{cc:'\\mathbb{C}',rr:'\\mathbb{R}',nn:'\\mathbb{N}',
+          zz:'\\mathbb{Z}',qq:'\\mathbb{Q}',cis:'\\operatorname{cis}',
+          Log:'\\operatorname{Log}',dd:'\\mathrm{d}',
+          glqq:'\\text{„}',grqq:'\\text{“}',
+          // Aus dem Vorspann von MA01.03 (`Preambel/Styles.tex`):
+          // ein Gleichheitszeichen mit Dach, «entspricht».
+          equalhat:'\\mathrel{\\stackrel{\\wedge}{=}}',
+          // `\vv` kommt aus dem Paket `esvect` (Vektorpfeil) und ist
+          // MathJax unbekannt — ohne diese Zeile setzt es den Befehl
+          // rot als Fehler. Gefunden am 26.08. in Kapitel 3 von
+          // MA01.03 («schultypische Beispiele», 4 Stellen).
+          vv:['\\overrightarrow{#1}',1]}},
+  options:{skipHtmlTags:['script','noscript','style','textarea','pre']}};</script>
+<script defer src="../../gemeinsam/fremd/tex-svg.js"></script>
+</body>
+</html>

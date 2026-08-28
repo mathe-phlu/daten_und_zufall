@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="de">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Aufgabe 7.7 · Daten und Zufall</title>
+<link rel="stylesheet" href="../../gemeinsam/lernlandschaft.css?f=c77c6724">
+<body data-farbe="fach">
+<div class="stationskopf"><span class="wort">AUFGABE</span><span class="roemisch">7.7</span><h1>Daten und Zufall</h1><span class="wechsel wortweise"><a href="../../index.html">Startseite</a><a href="../index.html">Alle Aufgaben</a></span></div>
+<main>
+<h2 class="etappentitel"><span class="stand">Aufgabe 7.7</span></h2><div class="aufgabenblatt"><p>Ein Multiple-Choice-Test besteht aus zwei Teilen I und II. Teil I enthält 10 Fragen mit je
+5 möglichen Antworten, von denen genau eine richtig ist. Teil II umfasst 5 Fragen mit
+ebenfalls je 5 möglichen Antworten, von denen aber jeweils genau zwei richtig sind.
+Der Test gilt als bestanden, wenn mindestens 5 Fragen aus Teil I und mindestens 2
+Fragen aus Teil II zutreffend beantwortet sind, wobei in II im Falle einer richtigen Lösung jeweils beide zutreffenden Antworten anzukreuzen sind.
+Mit welcher Wahrscheinlichkeit besteht ein «Glücksritter» diesen Test?</p><div class="stufen"><div class="reiter"><button type="button" data-stufe="starthilfe" aria-expanded="false">Starthilfe</button><button type="button" data-stufe="loesung" aria-expanded="false">Lösung</button></div><div class="faltung" data-stufe="starthilfe" hidden><ul><li>Berechnen Sie für Teil II die Wahrscheinlichkeit, beide richtigen Antworten zufällig zu treffen</li><li>Modellieren Sie Teil I und II separat mit Binomialverteilungen</li><li>Die Gesamtwahrscheinlichkeit ist das Produkt der Einzelwahrscheinlichkeiten (Unabhängigkeit)</li><li>Nutzen Sie die Komplementärwahrscheinlichkeit für «mindestens k Treffer»</li></ul></div><div class="faltung" data-stufe="loesung" hidden><div class="tabelle"><table><tr><td class="l sl so" style="background:#f2f2f2"><strong>Gegeben</strong></td><td class="l sl sr so" style="background:#f2f2f2"><strong>Gesucht</strong></td></tr><tr><td class="l sl so">Teil I: 10 Fragen, je 5 Antworten, 1 richtig</td><td class="l sl sr so">$P(\text{Test bestanden durch Raten})$</td></tr><tr><td class="l sl">Teil II: 5 Fragen, je 5 Antworten, 2 richtig</td><td class="l sl sr"></td></tr><tr><td class="l sl">Bestehen: mind. 5 in I UND mind. 2 in II</td><td class="l sl sr"></td></tr><tr><td class="l sl so">Teil I: $X \sim B(10, 0.2)$</td><td class="l sl sr so">$P(X \geq 5) \cdot P(Y \geq 2)$</td></tr><tr><td class="su l sl">Teil II: $Y \sim B(5, 0.1)$</td><td class="su l sl sr"></td></tr></table></div>
+<p><strong>Teststruktur-Diagramm:</strong></p>
+<figure class="zeichnung"><img src="../../bilder/zeichnung-6a17f32296d2.svg" alt=""></figure>
+<p><strong>Analyse der Teststruktur:</strong></p>
+<p><strong>Teil I:</strong>
+<ul><li>Ratewahrscheinlichkeit: $p_I = \frac{1}{5} = 0.2$</li><li>Bestehensgrenze: mindestens 5 richtige Antworten</li><li>Modellierung: $X \sim B(10, 0.2)$</li></ul></p>
+<p><strong>Teil II:</strong>
+<ul><li>Anzahl Möglichkeiten, 2 aus 5 zu wählen: $\binom{5}{2} = 10$</li><li>Ratewahrscheinlichkeit: $p_{II} = \frac{1}{10} = 0.1$</li><li>Bestehensgrenze: mindestens 2 richtige Antworten</li><li>Modellierung: $Y \sim B(5, 0.1)$</li></ul></p>
+<p><strong>Berechnung für Teil I:</strong></p>
+<aside class="merksatz">\begin{align*}
+P(X \geq 5) &amp;= 1 - P(X \leq 4) \\
+&amp;= 1 - \sum_{k=0}^{4} \binom{10}{k} \cdot 0.2^k \cdot 0.8^{10-k}
+\end{align*}</aside>
+<p>Einzelwahrscheinlichkeiten:</p>
+<div class="tabelle"><table><tr style="background:#f2f2f2"><td class="c sl so">$k$</td><td class="c sl so">$P(X=k)$</td><td class="c sl sr so">Kumuliert $P(X \leq k)$</td></tr><tr><td class="c sl so">0</td><td class="c sl so">0.1074</td><td class="c sl sr so">0.1074</td></tr><tr><td class="c sl">1</td><td class="c sl">0.2684</td><td class="c sl sr">0.3758</td></tr><tr><td class="c sl">2</td><td class="c sl">0.3020</td><td class="c sl sr">0.6778</td></tr><tr><td class="c sl">3</td><td class="c sl">0.2013</td><td class="c sl sr">0.8791</td></tr><tr><td class="su c sl">4</td><td class="su c sl">0.0881</td><td class="su c sl sr">0.9672</td></tr></table></div>
+<p>$$P(X \geq 5) = 1 - 0.9672 = 0.0328 = 3.28\%$$</p>
+<p><strong>Berechnung für Teil II:</strong></p>
+<aside class="merksatz">\begin{align*}
+P(Y \geq 2) &amp;= 1 - P(Y \leq 1) = 1 - [P(Y=0) + P(Y=1)]
+\end{align*}
+<p>\begin{align*}
+P(Y=0) &amp;= \binom{5}{0} \cdot 0.1^0 \cdot 0.9^5 = 0.9^5 = 0.5905\\
+P(Y=1) &amp;= \binom{5}{1} \cdot 0.1^1 \cdot 0.9^4 = 5 \cdot 0.1 \cdot 0.6561 = 0.3281
+\end{align*}</p>
+<p>$$P(Y \geq 2) = 1 - 0.9186 = 0.0814 = 8.14\%$$</p></aside>
+<p><strong>Gesamtwahrscheinlichkeit:</strong></p>
+<p>Da die beiden Testteile unabhängig sind:</p>
+<aside class="merksatz">\begin{align*}
+P(\text{Test bestanden}) &amp;= P(X \geq 5) \cdot P(Y \geq 2)\\
+&amp;= 0.0328 \cdot 0.0814\\
+&amp;= 0.00267 \approx \boxed{0.27\%}
+\end{align*}</aside>
+<p><strong>Übersicht verschiedener Ratestrategien:</strong></p>
+<div class="tabelle"><table><tr style="background:#f2f2f2"><td class="l sl so"><strong>Strategie</strong></td><td class="c sl so"><strong>Teil I</strong></td><td class="c sl so"><strong>Teil II</strong></td><td class="c sl sr so"><strong>Gesamt</strong></td></tr><tr><td class="l sl so">Reines Raten</td><td class="c sl so">3.28%</td><td class="c sl so">8.14%</td><td class="c sl sr so">0.27%</td></tr><tr><td class="l sl">Nur Teil I vorbereitet</td><td class="c sl">100%</td><td class="c sl">8.14%</td><td class="c sl sr">8.14%</td></tr><tr><td class="su l sl">Nur Teil II vorbereitet</td><td class="su c sl">3.28%</td><td class="su c sl">100%</td><td class="su c sl sr">3.28%</td></tr></table></div>
+<aside class="merksatz"><strong>Interpretation:</strong>
+Ein «Glücksritter», der nur rät, hat eine verschwindend geringe Chance von etwa 0.27%, den Test zu bestehen. Dies zeigt die Effektivität des zweistufigen Testdesigns:
+<ul><li>Die unterschiedlichen Fragetypen verhindern einseitige Ratestrategien</li><li>Die Kombination beider Teile reduziert die Zufallschance drastisch</li><li>Selbst wenn ein Teil durch Zufall bestanden wird, scheitert man wahrscheinlich am anderen</li><li>Die Ratewahrscheinlichkeit sinkt multiplikativ mit der Anzahl der Bedingungen</li></ul>
+<p><strong>Ethische Anmerkung:</strong> Diese Berechnung dient nur der mathematischen Analyse. Akademische Integrität erfordert ehrliche Vorbereitung auf Prüfungen.</p></aside></div></div></div><p class="heimknopf"><a href="../../index.html"><span class="haus" aria-hidden="true">⌂</span>Material</a></p>
+</main>
+<footer><div class="seitenfuss"><span class="wo"><b>MA01.07 · MA01.08</b> Daten und Zufall</span><span class="wer">Henrike Allmendinger · Herbstsemester 2026<a class="pinnwand" href="https://www.taskcards.de/#/board/c1b7fe7b-28eb-41b2-bf38-60c4264a9f8c" target="_blank" rel="noopener">Feedback</a></span></div></footer>
+<script src="../../gemeinsam/seite.js?f=c77c6724"></script>
+
+<script>window.MathJax={tex:{inlineMath:[['$','$'],['\\(','\\)']],
+  displayMath:[['\\[','\\]'],['$$','$$']],processEscapes:true,
+  macros:{cc:'\\mathbb{C}',rr:'\\mathbb{R}',nn:'\\mathbb{N}',
+          zz:'\\mathbb{Z}',qq:'\\mathbb{Q}',cis:'\\operatorname{cis}',
+          Log:'\\operatorname{Log}',dd:'\\mathrm{d}',
+          glqq:'\\text{„}',grqq:'\\text{“}',
+          // Aus dem Vorspann von MA01.03 (`Preambel/Styles.tex`):
+          // ein Gleichheitszeichen mit Dach, «entspricht».
+          equalhat:'\\mathrel{\\stackrel{\\wedge}{=}}',
+          // `\vv` kommt aus dem Paket `esvect` (Vektorpfeil) und ist
+          // MathJax unbekannt — ohne diese Zeile setzt es den Befehl
+          // rot als Fehler. Gefunden am 26.08. in Kapitel 3 von
+          // MA01.03 («schultypische Beispiele», 4 Stellen).
+          vv:['\\overrightarrow{#1}',1]}},
+  options:{skipHtmlTags:['script','noscript','style','textarea','pre']}};</script>
+<script defer src="../../gemeinsam/fremd/tex-svg.js"></script>
+</body>
+</html>

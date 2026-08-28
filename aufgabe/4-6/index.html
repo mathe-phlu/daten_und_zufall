@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="de">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Aufgabe 4.6 · Daten und Zufall</title>
+<link rel="stylesheet" href="../../gemeinsam/lernlandschaft.css?f=c77c6724">
+<body data-farbe="fach">
+<div class="stationskopf"><span class="wort">AUFGABE</span><span class="roemisch">4.6</span><h1>Daten und Zufall</h1><span class="wechsel wortweise"><a href="../../index.html">Startseite</a><a href="../index.html">Alle Aufgaben</a></span></div>
+<main>
+<h2 class="etappentitel"><span class="stand">Aufgabe 4.6</span></h2><div class="aufgabenblatt"><p>50 % einer Personengruppe rauchen Zigaretten, 35 % Pfeife und 30
+  % rauchen beides.  Andere Rauchwaren sind nicht im Spiel.</p>
+<ol class="klammer-a"><li>Wie gross ist der Anteil der Nichtraucher?</li><li>Wie gross ist der Anteil derer, die entweder Zigaretten oder
+    Pfeife rauchen?</li></ol><div class="stufen"><div class="reiter"><button type="button" data-stufe="starthilfe" aria-expanded="false">Starthilfe</button><button type="button" data-stufe="loesung" aria-expanded="false">Lösung</button><button type="button" data-stufe="video" aria-expanded="false">Video</button></div><div class="faltung" data-stufe="starthilfe" hidden><ul><li>Nutzen Sie die Additionsformel: $P(Z \cup P) = P(Z) + P(P) - P(Z \cap P)$</li><li>Zeichnen Sie ein Venn-Diagramm zur Visualisierung</li><li>«Entweder oder» bedeutet exklusives Oder</li><li>Nichtraucher sind das Komplement zu allen Rauchern</li></ul></div><div class="faltung" data-stufe="loesung" hidden><p><strong>Gegeben:</strong>
+<ul><li>$P(Z) = 50\%$ (Zigarettenraucher)</li><li>$P(P) = 35\%$ (Pfeifenraucher)</li><li>$P(Z \cap P) = 30\%$ (rauchen beides)</li></ul></p>
+<p><strong>Lösung mit der Additionsformel:</strong></p>
+<p>Mit der Additionsformel (farbig markiert):
+$$P(Z \cup P) = \bbox[#80BEAB,2pt]{P(Z)} + \bbox[#CCB3D2,2pt]{P(P)} - \bbox[#F0CEAC,2pt]{P(Z \cap P)}$$
+$$P(Z \cup P) = \bbox[#80BEAB,2pt]{50\%} + \bbox[#CCB3D2,2pt]{35\%} - \bbox[#F0CEAC,2pt]{30\%} = 55\%$$</p>
+<p><strong>Visualisierung mit Venn-Diagramm:</strong></p>
+<figure class="zeichnung"><img src="../../bilder/zeichnung-0609882f8724.svg" alt=""></figure>
+<p><strong>Berechnung der einzelnen Bereiche:</strong>
+<ul><li>Nur Zigaretten: $P(Z \setminus P) = P(Z) - P(Z \cap P) = 50\% - 30\% = 20\%$</li><li>Nur Pfeife: $P(P \setminus Z) = P(P) - P(Z \cap P) = 35\% - 30\% = 5\%$</li><li>Beides: $P(Z \cap P) = 30\%$</li></ul></p>
+<p><strong>Teil (a): Anteil der Nichtraucher</strong></p>
+<figure class="zeichnung"><img src="../../bilder/zeichnung-a1407a17c930.svg" alt=""></figure>
+<p>$$P(\text{Nichtraucher}) = 100\% - P(Z \cup P) = 100\% - 55\% = 45\%$$</p>
+<p><strong>Teil (b): Entweder Zigaretten oder Pfeife</strong></p>
+<figure class="zeichnung"><img src="../../bilder/zeichnung-8097a81bf2fa.svg" alt=""></figure>
+<p>$$P(\text{entweder } Z \text{ oder } P) = P(Z \setminus P) + P(P \setminus Z) = 20\% + 5\% = 25\%$$</p>
+<p><strong>Antworten:</strong>
+<ol class="klammer-a"><li>Der Anteil der Nichtraucher beträgt <strong>45%</strong></li><li>Der Anteil derer, die entweder Zigaretten oder Pfeife (aber nicht beides) rauchen, beträgt <strong>25%</strong></li></ol></p></div><div class="faltung" data-stufe="video" hidden><div class="rahmen vorschau" data-video="TYMFbrw1C1Q"><img class="standbild" alt="" src="../../gemeinsam/standbilder/TYMFbrw1C1Q.jpg"><button type="button" class="starten" aria-label="Video abspielen"><span class="dreieck"></span></button></div><p class="ausweichen"><a href="https://www.youtube.com/watch?v=TYMFbrw1C1Q" target="_blank" rel="noopener">Auf YouTube öffnen</a></p></div></div></div><p class="fundort">Im Video: <a href="../../lernweg-4/folgerungen/index.html">Etappe 7 · Folgerungen</a> <span class="zeit">bei 11:02</span></p><p class="heimknopf"><a href="../../index.html"><span class="haus" aria-hidden="true">⌂</span>Material</a></p>
+</main>
+<footer><div class="seitenfuss"><span class="wo"><b>MA01.07 · MA01.08</b> Daten und Zufall</span><span class="wer">Henrike Allmendinger · Herbstsemester 2026<a class="pinnwand" href="https://www.taskcards.de/#/board/c1b7fe7b-28eb-41b2-bf38-60c4264a9f8c" target="_blank" rel="noopener">Feedback</a></span></div></footer>
+<script src="../../gemeinsam/seite.js?f=c77c6724"></script>
+
+<script>window.MathJax={tex:{inlineMath:[['$','$'],['\\(','\\)']],
+  displayMath:[['\\[','\\]'],['$$','$$']],processEscapes:true,
+  macros:{cc:'\\mathbb{C}',rr:'\\mathbb{R}',nn:'\\mathbb{N}',
+          zz:'\\mathbb{Z}',qq:'\\mathbb{Q}',cis:'\\operatorname{cis}',
+          Log:'\\operatorname{Log}',dd:'\\mathrm{d}',
+          glqq:'\\text{„}',grqq:'\\text{“}',
+          // Aus dem Vorspann von MA01.03 (`Preambel/Styles.tex`):
+          // ein Gleichheitszeichen mit Dach, «entspricht».
+          equalhat:'\\mathrel{\\stackrel{\\wedge}{=}}',
+          // `\vv` kommt aus dem Paket `esvect` (Vektorpfeil) und ist
+          // MathJax unbekannt — ohne diese Zeile setzt es den Befehl
+          // rot als Fehler. Gefunden am 26.08. in Kapitel 3 von
+          // MA01.03 («schultypische Beispiele», 4 Stellen).
+          vv:['\\overrightarrow{#1}',1]}},
+  options:{skipHtmlTags:['script','noscript','style','textarea','pre']}};</script>
+<script defer src="../../gemeinsam/fremd/tex-svg.js"></script>
+</body>
+</html>

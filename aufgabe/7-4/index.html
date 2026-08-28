@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="de">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Aufgabe 7.4 · Daten und Zufall</title>
+<link rel="stylesheet" href="../../gemeinsam/lernlandschaft.css?f=c77c6724">
+<body data-farbe="beweis">
+<div class="stationskopf"><span class="wort">AUFGABE</span><span class="roemisch">7.4</span><h1>Daten und Zufall</h1><span class="wechsel wortweise"><a href="../../index.html">Startseite</a><a href="../index.html">Alle Aufgaben</a></span></div>
+<main>
+<h2 class="etappentitel"><span class="stand">Aufgabe 7.4</span></h2><div class="aufgabenblatt"><p>Wenn wir die Geschicklichkeit beim Schiessen auf eine Torwand durch
+  die Erfolgswahrscheinlichkeit $p$ ausdrücken – wie gross muss $p$
+  dann sein, damit wir bei 6 Schüssen mit mindestens 95%iger
+  Wahrscheinlichkeit wenigstens ein Tor erzielen?</p><div class="stufen"><div class="reiter"><button type="button" data-stufe="starthilfe" aria-expanded="false">Starthilfe</button><button type="button" data-stufe="loesung" aria-expanded="false">Lösung</button></div><div class="faltung" data-stufe="starthilfe" hidden><ul><li>Sei $p$ die gesuchte Trefferwahrscheinlichkeit pro Schuss</li><li>Nutzen Sie wieder das Gegenereignis: «kein Treffer bei 6 Schüssen»</li><li>Die Misserfolgswahrscheinlichkeit ist $q = 1 - p$</li><li>Lösen Sie die Ungleichung $1 - q^6 \geq 0.95$ nach $p$ auf</li></ul></div><div class="faltung" data-stufe="loesung" hidden><div class="tabelle"><table><tr><td class="l sl so" style="background:#f2f2f2"><strong>Gegeben</strong></td><td class="l sl sr so" style="background:#f2f2f2"><strong>Gesucht</strong></td></tr><tr><td class="l sl so">6 Schüsse auf die Torwand</td><td class="l sl sr so">Minimale Trefferwahrscheinlichkeit $p$</td></tr><tr><td class="l sl">Mindestens 95% Wahrscheinlichkeit</td><td class="l sl sr"></td></tr><tr><td class="l sl">für wenigstens einen Treffer</td><td class="l sl sr"></td></tr><tr><td class="l sl so">$X \sim B(6, p)$</td><td class="l sl sr so">$p =$ ?</td></tr><tr><td class="su l sl">Bedingung: $P(X \geq 1) \geq 0.95$</td><td class="su l sl sr"></td></tr></table></div>
+<h4>Berechnung über das Gegenereignis:</h4>
+<p>Mit $q = 1 - p$ (Misserfolgswahrscheinlichkeit):</p>
+<aside class="merksatz">\begin{align*}
+P(X \geq 1) &amp;\geq 0.95 &amp;\text{(Bedingung)}\\
+1 - P(X = 0) &amp;\geq 0.95 &amp;\text{(Komplementär)}\\
+1 - q^6 &amp;\geq 0.95 &amp;\text{(Binomialverteilung)}\\
+-q^6 &amp;\geq -0.05 &amp;\text{(Minus 1)}\\
+q^6 &amp;\leq 0.05 &amp;\text{(Mal -1)}
+\end{align*}</aside>
+<h4>Lösung der Ungleichung:</h4>
+<p>Ziehen der 6. Wurzel:</p>
+<aside class="merksatz">\begin{align*}
+q &amp;\leq \sqrt[6]{0.05} &amp;\text{(6. Wurzel)}\\
+q &amp;\leq 0.05^{1/6} &amp;\text{(Umschreibung)}\\
+q &amp;\leq 0.6070 &amp;\text{(Berechnung)}
+\end{align*}</aside>
+<p>Daher:
+\begin{align*}
+1 - p &amp;\leq 0.6070 &amp;\text{(Definition von q)}\\
+-p &amp;\leq -0.3930 &amp;\text{(Minus 1)}\\
+p &amp;\geq 0.3930 &amp;\text{(Mal -1)}\\
+p &amp;\geq 39.3\% &amp;\text{(In Prozent)}
+\end{align*}</p>
+<aside class="merksatz"><strong>Ergebnis:</strong> Die Trefferwahrscheinlichkeit muss mindestens $\boxed{p \geq 39.3\%}$ betragen.</aside>
+<h4>Überprüfung:</h4>
+<ol><li>Mit $p = 0.393$:
+   $$P(X \geq 1) = 1 - 0.607^6 = 1 - 0.0501 = 0.9499 \approx 95\% \quad \checkmark$$</li><li>Mit $p = 0.39$:
+   $$P(X \geq 1) = 1 - 0.61^6 = 1 - 0.0518 = 0.9482 &lt; 95\% \quad \text{✗}$$</li></ol>
+<h4>Interpretation und Vergleich:</h4>
+<div class="tabelle"><table><tr style="background:#f2f2f2"><td class="c sl so"><strong>Sicherheitsniveau</strong></td><td class="c sl so"><strong>Benötigtes $p$</strong></td><td class="c sl sr so"><strong>Sportlicher Vergleich</strong></td></tr><tr><td class="c sl so">90%</td><td class="c sl so">31.7%</td><td class="c sl sr so">Freizeitspieler</td></tr><tr style="background:color-mix(in srgb, var(--beweis) 20%, #fff)"><td class="c sl">95%</td><td class="c sl">39.3%</td><td class="c sl sr">Vereinsspieler</td></tr><tr><td class="su c sl">99%</td><td class="su c sl">53.0%</td><td class="su c sl sr">Profi</td></tr></table></div>
+<aside class="merksatz"><strong>Fazit:</strong> 
+Die Trefferwahrscheinlichkeit muss mindestens 39.3% betragen, damit bei 6 Schüssen mit mindestens 95%iger Wahrscheinlichkeit wenigstens ein Tor erzielt wird. Dies zeigt:
+<ul><li>Selbst bei einer relativ moderaten Trefferquote von knapp 40% pro Schuss ist die Gesamtchance auf mindestens einen Treffer bei 6 Versuchen sehr hoch</li><li>Die Anzahl der Versuche kompensiert teilweise eine niedrige Einzelwahrscheinlichkeit</li><li>Für hohe Sicherheit (95%) reicht eine mittlere Trefferquote aus</li></ul></aside></div></div></div><p class="fundort">Im Video: <a href="../../lernweg-7/erweiterte-bernoulli-formel/index.html">Etappe 4 · Erweiterte Bernoulli-Formel</a> <span class="zeit">bei 6:30</span></p><p class="heimknopf"><a href="../../index.html"><span class="haus" aria-hidden="true">⌂</span>Material</a></p>
+</main>
+<footer><div class="seitenfuss"><span class="wo"><b>MA01.07 · MA01.08</b> Daten und Zufall</span><span class="wer">Henrike Allmendinger · Herbstsemester 2026<a class="pinnwand" href="https://www.taskcards.de/#/board/c1b7fe7b-28eb-41b2-bf38-60c4264a9f8c" target="_blank" rel="noopener">Feedback</a></span></div></footer>
+<script src="../../gemeinsam/seite.js?f=c77c6724"></script>
+
+<script>window.MathJax={tex:{inlineMath:[['$','$'],['\\(','\\)']],
+  displayMath:[['\\[','\\]'],['$$','$$']],processEscapes:true,
+  macros:{cc:'\\mathbb{C}',rr:'\\mathbb{R}',nn:'\\mathbb{N}',
+          zz:'\\mathbb{Z}',qq:'\\mathbb{Q}',cis:'\\operatorname{cis}',
+          Log:'\\operatorname{Log}',dd:'\\mathrm{d}',
+          glqq:'\\text{„}',grqq:'\\text{“}',
+          // Aus dem Vorspann von MA01.03 (`Preambel/Styles.tex`):
+          // ein Gleichheitszeichen mit Dach, «entspricht».
+          equalhat:'\\mathrel{\\stackrel{\\wedge}{=}}',
+          // `\vv` kommt aus dem Paket `esvect` (Vektorpfeil) und ist
+          // MathJax unbekannt — ohne diese Zeile setzt es den Befehl
+          // rot als Fehler. Gefunden am 26.08. in Kapitel 3 von
+          // MA01.03 («schultypische Beispiele», 4 Stellen).
+          vv:['\\overrightarrow{#1}',1]}},
+  options:{skipHtmlTags:['script','noscript','style','textarea','pre']}};</script>
+<script defer src="../../gemeinsam/fremd/tex-svg.js"></script>
+</body>
+</html>

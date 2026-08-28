@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="de">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Aufgabe 1.10 · Daten und Zufall</title>
+<link rel="stylesheet" href="../../gemeinsam/lernlandschaft.css?f=c77c6724">
+<body data-farbe="fach">
+<div class="stationskopf"><span class="wort">AUFGABE</span><span class="roemisch">1.10</span><h1>Daten und Zufall</h1><span class="wechsel wortweise"><a href="../../index.html">Startseite</a><a href="../index.html">Alle Aufgaben</a></span></div>
+<main>
+<h2 class="etappentitel"><span class="stand">Aufgabe 1.10</span></h2><div class="aufgabenblatt"><p>Eine Reisegruppe aus 12 Personen verteilt sich auf 2 Abteile eines
+    Zuges. Jedes Abteil hat 3 Sitzplätze in Fahrtrichtung und 3
+    entgegen der Fahrtrichtung. Aus der Reisegruppe wollen auf alle
+    Fälle 5 Personen in Fahrtrichtung und 4 entgegen sitzen. Wie viele
+    Möglichkeiten der Platzierung gibt es bei nummerierten Plätzen?</p><div class="stufen"><div class="reiter"><button type="button" data-stufe="starthilfe" aria-expanded="false">Starthilfe</button><button type="button" data-stufe="loesung" aria-expanded="false">Lösung</button><button type="button" data-stufe="video" aria-expanded="false">Video</button></div><div class="faltung" data-stufe="starthilfe" hidden><ul><li>Zeichnen Sie eine Skizze der Sitzplätze mit Nummern</li><li>Teilen Sie das Problem in drei Gruppen auf: Personen mit Präferenz «in Fahrtrichtung», «gegen Fahrtrichtung» und «egal»</li><li>Verteilen Sie jede Gruppe separat auf die entsprechenden Plätze</li><li>Nutzen Sie k-Permutationen für jede Gruppe</li></ul></div><div class="faltung" data-stufe="loesung" hidden><p><strong>Schritt 1: Situation verstehen und visualisieren</strong></p>
+<p>Eine Skizze hilft enorm beim Verständnis:</p>
+<figure class="zeichnung"><img src="../../bilder/zeichnung-653664567221.svg" alt=""></figure>
+<p>Wir haben:
+<ul><li>6 Plätze in Fahrtrichtung (blau, Nr. 1-6)</li><li>6 Plätze gegen Fahrtrichtung (rot, Nr. 7-12)</li></ul></p>
+<p><strong>Schritt 2: Personen in Gruppen einteilen</strong></p>
+<p>Von den 12 Personen:
+<ul><li>5 wollen in Fahrtrichtung sitzen</li><li>4 wollen gegen Fahrtrichtung sitzen</li><li>3 haben keine Präferenz (12 - 5 - 4 = 3)</li></ul></p>
+<p><strong>Schritt 3: Verteilung berechnen</strong></p>
+<p>Wir verteilen die drei Gruppen nacheinander:</p>
+<p><strong>Gruppe 1: Die 5 Personen, die in Fahrtrichtung wollen</strong>
+<ul><li>Sie werden auf die 6 blauen Plätze (1-6) verteilt</li><li>Das ist eine 5-Permutation aus 6 Elementen</li><li>Anzahl: $\frac{6!}{(6-5)!} = \frac{6!}{1!} = 6 \cdot 5 \cdot 4 \cdot 3 \cdot 2 = 720$</li></ul></p>
+<p><strong>Gruppe 2: Die 4 Personen, die gegen Fahrtrichtung wollen</strong>
+<ul><li>Sie werden auf die 6 roten Plätze (7-12) verteilt</li><li>Das ist eine 4-Permutation aus 6 Elementen</li><li>Anzahl: $\frac{6!}{(6-4)!} = \frac{6!}{2!} = 6 \cdot 5 \cdot 4 \cdot 3 = 360$</li></ul></p>
+<p><strong>Gruppe 3: Die 3 Personen ohne Präferenz</strong>
+<ul><li>Nach Verteilung von Gruppe 1 und 2 sind noch 3 Plätze frei</li><li>1 Platz in Fahrtrichtung (6 - 5 = 1)</li><li>2 Plätze gegen Fahrtrichtung (6 - 4 = 2)</li><li>Die 3 Personen werden auf diese 3 freien Plätze verteilt</li><li>Das ist eine Permutation von 3 Elementen</li><li>Anzahl: $3! = 3 \cdot 2 \cdot 1 = 6$</li></ul></p>
+<p><strong>Schritt 4: Gesamtanzahl nach dem Zählprinzip</strong></p>
+<p>Die Verteilungen der drei Gruppen sind unabhängig voneinander:</p>
+<p>$$|\Omega| = 720 \cdot 360 \cdot 6 = 1'555'200$$</p></div><div class="faltung" data-stufe="video" hidden><div class="rahmen"><video class="spieler" controls preload="metadata" src="https://api.cast.switch.ch/p/110/sp/11000/playManifest/entryId/0_w55qodyy/format/url/protocol/https/video.mp4"></video></div></div></div></div><p class="heimknopf"><a href="../../index.html"><span class="haus" aria-hidden="true">⌂</span>Material</a></p>
+</main>
+<footer><div class="seitenfuss"><span class="wo"><b>MA01.07 · MA01.08</b> Daten und Zufall</span><span class="wer">Henrike Allmendinger · Herbstsemester 2026<a class="pinnwand" href="https://www.taskcards.de/#/board/c1b7fe7b-28eb-41b2-bf38-60c4264a9f8c" target="_blank" rel="noopener">Feedback</a></span></div></footer>
+<script src="../../gemeinsam/seite.js?f=c77c6724"></script>
+
+<script>window.MathJax={tex:{inlineMath:[['$','$'],['\\(','\\)']],
+  displayMath:[['\\[','\\]'],['$$','$$']],processEscapes:true,
+  macros:{cc:'\\mathbb{C}',rr:'\\mathbb{R}',nn:'\\mathbb{N}',
+          zz:'\\mathbb{Z}',qq:'\\mathbb{Q}',cis:'\\operatorname{cis}',
+          Log:'\\operatorname{Log}',dd:'\\mathrm{d}',
+          glqq:'\\text{„}',grqq:'\\text{“}',
+          // Aus dem Vorspann von MA01.03 (`Preambel/Styles.tex`):
+          // ein Gleichheitszeichen mit Dach, «entspricht».
+          equalhat:'\\mathrel{\\stackrel{\\wedge}{=}}',
+          // `\vv` kommt aus dem Paket `esvect` (Vektorpfeil) und ist
+          // MathJax unbekannt — ohne diese Zeile setzt es den Befehl
+          // rot als Fehler. Gefunden am 26.08. in Kapitel 3 von
+          // MA01.03 («schultypische Beispiele», 4 Stellen).
+          vv:['\\overrightarrow{#1}',1]}},
+  options:{skipHtmlTags:['script','noscript','style','textarea','pre']}};</script>
+<script defer src="../../gemeinsam/fremd/tex-svg.js"></script>
+</body>
+</html>

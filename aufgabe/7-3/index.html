@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="de">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Aufgabe 7.3 · Daten und Zufall</title>
+<link rel="stylesheet" href="../../gemeinsam/lernlandschaft.css?f=c77c6724">
+<body data-farbe="beweis">
+<div class="stationskopf"><span class="wort">AUFGABE</span><span class="roemisch">7.3</span><h1>Daten und Zufall</h1><span class="wechsel wortweise"><a href="../../index.html">Startseite</a><a href="../index.html">Alle Aufgaben</a></span></div>
+<main>
+<h2 class="etappentitel"><span class="stand">Aufgabe 7.3</span></h2><div class="aufgabenblatt"><p>Wie oft ist ein Würfel zu werfen, damit die Chance auf wenigstens
+  eine Sechs mehr als 90% ausmacht?</p><div class="stufen"><div class="reiter"><button type="button" data-stufe="starthilfe" aria-expanded="false">Starthilfe</button><button type="button" data-stufe="loesung" aria-expanded="false">Lösung</button></div><div class="faltung" data-stufe="starthilfe" hidden><ul><li>Nutzen Sie das Gegenereignis: «keine Sechs in n Würfen»</li><li>Die Wahrscheinlichkeit für keine Sechs bei einem Wurf ist $\frac{5}{6}$</li><li>Stellen Sie die Ungleichung $1 - \left(\frac{5}{6}\right)^n &gt; 0.9$ auf</li><li>Beachten Sie beim Logarithmieren das negative Vorzeichen von $\ln\left(\frac{5}{6}\right)$</li></ul></div><div class="faltung" data-stufe="loesung" hidden><div class="tabelle"><table><tr><td class="l sl so" style="background:#f2f2f2"><strong>Gegeben</strong></td><td class="l sl sr so" style="background:#f2f2f2"><strong>Gesucht</strong></td></tr><tr><td class="l sl so">Ein fairer Würfel</td><td class="l sl sr so">Minimale Anzahl $n$</td></tr><tr><td class="l sl">Wahrscheinlichkeit für mindestens eine 6</td><td class="l sl sr">von Würfen</td></tr><tr><td class="l sl so">$P(X \geq 1) &gt; 0.9$</td><td class="l sl sr so">$n =$ ?</td></tr><tr><td class="su l sl">$X \sim B(n, \frac{1}{6})$</td><td class="su l sl sr"></td></tr></table></div>
+<h4>Verwendung der Komplementärwahrscheinlichkeit:</h4>
+<aside class="merksatz">$$P(X \geq 1) = 1 - P(X = 0) = 1 - \left(\frac{5}{6}\right)^n$$</aside>
+<h4>Aufstellen und Lösen der Ungleichung:</h4>
+<p>\begin{align*}
+P(X \geq 1) &amp;&gt; 0.9 &amp;\text{(Bedingung)}\\
+1 - \left(\frac{5}{6}\right)^n &amp;&gt; 0.9 &amp;\text{(Komplementär)}\\
+-\left(\frac{5}{6}\right)^n &amp;&gt; -0.1 &amp;\text{(Minus 1)}\\
+\left(\frac{5}{6}\right)^n &amp;&lt; 0.1 &amp;\text{(Mal -1, Ungleichung dreht)}
+\end{align*}</p>
+<p>Logarithmieren beider Seiten:
+\begin{align*}
+\ln\left(\left(\frac{5}{6}\right)^n\right) &amp;&lt; \ln(0.1) &amp;\text{(Logarithmus anwenden)}\\
+n \cdot \ln\left(\frac{5}{6}\right) &amp;&lt; \ln(0.1) &amp;\text{(Logarithmengesetz)}
+\end{align*}</p>
+<aside class="merksatz">Da $\ln\left(\frac{5}{6}\right) = \ln(5) - \ln(6) &lt; 0$ ist, kehrt sich beim Dividieren das Ungleichheitszeichen um:
+\begin{align*}
+n &amp;&gt; \frac{\ln(0.1)}{\ln\left(\frac{5}{6}\right)} &amp;\text{(Division durch negative Zahl)}\\
+n &amp;&gt; \frac{-2.3026}{-0.1823} &amp;\text{(Werte einsetzen)}\\
+n &amp;&gt; 12.63 &amp;\text{(Berechnung)}
+\end{align*}</aside>
+<h4>Ergebnis:</h4>
+<p>Da $n$ eine natürliche Zahl sein muss: $\boxed{n \geq 13}$</p>
+<h4>Überprüfung:</h4>
+<div class="tabelle"><table><tr style="background:#f2f2f2"><td class="c sl so">$n$</td><td class="c sl so">$P(X = 0) = \left(\frac{5}{6}\right)^n$</td><td class="c sl so">$P(X \geq 1)$</td><td class="c sl sr so">Bedingung erfüllt?</td></tr><tr><td class="c sl so">11</td><td class="c sl so">0.1346</td><td class="c sl so">0.8654</td><td class="c sl sr so">Nein</td></tr><tr><td class="c sl">12</td><td class="c sl">0.1122</td><td class="c sl">0.8878</td><td class="c sl sr">Nein</td></tr><tr style="background:color-mix(in srgb, var(--beweis) 20%, #fff)"><td class="c sl">13</td><td class="c sl">0.0935</td><td class="c sl">0.9065</td><td class="c sl sr">Ja ✓</td></tr><tr><td class="su c sl">14</td><td class="su c sl">0.0779</td><td class="su c sl">0.9221</td><td class="su c sl sr">Ja ✓</td></tr></table></div>
+<h4>Graphische Darstellung:</h4>
+<figure class="zeichnung"><img src="../../bilder/zeichnung-8d2574ca00a5.svg" alt=""></figure>
+<aside class="merksatz"><strong>Interpretation:</strong>
+Man muss mindestens 13-mal würfeln, um mit mehr als 90% Wahrscheinlichkeit mindestens eine Sechs zu erhalten. Dies zeigt, dass selbst bei einem «fairen» Würfel erstaunlich viele Versuche nötig sind, um ein Ereignis mit hoher Sicherheit zu erzielen.
+<p><strong>Historische Anmerkung:</strong> Dies ist eine Variante des berühmten Problems von Chevalier de Méré, das zur Entwicklung der Wahrscheinlichkeitstheorie durch Pascal und Fermat führte.</p></aside></div></div></div><p class="fundort">Im Video: <a href="../../lernweg-7/erweiterte-bernoulli-formel/index.html">Etappe 4 · Erweiterte Bernoulli-Formel</a> <span class="zeit">bei 6:30</span></p><p class="heimknopf"><a href="../../index.html"><span class="haus" aria-hidden="true">⌂</span>Material</a></p>
+</main>
+<footer><div class="seitenfuss"><span class="wo"><b>MA01.07 · MA01.08</b> Daten und Zufall</span><span class="wer">Henrike Allmendinger · Herbstsemester 2026<a class="pinnwand" href="https://www.taskcards.de/#/board/c1b7fe7b-28eb-41b2-bf38-60c4264a9f8c" target="_blank" rel="noopener">Feedback</a></span></div></footer>
+<script src="../../gemeinsam/seite.js?f=c77c6724"></script>
+
+<script>window.MathJax={tex:{inlineMath:[['$','$'],['\\(','\\)']],
+  displayMath:[['\\[','\\]'],['$$','$$']],processEscapes:true,
+  macros:{cc:'\\mathbb{C}',rr:'\\mathbb{R}',nn:'\\mathbb{N}',
+          zz:'\\mathbb{Z}',qq:'\\mathbb{Q}',cis:'\\operatorname{cis}',
+          Log:'\\operatorname{Log}',dd:'\\mathrm{d}',
+          glqq:'\\text{„}',grqq:'\\text{“}',
+          // Aus dem Vorspann von MA01.03 (`Preambel/Styles.tex`):
+          // ein Gleichheitszeichen mit Dach, «entspricht».
+          equalhat:'\\mathrel{\\stackrel{\\wedge}{=}}',
+          // `\vv` kommt aus dem Paket `esvect` (Vektorpfeil) und ist
+          // MathJax unbekannt — ohne diese Zeile setzt es den Befehl
+          // rot als Fehler. Gefunden am 26.08. in Kapitel 3 von
+          // MA01.03 («schultypische Beispiele», 4 Stellen).
+          vv:['\\overrightarrow{#1}',1]}},
+  options:{skipHtmlTags:['script','noscript','style','textarea','pre']}};</script>
+<script defer src="../../gemeinsam/fremd/tex-svg.js"></script>
+</body>
+</html>

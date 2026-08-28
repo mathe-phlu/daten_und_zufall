@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="de">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Aufgabe 3.7 · Daten und Zufall</title>
+<link rel="stylesheet" href="../../gemeinsam/lernlandschaft.css?f=c77c6724">
+<body data-farbe="fach">
+<div class="stationskopf"><span class="wort">AUFGABE</span><span class="roemisch">3.7</span><h1>Daten und Zufall</h1><span class="wechsel wortweise"><a href="../../index.html">Startseite</a><a href="../index.html">Alle Aufgaben</a></span></div>
+<main>
+<h2 class="etappentitel"><span class="stand">Aufgabe 3.7</span></h2><div class="aufgabenblatt"><p>Zwei völlig gleichartige Kästchen $A$ und $B$ besitzen je zwei Schubladen $a$ und $b$. $A$ enthält in jeder Schublade eine Goldmünze $G$, $B$ in einer eine Goldmünze, in der anderen
+eine Silbermünze $S$.</p>
+<figure style="--bildbreite:0.40"><img src="../../bilder/95e218f22ce51f4d.png" alt=""></figure>
+<p>Man wählt nun zuerst blindlings ein Kästchen, öffnet dann zufällig eine Schublade und
+findet darin eine Goldmünze. Wie gross ist die Wahrscheinlichkeit, in der zweiten
+Schublade die Silbermünze zu finden?</p><div class="stufen"><div class="reiter"><button type="button" data-stufe="starthilfe" aria-expanded="false">Starthilfe</button><button type="button" data-stufe="loesung" aria-expanded="false">Lösung</button><button type="button" data-stufe="video" aria-expanded="false">Video</button></div><div class="faltung" data-stufe="starthilfe" hidden><ul><li>Die Information «Goldmünze gefunden» ist wichtig - sie verändert die Wahrscheinlichkeiten</li><li>Listen Sie alle Wege auf, die zu «Goldmünze in der ersten Schublade» führen</li><li>Nicht alle diese Wege sind gleichwahrscheinlich!</li><li>Von welchen dieser Wege führt die zweite Schublade zur Silbermünze?</li></ul></div><div class="faltung" data-stufe="loesung" hidden><p><strong>Eine weitere Variante des Paradoxons</strong></p>
+<p>Diese Aufgabe ist verwandt mit dem Ziegenproblem und zeigt erneut, wie Zusatzinformation unsere Wahrscheinlichkeiten beeinflusst.</p>
+<p><strong>Ausgangssituation visualisiert:</strong></p>
+<figure class="zeichnung"><img src="../../bilder/zeichnung-db4fa5d74c18.svg" alt=""></figure>
+<p><strong>Die verlockende Falle:</strong></p>
+<p>Man könnte denken: «Ich habe eine Goldmünze gefunden, also bin ich entweder in Kästchen A oder in Kästchen B (Schublade b). Das sind zwei gleichwahrscheinliche Fälle, also 50% für Silbermünze.»</p>
+<p><strong>Das ist falsch!</strong></p>
+<p><strong>Systematische Analyse (ohne bedingte Wahrscheinlichkeit):</strong></p>
+<p>Wir betrachten alle möglichen Abläufe mit ihren Wahrscheinlichkeiten:</p>
+<div class="tabelle"><table><tr><td class="c sl so"><strong>Kästchen</strong></td><td class="c sl so"><strong>Schublade</strong></td><td class="c sl so"><strong>Wahrsch.</strong></td><td class="c sl so"><strong>1. Fund</strong></td><td class="c sl sr so"><strong>2. Schublade</strong></td></tr><tr><td class="c sl so">A</td><td class="c sl so">a</td><td class="c sl so">$\frac{1}{4}$</td><td class="c sl so">G $\checkmark$</td><td class="c sl sr so">G</td></tr><tr><td class="c sl">A</td><td class="c sl">b</td><td class="c sl">$\frac{1}{4}$</td><td class="c sl">G $\checkmark$</td><td class="c sl sr">G</td></tr><tr><td class="c sl">B</td><td class="c sl">a</td><td class="c sl">$\frac{1}{4}$</td><td class="c sl">S</td><td class="c sl sr">-</td></tr><tr><td class="su c sl">B</td><td class="su c sl">b</td><td class="su c sl">$\frac{1}{4}$</td><td class="su c sl">G $\checkmark$</td><td class="su c sl sr">S</td></tr></table></div>
+<p>Nur die mit $\checkmark$ markierten Fälle sind mit unserer Beobachtung «Goldmünze gefunden» vereinbar.</p>
+<p><strong>Lösung durch systematisches Abzählen:</strong></p>
+<p>Von den vier gleichwahrscheinlichen Elementarereignissen führen genau drei zum Ereignis «Goldmünze in der ersten Schublade»:
+<ol><li>Kästchen A, Schublade a geöffnet $\rightarrow$ zweite Schublade enthält G</li><li>Kästchen A, Schublade b geöffnet $\rightarrow$ zweite Schublade enthält G</li><li>Kästchen B, Schublade b geöffnet $\rightarrow$ zweite Schublade enthält S</li></ol></p>
+<p>Von diesen drei gleichwahrscheinlichen Möglichkeiten führt nur eine zur Silbermünze in der zweiten Schublade.</p>
+<p>$$P(\text{Silbermünze in 2. Schublade} \mid \text{Goldmünze gefunden}) = \frac{1}{3}$$</p>
+<p><strong>Alternative Betrachtung mit Baumdiagramm:</strong></p>
+<figure class="zeichnung"><img src="../../bilder/zeichnung-1cbf676d90dd.svg" alt=""></figure>
+<p><strong>Intuitive Erklärung:</strong></p>
+<p>Die Goldmünze kann aus drei Quellen stammen:
+<ul><li>2 Schubladen aus Kästchen A (beide mit Gold)</li><li>1 Schublade aus Kästchen B (nur Schublade b mit Gold)</li></ul></p>
+<p>Da Kästchen A zwei «Chancen» hat, eine Goldmünze zu liefern, während B nur eine hat, ist es wahrscheinlicher (im Verhältnis 2:1), dass wir uns bei Kästchen A befinden. Deshalb ist die Wahrscheinlichkeit für die Silbermünze nur $\frac{1}{3}$ und nicht $\frac{1}{2}$.</p>
+<p><strong>Vergleich mit dem Ziegenproblem:</strong></p>
+<p>Beide Probleme zeigen:
+<ul><li>Zusatzinformation verändert Wahrscheinlichkeiten</li><li>Die intuitive 50:50-Annahme ist oft falsch</li><li>Systematisches Durchdenken aller Möglichkeiten führt zur richtigen Lösung</li><li>Man muss genau prüfen, welche Elementarereignisse noch möglich sind</li></ul></p>
+<p>Die Wahrscheinlichkeit $\frac{1}{3}$ für die Silbermünze zeigt erneut, wie unsere Intuition in der Wahrscheinlichkeitsrechnung täuschen kann!</p></div><div class="faltung" data-stufe="video" hidden><div class="rahmen"><video class="spieler" controls preload="metadata" src="https://api.cast.switch.ch/p/110/sp/11000/playManifest/entryId/0_zutex1as/format/url/protocol/https/video.mp4"></video></div></div></div></div><p class="heimknopf"><a href="../../index.html"><span class="haus" aria-hidden="true">⌂</span>Material</a></p>
+</main>
+<footer><div class="seitenfuss"><span class="wo"><b>MA01.07 · MA01.08</b> Daten und Zufall</span><span class="wer">Henrike Allmendinger · Herbstsemester 2026<a class="pinnwand" href="https://www.taskcards.de/#/board/c1b7fe7b-28eb-41b2-bf38-60c4264a9f8c" target="_blank" rel="noopener">Feedback</a></span></div></footer>
+<script src="../../gemeinsam/seite.js?f=c77c6724"></script>
+
+<script>window.MathJax={tex:{inlineMath:[['$','$'],['\\(','\\)']],
+  displayMath:[['\\[','\\]'],['$$','$$']],processEscapes:true,
+  macros:{cc:'\\mathbb{C}',rr:'\\mathbb{R}',nn:'\\mathbb{N}',
+          zz:'\\mathbb{Z}',qq:'\\mathbb{Q}',cis:'\\operatorname{cis}',
+          Log:'\\operatorname{Log}',dd:'\\mathrm{d}',
+          glqq:'\\text{„}',grqq:'\\text{“}',
+          // Aus dem Vorspann von MA01.03 (`Preambel/Styles.tex`):
+          // ein Gleichheitszeichen mit Dach, «entspricht».
+          equalhat:'\\mathrel{\\stackrel{\\wedge}{=}}',
+          // `\vv` kommt aus dem Paket `esvect` (Vektorpfeil) und ist
+          // MathJax unbekannt — ohne diese Zeile setzt es den Befehl
+          // rot als Fehler. Gefunden am 26.08. in Kapitel 3 von
+          // MA01.03 («schultypische Beispiele», 4 Stellen).
+          vv:['\\overrightarrow{#1}',1]}},
+  options:{skipHtmlTags:['script','noscript','style','textarea','pre']}};</script>
+<script defer src="../../gemeinsam/fremd/tex-svg.js"></script>
+</body>
+</html>

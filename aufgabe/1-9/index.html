@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="de">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Aufgabe 1.9 · Daten und Zufall</title>
+<link rel="stylesheet" href="../../gemeinsam/lernlandschaft.css?f=c77c6724">
+<body data-farbe="fach">
+<div class="stationskopf"><span class="wort">AUFGABE</span><span class="roemisch">1.9</span><h1>Daten und Zufall</h1><span class="wechsel wortweise"><a href="../../index.html">Startseite</a><a href="../index.html">Alle Aufgaben</a></span></div>
+<main>
+<h2 class="etappentitel"><span class="stand">Aufgabe 1.9</span></h2><div class="aufgabenblatt"><div class="neben">
+<figure style="--bildbreite:0.80"><img src="../../bilder/b0cf309e5e6c3695.png" alt=""></figure>
+</div>
+<div class="neben">
+  Im aktuellen Spielsystem von Swiss Lotto sind bei einem Tipp 6 aus
+  42 Zahlen anzukreuzen sowie eine Glückszahl aus 1 bis 6.
+<p>Wie viele verschiedene Ziehungen sind bei diesem System möglich im
+  Vergleich zum alten «6 aus 45»?
+</p></div><div class="stufen"><div class="reiter"><button type="button" data-stufe="starthilfe" aria-expanded="false">Starthilfe</button><button type="button" data-stufe="loesung" aria-expanded="false">Lösung</button><button type="button" data-stufe="video" aria-expanded="false">Video</button></div><div class="faltung" data-stufe="starthilfe" hidden><ul><li>Das neue System hat zwei unabhängige Komponenten: Hauptzahlen und Glückszahl</li><li>Bei den Hauptzahlen: Reihenfolge egal, ohne Wiederholung</li><li>Nutzen Sie das Multiplikationsprinzip für die Gesamtanzahl</li><li>Vergleichen Sie die Größenordnungen der Ergebnisse</li></ul></div><div class="faltung" data-stufe="loesung" hidden><p><strong>Aktuelles Swiss Lotto System (seit 2013)</strong></p>
+<p>Das aktuelle System besteht aus zwei Teilen:
+<ol><li><strong>Hauptzahlen</strong>: 6 aus 42 Zahlen auswählen</li><li><strong>Glückszahl</strong>: 1 aus 6 Zahlen auswählen</li></ol></p>
+<p><strong>Schritt 1: Anzahl Möglichkeiten für die Hauptzahlen</strong></p>
+<p>Bei den Hauptzahlen ist die Reihenfolge egal (die Zahlen werden sortiert gezogen) und jede Zahl kann nur einmal vorkommen. Das ist eine klassische Kombination:</p>
+<p>$$\binom{42}{6} = \frac{42!}{6! \cdot 36!} = \frac{42 \cdot 41 \cdot 40 \cdot 39 \cdot 38 \cdot 37}{6 \cdot 5 \cdot 4 \cdot 3 \cdot 2 \cdot 1}= 5'245'786$$</p>
+<p><strong>Schritt 2: Anzahl Möglichkeiten für die Glückszahl</strong></p>
+<p>Die Glückszahl ist einfach: 6 Möglichkeiten (die Zahlen 1 bis 6).</p>
+<p><strong>Schritt 3: Gesamtanzahl nach dem Zählprinzip</strong></p>
+<p>Die Auswahl der Hauptzahlen und der Glückszahl sind unabhängig voneinander. Nach dem Multiplikationsprinzip:</p>
+<p>$$|\Omega_{\text{neu}}| = \binom{42}{6} \cdot 6 = 5'245'786 \cdot 6 = 31'474'716$$</p>
+<p><strong>Altes Swiss Lotto System (bis 2013)</strong></p>
+<p>Beim alten System wurden nur 6 aus 45 Zahlen gezogen, ohne zusätzliche Glückszahl:</p>
+<p>$$|\Omega_{\text{alt}}| = \binom{45}{6} = \frac{45!}{6! \cdot 39!} = \frac{45 \cdot 44 \cdot 43 \cdot 42 \cdot 41 \cdot 40}{720}= 8'145'060$$</p>
+<p><strong>Vergleich der Systeme</strong></p>
+<p>$$\frac{|\Omega_{\text{neu}}|}{|\Omega_{\text{alt}}|} = \frac{31'474'716}{8'145'060} \approx 3.86$$</p>
+<p>Die Anzahl der möglichen Ziehungen hat sich fast <strong>vervierfacht</strong>!</p>
+<p><strong>Konsequenzen für die Spieler:</strong>
+<ul><li>Die Gewinnchance für den Hauptgewinn (6 Richtige + Glückszahl) ist deutlich kleiner geworden, Von etwa 1:8 Millionen auf etwa 1:31 Millionen</li><li>Dafür können höhere Jackpots entstehen (mehr Ziehungen ohne Hauptgewinner) – Das war auch die Absicht der Umstellung: Höhere Jackpots generieren mehr Aufmerksamkeit</li></ul></p>
+<p><strong>Zusatzüberlegung:</strong>
+Interessant ist, dass trotz weniger Zahlen im Pool (42 statt 45) die Gewinnwahrscheinlichkeit durch die zusätzliche Glückszahl stark gesunken ist. Die Glückszahl multipliziert die Anzahl der Möglichkeiten mit Faktor 6,</p>
+<p>während die Reduktion von 45 auf 42 Zahlen die Möglichkeiten nur um gut ein Drittel verringert (Faktor $\approx 1.55$).</p></div><div class="faltung" data-stufe="video" hidden><div class="rahmen"><video class="spieler" controls preload="metadata" src="https://api.cast.switch.ch/p/110/sp/11000/playManifest/entryId/0_wedlshfg/format/url/protocol/https/video.mp4"></video></div></div></div></div><p class="heimknopf"><a href="../../index.html"><span class="haus" aria-hidden="true">⌂</span>Material</a></p>
+</main>
+<footer><div class="seitenfuss"><span class="wo"><b>MA01.07 · MA01.08</b> Daten und Zufall</span><span class="wer">Henrike Allmendinger · Herbstsemester 2026<a class="pinnwand" href="https://www.taskcards.de/#/board/c1b7fe7b-28eb-41b2-bf38-60c4264a9f8c" target="_blank" rel="noopener">Feedback</a></span></div></footer>
+<script src="../../gemeinsam/seite.js?f=c77c6724"></script>
+
+<script>window.MathJax={tex:{inlineMath:[['$','$'],['\\(','\\)']],
+  displayMath:[['\\[','\\]'],['$$','$$']],processEscapes:true,
+  macros:{cc:'\\mathbb{C}',rr:'\\mathbb{R}',nn:'\\mathbb{N}',
+          zz:'\\mathbb{Z}',qq:'\\mathbb{Q}',cis:'\\operatorname{cis}',
+          Log:'\\operatorname{Log}',dd:'\\mathrm{d}',
+          glqq:'\\text{„}',grqq:'\\text{“}',
+          // Aus dem Vorspann von MA01.03 (`Preambel/Styles.tex`):
+          // ein Gleichheitszeichen mit Dach, «entspricht».
+          equalhat:'\\mathrel{\\stackrel{\\wedge}{=}}',
+          // `\vv` kommt aus dem Paket `esvect` (Vektorpfeil) und ist
+          // MathJax unbekannt — ohne diese Zeile setzt es den Befehl
+          // rot als Fehler. Gefunden am 26.08. in Kapitel 3 von
+          // MA01.03 («schultypische Beispiele», 4 Stellen).
+          vv:['\\overrightarrow{#1}',1]}},
+  options:{skipHtmlTags:['script','noscript','style','textarea','pre']}};</script>
+<script defer src="../../gemeinsam/fremd/tex-svg.js"></script>
+</body>
+</html>

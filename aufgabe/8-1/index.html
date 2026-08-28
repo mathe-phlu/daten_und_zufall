@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="de">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Aufgabe 8.1 · Daten und Zufall</title>
+<link rel="stylesheet" href="../../gemeinsam/lernlandschaft.css?f=c77c6724">
+<body data-farbe="aktion">
+<div class="stationskopf"><span class="wort">AUFGABE</span><span class="roemisch">8.1</span><h1>Daten und Zufall</h1><span class="wechsel wortweise"><a href="../../index.html">Startseite</a><a href="../index.html">Alle Aufgaben</a></span></div>
+<main>
+<h2 class="etappentitel"><span class="stand">Aufgabe 8.1</span></h2><div class="aufgabenblatt"><p>[][https://mathe-phlu.github.io/daten_und_zufall/aufgabe/8-1/index.html]
+  Sei $X$ verteilt nach $B(120; 0.75)$. Wie gross ist die Wahrscheinlichkeit für genau $82$
+Treffer, wenn Sie a) exakt mit der Binomialverteilung und b) näherungsweise mit der
+Normalverteilung rechnen? (<em>GeoGebra</em>, <em>Excel</em> oder einen hinreichend leistungsfähigen
+Taschenrechner verwenden.)</p><div class="stufen"><div class="reiter"><button type="button" data-stufe="starthilfe" aria-expanded="false">Starthilfe</button><button type="button" data-stufe="loesung" aria-expanded="false">Lösung</button></div><div class="faltung" data-stufe="starthilfe" hidden><ul><li>Berechnen Sie zuerst $\mu = np$ und $\sigma = \sqrt{np(1-p)}$</li><li>Prüfen Sie die Faustregel $\sigma &gt; 3$ für die Normalapproximation</li><li>Für die Normalverteilung: Standardisieren Sie mit $t = \frac{x-\mu}{\sigma}$</li><li>Verwenden Sie Excel-Funktionen oder äquivalente Software</li></ul></div><div class="faltung" data-stufe="loesung" hidden><div class="tabelle"><table><tr><td class="c sr"></td><td class="l sl so" style="background:#f2f2f2"><strong>Gegeben</strong></td><td class="l sl sr so" style="background:#f2f2f2"><strong>Gesucht</strong></td></tr><tr><td class="c sr"></td><td class="l sl so">Verteilung: $X \sim B(120; 0.75)$</td><td class="l sl sr so">$P(X = 82)$</td></tr><tr><td class="c sr"></td><td class="l sl">Anzahl Versuche: $n = 120$</td><td class="l sl sr">a) Exakt mit Binomialverteilung</td></tr><tr><td class="c sr"></td><td class="l sl">Erfolgswahrscheinlichkeit: $p = 0.75$</td><td class="l sl sr">b) Näherung mit Normalverteilung</td></tr><tr><td class="c sr"></td><td class="l sl">Gesuchte Trefferzahl: $k = 82$</td><td class="l sl sr"></td></tr></table></div>
+<h4>Berechnung der Verteilungsparameter:</h4>
+<p>Für die Normalapproximation benötigen wir die charakteristischen Grössen der Binomialverteilung:
+<ul><li><strong>Erwartungswert</strong> (durchschnittlich erwartete Trefferzahl): 
+$$\mu = n \cdot p = 120 \cdot 0.75 = 90$$</li><li><strong>Varianz</strong> (Mass für die Streuung):
+$$\sigma^2 = n \cdot p \cdot (1-p) = 120 \cdot 0.75 \cdot 0.25 = 22.5$$</li><li><strong>Standardabweichung</strong> (mittlere Abweichung vom Erwartungswert):
+$$\sigma = \sqrt{22.5} = 4.74$$</li></ul></p>
+<aside class="merksatz"><strong>Überprüfung der Approximationsbedingung:</strong>
+<p>Die Faustregel besagt: Die Normalapproximation ist gerechtfertigt, wenn $\sigma &gt; 3$.</p>
+<p>Da $\sigma = 4.74 &gt; 3$ ✓, können wir die Normalverteilung als Näherung verwenden.</p></aside>
+<h4>(a) Exakte Berechnung mit Binomialverteilung:</h4>
+<p>Die exakte Wahrscheinlichkeit für genau 82 Treffer berechnet sich mit der Binomialformel:
+$$P(X = 82) = \binom{120}{82} \cdot 0.75^{82} \cdot 0.25^{38}$$</p>
+<p>Diese Berechnung ist per Hand kaum durchführbar. Wir verwenden daher Excel:</p>
+<p><strong>Excel-Formel:</strong> <code>=BINOM.VERT(82 120 0,75 FALSCH)</code></p>
+<aside class="merksatz"><strong>Ergebnis:</strong> $P(X = 82) = 0.0203 = 2.0\%$</aside>
+<h4>(b) Näherung mit Normalverteilung:</h4>
+<p>Bei der Normalverteilung verwenden wir die kontinuierliche Dichtefunktion. Zunächst standardisieren wir den Wert:</p>
+<p><strong>Standardisierung:</strong> Umrechnung in die Standardnormalverteilung
+$$t = \frac{x - \mu}{\sigma} = \frac{82 - 90}{4.74} = \frac{-8}{4.74} = -1.69$$</p>
+<p>Die Wahrscheinlichkeitsdichte an der Stelle $x = 82$ ist:
+$$f(82) = \frac{1}{\sigma\sqrt{2\pi}} \cdot e^{-\frac{1}{2}t^2}$$</p>
+<p><strong>Excel-Formel:</strong> <code>=NORM.VERT(82 90 4,74 FALSCH)</code></p>
+<aside class="merksatz"><strong>Ergebnis:</strong> $f(82) \approx 0.0203 = 2.0\%$</aside>
+<h4>Vergleich und Interpretation:</h4>
+<p>Die Normalapproximation liefert mit 2.0% ein exzellentes Ergebnis! Die perfekte Übereinstimmung erklärt sich durch:
+<ul><li>Hinreichend grosses $n = 120$</li><li>Erfüllte Faustregel $\sigma = 4.74 &gt; 3$</li><li>Der gesuchte Wert $x = 82$ liegt nicht zu weit vom Erwartungswert entfernt</li></ul></p>
+<p>Die Normalverteilung ist hier eine hervorragende Näherung für die Binomialverteilung.</p></div></div></div><p class="fundort">Im Video: <a href="../../lernweg-8/naeherung-der-bernoulliformel/index.html">Etappe 3 · Näherung der Bernoulliformel</a> <span class="zeit">bei 5:39</span></p><p class="heimknopf"><a href="../../index.html"><span class="haus" aria-hidden="true">⌂</span>Material</a></p>
+</main>
+<footer><div class="seitenfuss"><span class="wo"><b>MA01.07 · MA01.08</b> Daten und Zufall</span><span class="wer">Henrike Allmendinger · Herbstsemester 2026<a class="pinnwand" href="https://www.taskcards.de/#/board/c1b7fe7b-28eb-41b2-bf38-60c4264a9f8c" target="_blank" rel="noopener">Feedback</a></span></div></footer>
+<script src="../../gemeinsam/seite.js?f=c77c6724"></script>
+
+<script>window.MathJax={tex:{inlineMath:[['$','$'],['\\(','\\)']],
+  displayMath:[['\\[','\\]'],['$$','$$']],processEscapes:true,
+  macros:{cc:'\\mathbb{C}',rr:'\\mathbb{R}',nn:'\\mathbb{N}',
+          zz:'\\mathbb{Z}',qq:'\\mathbb{Q}',cis:'\\operatorname{cis}',
+          Log:'\\operatorname{Log}',dd:'\\mathrm{d}',
+          glqq:'\\text{„}',grqq:'\\text{“}',
+          // Aus dem Vorspann von MA01.03 (`Preambel/Styles.tex`):
+          // ein Gleichheitszeichen mit Dach, «entspricht».
+          equalhat:'\\mathrel{\\stackrel{\\wedge}{=}}',
+          // `\vv` kommt aus dem Paket `esvect` (Vektorpfeil) und ist
+          // MathJax unbekannt — ohne diese Zeile setzt es den Befehl
+          // rot als Fehler. Gefunden am 26.08. in Kapitel 3 von
+          // MA01.03 («schultypische Beispiele», 4 Stellen).
+          vv:['\\overrightarrow{#1}',1]}},
+  options:{skipHtmlTags:['script','noscript','style','textarea','pre']}};</script>
+<script defer src="../../gemeinsam/fremd/tex-svg.js"></script>
+</body>
+</html>

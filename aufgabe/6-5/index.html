@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="de">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Aufgabe 6.5 · Daten und Zufall</title>
+<link rel="stylesheet" href="../../gemeinsam/lernlandschaft.css?f=c77c6724">
+<body data-farbe="fach">
+<div class="stationskopf"><span class="wort">AUFGABE</span><span class="roemisch">6.5</span><h1>Daten und Zufall</h1><span class="wechsel wortweise"><a href="../../index.html">Startseite</a><a href="../index.html">Alle Aufgaben</a></span></div>
+<main>
+<h2 class="etappentitel"><span class="stand">Aufgabe 6.5</span></h2><div class="aufgabenblatt"><p>In einem Karton sind 8 Lämpchen, 5 davon sind defekt. Wie oft im
+  Mittel muss man dem Karton zufällig Lämpchen entnehmen, bis man ein
+  funktionstüchtiges in Händen hält?</p><div class="stufen"><div class="reiter"><button type="button" data-stufe="starthilfe" aria-expanded="false">Starthilfe</button><button type="button" data-stufe="loesung" aria-expanded="false">Lösung</button><button type="button" data-stufe="video" aria-expanded="false">Video</button></div><div class="faltung" data-stufe="starthilfe" hidden><ul><li>Definieren Sie $X$ = Anzahl Ziehungen bis zum ersten funktionierenden Lämpchen</li><li>Erstellen Sie ein Baumdiagramm für das sukzessive Ziehen ohne Zurücklegen</li><li>Beachten Sie, dass sich die Wahrscheinlichkeiten nach jedem Zug ändern</li><li>$X$ kann Werte von 1 bis 6 annehmen (warum nicht mehr?)</li><li>Berechnen Sie $P(X=k)$ für jedes $k$ über die Pfadwahrscheinlichkeiten</li></ul></div><div class="faltung" data-stufe="loesung" hidden><h4>Ausgangssituation:</h4>
+<ul><li>8 Lämpchen insgesamt</li><li>5 defekte Lämpchen (D)</li><li>3 funktionstüchtige Lämpchen (F)</li><li>$X$ = Anzahl Ziehungen bis zum ersten funktionstüchtigen Lämpchen</li></ul>
+<h4>Baumdiagramm für das Ziehen ohne Zurücklegen:</h4>
+<figure class="zeichnung"><img src="../../bilder/zeichnung-ef2138c35a4c.svg" alt=""></figure>
+<h4>Mögliche Werte von X:</h4>
+<p>$X$ kann die Werte 1, 2, 3, 4, 5 oder 6 annehmen. Warum maximal 6? Nach spätestens 6 Ziehungen hat man alle 5 defekten Lämpchen gezogen und muss beim 6. Zug ein funktionierendes erhalten.</p>
+<h4>Bestimmung der Verteilung:</h4>
+<p><strong>$P(X=1)$: Direkt beim ersten Zug ein funktionierendes Lämpchen</strong>
+$$P(X=1) = \frac{3}{8}$$</p>
+<p><strong>$P(X=2)$: Erst defekt, dann funktionierend</strong>
+$$P(X=2) = P(\text{1. defekt}) \cdot P(\text{2. funktionierend | 1. defekt}) = \frac{5}{8} \cdot \frac{3}{7} = \frac{15}{56}$$</p>
+<p><strong>$P(X=3)$: Zwei defekte, dann funktionierend</strong>
+$$P(X=3) = \frac{5}{8} \cdot \frac{4}{7} \cdot \frac{3}{6} = \frac{60}{336} = \frac{5}{28}$$</p>
+<p><strong>$P(X=4)$: Drei defekte, dann funktionierend</strong>
+$$P(X=4) = \frac{5}{8} \cdot \frac{4}{7} \cdot \frac{3}{6} \cdot \frac{3}{5} = \frac{180}{1680} = \frac{3}{28}$$</p>
+<p><strong>$P(X=5)$: Vier defekte, dann funktionierend</strong>
+$$P(X=5) = \frac{5}{8} \cdot \frac{4}{7} \cdot \frac{3}{6} \cdot \frac{2}{5} \cdot \frac{3}{4} = \frac{360}{6720} = \frac{3}{56}$$</p>
+<p><strong>$P(X=6)$: Alle fünf defekten, dann funktionierend</strong>
+$$P(X=6) = \frac{5}{8} \cdot \frac{4}{7} \cdot \frac{3}{6} \cdot \frac{2}{5} \cdot \frac{1}{4} \cdot \frac{3}{3} = \frac{360}{20160} = \frac{1}{56}$$</p>
+<h4>Verteilungstabelle:</h4>
+<div class="tabelle"><table><tr style="background:#f2f2f2"><td class="l sl so">$k$</td><td class="c sl so">1</td><td class="c sl so">2</td><td class="c sl so">3</td><td class="c sl so">4</td><td class="c sl so">5</td><td class="c sl sr so">6</td></tr><tr><td class="l sl so">$P(X=k)$</td><td class="c sl so">$\frac{3}{8}$</td><td class="c sl so">$\frac{15}{56}$</td><td class="c sl so">$\frac{5}{28}$</td><td class="c sl so">$\frac{3}{28}$</td><td class="c sl so">$\frac{3}{56}$</td><td class="c sl sr so">$\frac{1}{56}$</td></tr><tr><td class="su l sl so">dezimal</td><td class="su c sl so">0.375</td><td class="su c sl so">0.268</td><td class="su c sl so">0.179</td><td class="su c sl so">0.107</td><td class="su c sl so">0.054</td><td class="su c sl sr so">0.018</td></tr></table></div>
+<h4>Kontrolle:</h4>
+<p>Bringen wir alle Wahrscheinlichkeiten auf den Nenner 56:
+$$\frac{21}{56} + \frac{15}{56} + \frac{10}{56} + \frac{6}{56} + \frac{3}{56} + \frac{1}{56} = \frac{56}{56} = 1 \checkmark$$</p>
+<h4>Berechnung des Erwartungswerts:</h4>
+<p>\begin{align*}
+E[X] &amp;= \sum_{k=1}^{6} k \cdot P(X=k)\\
+&amp;= 1 \cdot \frac{3}{8} + 2 \cdot \frac{15}{56} + 3 \cdot \frac{5}{28} + 4 \cdot \frac{3}{28} + 5 \cdot \frac{3}{56} + 6 \cdot \frac{1}{56}\\
+&amp;= \frac{3}{8} + \frac{30}{56} + \frac{15}{28} + \frac{12}{28} + \frac{15}{56} + \frac{6}{56}
+\end{align*}</p>
+<p>Auf gemeinsamen Nenner 56:
+$$E[X] = \frac{21}{56} + \frac{30}{56} + \frac{30}{56} + \frac{24}{56} + \frac{15}{56} + \frac{6}{56} = \frac{126}{56} = 2.25$$</p>
+<h4>Alternative Lösung über kombinatorische Überlegungen:</h4>
+<p><strong>Bemerkung:</strong> Diese Aufgabe kann auch mit den Methoden aus Kapitel 1 (Kombinatorik) gelöst werden.</p>
+<p>Die Wahrscheinlichkeit, dass das $k$-te gezogene Lämpchen das erste funktionierende ist, entspricht dem Anteil der Anordnungen, bei denen die ersten $k-1$ Plätze mit defekten und der $k$-te Platz mit einem funktionierenden Lämpchen besetzt ist:</p>
+<p>$$P(X=k) = \frac{\text{Anzahl günstiger Anordnungen}}{\text{Anzahl aller Anordnungen der ersten } k \text{ Lämpchen}}$$</p>
+<p>Für $P(X=3)$ beispielsweise:
+$$P(X=3) = \frac{\binom{5}{2} \cdot \binom{3}{1}}{\binom{8}{3}} = \frac{10 \cdot 3}{56} = \frac{30}{56} = \frac{5}{28}$$</p>
+<p>Dies führt zum gleichen Ergebnis wie die Baumdiagramm-Methode.</p>
+<h4>Interpretation:</h4>
+<p>Im Mittel muss man 2.25 Lämpchen entnehmen, bis man ein funktionstüchtiges erhält. Dies macht intuitiv Sinn, da mehr als die Hälfte der Lämpchen defekt sind, man also im Schnitt mehr als 2 Versuche braucht.</p></div><div class="faltung" data-stufe="video" hidden><div class="rahmen"><video class="spieler" controls preload="metadata" src="https://api.cast.switch.ch/p/110/sp/11000/playManifest/entryId/0_1ho9t2oj/format/url/protocol/https/video.mp4"></video></div></div></div></div><p class="fundort">Im Video: <a href="../../lernweg-6/erwartungswert/index.html">Etappe 4 · Erwartungswert</a> <span class="zeit">bei 8:06</span></p><p class="heimknopf"><a href="../../index.html"><span class="haus" aria-hidden="true">⌂</span>Material</a></p>
+</main>
+<footer><div class="seitenfuss"><span class="wo"><b>MA01.07 · MA01.08</b> Daten und Zufall</span><span class="wer">Henrike Allmendinger · Herbstsemester 2026<a class="pinnwand" href="https://www.taskcards.de/#/board/c1b7fe7b-28eb-41b2-bf38-60c4264a9f8c" target="_blank" rel="noopener">Feedback</a></span></div></footer>
+<script src="../../gemeinsam/seite.js?f=c77c6724"></script>
+
+<script>window.MathJax={tex:{inlineMath:[['$','$'],['\\(','\\)']],
+  displayMath:[['\\[','\\]'],['$$','$$']],processEscapes:true,
+  macros:{cc:'\\mathbb{C}',rr:'\\mathbb{R}',nn:'\\mathbb{N}',
+          zz:'\\mathbb{Z}',qq:'\\mathbb{Q}',cis:'\\operatorname{cis}',
+          Log:'\\operatorname{Log}',dd:'\\mathrm{d}',
+          glqq:'\\text{„}',grqq:'\\text{“}',
+          // Aus dem Vorspann von MA01.03 (`Preambel/Styles.tex`):
+          // ein Gleichheitszeichen mit Dach, «entspricht».
+          equalhat:'\\mathrel{\\stackrel{\\wedge}{=}}',
+          // `\vv` kommt aus dem Paket `esvect` (Vektorpfeil) und ist
+          // MathJax unbekannt — ohne diese Zeile setzt es den Befehl
+          // rot als Fehler. Gefunden am 26.08. in Kapitel 3 von
+          // MA01.03 («schultypische Beispiele», 4 Stellen).
+          vv:['\\overrightarrow{#1}',1]}},
+  options:{skipHtmlTags:['script','noscript','style','textarea','pre']}};</script>
+<script defer src="../../gemeinsam/fremd/tex-svg.js"></script>
+</body>
+</html>
