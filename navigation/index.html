@@ -116,16 +116,17 @@
         <b>Online-Einführung</b>
         <span>bitte bis 08.09.25 ansehen</span>
       </a>
-      <!-- Rike, 24.08.2026: «Semesterstart Link geht direkt zu Kapitel 1.» -->
-      <a class="zettel" href="https://mathe-phlu.github.io/daten_und_zufall/kapitel-1/"
-         target="_blank" rel="noopener">
-        <b>Semesterstart</b>
-        <span>Woche 1 – Kapitel 1: Kombinatorik</span>
-      </a>
+      <!-- **Was diese Woche ansteht** (Rike, 28.08.2026). Gefüllt von
+           `gemeinsam/diese-woche.js` aus `wochenplan.json` — im
+           Browser, nicht beim Bauen: Sonst müsste jede Woche jemand neu
+           bauen, und einmal vergessen hiesse, dass wochenlang das
+           falsche Kapitel dasteht. -->
+      <a class="zettel" data-diese-woche></a>
     </aside>
 
   </div>
 </div>
 
+<script src="gemeinsam/diese-woche.js"></script>
 </body>
 </html>
