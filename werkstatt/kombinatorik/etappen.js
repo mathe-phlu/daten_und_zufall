@@ -75,7 +75,8 @@ function etappe1(){
        + 'ausliegenden Situationen — aber zueinander: Bilden Sie auch daraus '
        + 'eine Gruppe, nur ohne Situationskarte obendrauf. Es liegen zunächst '
        + 'nicht alle Situationen aus — wer fertig ist oder mehr will, holt '
-       + 'sich weitere.</span>'},
+       + 'sich weitere. Auf jeder Rechnung steht ein <b>=</b>; wer darauf '
+       + 'zeigt, sieht ihr Ergebnis.</span>'},
     'Ihre Zuordnung',
     [{id:'S', name:'Situationen'}, {id:'U', name:'Urnenmodelle'}, {id:'T', name:'Terme'}],
     `<span class="beschriftung">Auf dem Tisch: ${D.stufen[stand.e1stufe]}</span>
@@ -108,12 +109,30 @@ function etappe1(){
   // NEU (2026-08-21): Die Situationskarten tragen ihre Nummer. Nur so
   // laesst sich in Etappe 2 und 3 auf sie zurueckverweisen - dort steht
   // dieselbe Zahl an den Modellkarten.
+  //
+  // NEU (2026-09-09, Rikes Wunsch): Die Termkarten tragen ein «=», das
+  // beim Darueberfahren das Ergebnis zeigt. Rikes Absicht: «So kann man
+  // schauen, ob der term das gleiche gibt ... und dann ueberlegen warum?»
+  // - also der Vergleich ZWEIER Wege derselben Situation, nicht das
+  // Ausrechnen als Selbstzweck.
+  //
+  // Bewusst DIESELBE Bewegung wie die Situationsblase in Etappe 2 und 3
+  // («eher oben als Hilfe, so wie wir es mit den Situationen ab Etappe 2
+  // machen»): eine Marke oben links, nichts wird von selbst eingeblendet.
+  //
+  // Die Urnenkarten bekommen keine. Was ein Urnenbild behauptet, laesst
+  // sich auch ausrechnen (pruefe_urnen.py tut es), aber dann waere das
+  // Bild nicht mehr zu lesen, sondern nur noch aufzudecken.
+  function marke(k){
+    if (k.typ === 'SS')
+      return {text: String(D.anzeige[parseInt(k.id.slice(2))]), art:'sit'};
+    const wert = D.werte && D.werte[k.id];
+    return wert === undefined
+      ? null
+      : {text:'=', art:'sit', titel:'Diese Rechnung ergibt <b>' + wert + '</b>.'};
+  }
   const els = {};
-  D.karten.forEach(k=>{
-    els[k.id] = k.typ === 'SS'
-      ? karte(k.id, {text: String(D.anzeige[parseInt(k.id.slice(2))]), art:'sit'})
-      : karte(k.id);
-  });
+  D.karten.forEach(k=>{ els[k.id] = karte(k.id, marke(k)); });
 
   function kbw(){ return parseFloat(getComputedStyle(document.documentElement)
                     .getPropertyValue('--kb')); }
