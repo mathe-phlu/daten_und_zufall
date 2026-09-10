@@ -837,6 +837,27 @@ a.materialkarte:hover {
   font-size: .9rem;
   color: var(--grau);
 }
+/* Auswaerts, wie bei den Kacheln oben: Marke ↗ und ein eigenes
+   Fenster. Die Strategiewerkstatt ist eine ARBEITSSEITE — sie nimmt
+   auf, und wer sie im Rahmen oeffnet, verliert bei jedem Zurueck die
+   laufende Aufnahme. Rike, 10.09.2026: «Alle Links, die zu
+   Arbeitsmaterial fuehren und nicht zu Informaterial, sollten auf
+   einer neuen Seite oeffnen.»
+
+   `.aus-text` ist dieselbe Regel fuer einen Verweis im Fliesstext —
+   dort kann die Marke nicht in der Ecke sitzen, also haengt sie
+   hinten an, mit geschuetztem Abstand, damit sie nicht allein
+   umbricht. */
+.materialkarte { position: relative; }
+.materialkarte.aus::after {
+  content: "↗";
+  position: absolute;
+  top: .375rem; right: .5rem;
+  font-size: .8rem;
+  color: var(--grau);
+}
+.aus-text::after { content: "\00a0↗"; font-size: .8em; }
+
 /* Wartend: matt und nicht anklickbar — dieselbe Sprache wie überall. */
 .materialkarte.wartet {
   opacity: .45;
