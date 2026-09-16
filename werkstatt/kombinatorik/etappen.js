@@ -586,6 +586,13 @@ function etappe2(){
   const modelle = D.karten.filter(k=>k.typ==='U'
     && (stand.loesungOffen || (D.stufe[k.id] ?? 0) <= (stand.e1stufe ?? 0))).map(k=>k.id);
   const els = {};
+  /* NEU (2026-09-10, siehe merken() in der Flaeche): Diese Etappe zeigt
+     nur die Modellkarten. Ohne diese Angabe strich merken() beim ersten
+     Ablegen alle Situations- und Termkarten aus dem Stand - und damit
+     die Sortierung von Etappe 1. Gemeldet wird die GRUNDkennung, damit
+     Kopien (id#N) mitzaehlen und beim Weglegen weiterhin verschwinden. */
+  const _meine = new Set(modelle);
+  window._zustaendig = id => _meine.has(id.split('#')[0]);
   modelle.forEach(id=>{
     const n = D.loesung[id];
     // Von Anfang an, nicht mehr auf Knopfdruck.
@@ -621,6 +628,10 @@ function etappe2(){
     p.onclick=()=>{ stand.gruppen.push({name:'',karten:[]}); gruppen(); };
     feld.appendChild(p);
     feld.style.minHeight=(26+Math.ceil((i+1)/sp)*(fh+10)+20)+'px';
+    const heimatlos = [];
+    // Die Hoehen oben sind VORgerechnet, fuer leere Gruppen. Wie hoch
+    // eine Gruppe wirklich wird, weiss erst gitterSetzen() - nach dem
+    // Einsetzen der Karten unten wird deshalb noch einmal gestapelt.
     Object.entries(stand.karten).forEach(([id,s])=>{
       const el=els[id]; if(!el) return;
       // FEHLERBEHOBEN (2026-08-24): Etappe 1 legt frisch freigeschaltete
@@ -632,7 +643,21 @@ function etappe2(){
       // Direkt zu Etappe 2 gesprungen, «Modellkarten» komplett leer.
       const ziel = s.ort.startsWith('tisch') ? tisch : feld.querySelector(`[data-ort="${s.ort}"]`);
       if(ziel){ ziel.appendChild(el); el._x=s.x; el._y=s.y; el._rot=s.rot; pos(el); }
+      /* FEHLERBEHOBEN (2026-09-10, zweite Haelfte von Rikes Bericht:
+         «da war dann irgendwie keine Urnenkarte zu sehen»): Ein Modell,
+         das in Etappe 1 in einer Gruppe liegt, traegt den Ort «g0/p0».
+         Etappe 2 kennt nur «g0» - der querySelector fand nichts, `ziel`
+         blieb null, und die Karte erschien NIRGENDS. Wer in Etappe 1
+         gruendlich sortiert hatte, fand hier einen leeren Tisch.
+         Der Ort gehoert einer anderen Etappe; hier kommt die Karte
+         zurueck auf den Tisch, wo der Auftrag sie erwartet («Nehmen Sie
+         die Modellkarten wieder auf»). */
+      else { el.dataset.fremdlage = JSON.stringify(s); heimatlos.push(el); }
     });
+    // Sie liegen hier auf dem Tisch, aber ihr Platz drueben bleibt
+    // stehen, solange sie hier niemand anfasst - siehe merken().
+    if (heimatlos.length) streuen(heimatlos, tisch);
+    gitterSetzen(feld);
   }
   window._neuzeichnen = gruppen;      // sonst zeichnet Etappe 1 hier hinein
   gruppen();
@@ -643,6 +668,9 @@ function etappe2(){
     const ziel = s.ort.startsWith('tisch') ? tisch : feld.querySelector(`[data-ort="${s.ort}"]`);
     if(ziel){ ziel.appendChild(el); el._x=s.x; el._y=s.y; el._rot=s.rot; pos(el); }
   });
+  // Nach dem Ausstreuen und Einsetzen steht der Stand - erst jetzt
+  // merken, sonst faellt gerade Korrigiertes wieder heraus.
+  merken();
   // Die Loesung setzt nur, WELCHE Gruppe eine Karte traegt - WO sie
   // innerhalb der Gruppe liegt, richtet dasselbe Raster her, das auch
   // beim Ablegen von Hand greift.
@@ -673,7 +701,14 @@ function etappe2(){
         + `Wovon ist die Strategie dann eine Eigenschaft?`
       : 'Sie benennen die Gruppen selbst. Es gibt keine richtige Zahl.';
   }
-  window._nachAblegen = streuungMelden;
+  /* NEU (2026-09-10, Rueckmeldung der Studierenden): gitterSetzen() muss
+     mit. gruppeOrdnen() machte beim Ablegen die eine Gruppe hoeher, und
+     die Zeile darunter blieb stehen, wo sie war - «die Gruppen haben
+     sich überschnitten». Der Haken traegt nur EINE Funktion, und
+     streuungMelden() stand schon darin; deshalb beides hier zusammen
+     und nicht zweimal gesetzt (das zweite gewinnt sonst stillschweigend
+     - genau der Fehler, der beim Bauen dieser Zeile passiert ist). */
+  window._nachAblegen = ()=>{ gitterSetzen(feld); streuungMelden(); };
   streuungMelden();
 
   document.getElementById('weiter').onclick = ()=>{ stand.etappe=2; los(); };
@@ -763,6 +798,10 @@ function etappe3(){
         : 'Später können Sie die übrigen dazunehmen.'}</span>`);
 
   const feld = document.getElementById('feld'), tisch = document.getElementById('tisch');
+  // NEU (2026-09-10): els fuehrt die Karten dieser Etappe. Vorher gab
+  // es hier keine Buchfuehrung - deshalb konnten die «+»-Kopien beim
+  // Neuzeichnen verschwinden. kopierGeste() braucht sie ohnehin.
+  const els = {};
   const kb = parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--kb'));
   const bb = feld.clientWidth||520, fw=Math.min(bb-16,kb*2+30), fh=kb*1.5;
   const sp = Math.max(1, Math.floor((bb-8)/(fw+10)));
@@ -794,20 +833,46 @@ function etappe3(){
     ziel.appendChild(el); el._x=s.x; el._y=s.y; el._rot=s.rot; pos(el);
   });
   feld.style.minHeight=(26+Math.ceil(stand.gruppen.length/sp)*(fh+10)+20)+'px';
+  // Wie in Etappe 2: die Hoehen oben sind fuer LEERE Gruppen gerechnet.
+  // Hier liegen die Karten aus Etappe 2 schon drin, also muss gleich
+  // beim Aufbau gestapelt werden - und nach jedem Ablegen wieder.
+  window._nachAblegen = ()=>{
+    const geaendert = vorratWahren();
+    gitterSetzen(feld);
+    if (geaendert) merken();
+  };
 
   // FEHLERBEHOBEN: Beim Dazulegen des zweiten Stapels wurden die schon
   // gelegten Karten uebersprungen - und weil die Buehne neu aufgebaut
   // wird, verschwanden sie ganz. Jetzt kommen sie an ihren Platz zurueck.
+  /* GEAENDERT (2026-09-10, Rikes Rueckmeldung «das ist muehsam»): Das
+     «+» ist weg, die Geste selbst ist die Kopie - dieselbe Regel wie in
+     den anderen Kapiteln, gemeinsam in flaeche.js (kopierGeste).
+
+     Der alte Knopf hatte hier zusaetzlich einen stillen Fehler: Die
+     Kopie wurde zwar gebaut und abgelegt, aber NIE in els eingetragen.
+     Beim naechsten Neuzeichnen (Fenstergroesse, Loesung, Etappenwechsel)
+     fand felder() kein Element zu ihrer Kennung - die Kopie war weg,
+     ihr Eintrag im Stand blieb. Das Zaehlwerk stimmte danach nicht mehr.
+     Mit der gemeinsamen Geste kann das nicht mehr passieren: Sie fuehrt
+     els selbst. */
+  const marken = {};
+  liste.forEach(x=>{ marken[x.id] = {text:x.marke, art:x.art}; });
+  const grund3 = id => id.split('#')[0];
+  const aufgabenkarte = id =>
+    karte(id, marken[grund3(id)] || {text:'', art:'skript'});
+
+  function vorratWahren(){
+    return kopierGeste({
+      tisch, els, bauen: aufgabenkarte,
+      ziele: () => [...feld.querySelectorAll(':scope > .feld')],
+    });
+  }
+
   const neue = [];
   liste.forEach(x=>{
-    const el = karte(x.id, {text:x.marke, art:x.art});
-    const d = document.createElement('div');
-    d.className='dop'; d.textContent='+'; d.title='Karte verdoppeln';
-    d.onclick = ev=>{ ev.stopPropagation();
-      const kopie = karte(x.id+'#'+(++stand.dupl), {text:x.marke, art:x.art});
-      el.parentElement.appendChild(kopie);
-      kopie._x = el._x + 16; kopie._y = el._y + 16; pos(kopie); merken(); };
-    el.appendChild(d);
+    const el = aufgabenkarte(x.id);
+    els[x.id] = el;
     const s = stand.karten[x.id];
     if (s){
       const ziel = s.ort==='tisch' ? tisch : feld.querySelector(`[data-ort="${s.ort}"]`);
@@ -816,6 +881,7 @@ function etappe3(){
     } else neue.push(el);
   });
   if (neue.length) streuen([...tisch.querySelectorAll('.k'), ...neue], tisch);
+  gitterSetzen(feld);
   merken();
   const w = document.getElementById('wechsel');
   if (w) w.onclick=()=>{
