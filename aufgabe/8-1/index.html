@@ -3,7 +3,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Aufgabe 8.1 · Daten und Zufall</title>
-<link rel="stylesheet" href="../../gemeinsam/lernlandschaft.css?f=bd956d39">
+<link rel="stylesheet" href="../../gemeinsam/lernlandschaft.css?f=60d90b59">
 <body data-farbe="aktion">
 <div class="stationskopf"><span class="wort">AUFGABE</span><span class="roemisch">8.1</span><h1>Daten und Zufall</h1><span class="wechsel wortweise"><a href="../../index.html">Startseite</a><a href="../index.html">Alle Aufgaben</a></span></div>
 <main>
@@ -25,7 +25,7 @@ $$\sigma = \sqrt{22.5} = 4.74$$</li></ul></p>
 <p>Die exakte Wahrscheinlichkeit für genau 82 Treffer berechnet sich mit der Binomialformel:
 $$P(X = 82) = \binom{120}{82} \cdot 0.75^{82} \cdot 0.25^{38}$$</p>
 <p>Diese Berechnung ist per Hand kaum durchführbar. Wir verwenden daher Excel:</p>
-<p><strong>Excel-Formel:</strong> <code>=BINOM.VERT(82 120 0,75 FALSCH)</code></p>
+<p><strong>Excel-Formel:</strong> <code>=BINOM.VERT(82;120;0,75;FALSCH)</code></p>
 <aside class="merksatz"><strong>Ergebnis:</strong> $P(X = 82) = 0.0203 = 2.0\%$</aside>
 <h4>(b) Näherung mit Normalverteilung:</h4>
 <p>Bei der Normalverteilung verwenden wir die kontinuierliche Dichtefunktion. Zunächst standardisieren wir den Wert:</p>
@@ -33,7 +33,7 @@ $$P(X = 82) = \binom{120}{82} \cdot 0.75^{82} \cdot 0.25^{38}$$</p>
 $$t = \frac{x - \mu}{\sigma} = \frac{82 - 90}{4.74} = \frac{-8}{4.74} = -1.69$$</p>
 <p>Die Wahrscheinlichkeitsdichte an der Stelle $x = 82$ ist:
 $$f(82) = \frac{1}{\sigma\sqrt{2\pi}} \cdot e^{-\frac{1}{2}t^2}$$</p>
-<p><strong>Excel-Formel:</strong> <code>=NORM.VERT(82 90 4,74 FALSCH)</code></p>
+<p><strong>Excel-Formel:</strong> <code>=NORM.VERT(82;90;4,74;FALSCH)</code></p>
 <aside class="merksatz"><strong>Ergebnis:</strong> $f(82) \approx 0.0203 = 2.0\%$</aside>
 <h4>Vergleich und Interpretation:</h4>
 <p>Die Normalapproximation liefert mit 2.0% ein exzellentes Ergebnis! Die perfekte Übereinstimmung erklärt sich durch:
@@ -41,7 +41,7 @@ $$f(82) = \frac{1}{\sigma\sqrt{2\pi}} \cdot e^{-\frac{1}{2}t^2}$$</p>
 <p>Die Normalverteilung ist hier eine hervorragende Näherung für die Binomialverteilung.</p></div></div></div><p class="fundort">Im Video: <a href="../../lernweg-8/naeherung-der-bernoulliformel/index.html">Etappe 3 · Näherung der Bernoulliformel</a> <span class="zeit">bei 5:39</span></p><p class="heimknopf"><a href="../../index.html"><span class="haus" aria-hidden="true">⌂</span>Material</a></p>
 </main>
 <footer><div class="seitenfuss"><span class="wo"><b>MA01.07 · MA01.08</b> Daten und Zufall</span><span class="wer">Henrike Allmendinger · Herbstsemester 2026<a class="pinnwand" href="https://www.taskcards.de/#/board/c1b7fe7b-28eb-41b2-bf38-60c4264a9f8c" target="_blank" rel="noopener">Feedback</a></span></div></footer>
-<script src="../../gemeinsam/seite.js?f=bd956d39"></script>
+<script src="../../gemeinsam/seite.js?f=60d90b59"></script>
 
 <script>window.MathJax={tex:{inlineMath:[['$','$'],['\\(','\\)']],
   displayMath:[['\\[','\\]'],['$$','$$']],processEscapes:true,
