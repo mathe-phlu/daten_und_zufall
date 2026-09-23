@@ -1053,10 +1053,157 @@
     document.querySelectorAll('.etappe').forEach(etappeAufsetzen);
     document.querySelectorAll('.zeitstrahl').forEach(wegAnpassen);
     document.querySelectorAll('.stufen').forEach(stufenAufsetzen);
+    document.querySelectorAll('.schrittfolge[data-szenen]')
+            .forEach(buehneAufsetzen);
+    document.querySelectorAll('.zellentabelle').forEach(zellentafelAufsetzen);
     /* Nach `etappeAufsetzen`, damit das Video der Etappe schon
        beansprucht ist und hier nicht doppelt verdrahtet wird. */
     document.querySelectorAll('.rahmen.vorschau[data-video]')
             .forEach(vorschauAufsetzen);
+  }
+
+  /* **Die Buehne zum Durchklicken.** Uebernommen aus Lores Prototyp
+     vom 19.09.2026, den Rike abgenommen hat — Zurueck, Weiter, Von
+     vorn, Punkte als Fortschritt, Pfeiltasten. Nicht neu erfunden:
+     Was sie gebaut hat, funktionierte; es fehlte nur der Weg vom
+     Quelltext hierher.
+
+     **Erst hier wird gefaltet, nicht schon beim Bauen.** Die Seite
+     liefert alle Szenen sichtbar aus. Ohne JavaScript — beim Drucken,
+     bei abgeschaltetem Skript — bleiben sie untereinander stehen und
+     die ganze Loesung ist lesbar. Verlieren kann daran niemand etwas.
+
+     Die Pfeiltasten wirken nur, solange die Buehne im Bild ist: Auf
+     einer Etappenseite koennen mehrere stehen, und Pfeiltasten, die
+     alle gleichzeitig weiterschalten, waeren Unfug. */
+  function buehneAufsetzen(tafel) {
+    const szenen = [...tafel.querySelectorAll('.sf-szene')];
+    const fuss   = tafel.querySelector('.sf-fuss');
+    const kopf   = tafel.querySelector('.sf-kopf');
+    if (szenen.length < 2 || !fuss || !kopf) return;
+
+    const zurueck = fuss.querySelector('.sf-zurueck');
+    const weiter  = fuss.querySelector('.sf-weiter');
+    const punkte  = fuss.querySelector('.sf-punkte');
+    const titel   = kopf.querySelector('.sf-kopftitel');
+    const zaehler = kopf.querySelector('.sf-zaehler');
+
+    szenen.forEach(() => {
+      const p = document.createElement('span');
+      p.className = 'sf-punkt';
+      punkte.append(p);
+    });
+
+    let k = 0;
+    function zeigen() {
+      szenen.forEach((s, i) => s.classList.toggle('da', i === k));
+      [...punkte.children].forEach((p, i) => p.classList.toggle('da', i <= k));
+      /* Die Ueberschrift der Szene wandert in den Kopf. Sie steht
+         trotzdem in jeder Szene: Ohne JavaScript stehen die Szenen
+         untereinander, und dann gehoert der Titel ueber seine eigene. */
+      const eigen = szenen[k].querySelector('.sf-titel');
+      titel.innerHTML = eigen ? eigen.innerHTML : '';
+      zaehler.textContent = (k + 1) + ' von ' + szenen.length;
+      zurueck.disabled = k === 0;
+      weiter .disabled = k === szenen.length - 1;
+    }
+    weiter .onclick = () => { if (k < szenen.length - 1) { k++; zeigen(); } };
+    zurueck.onclick = () => { if (k > 0) { k--; zeigen(); } };
+
+    addEventListener('keydown', e => {
+      if (!tafel.isConnected || tafel.offsetParent === null) return;
+      const r = tafel.getBoundingClientRect();
+      if (r.bottom < 0 || r.top > innerHeight) return;
+      if (e.key === 'ArrowRight' && k < szenen.length - 1) { k++; zeigen(); }
+      if (e.key === 'ArrowLeft'  && k > 0)                 { k--; zeigen(); }
+    });
+
+    tafel.classList.add('gefaltet');
+    fuss.hidden = false;
+    kopf.hidden = false;
+    zeigen();
+  }
+
+  /* **Die Gruppentabelle zum Anklicken.** Rike, 20.09.2026: «Ich dachte
+     daran, dass wir nur die Tabelle haben, und wenn man in eine Zelle
+     klickt, dann erscheint rechts daneben die Erklaerung dazu. Keine
+     Schritte drunter.»
+
+     Die Erklaerungen stehen als Liste unter der Tabelle im Quelltext —
+     eine je Zelle, ueber `data-zelle` zugeordnet. Hier wird die Liste
+     weggeblendet und ihr Inhalt auf Klick in die Tafel gehoben. Ohne
+     JavaScript bleibt die Liste stehen: dann keine Tafel, aber auch
+     kein verlorener Satz.
+
+     **Die Ueberschrift wird aus der Tabelle genommen, nicht aus dem
+     Schluessel.** Im Schluessel steht `(Z,+)`, in der Tabelle steht die
+     gesetzte Formel — und die will man lesen. Der Schluessel ist eine
+     Adresse, kein Text. */
+  function zellentafelAufsetzen(block) {
+    const tafel  = block.querySelector('.zt-tafel');
+    const inhalt = block.querySelector('.zt-inhalt');
+    const ruf    = block.querySelector('.zt-ruf');
+    const liste  = block.querySelector('.zt-texte');
+    const zellen = [...block.querySelectorAll('td[data-zelle]')];
+    if (!tafel || !inhalt || !liste || !zellen.length) return;
+
+    const texte = {};
+    liste.querySelectorAll('dt[data-zelle]').forEach(dt => {
+      const dd = dt.nextElementSibling;
+      if (dd && dd.tagName === 'DD') texte[dt.dataset.zelle] = dd;
+    });
+    /* Fehlt auch nur ein Text, bleibt die Liste stehen. Eine Tabelle,
+       bei der jede zweite Zelle nichts sagt, ist aergerlicher als eine
+       Liste, die alles sagt. */
+    if (zellen.some(z => !texte[z.dataset.zelle])) return;
+
+    const kopfzeile = block.querySelector('tr');
+    const kopf = kopfzeile ? [...kopfzeile.children] : [];
+
+    function beschriftung(zelle) {
+      const stelle = zelle.dataset.zelle.split('-');
+      const reihe  = zelle.closest('tr');
+      const links  = reihe ? reihe.children[0] : null;
+      const oben   = kopf[Number(stelle[1])];
+      const teile  = [];
+      if (links) teile.push(links.innerHTML);
+      if (oben)  teile.push(oben.innerHTML);
+      return teile.join(' <span class="zt-mal">·</span> ');
+    }
+
+    function zeigen(zelle) {
+      zellen.forEach(z => z.classList.toggle('da', z === zelle));
+      inhalt.innerHTML = '<h4>' + beschriftung(zelle) + '</h4>'
+                       + texte[zelle.dataset.zelle].innerHTML;
+      if (ruf) ruf.hidden = true;
+      /* Wurde die Zelle angeklickt, bevor MathJax fertig war, steht im
+         Text noch das rohe Dollarzeichen. Einmal nachsetzen kostet
+         nichts und rettet diesen Fall. */
+      if (window.MathJax && MathJax.typesetPromise) {
+        MathJax.typesetPromise([inhalt]).catch(function () {});
+      }
+    }
+
+    zellen.forEach((zelle, i) => {
+      zelle.tabIndex = 0;
+      zelle.setAttribute('role', 'button');
+      zelle.onclick = () => zeigen(zelle);
+      zelle.onkeydown = e => {
+        if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); zeigen(zelle); return; }
+        /* Pfeiltasten wandern durch das Raster — fuenf mal fuenf lassen
+           sich mit der Tabulatortaste nur muehsam durchqueren. */
+        const spalten = kopf.length - 1;
+        const schritt = { ArrowRight: 1, ArrowLeft: -1,
+                          ArrowDown: spalten, ArrowUp: -spalten }[e.key];
+        if (schritt === undefined) return;
+        const ziel = zellen[i + schritt];
+        if (ziel) { e.preventDefault(); ziel.focus(); }
+      };
+    });
+
+    liste.hidden = true;
+    tafel.hidden = false;
+    block.classList.add('bedienbar');
   }
 
   if (document.readyState === 'loading') {

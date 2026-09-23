@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="de"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Reflexion — Kapitel 3</title>
+<style>
+@font-face{font-family:'Fira Sans';font-style:normal;font-weight:400;src:url('schriften/FiraSans-Regular.woff') format('woff')}
+@font-face{font-family:'Fira Sans';font-style:italic;font-weight:400;src:url('schriften/FiraSans-Italic.woff') format('woff')}
+@font-face{font-family:'Fira Sans';font-style:normal;font-weight:600;src:url('schriften/FiraSans-SemiBold.woff') format('woff')}
+@font-face{font-family:'Fira Sans';font-style:normal;font-weight:700;src:url('schriften/FiraSans-Bold.woff') format('woff')}
+@font-face{font-family:'Patrick Hand';font-style:normal;font-weight:400;src:url('schriften/PatrickHand-Regular.woff') format('woff')}
+:root{ --papier:#f8f4ec; --karte:#fffefb; --tinte:#2d2924; --matt:#6c6357;
+       --linie:#e4d9c7;
+       --zugang:#007D57; --aktion:#9867A5; --beweis:#E09E5A; --fach:#0065A9;
+       --akzent:var(--beweis);
+       --druck:'Fira Sans','Segoe UI',-apple-system,sans-serif;
+       --hand:'Patrick Hand',cursive; }
+*{box-sizing:border-box}
+body{margin:0;font:15px/1.55 var(--druck);color:var(--tinte);
+     background:var(--papier)}
+/* `flex-wrap` und `nowrap`: Auf einem Telefon steht die Kopfzeile
+   zweizeilig. Ohne beides riss der Rueckweg zwischen Haussymbol und
+   Text auseinander - gemessen bei 375 px. */
+header{display:flex;align-items:center;gap:14px;padding:8px 18px;
+        flex-wrap:wrap;border-bottom:1px solid var(--linie);
+        background:var(--karte)}
+header .streifen{width:5px;height:26px;background:var(--akzent);
+                 border-radius:3px}
+header h1{font-family:var(--hand);font-size:21px;margin:0;font-weight:400}
+.heimknopf{margin-left:auto;display:inline-flex;align-items:center;gap:7px;
+      font-size:13px;text-decoration:none;color:var(--matt);
+      border:1px solid transparent;border-radius:9px;padding:4px 10px;
+      white-space:nowrap}
+.heimknopf:hover{border-color:var(--linie);color:var(--tinte)}
+main{max-width:660px;margin:0 auto;padding:38px 20px 60px}
+.lage{font-family:var(--hand);font-size:23px;color:var(--akzent);
+      margin:0 0 26px}
+h2{font-size:20px;margin:0 0 6px;font-weight:600}
+.vor{color:var(--matt);margin:0 0 22px}
+.tuer{display:block;text-decoration:none;color:inherit;background:var(--karte);
+      border:1px solid var(--linie);border-radius:13px;padding:16px 18px;
+      margin-bottom:12px}
+.tuer:hover{border-color:var(--akzent)}
+.tuer b{display:block;font-size:17px;margin-bottom:5px}
+.tuer span{display:block;color:var(--matt);font-size:14px}
+.hinweis{color:var(--matt);font-size:13px;line-height:1.6;margin-top:26px;
+         border-top:1px solid var(--linie);padding-top:16px}
+</style>
+</head><body>
+
+<header><div class="streifen"></div>
+  <h1>Kapitel 3 · Reflexion</h1>
+  <a class="heimknopf" href="../../lernweg-3/abschluss/index.html"><span
+     aria-hidden="true">&#8962;</span>Zurück zum Kapitel 3</a>
+</header>
+
+<main>
+  <p class="lage">Wer die Wahl hat … oder nicht?</p>
+  <h2>Wie arbeiten Sie heute?</h2>
+  <p class="vor">Die Aufgabe ist in beiden Fassungen dieselbe. Verschieden
+     ist nur, ob eine Aufnahme mitläuft.</p>
+
+  <a class="tuer" href="ohne_aufnahme.html">
+    <b>Ich arbeite in der Übung oder zu Hause für mich</b>
+    <span>Es wird nichts aufgezeichnet. Sie sortieren, schreiben und
+      nehmen am Ende Ihren Stand als PDF mit.</span></a>
+
+  <a class="tuer" href="aufnahme.html">
+    <b>Ich kompensiere eine Anwesenheit</b>
+    <span>Ihr Gespräch und Ihre Kartenzüge werden aufgezeichnet. Am Ende
+      speichern Sie beides und geben es ab — die Aufnahme ist Ihr Nachweis
+      für die Studienleistung. Und wenn Sie ohnehin aufnehmen möchten, vor
+      Ort oder zu Hause, ist das ebenfalls diese Fassung.</span></a>
+
+  <p class="hinweis"><b>Fünf Nachweise im Semester.</b> Ein Nachweis ist entweder eine Anwesenheit vor Ort oder eine Aufnahme — beides zählt gleich, und Sie dürfen mischen. Mehr als fünf ist möglich, aufnehmen dürfen Sie immer: vor Ort ebenso wie zu Hause.</p>
+</main>
+
+</body></html>
