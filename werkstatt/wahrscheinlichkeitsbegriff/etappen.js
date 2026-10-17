@@ -28,6 +28,20 @@
 
    Die Geometrie rechnet in matplotlib-Richtung - y waechst nach OBEN.
    SVG rechnet umgekehrt. Deshalb die eine Spiegelung in Y(). */
+/* NEU (2026-10-17): die getippte Rechnung klein unter dem Feld, und ein
+   Feld, dessen Rechnung sich nicht lesen laesst. Hier statt in
+   kern/flaechen/flaeche/flaeche.css, weil nur dieses Kapitel es braucht. */
+(function(){
+  const s = document.createElement('style');
+  s.id = 'rechnung-stil';
+  s.textContent = `
+  svg.venn .vrech{font-size:3.8px;fill:var(--matt);pointer-events:none;
+     paint-order:stroke;stroke:#fffefb;stroke-width:1.4px;stroke-linejoin:round}
+  svg.venn input.vfeld.vunlesbar{border:.9px solid var(--falsch);color:var(--falsch)}
+  `;
+  document.head.appendChild(s);
+})();
+
 const VH = 100;                        // Hoehe des Zeichenfeldes
 /* Angezeigt als A, B, C, intern M, V, W - siehe zeichnen.NAMEN. */
 const NAME = f => (D.venn.beschriftung || {})[f] || f;
@@ -41,13 +55,76 @@ function vennWert(id, feld){
 }
 
 /* Prozentangabe zu Zahl. «12,5%» und «12.5» und «12,5 %» sind dasselbe.
-   Gibt null zurueck, wenn nichts Brauchbares dasteht. */
+   Gibt null zurueck, wenn nichts Brauchbares dasteht.
+
+   NEU (2026-10-17, Rikes Wunsch): Ein Feld nimmt auch eine RECHNUNG,
+   wie in Kapitel 5 («100 - 35 - 20», «45 - (12 + 8)»). Gespeichert wird
+   die getippte Rechnung, gerechnet wird ueberall mit ihrem Ergebnis.
+     Zeichen  + - −   * · × x   : / ÷   ( )
+   Alles hier ist Prozent; ein «%» ist deshalb nur Schmuck und wird
+   ueberlesen. Anders als in Kapitel 5 gibt es keine Deutungsfrage:
+   Im Venn wird nur addiert und subtrahiert, «50 % · 40 %» kommt nicht vor.
+   PRUEFEN: Wer doch so multipliziert, bekommt 2000 statt 20. */
+function rechne(txt){
+  const s = String(txt).replace(/%/g, '').replace(/,/g, '.').replace(/\s+/g, '');
+  if (!s) return null;
+  const tok = [], re = /(\d+(?:\.\d+)?|\.\d+)|([+\-−*·×x:\/÷()])/gy;
+  while (re.lastIndex < s.length){
+    const m = re.exec(s);
+    if (!m) return null;
+    tok.push(m[1] !== undefined ? {z: Number(m[1])}
+      : {o: ({'−':'-', '·':'*', '×':'*', 'x':'*', '÷':'/', ':':'/'})[m[2]] || m[2]});
+  }
+  let i = 0;
+  const sieh = () => tok[i] || {}, nimm = () => tok[i++] || {};
+  function primaer(){
+    const t = nimm();
+    if (t.o === '('){
+      const v = summe();
+      if (nimm().o !== ')') throw 0;
+      return v;
+    }
+    if (t.o === '-') return -primaer();
+    if (t.z === undefined) throw 0;
+    return t.z;
+  }
+  function produkt(){
+    let v = primaer();
+    while (sieh().o === '*' || sieh().o === '/'){
+      const o = nimm().o, w = primaer();
+      v = o === '*' ? v * w : v / w;
+    }
+    return v;
+  }
+  function summe(){
+    let v = produkt();
+    while (sieh().o === '+' || sieh().o === '-'){
+      const o = nimm().o, w = produkt();
+      v = o === '+' ? v + w : v - w;
+    }
+    return v;
+  }
+  try {
+    const v = summe();
+    if (i < tok.length || !Number.isFinite(v)) return null;
+    // Gleitkomma-Reste weg: 100 - 35.3 soll 64.7 sein, nicht 64.69999
+    return Math.round(v * 1e9) / 1e9;
+  } catch (_){ return null; }
+}
 function alsZahl(txt){
   if (txt === undefined || txt === null) return null;
-  const t = String(txt).replace('%','').replace(',','.').trim();
-  if (t === '') return null;
-  const z = Number(t);
-  return Number.isFinite(z) ? z : null;
+  return rechne(txt);
+}
+const esc = t => String(t).replace(/&/g, '&amp;').replace(/</g, '&lt;')
+  .replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+/* Steht im Feld eine Rechnung oder nur eine Zahl? */
+const istRechnung = txt => /\d\s*[+\-−*·×x:\/÷]|[()]/.test(String(txt || '').replace(/^\s*[-−]/, ''));
+/* Das Ergebnis so, wie es im Feld steht: «64,7%». Unlesbares bleibt,
+   wie es getippt wurde. */
+function feldText(txt){
+  const z = alsZahl(txt);
+  if (z === null) return String(txt || '');
+  return String(Math.round(z * 100) / 100).replace('.', ',') + '%';
 }
 
 /* Alle elf Groessen einer Erhebung: gedruckt plus selbst eingetragen -
@@ -112,19 +189,25 @@ function vennBild(e, editierbar, richtig){
     if (gedruckt !== undefined)
       return `<text x="${x}" y="${Y(y)}" class="vwert ${klasse}">${gedruckt}</text>`;
     if (!editierbar){
-      const eig = richtig ? e.loesung[feld] : vennWert(e.id, feld);
+      const eig = richtig ? e.loesung[feld] : feldText(vennWert(e.id, feld));
       return `<text x="${x}" y="${Y(y)}" class="vwert vselbst ${klasse}">`
-           + `${eig || '?'}</text>`;
+           + `${esc(eig) || '?'}</text>`;
     }
     // foreignObject, weil ein <input> kein SVG-Element ist. Die Breite
     // ist so gewaehlt, dass «100%» hineinpasst, ohne den Nachbarn zu
     // beruehren.
+    // NEU (2026-10-17): Im Feld steht das Ergebnis, klein darunter die
+    // getippte Rechnung - wie in Kapitel 5. Beim Anklicken kommt die
+    // Rechnung zurueck ins Feld, damit man sie verbessern kann.
     const bw = 15, bh = klasse === 'imkasten' ? 7.2 : 8.4;
+    const roh = vennWert(e.id, feld);
     return `<foreignObject x="${x - bw/2}" y="${Y(y) - bh/2}" `
          + `width="${bw}" height="${bh}">`
          + `<input xmlns="http://www.w3.org/1999/xhtml" class="vfeld" `
-         + `data-erh="${e.id}" data-feld="${feld}" `
-         + `value="${vennWert(e.id, feld)}" placeholder="?"/></foreignObject>`;
+         + `data-erh="${e.id}" data-feld="${feld}" autocomplete="off" spellcheck="false" `
+         + `value="${esc(feldText(roh))}" placeholder="?"/></foreignObject>`
+         + `<text x="${x}" y="${Y(y) + bh/2 + 1.9}" class="vrech" `
+         + `data-feld="${feld}">${istRechnung(roh) ? esc(roh) : ''}</text>`;
   };
 
   Object.entries(g.felder).forEach(([feld, [x, y]]) => {
@@ -159,6 +242,23 @@ function vennBild(e, editierbar, richtig){
       stand.venn[e.id][f.dataset.feld] = f.value;
       merken();
     });
+    // Rechnung beim Anklicken zurueck ins Feld, Ergebnis beim Verlassen.
+    const rech = svg.querySelector(`text.vrech[data-feld="${f.dataset.feld}"]`);
+    f.addEventListener('focus', () => {
+      f.value = vennWert(e.id, f.dataset.feld);
+      if (rech) rech.textContent = '';
+    });
+    f.addEventListener('keydown', ev => { if (ev.key === 'Enter') f.blur(); });
+    const zeigen = () => {
+      const roh = vennWert(e.id, f.dataset.feld);
+      f.value = feldText(roh);
+      f.classList.toggle('vunlesbar', roh.trim() !== '' && alsZahl(roh) === null);
+      f.title = f.classList.contains('vunlesbar')
+        ? 'Diese Rechnung lässt sich nicht lesen. Erlaubt: Zahlen, + − · : und Klammern.' : '';
+      if (rech) rech.textContent = istRechnung(roh) ? roh : '';
+    };
+    f.addEventListener('blur', zeigen);
+    zeigen();
   });
   return svg;
 }
@@ -259,7 +359,10 @@ function etappe1(){
        // GEAENDERT (2026-10-13, Rike): Der Nachsatz «Wogegen eine
        // Erhebung verstoesst, ist hier noch nicht die Frage. Das kommt im
        // zweiten Zug» ist weg - er muss da noch nicht stehen.
-       + 'fehlenden Angaben aus dem aus, was dasteht.'},
+       + 'fehlenden Angaben aus dem aus, was dasteht. '
+       // NEU (2026-10-17): Rechnungen im Feld, wie in Kapitel 5.
+       + 'Sie können die Zahl oder gleich die Rechnung eintippen, '
+       + 'z. B. <i>100 − 35 − 20</i>.'},
     'Die acht Erhebungen — zum Füllen', 'Woran es scheitern kann',
     `<button class="knopf leer" id="leeren" title="Alle Eingaben löschen">↺</button>
      <button class="knopf" id="nachrechnen">Nachrechnen</button>
