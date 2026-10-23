@@ -1,0 +1,780 @@
+<!doctype html>
+<!--
+NEU (2026-10-21, Rikes Auftrag): Borel als kurzer Einstieg in die
+Uebungsstunde nach Kapitel 1-4. Rund 15 Minuten im Plenum, dann Landkarte.
+
+GEAENDERT (2026-10-22, Rike): Einstieg mit der Frage «Was ist
+Wahrscheinlichkeit?»; aus den Antworten werden die Grundvorstellungen
+nach Malle & Malle herausgearbeitet (Popup, Fassung aus Rikes Folien
+FD3_HS22_10). Ziel: Schulbuchaufgaben fragen nach der Zahl, Borel fragt,
+was sie mir sagt. Wenig Spielinfo. Drei einfache Karten, an denen man
+ueber Strategien sprechen kann - je eine mit/ohne Gegenereignis, mit/ohne
+Reihenfolge, Reihenfolge kuenstlich noetig. Loesungswege als Popups,
+keine Originalkarten-Bilder, Schrift weniger technisch. Mehrfach
+durchfuehren (10/100/1000) auf der Kartenseite. Schluss: Welten und die
+zwei Wege. Keine Reserve.
+
+  Karte 1  zwei Wuerfel, mindestens eine Sechs     11/36  (Nein)
+           zwei Wege: guenstige direkt / ueber das Gegenteil;
+           Achtung: ohne Reihenfolge verboten (6/21)
+  Karte 2  6 blau / 1 rot, 4 ziehen, rote dabei     4/7   (Ja)
+           zwei Wege: ohne / mit Reihenfolge - beide erlaubt
+  Karte 3  2 rot / 2 blau, zweimal mit Zuruecklegen,
+           beide rot?                                1/4   (Nein)
+           zwei Wege: mit / ohne kuenstliche Nummerierung - beide
+           erlaubt, weil jede Farbe gleich oft drin ist
+
+Layout wie die Reflexionen (Farben, Schriften, Kopfleiste aus der
+flaeche.css der Reflexionen; Schriften liegen mit, nichts von Google).
+Bedienung: Pfeiltasten/Leertaste blaettern, D durchfuehren, E naechsten Schritt der Loesungswege einblenden,
+G Grundvorstellungen, N Notizen, F Vollbild, Esc schliesst ein Popup.
+-->
+<html lang="de-CH">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Borel</title>
+<style>
+@font-face{font-family:'Fira Sans';font-style:normal;font-weight:400;src:url('schriften/FiraSans-Regular.woff') format('woff')}
+@font-face{font-family:'Fira Sans';font-style:italic;font-weight:400;src:url('schriften/FiraSans-Italic.woff') format('woff')}
+@font-face{font-family:'Fira Sans';font-style:normal;font-weight:600;src:url('schriften/FiraSans-SemiBold.woff') format('woff')}
+@font-face{font-family:'Fira Sans';font-style:normal;font-weight:700;src:url('schriften/FiraSans-Bold.woff') format('woff')}
+@font-face{font-family:'Patrick Hand';font-style:normal;font-weight:400;src:url('schriften/PatrickHand-Regular.woff') format('woff')}
+:root{
+  --papier:#f8f4ec; --creme:#f6ecdf; --karte:#fffefb;
+  --tinte:#2d2924; --matt:#6c6357; --linie:#e4d9c7; --blase:#efe2cd;
+  --zugang:#007D57; --aktion:#9867A5; --beweis:#E09E5A; --fach:#0065A9;
+  --ja:#2E7D32; --nein:#C0392B; --rot:#C0392B; --kugelblau:#1565C0;
+  --akzent:var(--aktion);
+  --druck:'Fira Sans','Segoe UI',-apple-system,sans-serif;
+  --hand:'Patrick Hand',cursive;
+}
+*{box-sizing:border-box}
+html,body{margin:0;height:100%;background:#e9e1d3;font-family:var(--druck);color:var(--tinte)}
+#buehne{position:absolute;left:50%;top:50%;width:1600px;height:900px;transform-origin:center;background:var(--papier);overflow:hidden}
+button{font:inherit;cursor:pointer}
+
+/* Kopfleiste wie in der Reflexion */
+#kopfleiste{position:absolute;left:0;right:0;top:0;height:84px;display:flex;align-items:center;gap:18px;padding:0 30px;background:var(--karte);border-bottom:1px solid var(--linie);z-index:3}
+#kopfleiste .streifen{width:8px;height:40px;background:var(--akzent);border-radius:4px}
+#kopfleiste h1{font-family:var(--hand);font-weight:400;font-size:34px;margin:0}
+#kopfleiste nav{display:flex;gap:8px;margin-left:auto}
+#kopfleiste nav button{font-size:19px;padding:7px 17px;border:1px solid var(--linie);background:var(--karte);border-radius:999px;color:var(--tinte)}
+#kopfleiste nav button[aria-current=true]{background:var(--akzent);color:#fff;border-color:var(--akzent)}
+#kopfleiste .gv{font-family:var(--hand);font-size:24px;padding:4px 18px;border:2px solid var(--akzent);color:var(--akzent);background:var(--karte);border-radius:999px}
+
+.folie{position:absolute;left:0;right:0;top:84px;bottom:0;padding:34px 56px 40px;display:none;flex-direction:column}
+.folie.aktiv{display:flex}
+.kopf{display:flex;align-items:baseline;gap:20px;margin-bottom:12px}
+.kopf h2{font-family:var(--hand);font-weight:400;font-size:56px;margin:0}
+.tafel{background:var(--karte);border:1px solid var(--linie);border-radius:22px}
+.hand{font-family:var(--hand)}
+.leise{color:var(--matt)}
+.knopf{font-family:var(--hand);font-size:28px;padding:8px 26px;border-radius:999px;border:2px solid var(--akzent);background:var(--karte);color:var(--akzent)}
+.knopf.voll{background:var(--akzent);color:#fff}
+
+/* Start */
+.gross{padding:60px 70px;margin-top:40px;display:flex;flex-direction:column;gap:28px;align-items:flex-start}
+.gross h2{font-family:var(--hand);font-weight:400;font-size:110px;margin:0;line-height:1;color:var(--akzent)}
+.gross p{font-size:32px;margin:0;color:var(--matt)}
+
+/* Schulbuch gegen Borel */
+.ausgang-lage{font-family:var(--hand);font-size:48px;background:var(--karte);border:1px solid var(--linie);border-radius:22px;padding:22px 40px;margin-bottom:26px}
+.vergleich{display:grid;grid-template-columns:1fr 90px 1fr;gap:0;flex:1;align-items:stretch}
+.vergleich .tafel{padding:34px 40px;display:flex;flex-direction:column;gap:18px}
+.vergleich .marke-oben{font-family:var(--hand);font-size:64px;line-height:1;color:var(--akzent)}
+.vergleich .aufgabe{font-family:var(--hand);font-size:40px;line-height:1.25}
+.vergleich .ergebnis{font-family:var(--hand);font-size:44px;color:var(--akzent)}
+.vergleich .pfeil{align-self:center;text-align:center;font-family:var(--hand);font-size:70px;color:var(--matt)}
+.vergleich .fazit{margin-top:auto;background:var(--creme);border-radius:16px;padding:16px 22px;font-size:26px;line-height:1.35}
+
+/* Borel kurz */
+.zwei{display:grid;grid-template-columns:1fr 1fr;gap:36px;flex:1;min-height:0}
+.foto{width:100%;height:100%;min-height:0;object-fit:contain;border-radius:18px;border:1px solid var(--linie);background:#fff}
+.liste{font-family:var(--hand);font-size:36px;line-height:1.35;margin:0;padding-left:1em}
+.liste li{margin-bottom:16px}
+.heute{margin-top:auto;background:var(--creme);border:1px solid var(--linie);border-radius:18px;padding:20px 28px;font-size:26px;line-height:1.4}
+.heute b{font-family:var(--hand);font-weight:400;font-size:34px;color:var(--akzent);display:block}
+
+/* Kartenseite */
+.kartenzeile{display:grid;grid-template-columns:700px 1fr;gap:32px;flex:1;min-height:0}
+.karte{background:var(--karte);border:1px solid var(--linie);border-radius:22px;padding:40px 46px;display:flex;flex-direction:column}
+.karte .experiment{font-family:var(--hand);font-size:44px;line-height:1.3}
+.karte .frage{font-family:var(--hand);font-size:66px;line-height:1.1;margin:auto 0 26px;color:var(--akzent)}
+.marken{display:flex;gap:18px;align-items:center}
+.marke{border-radius:999px;color:#fff;font-family:var(--hand);font-size:36px;padding:2px 38px}
+.marke.ja{background:var(--ja)}.marke.nein{background:var(--nein)}
+.einsatz{font-family:var(--hand);font-size:32px;color:var(--matt);margin-left:14px}
+.rechtsspalte{display:flex;flex-direction:column;gap:18px;min-height:0}
+.labor{flex:1;min-height:0;background:var(--creme);border:1px solid var(--linie);border-radius:22px;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:20px}
+.labor .ausgang{font-family:var(--hand);font-size:42px;margin:14px 0;min-height:52px;text-align:center}
+.labor .spur{display:flex;gap:14px;flex-wrap:wrap;justify-content:center;min-height:110px;align-items:center}
+.mehrmals{background:var(--karte);border:1px solid var(--linie);border-radius:22px;padding:18px 24px}
+.mehrmals .zeile{display:flex;gap:12px;align-items:center}
+.mehrmals .zeile span{font-family:var(--hand);font-size:30px;margin-right:6px}
+.mehrmals button{font-family:var(--hand);font-size:26px;padding:2px 20px;border-radius:999px;border:2px solid var(--akzent);background:var(--karte);color:var(--akzent)}
+.mehrmals .chips{display:flex;gap:6px;flex-wrap:wrap;margin-top:12px;min-height:34px}
+.mehrmals .chips i{font-style:normal;font-family:var(--hand);font-size:22px;color:#fff;border-radius:8px;padding:0 9px}
+.balken{display:flex;height:34px;border-radius:10px;overflow:hidden;margin-top:12px;background:var(--linie)}
+.balken div{transition:width .15s}
+.balken .j{background:var(--ja)}.balken .n{background:var(--nein)}
+.mehrmals .stand{font-family:var(--hand);font-size:30px;margin-top:6px;min-height:40px}
+
+/* Kugeln, Muenzen, Wuerfel */
+.kugel{width:76px;height:76px;border-radius:50%;box-shadow:inset -9px -11px 0 rgba(0,0,0,.18);transition:transform .5s,opacity .5s}
+.kugel.r{background:var(--rot)}.kugel.b{background:var(--kugelblau)}
+.beutel{width:270px;height:190px;border-radius:36px 36px 100px 100px;background:#C9A57A;display:flex;flex-wrap:wrap;gap:10px;align-content:center;justify-content:center;padding:22px 34px;flex:none}
+.reihe{display:flex;gap:28px;align-items:center}
+.reihe .spur{display:grid;grid-template-columns:repeat(2,76px);gap:12px;min-height:0;width:164px}
+.beutel .kugel{width:44px;height:44px}
+.beutel .kugel.weg{opacity:0;transform:translateY(-60px) scale(.6)}
+.muenze{width:90px;height:90px;border-radius:50%;background:#D4A93C;border:6px solid #B08A24;display:flex;align-items:center;justify-content:center;font-family:var(--hand);font-size:48px;color:#5b4410}
+.muenze.dreht{animation:dreh .3s ease-in-out infinite}
+@keyframes dreh{0%{transform:rotateY(0)}50%{transform:rotateY(90deg)}100%{transform:rotateY(0)}}
+.wuerfel{width:120px;height:120px;border-radius:22px;background:#fff;border:4px solid var(--tinte);display:grid;grid-template-columns:repeat(3,1fr);grid-template-rows:repeat(3,1fr);padding:13px}
+.wuerfel i{width:22px;height:22px;border-radius:50%;background:var(--tinte);margin:auto;visibility:hidden}
+.wuerfel i.an{visibility:visible}
+.wuerfel.treffer{border-color:var(--akzent);box-shadow:0 0 0 6px rgba(152,103,165,.3)}
+.wuerfel.rollt{animation:roll .12s linear infinite}
+@keyframes roll{0%{transform:rotate(-8deg)}50%{transform:rotate(8deg)}100%{transform:rotate(-8deg)}}
+
+/* Aufloesung */
+.aufl{display:grid;grid-template-columns:250px 1fr;gap:34px;flex:1;min-height:0}
+.zahl{background:var(--karte);border:1px solid var(--linie);border-radius:22px;padding:30px 26px;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;gap:6px}
+.zahl .bruch{font-family:var(--hand);font-size:44px;color:var(--matt)}
+.zahl .wert{font-family:var(--hand);font-size:78px;white-space:nowrap;line-height:1;color:var(--akzent);margin-bottom:16px}
+.rechts{display:flex;flex-direction:column;gap:22px;min-height:0}
+.rechts h3{font-family:var(--hand);font-weight:400;font-size:40px;margin:0 0 12px}
+.wege{display:flex;gap:14px;flex-wrap:wrap}
+.wege .knopf{font-size:30px}
+.wege .knopf.fehler{border-color:var(--nein);color:var(--nein)}
+.sagt{background:var(--karte);border:1px solid var(--linie);border-radius:22px;padding:24px 30px}
+.sagt p{font-size:27px;line-height:1.35;margin:0 0 12px;display:flex;gap:14px;align-items:baseline}
+.sagt p b{font-family:var(--hand);font-weight:400;font-size:30px;color:#fff;background:var(--akzent);border-radius:10px;padding:0 12px;white-space:nowrap}
+
+/* Loesungswege nebeneinander. GEAENDERT (2026-10-22, Rike): Die Entscheidungen
+   sichtbar machen - Zeilen sind Schritte (Ergebnismenge waehlen mit Urne,
+   Anzahl moeglich, Anzahl guenstig, Anteil), Spalten die Wege. */
+.vgl{display:grid;grid-template-columns:170px repeat(var(--n),1fr);gap:6px 12px;align-items:stretch}
+.vgl .lbl{font-family:var(--hand);font-size:24px;line-height:1.1;color:var(--matt);display:flex;align-items:center;cursor:pointer}
+.vgl .lbl i{font-style:normal;display:inline-flex;width:34px;height:34px;border-radius:50%;background:var(--akzent);color:#fff;align-items:center;justify-content:center;margin-right:10px;flex:none}
+.vgl .kz{font-family:var(--hand);font-size:30px;color:var(--akzent);text-align:center;border-bottom:2px solid var(--akzent);padding-bottom:2px}
+.vgl .z{background:var(--karte);border:1px solid var(--linie);border-radius:14px;padding:6px 12px;font-size:22px;line-height:1.3;transition:opacity .25s}
+.vgl .z.zu{opacity:0}
+.vgl .z.anteil{font-family:var(--hand);font-size:34px;padding:4px 14px;color:var(--akzent);text-align:center;display:flex;align-items:center;justify-content:center;gap:10px}
+.vgl .z b{font-family:var(--hand);font-weight:400;font-size:30px;color:var(--akzent)}
+.vgl .omega{display:flex;gap:12px;align-items:center}
+.vgl .ent{display:flex;gap:10px;align-items:baseline;margin-bottom:4px}
+.vgl .ent span{font-family:var(--hand);font-size:21px;color:#fff;background:var(--akzent);border-radius:8px;padding:0 9px;white-space:nowrap}
+.vgl .warum{font-size:19px;color:var(--matt);font-style:italic;margin-top:2px}
+.vgl .rech{margin-top:4px}
+.vgl .wenn{white-space:nowrap;font-family:var(--hand);font-size:20px;color:var(--nein);background:none;border:1px dashed var(--nein);border-radius:999px;padding:0 14px}
+.vgl .achtung{font-family:var(--hand);font-size:24px;color:var(--nein);background:var(--karte);border:2px dashed var(--nein);border-radius:12px;padding:0 10px;align-self:end}
+.vgl .achtung[aria-pressed=true]{background:var(--nein);color:#fff;border-style:solid}
+.vgl .falsch{display:none}
+.vgl.mitfalsch .falsch{display:block}
+.vgl.mitfalsch .falsch.anteil{display:flex}
+.vgl .kz.falsch{color:var(--nein);border-color:var(--nein)}
+.vgl .z.falsch{border:2px dashed var(--nein);background:#fdf3f1}
+.vgl .z.falsch b{color:var(--nein)}
+.vgl .z small{font-family:var(--druck);font-size:17px;color:var(--nein);line-height:1.25}
+.vgl .omega svg{flex:none}
+.vgl .chips{display:flex;flex-wrap:wrap;gap:5px;margin-top:6px}
+.vgl .chips span{font-family:var(--hand);font-size:20px;background:var(--creme);border:1px solid var(--linie);border-radius:999px;padding:0 10px}
+.sagt{padding:16px 26px !important}
+.sagt h3{font-size:32px !important;margin-bottom:6px !important}
+.sagt p{font-size:23px !important;margin-bottom:6px !important}
+.sagt p b{font-size:26px !important}
+
+.zahl .sagt{margin-top:22px;padding:14px 4px 0 !important;border:0 !important;border-top:1px solid var(--linie) !important;border-radius:0 !important;text-align:left;background:none !important;width:100%}
+.zahl .sagt h3{font-family:var(--hand);font-weight:400;font-size:28px !important;margin:0 0 8px !important}
+.zahl .sagt p{display:block !important;font-size:20px !important;line-height:1.35;margin:0 0 10px !important}
+.zahl .sagt p b{display:inline-block;font-size:22px !important;margin-right:6px;padding:0 8px !important}
+.binom{display:inline-flex;align-items:center;vertical-align:middle}
+.binom::before,.binom::after{content:"";width:8px;align-self:stretch;border:2px solid currentColor}
+.binom::before{border-right:0;border-radius:12px 0 0 12px}
+.binom::after{border-left:0;border-radius:0 12px 12px 0}
+.binom span{display:inline-flex;flex-direction:column;line-height:1;font-size:.8em;padding:0 4px;text-align:center}
+.zahl{justify-content:flex-start !important}
+
+/* Entscheidungsbaum */
+.baum{display:flex;flex-direction:column;gap:12px;min-height:0;height:100%}
+.fragen{display:flex;flex-direction:column;gap:10px;margin-bottom:8px}
+.frage-z{display:flex;gap:12px;align-items:center}
+.frage-z .fr{font-family:var(--hand);font-size:34px;width:170px;flex:none}
+.opt{font-family:var(--hand);font-size:30px;padding:2px 20px;border-radius:999px;border:2px solid var(--akzent);background:var(--karte);color:var(--akzent)}
+.opt.an{background:var(--akzent);color:#fff}
+.st{font-size:22px;line-height:1.25;color:var(--matt);margin-left:8px;flex:1}
+.st b{font-family:var(--hand);font-weight:400;font-size:24px;margin-right:6px}
+.st.noetig b,.st.frei b{color:var(--ja)}
+.st.falsch b{color:var(--nein)}
+.weg{flex:1;min-height:0}
+.weg .leer{font-family:var(--hand);font-size:30px;color:var(--matt);padding:30px 0 0 182px}
+.verbot{font-family:var(--hand);font-size:24px;color:var(--nein);margin:0 0 6px 182px}
+.schritte,.vgl2{display:grid;grid-template-columns:190px 1fr;gap:8px 14px}
+.vgl2{grid-template-columns:150px 1fr 1fr}
+.schritte .lbl,.vgl2 .lbl{font-family:var(--hand);font-size:27px;color:var(--matt);display:flex;align-items:center;cursor:pointer}
+.schritte .lbl i,.vgl2 .lbl i{font-style:normal;display:inline-flex;width:32px;height:32px;border-radius:50%;background:var(--akzent);color:#fff;align-items:center;justify-content:center;margin-right:10px;flex:none}
+.schritte .z,.vgl2 .z{background:var(--karte);border:1px solid var(--linie);border-radius:14px;padding:8px 16px;font-size:26px;line-height:1.3;transition:opacity .25s}
+.schritte .z.zu{opacity:0}
+.schritte .z.anteil,.vgl2 .z.anteil{font-family:var(--hand);font-size:44px;color:var(--akzent);display:flex;align-items:center;gap:10px}
+.schritte .z b,.vgl2 .z b{font-family:var(--hand);font-weight:400;font-size:28px;color:var(--akzent)}
+.schritte.falsch .z{border:2px dashed var(--nein);background:#fdf3f1}
+.schritte.falsch .z b,.schritte.falsch .z.anteil{color:var(--nein)}
+.vgl2 .kz{font-family:var(--hand);font-size:30px;color:var(--akzent);text-align:center;border-bottom:2px solid var(--akzent)}
+.zwei-gu{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.gu-t{font-family:var(--hand);font-size:22px;color:var(--akzent)}
+.omega{display:flex;gap:12px;align-items:center}
+.chips{display:flex;flex-wrap:wrap;gap:5px}
+.chips span{font-family:var(--hand);font-size:23px;background:var(--creme);border:1px solid var(--linie);border-radius:999px;padding:0 10px}
+.rech{margin-top:4px}
+.unten{display:flex;gap:12px;justify-content:flex-end}
+.vergl.falsche{border-color:var(--nein);color:var(--nein)}
+.weg .leer small{display:block;font-family:var(--druck);font-size:22px;margin-top:8px}
+.tipp{font-size:19px;color:var(--matt);margin-right:auto;align-self:center}
+.zurloesung{margin-left:auto;font-family:var(--hand);font-size:30px;padding:2px 24px;border-radius:999px;border:2px solid var(--akzent);background:var(--akzent);color:#fff}
+.falschliste{display:flex;flex-direction:column;gap:10px}
+.fw{display:grid;grid-template-columns:260px 1fr 110px;grid-template-rows:auto auto;gap:2px 18px;background:#fdf3f1;border:2px dashed var(--nein);border-radius:14px;padding:10px 18px;align-items:center}
+.fw-wahl{font-family:var(--hand);font-size:26px;color:var(--nein)}
+.fw-om{font-size:22px}
+.fw-an{grid-row:span 2;font-family:var(--hand);font-size:40px;color:var(--nein);text-align:center}
+.fw-grund{grid-column:1 / 3;font-size:20px;color:var(--matt)}
+.vergl{align-self:flex-end;font-family:var(--hand);font-size:24px;padding:2px 20px;border-radius:999px;border:2px solid var(--akzent);background:var(--karte);color:var(--akzent)}
+
+/* Popup */
+#popup{position:absolute;inset:0;background:rgba(45,41,36,.45);display:none;align-items:center;justify-content:center;z-index:10}
+#popup.offen{display:flex}
+#popup .fenster{background:var(--karte);border-radius:26px;border:1px solid var(--linie);box-shadow:0 20px 60px rgba(0,0,0,.25);padding:40px 52px;max-width:1180px;max-height:780px;overflow:auto;position:relative}
+#popup .zu{position:absolute;right:20px;top:14px;border:0;background:none;font-size:44px;color:var(--matt)}
+#popup h3{font-family:var(--hand);font-weight:400;font-size:52px;margin:0 0 18px;color:var(--akzent)}
+#popup p{font-size:28px;line-height:1.45;margin:0 0 14px}
+#popup .schritt{display:flex;gap:18px;align-items:center;font-size:28px;line-height:1.4;margin:0 0 14px}
+#popup .ergebnis{font-family:var(--hand);font-size:44px;color:var(--akzent);margin-top:8px}
+#popup .quelle{font-size:18px;color:var(--matt);margin-top:16px}
+.gvliste{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+.gvliste div{background:var(--creme);border-radius:18px;padding:18px 24px}
+.gvliste b{display:block;font-family:var(--hand);font-weight:400;font-size:34px;color:var(--akzent)}
+.gvliste span{font-size:24px;line-height:1.35}
+.gw{margin-top:18px;font-size:23px;color:var(--matt)}
+.br{display:inline-flex;flex-direction:column;align-items:center;vertical-align:middle;font-family:var(--hand);font-size:1.15em;line-height:1.05;margin:0 4px}
+.br span:first-child{border-bottom:2px solid currentColor;padding:0 4px}
+.raster{display:grid;grid-template-columns:repeat(6,46px);gap:5px}
+.raster i{width:46px;height:46px;border-radius:8px;background:var(--creme);border:1px solid var(--linie)}
+.raster i.an{background:var(--akzent);border-color:var(--akzent)}
+
+/* Landkarte */
+.land{display:grid;grid-template-columns:auto 1fr;gap:40px;flex:1;min-height:0}
+.matrix{border-collapse:separate;border-spacing:10px 8px;align-self:start;height:auto}
+.matrix th{font-family:var(--hand);font-weight:400;font-size:26px;color:var(--matt);text-align:center}
+.matrix td.welt{font-family:var(--hand);font-size:32px;padding-right:10px;white-space:nowrap}
+.matrix td.welt img{width:58px;height:58px;object-fit:contain;vertical-align:middle;margin-right:14px}
+.legende{font-family:var(--hand);font-size:30px;display:flex;gap:26px;flex-wrap:wrap}
+.legende span{display:flex;align-items:center;gap:10px}
+.legende i{font-style:normal;width:42px;height:42px;border-radius:50%;color:#fff;display:inline-flex;align-items:center;justify-content:center}
+.matrix td.f{width:64px;height:58px;border-radius:12px;border:2px solid var(--linie);background:var(--karte);text-align:center;font-family:var(--hand);font-size:28px;transition:background .3s,color .3s}
+.matrix td.f.c1{border-color:var(--aktion);color:var(--aktion)}.matrix td.f.c2{border-color:var(--zugang);color:var(--zugang)}
+.matrix td.f.c3{border-color:var(--beweis);color:var(--beweis)}.matrix td.f.c4{border-color:var(--fach);color:var(--fach)}
+.matrix td.f.hell{color:#fff}
+.matrix td.f.c1.hell{background:var(--aktion)}.matrix td.f.c2.hell{background:var(--zugang)}
+.matrix td.f.c3.hell{background:var(--beweis)}.matrix td.f.c4.hell{background:var(--fach)}
+.wegtafel{display:flex;flex-direction:column;gap:22px}
+.wegtafel .weg{background:var(--karte);border:1px solid var(--linie);border-radius:22px;padding:24px 30px;cursor:pointer}
+.wegtafel .weg.an{border-color:var(--akzent);box-shadow:0 0 0 3px rgba(152,103,165,.25)}
+.wegtafel h3{font-family:var(--hand);font-weight:400;font-size:44px;margin:0 0 6px;color:var(--akzent)}
+.wegtafel p{font-size:26px;line-height:1.4;margin:0}
+
+#leiste{position:fixed;right:14px;bottom:8px;font-size:13px;color:var(--matt)}
+#notizen{position:fixed;left:0;right:0;bottom:0;max-height:40vh;overflow:auto;background:rgba(45,41,36,.96);color:#f8f4ec;font-size:18px;padding:16px 24px;display:none;white-space:pre-wrap}
+#notizen.an{display:block}
+</style>
+</head>
+<body>
+<div id="buehne">
+<header id="kopfleiste"><span class="streifen"></span><h1>Was sagt mir die Zahl?</h1>
+  <nav><button data-ziel="start">Start</button><button data-ziel="zahl">Zwei Fragen</button><button data-ziel="borel">Borel</button><button data-ziel="k1">Karte 1</button><button data-ziel="k2">Karte 2</button><button data-ziel="k3">Karte 3</button><button data-ziel="land">Landkarte</button></nav>
+</header>
+
+<!-- Start -->
+<section class="folie" data-nav="start" data-notiz="Antworten sammeln (Tafel oder zurufen). Dann mit dem Knopf - oder G - die Grundvorstellungen nach Malle & Malle zeigen und den Antworten zuordnen.
+Das Popup ist auf jeder Folie mit G erreichbar.
+Material: zwei Wuerfel, Beutel mit 6 blauen und 1 roten Kugel, Beutel mit 2 roten und 2 blauen Kugeln. Die Knoepfe ersetzen das Material.">
+  <div class="tafel gross">
+    <h2>Was ist Wahrscheinlichkeit?</h2>
+    <p>Was meinen wir, wenn wir sagen: «Das passiert mit 30 %»?</p>
+    <button class="knopf" data-popup="gv">Grundvorstellungen zeigen</button>
+  </div>
+</section>
+
+<!-- Zwei Fragen -->
+<section class="folie" data-nav="zahl" data-notiz="Zwei Fragen gegenueberstellen, Borel noch nicht nennen.
+Diskussion (nicht auf der Folie): Beide laufen auf dieselbe Operation hinaus - die Wahrscheinlichkeit berechnen, 3/8. Grundlegend verschieden sind sie trotzdem: Bei B muss mit der Zahl noch etwas geschehen - eine Entscheidung. Dafuer braucht man eine Vorstellung davon, was 37.5 % bedeuten.
+Viele Schulbuchaufgaben sind wie A.">
+  <div class="kopf"><h2>Zwei Fragen</h2></div>
+  <div class="ausgang-lage">Eine Münze wird dreimal geworfen.</div>
+  <div class="vergleich">
+    <div class="tafel">
+      <div class="marke-oben">A</div>
+      <div class="aufgabe">Wie gross ist die Wahrscheinlichkeit, dass genau zweimal Kopf fällt?</div>
+    </div>
+    <div class="pfeil"></div>
+    <div class="tafel">
+      <div class="marke-oben">B</div>
+      <div class="aufgabe">Fällt genau zweimal Kopf?</div>
+    </div>
+  </div>
+</section>
+
+<!-- Borel kurz -->
+<section class="folie" data-nav="borel" data-notiz="Kurz halten. Im Original: Ja/Nein- und Einsatzkarten 100/300/800, Startkapital 4000, Sanduhr; richtig getippt = Einsatz gewonnen.
+Benannt nach Emile Borel (1871-1956). Artikel: Allmendinger, Aslaksen, Buchholtz (2021), mathematik lehren 229.">
+  <div class="kopf"><h2>Borel – genau das macht dieses Spiel</h2></div>
+  <div class="zwei">
+    <img class="foto" src="bilder/spielinhalt.jpg" alt="Spielinhalt von Borel: Experimentkarten, Wettkarten Yes, No, 100, 300, 800, Chips, Würfel, Beutel mit Kugeln, Sanduhr">
+    <div style="display:flex;flex-direction:column">
+      <ul class="liste">
+        <li>Eine Karte beschreibt ein kleines Zufallsexperiment.</li>
+        <li>Alle wetten: Ja oder Nein – und wie viel.</li>
+        <li>Dann wird es einmal durchgeführt.</li>
+      </ul>
+      <div class="heute"><b>Heute</b>Startkapital 4000. Gleichzeitig zeigen: Daumen hoch oder runter, dazu 1, 3 oder 8 Finger für 100, 300 oder 800.</div>
+    </div>
+  </div>
+</section>
+
+<!-- Karte 1 -->
+<section class="folie" data-nav="k1" data-karte="k1" data-notiz="Erst wetten, dann einmal wuerfeln (echt oder Knopf).
+Danach 'Mehrmals': 10-mal zeigt, wie wenig zehn Wuerfe sagen; 1000-mal, wohin es geht.">
+  <div class="kopf"><h2>Karte 1</h2><button class="zurloesung">Zur Lösung →</button></div>
+  <div class="kartenzeile">
+    <div class="karte">
+      <div class="experiment">Zwei Würfel werden geworfen.</div>
+      <div class="frage">Zeigt mindestens einer eine Sechs?</div>
+      <div class="marken"><span class="marke ja">Ja</span><span class="marke nein">Nein</span><span class="einsatz">100 · 300 · 800</span></div>
+    </div>
+    <div class="rechtsspalte"><div class="labor"></div><div class="mehrmals"></div></div>
+  </div>
+</section>
+<section class="folie" data-nav="k1" data-notiz="Zwei Wege: mit und ohne Gegenereignis. Der Fehler 1/6 + 1/6 zaehlt die Doppelsechs doppelt.
+Bei 31 % ist Nein gut begruendet - hier darf man mehr setzen als bei Karte 2.">
+  <div class="kopf"><h2>Karte 1</h2><span class="hand leise" style="font-size:32px">Mindestens eine Sechs?</span></div>
+  <div class="aufl">
+    <div class="zahl"><div class="bruch">11 von 36</div><div class="wert">31 %</div><span class="marke nein">Nein</span></div>
+    <div class="rechts">
+      <div class="baum" data-k="k1"></div>
+    </div>
+  </div>
+</section>
+
+<!-- Karte 2 -->
+<section class="folie" data-nav="k2" data-karte="k2" data-notiz="Original-Borelkarte (Experiment 6). Erwartet: 'pro Zug 1/7' mit Zuruecklegen - 46 %, also Nein.">
+  <div class="kopf"><h2>Karte 2</h2><button class="zurloesung">Zur Lösung →</button></div>
+  <div class="kartenzeile">
+    <div class="karte">
+      <div class="experiment">Im Beutel: 6 blaue Kugeln und 1 rote. Es werden 4 Kugeln gezogen, ohne zurückzulegen.</div>
+      <div class="frage">Ist die rote Kugel dabei?</div>
+      <div class="marken"><span class="marke ja">Ja</span><span class="marke nein">Nein</span><span class="einsatz">100 · 300 · 800</span></div>
+    </div>
+    <div class="rechtsspalte"><div class="labor"></div><div class="mehrmals"></div></div>
+  </div>
+</section>
+<section class="folie" data-nav="k2" data-notiz="Zwei richtige Wege: ohne Reihenfolge (Vierergruppen) und mit Reihenfolge (Ziehfolgen). Hier ist 'ohne Reihenfolge' erlaubt - der Kontrast zu Karte 1, wo es verboten ist.
+Falls jemand fragt: ganz ohne Rechnen - 4 von 7 Kugeln kommen heraus, jede gleich wahrscheinlich, also 4/7.
+Bei 57 % ist Ja richtig - aber knapp: wenig setzen.">
+  <div class="kopf"><h2>Karte 2</h2><span class="hand leise" style="font-size:32px">Ist die rote dabei?</span></div>
+  <div class="aufl">
+    <div class="zahl"><div class="bruch">4 von 7</div><div class="wert">57 %</div><span class="marke ja">Ja</span></div>
+    <div class="rechts">
+      <div class="baum" data-k="k2"></div>
+    </div>
+  </div>
+</section>
+
+<!-- Karte 3 -->
+<section class="folie" data-nav="k3" data-karte="k3" data-notiz="Die Kugeln einer Farbe sehen gleich aus. Hier darf man trotzdem nur mit Farben arbeiten - weil von jeder Farbe gleich viele drin sind und zurueckgelegt wird.">
+  <div class="kopf"><h2>Karte 3</h2><button class="zurloesung">Zur Lösung →</button></div>
+  <div class="kartenzeile">
+    <div class="karte">
+      <div class="experiment">Im Beutel: 2 rote und 2 blaue Kugeln. Eine Kugel ziehen, Farbe notieren, zurücklegen – zweimal.</div>
+      <div class="frage">Sind beide rot?</div>
+      <div class="marken"><span class="marke ja">Ja</span><span class="marke nein">Nein</span><span class="einsatz">100 · 300 · 800</span></div>
+    </div>
+    <div class="rechtsspalte"><div class="labor"></div><div class="mehrmals"></div></div>
+  </div>
+</section>
+<section class="folie" data-nav="k3" data-notiz="Zwei richtige Wege: mit kuenstlicher Nummerierung (16 Paare) und ohne (4 Farbfolgen). Ohne Nummerierung ist hier erlaubt, weil jede Farbe gleich oft im Beutel liegt und zurueckgelegt wird - jede Farbfolge ist gleich wahrscheinlich.
+Was waere, wenn: ohne Reihenfolge (rr, rb, bb) ergaebe 1/3; bei 3 roten und 1 blauen reichen die Farben allein nicht mehr.">
+  <div class="kopf"><h2>Karte 3</h2><span class="hand leise" style="font-size:32px">Beide rot?</span></div>
+  <div class="aufl">
+    <div class="zahl"><div class="bruch">1 von 4</div><div class="wert">25 %</div><span class="marke nein">Nein</span></div>
+    <div class="rechts">
+      <div class="baum" data-k="k3"></div>
+    </div>
+  </div>
+</section>
+
+<!-- Landkarte -->
+<section class="folie" data-nav="land" data-notiz="Die Wege auf der rechten Seite antippen: Die Matrix zeigt, wie man laeuft. Danach Landkarte oeffnen - alle arbeiten, wo sie wollen.">
+  <div class="kopf"><h2>Jetzt Sie – auf der Landkarte</h2></div>
+  <div class="land">
+    <table class="matrix" id="matrix"></table>
+    <div class="wegtafel">
+      <div class="weg" data-weg="1"><h3>Weg 1 – eine Welt</h3><p>Eine Welt, alle vier Schwerpunkte: der ganze Bogen von Kapitel 1 bis 4 an einer Situation.</p></div>
+      <div class="weg" data-weg="2"><h3>Weg 2 – ein Schwerpunkt</h3><p>Ein Schwerpunkt über mehrere Welten: dieselbe Frage, andere Zahlen.</p></div>
+      <div class="legende"><span><i style="background:var(--aktion)">1</i>Zählen</span><span><i style="background:var(--zugang)">2</i>Ergebnismengen</span><span><i style="background:var(--beweis)">3</i>Laplace</span><span><i style="background:var(--fach)">4</i>Daten</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- Popup -->
+<div id="popup"><div class="fenster"><button class="zu" aria-label="Schliessen">×</button><div class="inhalt"></div></div></div>
+</div>
+
+<!-- Popup-Inhalte -->
+<template id="p-gv">
+  <h3>Grundvorstellungen zum Wahrscheinlichkeitsbegriff</h3>
+  <div class="gvliste">
+    <div><b>Mass für eine Erwartung</b><span>Wie stark erwarte ich, dass es eintritt? – prognostisch</span></div>
+    <div><b>Relativer Anteil</b><span>Günstige unter gleich möglichen Fällen – theoretisch, Laplace</span></div>
+    <div><b>Relative Häufigkeit</b><span>Wie oft tritt es auf lange Sicht ein? – frequentistisch</span></div>
+    <div><b>Subjektives Vertrauen</b><span>Wie sicher bin ich – wie viel würde ich setzen? – subjektiv</span></div>
+  </div>
+  <p class="gw">Grundwissen dazu: Eine Wahrscheinlichkeit ist unsicher · sie hängt vom Informationsstand ab · sie ist subjektiv.</p>
+  <p class="quelle">Malle, G. &amp; Malle, S. (2003): Was soll man sich unter einer Wahrscheinlichkeit vorstellen? mathematik lehren 118, 52–56.</p>
+</template>
+
+
+
+
+<div id="leiste"></div>
+<div id="notizen"></div>
+
+<script>
+// --- Experimente: ein Zufallsversuch liefert true, wenn das Ereignis eintritt
+function zufall(n){ return Math.floor(Math.random()*n); }
+function ziehen(beutel, k){            // ohne Zuruecklegen
+  const b = beutel.slice(), aus = [];
+  for(let i=0;i<k;i++) aus.push(b.splice(zufall(b.length),1)[0]);
+  return aus;
+}
+const BEUTEL = 'bbbbbbr'.split(''), BEUTEL3 = 'rrbb'.split('');
+const EXP = {
+  k1: () => zufall(6)===5 || zufall(6)===5,
+  k2: () => ziehen(BEUTEL,4).includes('r'),
+  k3: () => zufall(4)<2 && zufall(4)<2,
+};
+
+// --- Einmal sichtbar durchfuehren
+const PUNKTE = {1:[4],2:[0,8],3:[0,4,8],4:[0,2,6,8],5:[0,2,4,6,8],6:[0,2,3,5,6,8]};
+function wuerfelHTML(z, treffer){
+  let s='<div class="wuerfel'+(treffer?' treffer':'')+'">';
+  for(let i=0;i<9;i++) s+='<i class="'+(PUNKTE[z].includes(i)?'an':'')+'"></i>';
+  return s+'</div>';
+}
+function warte(ms){ return new Promise(r=>setTimeout(r,ms)); }
+// GEAENDERT (2026-10-22, Rike): Nach dem Durchfuehren nur das Ergebnis zeigen,
+// nicht das Urteil - ob Ja oder Nein, entscheidet die Gruppe selbst.
+function urteil(aus){ aus.textContent='Ja oder Nein?'; aus.style.color='var(--matt)'; }
+
+const LABOR = {
+  aufbau: {
+    k1: l => '<div class="spur">'+wuerfelHTML(1)+wuerfelHTML(1)+'</div>',
+    k2: l => '<div class="reihe"><div class="beutel">'+BEUTEL.map(x=>'<div class="kugel '+x+'"></div>').join('')+'</div><div class="spur"></div></div>',
+    k3: l => '<div class="reihe"><div class="beutel">'+BEUTEL3.map(x=>'<div class="kugel '+x+'"></div>').join('')+'</div><div class="spur"></div></div>',
+  },
+  async k1(l){
+    const spur=l.querySelector('.spur'), aus=l.querySelector('.ausgang'); aus.textContent='';
+    for(let t=0;t<10;t++){ spur.innerHTML=[0,0].map(()=>wuerfelHTML(1+zufall(6))).join(''); [...spur.children].forEach(x=>x.classList.add('rollt')); await warte(90); }
+    const z=[1+zufall(6),1+zufall(6)];
+    spur.innerHTML=z.map(v=>wuerfelHTML(v)).join('');
+    urteil(aus);
+  },
+  async k2(l){ await beutelZiehen(l, BEUTEL, 4); },
+  async k3(l){                          // mit Zuruecklegen
+    const b=l.querySelector('.beutel'), spur=l.querySelector('.spur'), aus=l.querySelector('.ausgang');
+    b.innerHTML=BEUTEL3.map(f=>'<div class="kugel '+f+'"></div>').join(''); spur.innerHTML=''; aus.textContent='';
+    const kugeln=[...b.children];
+    for(let n=0;n<2;n++){
+      await warte(300); const i=zufall(4);
+      kugeln[i].classList.add('weg'); await warte(420);
+      const neu=document.createElement('div'); neu.className='kugel '+BEUTEL3[i]; spur.appendChild(neu);
+      await warte(300); kugeln[i].classList.remove('weg');
+    }
+    urteil(aus);
+  },
+};
+async function beutelZiehen(l, inhalt, k){
+  const b=l.querySelector('.beutel'), spur=l.querySelector('.spur'), aus=l.querySelector('.ausgang');
+  b.innerHTML=inhalt.map(f=>'<div class="kugel '+f+'"></div>').join(''); spur.innerHTML=''; aus.textContent='';
+  await warte(250);
+  const kugeln=[...b.children];
+  for(const i of ziehen(kugeln.map((_,i)=>i),k)){
+    kugeln[i].classList.add('weg'); await warte(420);
+    const neu=document.createElement('div'); neu.className='kugel '+inhalt[i]; spur.appendChild(neu);
+  }
+  urteil(aus);
+}
+function laborAufbauen(f){
+  const art=f.dataset.karte, l=f.querySelector('.labor');
+  if(!art||!l) return;
+  l.innerHTML=LABOR.aufbau[art](l)+'<div class="ausgang"></div><button class="knopf voll">Einmal durchführen</button>';
+  let laeuft=false;
+  const los=async()=>{ if(laeuft) return; laeuft=true; const b=l.querySelector('.knopf'); b.disabled=true; await LABOR[art](l); b.disabled=false; b.textContent='Noch einmal'; laeuft=false; };
+  l.querySelector('.knopf').onclick=los; f._durchfuehren=los;
+  mehrmalsAufbauen(f, art);
+}
+
+// --- Mehrmals durchfuehren: 10 einzeln sichtbar, 100 und 1000 als Balken
+function mehrmalsAufbauen(f, art){
+  const m=f.querySelector('.mehrmals'); if(!m) return;
+  m.innerHTML='<div class="zeile"><span>Mehrmals:</span><button data-n="10">10-mal</button><button data-n="100">100-mal</button><button data-n="1000">1000-mal</button></div>'+
+    '<div class="chips"></div><div class="balken"><div class="j" style="width:0"></div><div class="n" style="width:0"></div></div><div class="stand"></div>';
+  const chips=m.querySelector('.chips'), j=m.querySelector('.j'), n=m.querySelector('.n'), stand=m.querySelector('.stand');
+  m.querySelectorAll('button').forEach(b=>b.onclick=async()=>{
+    const N=+b.dataset.n; m.querySelectorAll('button').forEach(x=>x.disabled=true);
+    chips.innerHTML=''; let k=0;
+    const schritt = N===10 ? 1 : Math.max(1,Math.round(N/60));
+    for(let i=1;i<=N;i++){
+      const ja=EXP[art](); if(ja) k++;
+      if(N===10){ const c=document.createElement('i'); c.textContent=ja?'Ja':'Nein'; c.style.background='var('+(ja?'--ja':'--nein')+')'; chips.appendChild(c); }
+      if(i%schritt===0||i===N){
+        j.style.width=(100*k/i)+'%'; n.style.width=(100*(i-k)/i)+'%';
+        stand.textContent=`Ja ${k}-mal, Nein ${i-k}-mal  ·  ${(100*k/i).toFixed(1)} % Ja`;
+        await warte(N===10?260:20);
+      }
+    }
+    m.querySelectorAll('button').forEach(x=>x.disabled=false);
+  });
+}
+
+// --- Loesungswege nach der Anteilsregel, Schritt fuer Schritt.
+// GEAENDERT (2026-10-22, Rike): Die Entscheidungen sichtbar machen.
+// Schritt 1 Ergebnismenge waehlen (mit Urnenmodell), 2 Anzahl moeglich,
+// 3 Anzahl guenstig, 4 Anteil. Karte 1: eine Ergebnismenge, die guenstigen
+// auf zwei Arten gezaehlt (gleiche Zellen laufen ueber beide Spalten).
+// Karte 2 und 3: verschiedene Ergebnismengen. Taste E blendet den naechsten
+// Schritt fuer alle Wege ein; ein Klick auf die Zeilenbeschriftung schaltet
+// den Schritt ein und aus.
+const bn=(n,k)=>`<span class="binom"><span>${n}<br>${k}</span></span>`;
+const br=(z,n)=>`<span class="br"><span>${z}</span><span>${n}</span></span>`;
+// Urne als Bild: Kugeln mit Farbe und Aufschrift
+// GEAENDERT (2026-10-22, Rike): Urne hübscher - die Breite richtet sich nach
+// der Kugelzahl, alle Kugeln liegen innen; Glas mit Rand und Glanzlicht.
+function urne(kugeln){
+  const n=kugeln.length, pro=n>4?4:n, reihen=Math.ceil(n/pro), rad=n>4?11:13, abst=4;
+  const innen=pro*2*rad+(pro-1)*abst, W=innen+30, H=reihen*(2*rad+abst)+30;
+  const x0=6, x1=W-6, unten=H-4, ru=Math.min(20,(x1-x0)/2-4);
+  let k='';
+  kugeln.forEach((x,i)=>{
+    const reihe=Math.floor(i/pro), spalte=i%pro, inReihe=Math.min(pro,n-reihe*pro);
+    const cx=W/2+(spalte-(inReihe-1)/2)*(2*rad+abst), cy=unten-6-rad-reihe*(2*rad+abst-1);
+    k+=`<circle cx="${cx}" cy="${cy}" r="${rad}" fill="${x[0]}" stroke="#2d2924" stroke-width="1"/>`
+      +`<circle cx="${cx-rad*.35}" cy="${cy-rad*.4}" r="${rad*.25}" fill="#fff" opacity="${x[0]==='#fff'?0:.45}"/>`;
+    if(x[1]) k+=`<text x="${cx}" y="${cy+5}" text-anchor="middle" font-family="Patrick Hand" font-size="${x[1].length>1?13:16}" fill="${x[0]==='#fff'?'#2d2924':'#fff'}">${x[1]}</text>`;
+  });
+  const glas=`M${x0} 10 L${x0} ${unten-ru} Q${x0} ${unten} ${x0+ru} ${unten} L${x1-ru} ${unten} Q${x1} ${unten} ${x1} ${unten-ru} L${x1} 10`;
+  return `<svg width="${W}" height="${H}" viewBox="0 0 ${W} ${H}">`
+    +`<path d="${glas}" fill="#fbf6ee" stroke="#6c6357" stroke-width="2.5" stroke-linejoin="round"/>`
+    +`<rect x="${x0-4}" y="5" width="${x1-x0+8}" height="7" rx="3.5" fill="#efe2cd" stroke="#6c6357" stroke-width="2"/>`
+    +k+`<path d="M${x0+5} 18 L${x0+5} ${unten-ru-4}" stroke="#fff" stroke-width="3" stroke-linecap="round" opacity=".8"/></svg>`;
+}
+const W6=[1,2,3,4,5,6].map(i=>['#fff',String(i)]);
+const BLAU=[1,2,3,4,5,6].map(i=>['#1565C0',String(i)]), ROT=[['#C0392B','r']];
+// --- Popups
+const popup=document.getElementById('popup'), inhalt=popup.querySelector('.inhalt');
+function oeffne(name){
+  const t=document.getElementById('p-'+name); if(!t) return;
+  inhalt.innerHTML=''; inhalt.appendChild(t.content.cloneNode(true));
+  popup.classList.add('offen');
+}
+function schliesse(){ popup.classList.remove('offen'); }
+document.querySelectorAll('[data-popup]').forEach(b=>b.onclick=()=>oeffne(b.dataset.popup));
+popup.querySelector('.zu').onclick=schliesse;
+popup.onclick=e=>{ if(e.target===popup) schliesse(); };
+
+const R2=[1,2].map(i=>['#C0392B','r'+i]), B2=[1,2].map(i=>['#1565C0','b'+i]);
+const W5=[1,2,3,4,5].map(i=>['#fff',String(i)]);
+const urnz=(kugeln,chips,rechnung)=>`<div class="omega">${urne(kugeln)}<div><div class="chips">${chips.map(c=>`<span>${c}</span>`).join('')}</div><div class="rech">${rechnung}</div></div></div>`;
+const SG=[['#fff','6'],['#fff','–']], RB=[['#C0392B',''],['#1565C0','']];
+
+// --- Entscheidungsbaum. GEAENDERT (2026-10-22, Rike): Erst entscheiden, dann
+// rechnen. Zwei Fragen - Reihenfolge? Wie fein? -, jede Wahl sagt, ob sie hier
+// noetig, frei oder nicht erlaubt ist. Danach genau ein Weg, Schritt fuer
+// Schritt (Taste E). Nicht erlaubte Wahlen werden trotzdem durchgerechnet,
+// rot markiert. Karte 1: zwei Rechenwege fuer die guenstigen. Karte 2 und 3:
+// am Ende «Vergleich» der beiden erlaubten Wege.
+const STATUS={noetig:'✓ hier nötig', frei:'✓ hier frei wählbar', falsch:'✗ hier nicht erlaubt'};
+const BAUM={
+  k1:{
+    r:{mit:{s:'noetig',t:'erster und zweiter Würfel'}, ohne:{s:'falsch',t:'{1, 6} fällt auf zwei Arten, {6, 6} nur auf eine'}},
+    f:{fein:{l:'alle Zahlen 1–6',s:'noetig',t:'jede Zahl für sich'}, grob:{l:'nur Sechs / keine',s:'falsch',t:'«keine Sechs» fällt viel öfter als «Sechs»'}},
+    wege:{
+      'mit-fein':{om:'Paare (1. Würfel, 2. Würfel), z. B. (3, 6)',
+        mo:urnz(W6,['2-mal','mit Zurücklegen','mit Reihenfolge'],'6 · 6 = <b>36</b>'),
+        gu:[['Fallunterscheidung',urnz(W5,['1-mal'],'genau eine Sechs: 5 · 2 Plätze = 10<br>zwei Sechsen: 1 · zusammen <b>11</b>')],
+            ['Über das Gegenteil',urnz(W5,['2-mal','mit Zurücklegen','mit Reihenfolge'],'keine Sechs: 5 · 5 = 25<br>36 − 25 = <b>11</b>')]],
+        an:br(11,36)},
+      'ohne-fein':{om:'ungeordnete Paare, z. B. {3, 6}',
+        mo:urnz(W6,['2-mal','mit Zurücklegen','ohne Reihenfolge'],'6 Pasche + 15 andere = <b>21</b>'),
+        gu:'{1, 6}, …, {5, 6}, {6, 6}: <b>6</b>', an:br(6,21)},
+      'mit-grob':{om:'Folgen aus «6» und «–», z. B. (–, 6)',
+        mo:urnz(SG,['2-mal','mit Zurücklegen','mit Reihenfolge'],'2 · 2 = <b>4</b>'),
+        gu:'(6, 6), (6, –), (–, 6): <b>3</b>', an:br(3,4)},
+      'ohne-grob':{om:'{6, 6}, {6, –}, {–, –}',
+        mo:urnz(SG,['2-mal','mit Zurücklegen','ohne Reihenfolge'],'<b>3</b>'),
+        gu:'{6, 6}, {6, –}: <b>2</b>', an:br(2,3)},
+    }},
+  k2:{
+    r:{mit:{s:'frei',t:'1., 2., 3., 4. Kugel'}, ohne:{s:'frei',t:'nur, welche 4 Kugeln'}},
+    f:{fein:{l:'jede Kugel für sich',s:'noetig',t:'b1 … b6 und r'}, grob:{l:'nur Farben',s:'falsch',t:'«3 blau + rot» kommt 20-mal vor, «4 blau» nur 15-mal'}},
+    vergleich:['ohne-fein','mit-fein'],
+    wege:{
+      'ohne-fein':{t:'Ohne Reihenfolge', om:'Vierergruppen, z. B. {b2, b5, b6, r}',
+        mo:urnz(BLAU.concat(ROT),['4-mal','ohne Zurücklegen','ohne Reihenfolge'],bn(7,4)+' = <b>35</b>'),
+        gu:urnz(BLAU,['3-mal','ohne Zurücklegen','ohne Reihenfolge'],'die Rote ist dabei, dazu 3 blaue: '+bn(6,3)+' = <b>20</b>'),
+        an:br(20,35)+' = '+br(4,7)},
+      'mit-fein':{t:'Mit Reihenfolge', om:'Ziehfolgen, z. B. (b2, r, b5, b6)',
+        mo:urnz(BLAU.concat(ROT),['4-mal','ohne Zurücklegen','mit Reihenfolge'],'7 · 6 · 5 · 4 = <b>840</b>'),
+        gu:urnz(BLAU,['3-mal','ohne Zurücklegen','mit Reihenfolge'],'Platz der Roten: 4 · blaue: 6 · 5 · 4 = <b>480</b>'),
+        an:br(480,840)+' = '+br(4,7)},
+      'ohne-grob':{om:'«4 blau» oder «3 blau + rot»',
+        mo:urnz(RB,['nur Farben','ohne Reihenfolge'],'<b>2</b>'), gu:'«3 blau + rot»: <b>1</b>', an:br(1,2)},
+      'mit-grob':{om:'Farbfolgen, z. B. (b, r, b, b)',
+        mo:urnz(RB,['nur Farben','mit Reihenfolge'],'bbbb, rbbb, brbb, bbrb, bbbr: <b>5</b>'), gu:'<b>4</b>', an:br(4,5)},
+    }},
+  k3:{
+    r:{mit:{s:'noetig',t:'erste und zweite Kugel'}, ohne:{s:'falsch',t:'rb fällt doppelt so oft wie rr'}},
+    f:{fein:{l:'jede Kugel für sich',s:'frei',t:'r1, r2, b1, b2 – obwohl sie gleich aussehen'}, grob:{l:'nur Farben',s:'frei',t:'erlaubt: von jeder Farbe gleich viele, zurückgelegt'}},
+    vergleich:['mit-fein','mit-grob'],
+    wege:{
+      'mit-fein':{t:'Mit Nummerierung', om:'Paare, z. B. (r1, b2)',
+        mo:urnz(R2.concat(B2),['2-mal','mit Zurücklegen','mit Reihenfolge'],'4 · 4 = <b>16</b>'),
+        gu:urnz(R2,['2-mal','mit Zurücklegen','mit Reihenfolge'],'2 · 2 = <b>4</b>'), an:br(4,16)+' = '+br(1,4)},
+      'mit-grob':{t:'Ohne Nummerierung', om:'Farbfolgen rr, rb, br, bb',
+        mo:urnz(RB,['2-mal','mit Zurücklegen','mit Reihenfolge'],'2 · 2 = <b>4</b>'),
+        gu:urnz([['#C0392B','']],['2-mal','mit Zurücklegen','mit Reihenfolge'],'rr: <b>1</b>'), an:br(1,4)},
+      'ohne-fein':{om:'ungeordnete Paare, z. B. {r1, b2}',
+        mo:urnz(R2.concat(B2),['2-mal','mit Zurücklegen','ohne Reihenfolge'],'<b>10</b>'),
+        gu:'{r1, r1}, {r2, r2}, {r1, r2}: <b>3</b>', an:br(3,10)},
+      'ohne-grob':{om:'rr, rb, bb',
+        mo:urnz(RB,['2-mal','mit Zurücklegen','ohne Reihenfolge'],'<b>3</b>'), gu:'rr: <b>1</b>', an:br(1,3)},
+    }},
+};
+const SCHRITTE=['Ergebnismenge','Anzahl möglich','Anzahl günstig','Anteil'];
+function wegHTML(w){
+  const gu=Array.isArray(w.gu)
+    ? `<div class="zwei-gu">${w.gu.map(([t,h])=>`<div><div class="gu-t">${t}</div>${h}</div>`).join('')}</div>` : w.gu;
+  return [w.om, w.mo, gu, w.an];
+}
+function baumAufbauen(el){
+  const d=BAUM[el.dataset.k], wahl={r:null,f:null};
+  const frage=(key,name,opts)=>`<div class="frage-z"><div class="fr">${name}</div>`+
+    opts.map(([o,l])=>`<button class="opt" data-q="${key}" data-o="${o}">${l}</button>`).join('')+`<div class="st" data-q="${key}"></div></div>`;
+  el.innerHTML=`<div class="fragen">`+
+    frage('r','Reihenfolge?',[['mit','mit'],['ohne','ohne']])+
+    frage('f','Wie fein?',[['fein',d.f.fein.l],['grob',d.f.grob.l]])+
+    `</div><div class="weg"></div>`+
+    `<div class="unten"><span class="tipp">Schritte einblenden: auf die Nummer klicken oder Taste E</span><button class="vergl">Richtige Wege im Vergleich</button><button class="vergl falsche">Falsche Wege</button></div>`;
+  const weg=el.querySelector('.weg');
+  el.querySelectorAll('.opt').forEach(b=>b.onclick=()=>{
+    const q=b.dataset.q, o=b.dataset.o; wahl[q]=o;
+    el.querySelectorAll(`.opt[data-q="${q}"]`).forEach(x=>x.classList.toggle('an',x===b));
+    const info=d[q][o], st=el.querySelector(`.st[data-q="${q}"]`);
+    st.className='st '+info.s; st.innerHTML=`<b>${STATUS[info.s]}</b> ${info.t}`;
+    if(wahl.r&&wahl.f) wegZeigen(el,d,wahl);
+  });
+  el.querySelector('.vergl:not(.falsche)').onclick=()=>vergleich(d);
+  el.querySelector('.vergl.falsche').onclick=()=>falscheWege(d);
+  weg.innerHTML='<div class="leer">Erst entscheiden – dann rechnen.<br><small>Beide Fragen beantworten. Auch eine falsche Wahl wird durchgerechnet – so sieht man, was sie ergäbe.</small></div>';
+}
+function wegZeigen(el,d,wahl){
+  const key=wahl.r+'-'+wahl.f, w=d.wege[key];
+  const falsch=d.r[wahl.r].s==='falsch'||d.f[wahl.f].s==='falsch';
+  const zellen=wegHTML(w);
+  let h=falsch?`<div class="verbot">Nicht erlaubt – die Ergebnisse sind nicht gleich wahrscheinlich. So käme heraus:</div>`:'';
+  h+='<div class="schritte'+(falsch?' falsch':'')+'">'+SCHRITTE.map((t,i)=>
+    `<div class="lbl" data-r="${i}"><i>${i+1}</i>${t}</div><div class="z zu${i===3?' anteil':''}" data-r="${i}">${zellen[i]}</div>`).join('')+'</div>';
+  const weg=el.querySelector('.weg'); weg.innerHTML=h;
+  weg.querySelectorAll('.lbl').forEach(l=>l.onclick=()=>{ const z=weg.querySelector(`.z[data-r="${l.dataset.r}"]`); z.classList.toggle('zu'); });
+}
+function naechsterWeg(){
+  const z=folien[nr].querySelector('.weg .z.zu'); if(z) z.classList.remove('zu');
+}
+function vergleich(d){
+  let a,b;
+  if(d.vergleich) [a,b]=d.vergleich.map(k=>d.wege[k]);
+  else { const w=d.wege['mit-fein']; [a,b]=w.gu.map(([t,h])=>({...w,t,gu:h})); }
+  const za=wegHTML(a), zb=wegHTML(b);
+  inhalt.innerHTML=`<h3>Richtige Wege im Vergleich</h3><div class="vgl2"><div></div><div class="kz">${a.t}</div><div class="kz">${b.t}</div>`+
+    SCHRITTE.map((t,i)=>`<div class="lbl"><i>${i+1}</i>${t}</div><div class="z${i===3?' anteil':''}">${za[i]}</div><div class="z${i===3?' anteil':''}">${zb[i]}</div>`).join('')+'</div>';
+  popup.classList.add('offen');
+}
+function falscheWege(d){
+  const RL={mit:'mit Reihenfolge',ohne:'ohne Reihenfolge'};
+  let h='<h3>Falsche Wege – und was sie ergäben</h3><div class="falschliste">';
+  for(const ro of ['mit','ohne']) for(const fo of ['fein','grob']){
+    const fr=d.r[ro], ff=d.f[fo]; if(fr.s!=='falsch'&&ff.s!=='falsch') continue;
+    const w=d.wege[ro+'-'+fo], grund=[fr,ff].filter(x=>x.s==='falsch').map(x=>x.t).join('; ');
+    h+=`<div class="fw"><div class="fw-wahl">${RL[ro]} · ${fo==='fein'?d.f.fein.l:d.f.grob.l}</div><div class="fw-om">${w.om}</div><div class="fw-an">${w.an}</div><div class="fw-grund">${grund}</div></div>`;
+  }
+  inhalt.innerHTML=h+'</div>';
+  popup.classList.add('offen');
+}
+document.querySelectorAll('.baum').forEach(baumAufbauen);
+document.querySelectorAll('.zurloesung').forEach(b=>b.onclick=()=>zeige(nr+1));
+
+// --- Landkarte: sechs Welten, vier Schwerpunkte; die Wege leuchten auf
+const WELTEN=[['Wuerfel','Würfel'],['Bewerbung','Bewerbung'],['Restaurant','Restaurant'],['Mensa','Mensa'],['Hotel','Hotel'],['Festival','Musikfestival']];
+const SP=['Zählen','Ergebnis­mengen','Laplace','Daten'];
+(function(){
+  const t=document.getElementById('matrix');
+  let s='<tr><th></th>'+SP.map((x,i)=>`<th>${i+1}</th>`).join('')+'</tr>';
+  WELTEN.forEach(([d,n],r)=>{ s+=`<tr><td class="welt"><img src="bilder/Festigung_${d}.png" alt="">${n}</td>`+[1,2,3,4].map(c=>`<td class="f c${c}" data-r="${r}" data-c="${c}">${c}</td>`).join('')+'</tr>'; });
+  t.innerHTML=s;
+  let lauf=null;
+  document.querySelectorAll('.weg').forEach(w=>w.onclick=async()=>{
+    const id=Symbol(); lauf=id;
+    document.querySelectorAll('.weg').forEach(x=>x.classList.toggle('an',x===w));
+    t.querySelectorAll('td.f').forEach(x=>x.classList.remove('hell'));
+    const zellen = w.dataset.weg==='1'
+      ? [1,2,3,4].map(c=>t.querySelector(`td.f[data-r="0"][data-c="${c}"]`))
+      : [0,1,2,3,4,5].map(r=>t.querySelector(`td.f[data-r="${r}"][data-c="1"]`));
+    for(const z of zellen){ if(lauf!==id) return; z.classList.add('hell'); await warte(350); }
+  });
+})();
+
+// --- Blaettern, Skalieren, Notizen
+const folien=[...document.querySelectorAll('.folie')];
+let nr=0;
+try{ const h=parseInt(location.hash.slice(1)); if(h>=1&&h<=folien.length) nr=h-1; }catch(e){}
+function zeige(i){
+  schliesse();
+  nr=Math.max(0,Math.min(folien.length-1,i));
+  folien.forEach((f,j)=>f.classList.toggle('aktiv',j===nr));
+  document.querySelectorAll('#kopfleiste nav button').forEach(k=>k.setAttribute('aria-current', k.dataset.ziel===folien[nr].dataset.nav));
+  document.getElementById('leiste').textContent=(nr+1)+' / '+folien.length+'  ·  ← → · D durchführen · E nächster Schritt · G Grundvorstellungen · N Notizen · F Vollbild';
+  document.getElementById('notizen').textContent=folien[nr].dataset.notiz||'';
+  try{ history.replaceState(null,'','#'+(nr+1)); }catch(e){}
+}
+function skaliere(){
+  const s=Math.min(innerWidth/1600, innerHeight/900);
+  document.getElementById('buehne').style.transform=`translate(-50%,-50%) scale(${s})`;
+}
+addEventListener('resize',skaliere);
+addEventListener('keydown',e=>{
+  if(e.key==='Escape'){ schliesse(); return; }
+  if(['ArrowRight','PageDown',' '].includes(e.key)){ e.preventDefault(); zeige(nr+1); }
+  else if(['ArrowLeft','PageUp'].includes(e.key)){ e.preventDefault(); zeige(nr-1); }
+  else if(e.key==='Home') zeige(0);
+  else if(e.key==='End') zeige(folien.length-1);
+  else if(e.key==='e'||e.key==='E') naechsterWeg();
+  else if(e.key==='g'||e.key==='G') popup.classList.contains('offen')?schliesse():oeffne('gv');
+  else if(e.key==='n'||e.key==='N') document.getElementById('notizen').classList.toggle('an');
+  else if(e.key==='d'||e.key==='D'){ if(folien[nr]._durchfuehren) folien[nr]._durchfuehren(); }
+  else if(e.key==='f'||e.key==='F'){ if(!document.fullscreenElement) document.documentElement.requestFullscreen?.(); else document.exitFullscreen?.(); }
+});
+folien.forEach(laborAufbauen);
+document.querySelectorAll('#kopfleiste nav button').forEach(k=>k.onclick=()=>zeige(folien.findIndex(f=>f.dataset.nav===k.dataset.ziel)));
+skaliere(); zeige(nr);
+</script>
+</body>
+</html>
