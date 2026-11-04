@@ -52,10 +52,22 @@ let zmax = 10;
 
    PRUEFEN: Ob es auf Maurus' Rechner wirklich scharf ist, kann Kasper
    nicht messen - Schaerfe ist kein Wert, den man auslesen kann. Die
-   Ursache ist begruendet, die Wirkung muss jemand SEHEN. */
+   Ursache ist begruendet, die Wirkung muss jemand SEHEN.
+
+   FEHLERBEHOBEN (2026-10-13, Maurus' Befund in Kapitel 4: «Der
+   Rolloverzoom ist teilweise hinter einer anderen Karte»): Seit dem
+   21.09. lag jede RUHENDE Karte auf einer eigenen Grafikebene
+   (translate3d), die vergroesserte aber nicht mehr. Safari zeichnet
+   solche Ebenen ueber gewoehnliche Elemente, auch gegen den z-index -
+   die Nachbarkarte schob sich also ueber die Lupe. Chrome tut das nicht,
+   deshalb war es hier nicht zu sehen. Jetzt bekommt nur die Karte eine
+   eigene Ebene, die gerade GEZOGEN wird; nur dort braucht es die
+   Fluessigkeit.
+
+   PRUEFEN: In Safari nachsehen - Kasper hat hier nur Chrome. */
 function pos(el){
   const l = el._lupe || 1;
-  const schub = l !== 1
+  const schub = (l !== 1 || !el._zieht)
     ? `translate(${el._x}px,${el._y}px)`
     : `translate3d(${el._x}px,${el._y}px,0)`;
   el.style.transform = schub
