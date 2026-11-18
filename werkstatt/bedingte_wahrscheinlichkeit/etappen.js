@@ -492,6 +492,21 @@
   .bwreiter .bwmliste button:hover{background:#f3efe6}
   .bwreiter .bwmliste button[aria-current=true]{background:var(--akzent);color:#fff}
   .bwreiter button.bwein{border-width:2px}
+  .bwuebers{margin-top:6px;font-size:13px}
+  .bwuebers .frei{font-size:11px;color:var(--matt)}
+  .bwuebers textarea{display:block}
+  /* NEU (VORSCHLAG 4.8): drei Zeilen - Lostoepfe, Chilbi, Zusatz */
+  .bwaufgwahl .bwstufe{flex:1 1 100%;display:flex;flex-wrap:wrap;align-items:center;gap:5px}
+  .bwaufgwahl .bwstnr{display:inline-flex;align-items:center;justify-content:center;width:20px;height:20px;border-radius:50%;
+     background:var(--akzent);color:#fff;font-size:12px;font-weight:700}
+  .bwaufgwahl .bwstlab{font-size:12.5px;font-weight:600;color:var(--tinte);margin-right:2px}
+  .bwaufgwahl .bwdazu{padding-top:4px;border-top:1px dashed var(--linie)}
+  .bwaufgwahl .bwdazu .bwmknopf{border-style:dashed}
+  /* gedimmt wie bisher, solange ein Weg der Lostoepfe offen ist */
+  .bwaufgwahl.gedimmt .bwstufe > button,.bwaufgwahl.gedimmt .bwstufe > .bwmenue{opacity:.5;filter:grayscale(1)}
+  .bwaufgwahl.gedimmt .bwstufe > button:hover,.bwaufgwahl.gedimmt .bwstufe > .bwmenue:hover{opacity:.85}
+  /* die Chilbi-Zeile bleibt in Farbe (Rike 2026-11-06: sonst uebersehen) */
+  body.ws-oben .wsleiste .bwskarte .bwsitwahl.gedimmt .bwchilbi > button,.bwaufgwahl.gedimmt .bwchilbi > button{opacity:.8;filter:none}
   .bwsit .bwtitel{font-family:var(--hand);font-size:23px;line-height:1.15;color:var(--akzent);margin:0 0 3px}
   .bwsit .bwtitel .frei{font-family:var(--druck);margin-left:10px;margin-right:0;vertical-align:4px}
   @media (max-width:900px){ .bwsit .bwtitel{font-size:20px} }
@@ -738,6 +753,8 @@
   .bw3stapel2 > b{font-size:15px;color:var(--akzent)}
   .bw3stapel2 .drin{display:flex;flex-direction:column;gap:6px}
   .bw3k2 .zeichen{color:var(--matt);font-size:12.5px;white-space:nowrap}
+  /* NEU (VORSCHLAG 4.8): woher das Kaertchen kommt */
+  .bw3k2 .herk{display:block;font-size:11.5px;color:var(--matt);text-transform:none;letter-spacing:.02em;margin-bottom:2px}
   .bw3k2 .werte{flex:1 1 100%;font-size:14px;font-weight:600;color:var(--tinte);background:#f3efe6;border-radius:6px;padding:2px 8px}
   .bw3k2 .werte .pt{color:var(--matt);margin:0 4px}
   .bw3k2.gelegt{opacity:1}
@@ -1721,7 +1738,7 @@ function auftragHtml(nr){
   return `<h2 id="bwfenstertitel">Auftrag · Etappe 2</h2>
     <p class="satz">${esc(D.etappen[1].auftrag)}</p>
     <ol>
-      <li>Zuerst «${esc(label(ein))}», dann ${BW.mindestens === 2 ? 'zwei' : BW.mindestens} weitere nach Wahl <span class="bsp">(«${esc(BW.menues.skript)}» oder «${esc(BW.menues.neu)}»)</span>.</li>
+      <li>Zuerst «${esc(label(ein))}», dann ${BW.mindestens === 2 ? 'zwei' : BW.mindestens} weitere nach Wahl: <b>${BW.neu.length} Aufgaben ${esc(BW.menues.neu)}</b> stehen oben zur Wahl. <span class="bsp">Die Aufgaben aus dem Skript sind ein freiwilliger Zusatz.</span></li>
       <li>Tragen Sie ein, was gegeben ist.</li>
       <li>Markieren Sie mit <b>?</b>, was gesucht ist: <span class="bsp">am gesuchten Feld auf das kleine ? klicken.</span></li>
       <li>Rechnen Sie nur, was Sie für das ? brauchen.</li>
@@ -3199,6 +3216,21 @@ function vergleichHtml(A, z){
     <textarea id="bwbegr" placeholder="Begründung …"></textarea>
     <div class="bwurteil" id="bwurteil"></div></div>`;
 }
+/* NEU (VORSCHLAG 4.8): «Was war uebersichtlicher?» - Text im stand.texte,
+   «Eine moegliche Sicht» erst, wenn etwas dasteht. Nichts wird geprueft. */
+function uebersichtHaken(tisch, A){
+  const t = tisch.querySelector('#bwuebers'), s = tisch.querySelector('#bwuebsicht');
+  if (!t || !s) return;
+  const sch = 'bw_' + A.id + '_uebers';
+  const zeigen = () => {
+    if ((stand.texte[sch] || '').trim().length >= 5)
+      sichtKnopf(s, '<ul>' + BW.uebersicht.sicht.map(x => `<li>${esc(x)}</li>`).join('') + '</ul>', () => {});
+    else s.innerHTML = '';
+  };
+  t.value = stand.texte[sch] || '';
+  t.oninput = () => { stand.texte[sch] = t.value; sichern(); zeigen(); };
+  zeigen();
+}
 function vergleichHaken(tisch, A, z, nach){
   const begr = tisch.querySelector('#bwbegr');
   if (!begr) return;
@@ -3581,9 +3613,30 @@ const daIn = (A, z, v) => z.eintraege.find(e => e.p === v + ':' + A.gesucht);
 /* NEU (Fassung 3.7, Brille und Lesen): Steht die Angabe k da - in der
    Darstellung v oder (ohne v) irgendwo? Eine Angabe darf auch an ihrer
    zweiten Stelle stehen (A.gegeben_auch: «6 von ihnen» als 6/25 ODER 6/10). */
+/* FEHLERBEHOBEN (2026-11-06, Rike: «springt nicht weiter zu Schritt zwei
+   mit den ?»): Ursache - Schritt 1 galt nur als erfuellt, wenn jede Angabe
+   GENAU an ihrer eigenen Stelle stand. Wer «fuenfmal so viele Touristen»
+   als P(Ē) = 5/6 eintrug statt P(E) = 1/6, oder bei der Brandmeldeanlage
+   gleich 0.95 statt «0.05 kein Alarm», blieb in Schritt 1, und die «?»
+   erschienen nie (e2fragZeit). Jetzt zaehlt auch das Gegenstueck (1 minus
+   die Angabe, derselbe Verzweigungspunkt): X <-> nX, X_Y <-> X_nY usw. */
+const gegenStelle = k => {
+  const um = s => (s[0] === 'n' ? s.slice(1) : 'n' + s), i = k.indexOf('_');
+  return i >= 0 ? k.slice(0, i + 1) + um(k.slice(i + 1))
+    : ['X', 'nX', 'Y', 'nY'].includes(k) ? um(k) : null;
+};
 const angabeDa = (A, z, k, v) => z.eintraege.some(e => (!v || vw(e.p) === v)
-  && (kk(e.p) === k || (A.gegeben_auch && A.gegeben_auch[k] === kk(e.p))));
+  && (kk(e.p) === k || kk(e.p) === gegenStelle(k)
+      || (A.gegeben_auch && A.gegeben_auch[k] === kk(e.p))));
 const angabenIn = (A, z, v) => A.gegeben.every(k => angabeDa(A, z, k, v));
+/* FEHLERBEHOBEN (2026-11-06, wie oben): Wer schon rechnet, ist ueber
+   Schritt 1 hinaus, auch wenn eine Angabe fehlt (Zwei Kaestchen: «Gold aus
+   Kaestchen A» = 1 traegt kaum jemand ein). Sonst blieben die «?» weg.
+   «Rechnet» heisst: ein Feld ist gefuellt, das weder eine Angabe noch ihr
+   Gegenstueck ist - gleich ob getippt oder mit der Rechenleiste. */
+const istAngabeStelle = (A, k) => A.gegeben.some(g => k === g || k === gegenStelle(g)
+  || (A.gegeben_auch && A.gegeben_auch[g] === k));
+const gerechnetIn = (A, z, v) => z.eintraege.some(e => (!v || vw(e.p) === v) && !istAngabeStelle(A, kk(e.p)));
 // NEU (Rike 2026-10-10): das «?» je Darstellung
 const fragIn = (z, v) => !!(z && z.fragen) && z.fragen[v] !== undefined;
 const fragIrgendwo = z => fragIn(z, 'r') || fragIn(z, 't');
@@ -3622,7 +3675,11 @@ const angabenDa = (A, z) => A.gegeben.every(k => angabeDa(A, z, k));
    dazu die Antwort «hängen zusammen / unabhängig» wie beim Wuerfel - und
    beide verglichenen Werte muessen dastehen. basisGeloest ist der Weg
    allein (das «?» ist erreicht). */
-const basisGeloest = (A, z) => !!(z && z.eintraege) && fragOk(A, z) && !!gesuchtDa(A, z) && angabenDa(A, z);
+/* FEHLERBEHOBEN (2026-11-06): Ursache - geloest verlangte zusaetzlich jede
+   Angabe an ihrer Stelle. Wer bei den Zwei Kaestchen die 1 nie eintrug,
+   aber das «?» richtig erreichte, kam nie zum Schluss. Steht der richtige
+   Wert am «?», genuegt das; die Angaben stecken darin. */
+const basisGeloest = (A, z) => !!(z && z.eintraege) && fragOk(A, z) && !!gesuchtDa(A, z);
 const vergleichDa = (A, z) => [A.vergleich.links, A.vergleich.rechts].every(k => z.eintraege.some(e => kk(e.p) === k));
 const vergleichOk = (A, z) => !A.vergleich || (z.wahl === A.vergleich.richtig && vergleichDa(A, z));
 const geloest = (A, z) => basisGeloest(A, z) && vergleichOk(A, z);
@@ -3633,7 +3690,8 @@ function e2schritt(A, z){
   if (geloest(A, z)) return 5;
   if (basisGeloest(A, z)) return 4;
   const v1 = e2erster(A, z);
-  if (v1 ? !angabenIn(A, z, andere(v1)) : !angabenDa(A, z)) return 1;
+  if ((v1 ? !angabenIn(A, z, andere(v1)) : !angabenDa(A, z))
+      && !gerechnetIn(A, z, v1 ? andere(v1) : null)) return 1;
   if (!fragSchritt(A, z)) return 2;
   return 3;
 }
@@ -3908,6 +3966,8 @@ function menuePlatzieren(li){
 function e2links(A, z){
   const kopf = document.getElementById('bwkopf'), reiterEl = document.getElementById('bwreiter'), s = e2stand();
   const frei = BW.freiwillig.includes(A.id);
+  // NEU (VORSCHLAG 4.8): Skript-Aufgaben sind freiwilliger Zusatz
+  const fTag = BW.skript.includes(A.id) ? 'freiwillig' : 'nach Wahl';
   const ein = aufgabe(BW.pflicht[0]);
   // GEAENDERT (Rike 2026-10-17, Zusatz «Zug 2»): wie in Etappe 1 zwei
   // Ebenen. Bei der Einstiegsaufgabe (zwei Wege) vorn die Wege als
@@ -3927,18 +3987,25 @@ function e2links(A, z){
         + `<span class="bwzug knopflos${ok ? ' fertig' : ''}" aria-current="${!ok && (n === 1 || w1)}" style="display:inline-flex;align-items:center;gap:6px;font-size:12px;font-weight:600;padding:3px 9px;border:2px solid var(--linie);border-radius:999px;background:var(--karte)"><span class="nr">${ok ? '✓' : n}</span>${t}</span>`).join('')
       + '</span>';
   }
+  /* GEAENDERT (VORSCHLAG 4.8, Rike 2026-11-06: «Mein Kollege hat komplett
+     uebersehen, dass es neben dem gefuehrten Beispiel noch ganz viele andere
+     gibt»): drei Zeilen statt Menues. 1 die Lostoepfe; 2 alle Aufgaben an
+     der Chilbi als sichtbare Knoepfe, nicht hinter einem ▾; darunter der
+     freiwillige Schluss und - getrennt, zugeklappt - die Skript-Aufgaben
+     als freiwilliger Zusatz (zaehlen nicht zu den zwei weiteren). */
+  const ok = id => geloest(aufgabe(id), s.a[id]) ? ' <span class="ok">✓</span>' : '';
   reiterEl.innerHTML = zr + `<span class="bwsitwahl bwaufgwahl${wegOffen ? ' gedimmt' : ''}"${wegOffen ? ' title="zuerst Weg 1 und 2"' : ''}>`
-    + `<button class="bwein" data-ansicht="${ein.id}" aria-current="${s.ansicht === ein.id}">Zum Einstieg: ${esc(label(ein))}${geloest(ein, s.a[ein.id]) ? ' <span class="ok">✓</span>' : ''}</button>`
-    // GEAENDERT (Fassung 4): die Titel der Menues kommen aus flaeche.py
-    // («Aus dem Skript», «An der Chilbi»)
-    + menueHtml('skript', BW.menues.skript, BW.skript, s)
-    + menueHtml('neu', BW.menues.neu, BW.neu, s)
+    + `<span class="bwstufe"><span class="bwstnr">1</span><button class="bwein" data-ansicht="${ein.id}" aria-current="${s.ansicht === ein.id}">${esc(label(ein))}${ok(ein.id)}</button></span>`
+    + `<span class="bwstufe bwchilbi"><span class="bwstnr">2</span><span class="bwstlab">${BW.mindestens === 2 ? 'Zwei' : BW.mindestens} weitere ${esc(BW.menues.neu)}:</span>`
+    + BW.neu.map(id => `<button data-ansicht="${id}" aria-current="${s.ansicht === id}">${esc(label(aufgabe(id)))}${ok(id)}</button>`).join('') + '</span>'
+    + `<span class="bwstufe bwdazu">`
     // NEU (FASSUNG 4.6): der freiwillige Schluss
     + `<button class="bwein bwbed" data-bedingung="1" aria-current="${!!s.bedingung}">Zum Schluss: Ändert die Bedingung etwas?${t2fertig(e3stand()) && t2richtig(e3stand()) ? ' <span class="ok">✓</span>' : ''}</button>`
+    + menueHtml('skript', BW.menues.skript, BW.skript, s) + '</span>'
     + (wegOffen && !oben ? '<span class="hin">zuerst Weg 1 und 2</span>' : '') + '</span>';
   // GEAENDERT (Fassung 4.1): Titel, Situation und Frage als Karte ganz
   // oben, mit Textmarker (Stifte «Angabe» und «gesucht»).
-  let h = situationKarte(A, {titel: esc(label(A)) + (frei ? ' <span class="frei">nach Wahl</span>' : ''),
+  let h = situationKarte(A, {titel: esc(label(A)) + (frei ? ` <span class="frei">${fTag}</span>` : ''),
     frage: true, stifte: ['angabe', 'gesucht'], auftrag: D.etappen[1].auftrag,
     nr: 2, getan: z.eintraege.length > 0});
   let mehr = '';
@@ -4023,6 +4090,10 @@ function e2links(A, z){
       <div class="zeile"><span>${n <= kurz ? `<b>${n} ${n === 1 ? 'Rechnung' : 'Rechnungen'}</b> — schneller geht es nicht.`
         : `<b>${n} Rechnungen</b> — es geht auch mit ${kurz}.`} Blass ist, was Sie für das ? nicht gebraucht haben.</span></div>`;
     if (A.vergleich) mehr += vergleichHtml(A, z);
+    // NEU (VORSCHLAG 4.8): offene Frage nach jeder Aufgabe an der Chilbi
+    if (BW.neu.includes(A.id) && BW.uebersicht)
+      mehr += `<div class="bwuebers"><b>${esc(BW.uebersicht.frage)}</b> <span class="frei">freiwillig</span>
+        <textarea id="bwuebers" placeholder="Ihre Antwort …"></textarea><span class="bw3sicht" id="bwuebsicht"></span></div>`;
   }
   if (mehr) h += `<div class="bwmehr">${mehr}</div>`;
   // Mit dem Band oben steht der Wechsel im Pop-up der Schritte (ⓘ), nicht
@@ -4045,12 +4116,15 @@ function e2links(A, z){
   h += schrittLeiste(l, det, stat, z.eintraege.length > 0 || fragIrgendwo(z));
   // NEU (Fassung 3.7): «Jugendtreffen ✓ · 1 von 2 weiteren»
   // GEAENDERT (Fassung 4.1): der Fortschritt steht in der Kopfleiste.
-  const fw = fertigZahl(BW.freiwillig), m = BW.mindestens;
+  // GEAENDERT (VORSCHLAG 4.8): die zwei weiteren kommen von der Chilbi;
+  // Skript-Aufgaben sind Zusatz und zaehlen nur als «dazu».
+  const fw = fertigZahl(BW.neu), m = BW.mindestens, dazu = Math.max(0, fw - m) + fertigZahl(BW.skript);
   const einOk = BW.pflicht.every(id => geloest(aufgabe(id), s.a[id]));
   // Fortschritt in die zurueckgenommene Wahl (Fassung 4.1: Kopfleiste)
-  (reiterEl.querySelector('.bwaufgwahl') || reiterEl).insertAdjacentHTML('beforeend', `<span class="bwfort"><b>${esc(label(ein))} ${einOk ? '✓' : 'offen'}</b> · <b>${Math.min(fw, m)} von ${m}</b> weiteren`
-    + `${fw > m ? ` (dazu ${fw - m} freiwillig)` : ''}${einOk && fw >= m ? ' — <b>Pflicht erfüllt.</b>' : ''}</span>`);
+  (reiterEl.querySelector('.bwaufgwahl') || reiterEl).insertAdjacentHTML('beforeend', `<span class="bwfort"><b>${esc(label(ein))} ${einOk ? '✓' : 'offen'}</b> · <b>${Math.min(fw, m)} von ${m}</b> ${esc(BW.menues.neu)}`
+    + `${dazu ? ` (dazu ${dazu} freiwillig)` : ''}${einOk && fw >= m ? ' — <b>Pflicht erfüllt.</b>' : ''}</span>`);
   kopf.innerHTML = h;
+  uebersichtHaken(kopf, A);
   protokollAuffrischen(A, z);
   markerHaken(kopf);
   karteHaken(kopf, 2, e2zeichnen);
@@ -4074,12 +4148,16 @@ function e2links(A, z){
   // Weg 1 eben fertig: kurze Notiz (E.wegHinweis, von e2eintrag gesetzt);
   // Aufgabe geloest: «Naechste Aufgabe →» zur naechsten offenen.
   if (ganz){
-    const folge = BW.pflicht.concat(BW.skript, BW.neu);
-    const i0 = folge.indexOf(A.id);
+    // GEAENDERT (VORSCHLAG 4.8): bis die Pflicht steht, nur Lostoepfe und
+    // Chilbi; nach den Lostoepfen geht die Fahne an die Chilbi.
+    const folge = BW.pflicht.concat(BW.neu);
+    const i0 = Math.max(0, folge.indexOf(A.id));
     const naechste = folge.slice(i0 + 1).concat(folge.slice(0, i0)).find(id => !geloest(aufgabe(id), s.a[id]));
     const pflichtOk = einOk && fw >= m;
     weiterFahne(naechste && !pflichtOk
-      ? {notiz: 'Aufgabe fertig.', knopf: 'Nächste Aufgabe →', tun: () => waehlen(naechste)}
+      ? (BW.pflicht.includes(A.id) && BW.neu.includes(naechste)
+        ? {notiz: `${label(A)} fertig. Jetzt ${m === 2 ? 'zwei' : m} weitere ${BW.menues.neu}, nach Wahl.`, knopf: `${label(aufgabe(naechste))} →`, tun: () => waehlen(naechste)}
+        : {notiz: 'Aufgabe fertig.', knopf: 'Nächste Aufgabe →', tun: () => waehlen(naechste)})
       // GEAENDERT (FASSUNG 4.3): nach der Pflicht weiter zur freiwilligen Etappe 3
       // GEAENDERT (FASSUNG 4.6): erst der freiwillige Schluss, dann Etappe 3
       : pflichtOk && !(t2fertig(e3stand()) && t2richtig(e3stand()))
@@ -4414,7 +4492,7 @@ function e3teil2(z, o){
   const kopf = document.getElementById('bwkopf');
   kopf.innerHTML = `<div class="bwskarte" role="region" aria-label="Auftrag"><div class="bwsinhalt">
     <div class="bwskopf"><span class="bwstitel">Ändert die Bedingung etwas?</span></div>
-    <div class="bwsganz"><p class="bwstext">Vier Situationen von der Chilbi. Ändert das, was man weiss (die Bedingung), die Wahrscheinlichkeit – oder nicht?</p>
+    <div class="bwsganz"><p class="bwstext">Vier Situationen von der Chilbi, drei davon kennen Sie aus Etappe 1 und 2. Ändert das, was man weiss (die Bedingung), die Wahrscheinlichkeit – oder nicht?</p>
     <div class="bwsauftrag"><p><span class="was">Auftrag:</span>Legen Sie jedes Kärtchen auf «${esc(E3.stapel2[0].name)}» oder «${esc(E3.stapel2[1].name)}». Abgelegt zeigt es beide Werte.</p>${AUFTRAG_KNOPF}</div></div></div></div>`;
   auftragKnopfHaken(kopf, o.nr || 3);
   // Der Satz steht in der Karte: In Etappe 2 traegt das Band rechts nichts.
@@ -4425,7 +4503,7 @@ function e3teil2(z, o){
   const karte2 = (k, gelegt) => {
     const ort = z.t2[k.id], ok = ort === k.richtig;
     return `<button type="button" class="bw3satz bw3k2${E3W.wahl === k.id ? ' gewaehlt' : ''}${gelegt ? ' gelegt ' + (ok ? 'ok' : 'falsch') : ''}" data-satz="${k.id}" aria-pressed="${E3W.wahl === k.id}">
-      <span class="satz"><b>${esc(k.titel)}</b> ${esc(k.text)} <b>${esc(k.frage)}</b> <span class="zeichen">${esc(k.zeichen)}</span></span>
+      <span class="satz">${k.herkunft ? `<span class="herk">${esc(k.herkunft)}</span>` : ''}<b>${esc(k.titel)}</b> ${esc(k.text)} <b>${esc(k.frage)}</b> <span class="zeichen">${esc(k.zeichen)}</span></span>
       ${gelegt ? `<span class="werte">${teileHtml(k.pa.teile)}${esc(gleich(k.pa.wert))} <span class="pt">·</span> ${teileHtml(k.pab.teile)}${esc(gleich(k.pab.wert))}</span>` : ''}</button>`;
   };
   const zeichnen = () => {
