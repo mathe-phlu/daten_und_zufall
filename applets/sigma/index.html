@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="de-CH">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Applet: Sigma-Regeln</title>
+<link rel="stylesheet" href="../_teile/applet.css">
+</head>
+<body>
+<main>
+<h1>Wie viel liegt zwischen μ − c·σ und μ + c·σ?</h1>
+<p class="zu">Zu Teil 3 «Die Sigma-Regeln»</p>
+
+<div class="blatt">
+  <svg class="bild" id="bild" role="img" aria-label="Glockenkurve, farbig die Fläche zwischen μ − c·σ und μ + c·σ"></svg>
+  <div class="regler" id="regler"></div>
+  <div class="anzeige" aria-live="polite">
+    <p>Bereich von <strong id="links"></strong> bis <strong id="rechts"></strong></p>
+    <p>Anteil der Fläche in diesem Bereich: <strong id="anteil"></strong></p>
+  </div>
+</div>
+
+<section class="auftrag">
+  <h2>Selber probieren</h2>
+  <ul>
+    <li><strong>Hängt es von μ und σ ab?</strong> c auf 1 lassen, verschiedene μ und σ einstellen und jedes Mal ablesen: Wie viel Prozent der Fläche liegen zwischen μ − σ und μ + σ? Dabei beobachten, was sich an der Glocke ändert und was am Anteil nicht.</li>
+    <li><strong>Wie viele σ für 90, 95 und 99 %?</strong> c schieben: Für welches c liegen zwischen μ − c·σ und μ + c·σ möglichst genau 90 % der Fläche? Und für 95 % und 99 %?</li>
+  </ul>
+</section>
+</main>
+
+<script src="../_teile/applet.js"></script>
+<script>
+// Drehbuch 8-03, Applet D (Rike, 17.11.2026): Schieber fuer mu, sigma
+// und c (0 bis 3, Schritt 0,01), farbig die Flaeche zwischen mu - c sigma
+// und mu + c sigma, Anteil in Prozent mit zwei Nachkommastellen.
+// Kein Knopf und kein Feld «Prozent -> c», die markanten Werte stehen
+// nirgends: Den Faktor findet man durch Schieben.
+const ber = { x0: -20, x1: 80, y0: 0, y1: 0.21 };
+const svg = document.getElementById('bild');
+const k = achsen(svg, {
+  b: 760, h: 380, rand: { l: 52, r: 24, o: 14, u: 30 }, ...ber,
+  xMarken: [-20, -10, 0, 10, 20, 30, 40, 50, 60, 70, 80],
+  yMarken: [0, 0.05, 0.1, 0.15, 0.2], yStellen: 2, yAchseBei: -20, xName: 'x'
+});
+const flaeche = k.el('path', { fill: 'var(--flaeche)' });
+const grenzeL = k.el('line', { stroke: 'var(--aktion)', 'stroke-width': 1.5, 'stroke-dasharray': '5 4' });
+const grenzeR = k.el('line', { stroke: 'var(--aktion)', 'stroke-width': 1.5, 'stroke-dasharray': '5 4' });
+const mitte = k.el('line', { stroke: 'var(--matt)', 'stroke-width': 1, 'stroke-dasharray': '2 4' });
+const kurve = k.el('path', { class: 'kurve' });
+
+const ort = document.getElementById('regler');
+const mu = schieber(ort, { name: 'mu', label: 'μ', min: 10, max: 50, schritt: 0.5, wert: 30, stellen: 1, bei: zeichnen });
+const sigma = schieber(ort, { name: 'sigma', label: 'σ', min: 2, max: 10, schritt: 0.1, wert: 5, stellen: 1, bei: zeichnen });
+const c = schieber(ort, { name: 'c', label: 'c', min: 0, max: 3, schritt: 0.01, wert: 1, stellen: 2, bei: zeichnen });
+
+function zeichnen() {
+  const M = mu.wert, S = sigma.wert, C = c.wert;
+  const f = (x) => phi(x, M, S);
+  kurve.setAttribute('d', pfad(f, k.X, k.Y, ber.x0, ber.x1, 500));
+  const l = M - C * S, r = M + C * S;
+  const xl = Math.max(l, ber.x0), xr = Math.min(r, ber.x1);
+  flaeche.setAttribute('d', C > 0
+    ? `M${k.X(xl)} ${k.Y(0)}` + pfad(f, k.X, k.Y, xl, xr, 300).replace(/^M/, 'L') + `L${k.X(xr)} ${k.Y(0)}Z`
+    : '');
+  for (const [ln, x] of [[grenzeL, l], [grenzeR, r]]) {
+    ln.setAttribute('x1', k.X(x)); ln.setAttribute('x2', k.X(x));
+    ln.setAttribute('y1', k.Y(0)); ln.setAttribute('y2', k.Y(f(x)));
+  }
+  mitte.setAttribute('x1', k.X(M)); mitte.setAttribute('x2', k.X(M));
+  mitte.setAttribute('y1', k.Y(0)); mitte.setAttribute('y2', k.Y(f(M)));
+  document.getElementById('links').textContent = zahl(l, 2);
+  document.getElementById('rechts').textContent = zahl(r, 2);
+  document.getElementById('anteil').textContent = zahl(100 * (2 * Phi(C) - 1), 2) + ' %';
+}
+zeichnen();
+</script>
+</body>
+</html>

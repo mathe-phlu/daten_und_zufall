@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="de-CH">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Applet: Glocke verstehen</title>
+<link rel="stylesheet" href="../_teile/applet.css">
+</head>
+<body>
+<main>
+<h1>Glocke verstehen</h1>
+<p class="zu">Zur Hilfe «Die Glockenkurve verstehen» · φ(x) = 1/(σ√(2π)) · e<sup>−(x − μ)²/(2σ²)</sup></p>
+
+<div class="blatt">
+  <svg class="bild" id="bild" role="img" aria-label="Glockenkurve mit μ und σ, dazu die Höhe der Kurve an der Stelle x"></svg>
+  <div class="regler" id="regler"></div>
+  <div class="anzeige" aria-live="polite">
+    <p>Höhe der Kurve an der Stelle x: <strong id="hoehe"></strong></p>
+    <p>Höhe der Spitze: <strong id="spitze"></strong></p>
+    <p>Fläche unter der ganzen Kurve: <strong id="flaeche"></strong></p>
+  </div>
+</div>
+
+<section class="auftrag">
+  <h2>Selber probieren</h2>
+  <ul>
+    <li><strong>Was macht μ?</strong> σ = 5 stehen lassen und μ von 20 auf 40 ziehen. Was ändert sich an der Kurve: Lage, Höhe, Breite? Was bleibt gleich?</li>
+    <li><strong>Was macht σ?</strong> μ = 30 stehen lassen und σ von 2,5 auf 10 ziehen. Was passiert mit der Breite, was mit der Höhe der Spitze? Die Höhe für σ = 5 und σ = 10 ablesen. Und was zeigt die Anzeige der Fläche?</li>
+    <li><strong>Der Exponent:</strong> Mit μ = 30 und σ = 5 mit dem Schieber für x prüfen, wie hoch die Kurve bei x = 25, 35, 40 und 50 ist.</li>
+  </ul>
+</section>
+</main>
+
+<script src="../_teile/applet.js"></script>
+<script>
+// Drehbuch 8-H1: Glocke mit Schiebern fuer mu, sigma und x (Hoehe der
+// Kurve an der Stelle x), Anzeige der Flaeche. Die y-Achse bleibt fest,
+// sonst sieht man nicht, dass die Spitze bei groesserem sigma sinkt.
+const ber = { x0: -20, x1: 80, y0: 0, y1: 0.21 };
+const svg = document.getElementById('bild');
+const k = achsen(svg, {
+  b: 760, h: 380, rand: { l: 52, r: 24, o: 14, u: 30 }, ...ber,
+  xMarken: [-20, -10, 0, 10, 20, 30, 40, 50, 60, 70, 80],
+  yMarken: [0, 0.05, 0.1, 0.15, 0.2], yStellen: 2, yAchseBei: -20, xName: 'x'
+});
+const flaeche = k.el('path', { fill: 'var(--grau)' });
+const lot = k.el('line', { stroke: 'var(--aktion)', 'stroke-width': 2 });
+const kurve = k.el('path', { class: 'kurve' });
+const marke = k.el('circle', { r: 5.5, fill: 'var(--aktion)' });
+
+const ort = document.getElementById('regler');
+const mu = schieber(ort, { name: 'mu', label: 'μ', min: 10, max: 50, schritt: 0.5, wert: 30, stellen: 1, bei: zeichnen });
+const sigma = schieber(ort, { name: 'sigma', label: 'σ', min: 2, max: 10, schritt: 0.1, wert: 5, stellen: 1, bei: zeichnen });
+const xs = schieber(ort, { name: 'x', label: 'x', min: -20, max: 80, schritt: 0.5, wert: 25, stellen: 1, bei: zeichnen });
+
+function zeichnen() {
+  const M = mu.wert, S = sigma.wert, X = xs.wert;
+  const f = (x) => phi(x, M, S);
+  const d = pfad(f, k.X, k.Y, ber.x0, ber.x1, 500);
+  kurve.setAttribute('d', d);
+  flaeche.setAttribute('d', `M${k.X(ber.x0)} ${k.Y(0)}` + d.replace(/^M/, 'L') + `L${k.X(ber.x1)} ${k.Y(0)}Z`);
+  lot.setAttribute('x1', k.X(X)); lot.setAttribute('x2', k.X(X));
+  lot.setAttribute('y1', k.Y(0)); lot.setAttribute('y2', k.Y(f(X)));
+  marke.setAttribute('cx', k.X(X)); marke.setAttribute('cy', k.Y(f(X)));
+  document.getElementById('hoehe').textContent = 'φ(' + zahl(X, 1) + ') ≈ ' + zahl(f(X), 6);
+  document.getElementById('spitze').textContent = zahl(f(M), 4);
+  // Flaeche unter der ganzen Kurve, numerisch ueber mu +- 10 sigma
+  // (Trapezregel). Nicht nur ueber den sichtbaren Ausschnitt: Bei
+  // mu = 10, sigma = 10 fehlte dort sonst ein Rest von 0,001.
+  let A = 0; const n = 4000, a0 = M - 10 * S, h = 20 * S / n;
+  for (let i = 0; i <= n; i++) A += (i === 0 || i === n ? 0.5 : 1) * f(a0 + i * h);
+  A *= h;
+  document.getElementById('flaeche').textContent = zahl(A, 3);
+}
+zeichnen();
+</script>
+</body>
+</html>

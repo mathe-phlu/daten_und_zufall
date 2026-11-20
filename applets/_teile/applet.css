@@ -1,0 +1,51 @@
+/* Gemeinsame Gestaltung der eigenen Applets von MA01.07.
+   Tokens wie in bauen/gestalt (lernlandschaft.css), Schriften aus
+   gemeinsam/fremd des gebauten Moduls -- die Applets liegen beim Bau
+   unter daten_und_zufall/applets/<name>/. */
+@font-face{font-family:'Fira Sans';font-style:normal;font-weight:400;font-display:swap;
+  src:url(../../gemeinsam/fremd/fira-400-latin.woff2) format('woff2')}
+@font-face{font-family:'Fira Sans';font-style:normal;font-weight:500;font-display:swap;
+  src:url(../../gemeinsam/fremd/fira-500-latin.woff2) format('woff2')}
+@font-face{font-family:'Patrick Hand';font-style:normal;font-weight:400;font-display:swap;
+  src:url(../../gemeinsam/fremd/patrick-400-latin.woff2) format('woff2')}
+
+:root{
+  --papier:#f8f4ec; --karte:#fffefb; --tinte:#2d2924; --matt:#6c6357;
+  --linie:#e4d9c7; --fach:#0065A9; --aktion:#9867A5; --braun:#935100;
+  --flaeche:rgba(152,103,165,.32); --grau:rgba(108,99,87,.18);
+  --druck:'Fira Sans','Segoe UI',-apple-system,BlinkMacSystemFont,sans-serif;
+  --hand:'Patrick Hand',cursive;
+}
+*{box-sizing:border-box}
+html,body{margin:0;background:var(--papier);color:var(--tinte);font-family:var(--druck);font-size:17px;line-height:1.45}
+main{max-width:60rem;margin:0 auto;padding:1.2rem 1rem 2rem}
+h1{font-family:var(--hand);font-weight:400;font-size:2rem;line-height:1.15;margin:0 0 .2rem}
+.zu{color:var(--matt);margin:0 0 1rem;font-size:.95rem}
+.blatt{background:var(--karte);border:1px solid var(--linie);border-top:4px solid var(--aktion);padding:1rem}
+svg.bild{display:block;width:100%;height:auto;touch-action:pan-y}
+svg.bild text{font-family:var(--druck);font-size:13px;fill:var(--matt)}
+svg.bild .achse{stroke:var(--matt);stroke-width:1}
+svg.bild .gitter{stroke:var(--linie);stroke-width:1}
+svg.bild .kurve{fill:none;stroke:var(--fach);stroke-width:2.5}
+svg.bild .punkt{fill:var(--tinte)}
+.regler{display:grid;grid-template-columns:auto 1fr auto;gap:.55rem .7rem;align-items:center;margin-top:1rem}
+.regler label{font-family:var(--hand);font-size:1.35rem;min-width:1.6rem}
+.regler .zeile{display:flex;align-items:center;gap:.4rem}
+.regler input[type=range]{flex:1;accent-color:var(--aktion);min-width:6rem;height:1.8rem}
+.regler button{font:inherit;font-size:1.05rem;width:2rem;height:2rem;padding:0;border:1px solid var(--linie);background:var(--papier);color:var(--tinte);cursor:pointer}
+.regler button:hover{border-color:var(--matt)}
+.regler output{font-variant-numeric:tabular-nums;min-width:4.6rem;text-align:right;font-weight:500}
+.anzeige{margin-top:1rem;padding:.7rem .9rem;border:1px solid var(--linie);background:var(--papier);font-variant-numeric:tabular-nums}
+.anzeige p{margin:.15rem 0}
+.anzeige strong{font-weight:500}
+.auftrag{margin-top:1.2rem;font-size:.95rem}
+.auftrag h2{font-family:var(--hand);font-weight:400;font-size:1.35rem;margin:0 0 .3rem}
+.auftrag ul{margin:0;padding-left:1.2rem}
+.auftrag li{margin:.25rem 0}
+@media (max-width:560px){
+  .regler{grid-template-columns:auto 1fr}
+  .regler output{grid-column:2;text-align:left;margin-top:-.4rem}
+  /* Das Bild wird auf gut 40 % verkleinert; ohne das waeren die
+     Achsenzahlen 5 Pixel hoch. */
+  svg.bild text{font-size:24px}
+}

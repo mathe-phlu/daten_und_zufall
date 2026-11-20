@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="de-CH">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Applet: Welche p passen?</title>
+<link rel="stylesheet" href="../_teile/applet.css">
+</head>
+<body>
+<main>
+<h1>Welche p passen?</h1>
+<p class="zu">Zu Anwendung 3 «Welche p passen?» · n = 1000 Befragte, davon X = 228 für Partei A</p>
+
+<div class="blatt">
+  <svg class="bild" id="bild" role="img" aria-label="Glockenkurve von X für n = 1000 mit dem 90-%-Bereich und der festen Linie bei X = 228"></svg>
+  <div class="regler" id="regler"></div>
+  <div class="anzeige" aria-live="polite">
+    <p>μ = 1000 · p = <strong id="mu"></strong> · σ = √(1000 · p · (1 − p)) ≈ <strong id="sigma"></strong></p>
+    <p>90-%-Bereich von μ − 1,64·σ ≈ <strong id="links"></strong> bis μ + 1,64·σ ≈ <strong id="rechts"></strong></p>
+    <p id="urteil"></p>
+  </div>
+</div>
+
+<section class="auftrag">
+  <h2>Selber probieren</h2>
+  <ul>
+    <li>p verschieben: Für welches kleinste und welches grösste p liegt X = 228 gerade noch im 90-%-Bereich? Beide Werte auf drei Stellen notieren.</li>
+    <li>Dabei beobachten, wie sich Lage und Breite des Bereichs ändern, wenn p wächst.</li>
+  </ul>
+</section>
+</main>
+
+<script src="../_teile/applet.js"></script>
+<script>
+// Drehbuch 8-06, Applet A: Schieber fuer p (0,10 bis 0,40, Schritt
+// 0,001), Glocke von X fuer n = 1000 mit dem 90-%-Bereich als Flaeche,
+// Grenzen mu -+ 1,64 sigma als Zahlen, feste Linie X = 228. Die Flaeche
+// wird farbig, sobald 228 drin liegt. Die Grenzen 0,207 und 0,250
+// stehen nirgends, und kein Knopf sucht sie.
+const N = 1000, X0 = 228, Z = 1.64;
+const ber = { x0: 50, x1: 450, y0: 0, y1: 0.045 };
+const svg = document.getElementById('bild');
+const k = achsen(svg, {
+  b: 760, h: 380, rand: { l: 56, r: 24, o: 14, u: 30 }, ...ber,
+  xMarken: [50, 100, 150, 200, 250, 300, 350, 400, 450],
+  yMarken: [0, 0.01, 0.02, 0.03, 0.04], yStellen: 2, xName: 'X'
+});
+const flaeche = k.el('path', {});
+const kurve = k.el('path', { class: 'kurve' });
+k.el('line', { x1: k.X(X0), x2: k.X(X0), y1: k.Y(0), y2: k.Y(ber.y1), stroke: 'var(--braun)', 'stroke-width': 2.5 });
+k.el('text', { x: k.X(X0) + 6, y: k.Y(ber.y1) + 14, style: 'fill:var(--braun);font-weight:500' }).textContent = 'X = 228';
+
+const ort = document.getElementById('regler');
+const p = schieber(ort, { name: 'p', label: 'p', min: 0.1, max: 0.4, schritt: 0.001, wert: 0.1, stellen: 3, bei: zeichnen });
+
+function zeichnen() {
+  const P = p.wert, M = N * P, S = Math.sqrt(N * P * (1 - P));
+  const f = (x) => phi(x, M, S);
+  kurve.setAttribute('d', pfad(f, k.X, k.Y, ber.x0, ber.x1, 800));
+  const l = M - Z * S, r = M + Z * S;
+  flaeche.setAttribute('d', `M${k.X(l)} ${k.Y(0)}` + pfad(f, k.X, k.Y, l, r, 300).replace(/^M/, 'L') + `L${k.X(r)} ${k.Y(0)}Z`);
+  const drin = l <= X0 && X0 <= r;
+  flaeche.setAttribute('fill', drin ? 'var(--flaeche)' : 'var(--grau)');
+  document.getElementById('mu').textContent = zahl(M, 0);
+  document.getElementById('sigma').textContent = zahl(S, 2);
+  document.getElementById('links').textContent = zahl(l, 2);
+  document.getElementById('rechts').textContent = zahl(r, 2);
+  document.getElementById('urteil').innerHTML = drin
+    ? '<strong>228 liegt im 90-%-Bereich.</strong>'
+    : '228 liegt nicht im 90-%-Bereich.';
+}
+zeichnen();
+</script>
+</body>
+</html>

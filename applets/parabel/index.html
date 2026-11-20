@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="de-CH">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Applet: a, b und c</title>
+<link rel="stylesheet" href="../_teile/applet.css">
+</head>
+<body>
+<main>
+<h1>a, b und c</h1>
+<p class="zu">Zu Teil 1 «Auf dem Weg zur Glockenkurve» · die logarithmierten Balken von B(100; 0,3)</p>
+
+<div class="blatt">
+  <svg class="bild" id="bild" role="img" aria-label="Punkte ln P(X = k) für B(100; 0,3) und die Parabel a(x − b)² + c"></svg>
+  <div class="regler" id="regler"></div>
+  <div class="anzeige" aria-live="polite">
+    <p>Parabel: <strong id="term"></strong></p>
+  </div>
+</div>
+
+<section class="auftrag">
+  <h2>Selber probieren</h2>
+  <ul>
+    <li>a, b und c so wählen, dass die Parabel genau durch die Punkte geht.</li>
+    <li>Dabei beobachten: Was ändert sich, wenn a, b oder c verändert wird?</li>
+  </ul>
+</section>
+</main>
+
+<script src="../_teile/applet.js"></script>
+<script>
+// Punkte: (k, ln P(X = k)) fuer B(100; 0,3), soweit ln P >= -10 --
+// derselbe Ausschnitt wie die Folie «Alle Balken logarithmiert»
+// (VIKTOR/kapitel8/ANIMATIONEN.md, Achse ln P von -2 bis -10).
+const N = 100, P = 0.3;
+function lnBinom(n, k, p) {
+  let s = 0;
+  for (let i = 1; i <= k; i++) s += Math.log(n - k + i) - Math.log(i);
+  return s + k * Math.log(p) + (n - k) * Math.log(1 - p);
+}
+const punkte = [];
+for (let k = 0; k <= N; k++) {
+  const y = lnBinom(N, k, P);
+  if (y >= -10) punkte.push([k, y]);
+}
+
+const svg = document.getElementById('bild');
+const ber = { x0: 0, x1: 60, y0: -12, y1: 0 };
+const k = achsen(svg, {
+  b: 760, h: 430, rand: { l: 44, r: 24, o: 14, u: 30 }, ...ber,
+  xMarken: [0, 10, 20, 30, 40, 50, 60], yMarken: [-12, -10, -8, -6, -4, -2, 0],
+  xAchseBei: 0, xName: 'k', yName: 'ln P(X = k)'
+});
+// x-Achse liegt oben (y = 0); Beschriftung der k-Werte unten lassen.
+const kurve = k.el('path', { class: 'kurve' });
+for (const [x, y] of punkte) k.el('circle', { cx: k.X(x), cy: k.Y(y), r: 3.6, class: 'punkt' });
+
+const ort = document.getElementById('regler');
+const a = schieber(ort, { name: 'a', label: 'a', min: -0.1, max: 0.1, schritt: 0.001, wert: -0.010, stellen: 3, bei: zeichnen });
+const b = schieber(ort, { name: 'b', label: 'b', min: 0, max: 60, schritt: 0.1, wert: 20, stellen: 1, bei: zeichnen });
+const c = schieber(ort, { name: 'c', label: 'c', min: -8, max: 1, schritt: 0.01, wert: -4, stellen: 2, bei: zeichnen });
+
+// Kurve auf den sichtbaren Bereich beschneiden, damit sie nicht ueber
+// die Beschriftung laeuft.
+const clip = k.el('clipPath', { id: 'feld' });
+k.el('rect', { x: k.X(ber.x0), y: k.Y(ber.y1), width: k.X(ber.x1) - k.X(ber.x0), height: k.Y(ber.y0) - k.Y(ber.y1) }, clip);
+kurve.setAttribute('clip-path', 'url(#feld)');
+
+function zeichnen() {
+  const A = a.wert, B = b.wert, C = c.wert;
+  kurve.setAttribute('d', pfad((x) => A * (x - B) ** 2 + C, k.X, k.Y, ber.x0, ber.x1, 300));
+  document.getElementById('term').textContent =
+    `${zahl(A, 3)} · (x ${B < 0 ? '+' : '−'} ${zahl(Math.abs(B), 1)})² ${C < 0 ? '−' : '+'} ${zahl(Math.abs(C), 2)}`;
+}
+zeichnen();
+</script>
+</body>
+</html>
