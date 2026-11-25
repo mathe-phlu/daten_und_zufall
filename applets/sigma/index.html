@@ -27,9 +27,15 @@
     <li><strong>Wie viele σ für 90, 95 und 99 %?</strong> c schieben: Für welches c liegen zwischen μ − c·σ und μ + c·σ möglichst genau 90 % der Fläche? Und für 95 % und 99 %?</li>
   </ul>
 </section>
+<p class="heim"><a class="heimknopf" href="../../index.html" target="_top">⌂ Zum Material Daten und Zufall</a></p>
 </main>
 
 <script src="../_teile/applet.js"></script>
+<script>
+// In der Werkstatt eingebettet braucht es den Rueckweg nicht -- dort
+// fuehrt die Seite darum herum zurueck.
+if (window.self !== window.top) document.querySelector('.heim').hidden = true;
+</script>
 <script>
 // Drehbuch 8-03, Applet D (Rike, 17.11.2026): Schieber fuer mu, sigma
 // und c (0 bis 3, Schritt 0,01), farbig die Flaeche zwischen mu - c sigma

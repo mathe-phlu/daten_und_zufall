@@ -26,9 +26,15 @@
     <li>Dabei beobachten: Was ändert sich, wenn a, b oder c verändert wird?</li>
   </ul>
 </section>
+<p class="heim"><a class="heimknopf" href="../../index.html" target="_top">⌂ Zum Material Daten und Zufall</a></p>
 </main>
 
 <script src="../_teile/applet.js"></script>
+<script>
+// In der Werkstatt eingebettet braucht es den Rueckweg nicht -- dort
+// fuehrt die Seite darum herum zurueck.
+if (window.self !== window.top) document.querySelector('.heim').hidden = true;
+</script>
 <script>
 // Punkte: (k, ln P(X = k)) fuer B(100; 0,3), soweit ln P >= -10 --
 // derselbe Ausschnitt wie die Folie «Alle Balken logarithmiert»

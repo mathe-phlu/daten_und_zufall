@@ -49,3 +49,6 @@ svg.bild .punkt{fill:var(--tinte)}
      Achsenzahlen 5 Pixel hoch. */
   svg.bild text{font-size:24px}
 }
+.heim{margin:1.6rem 0 0;font-size:.95rem}
+.heim a{color:var(--braun);text-decoration:none;font-family:var(--hand);font-size:1.2rem}
+.heim a:hover{text-decoration:underline}

@@ -29,9 +29,15 @@
     <li><strong>Der Exponent:</strong> Mit μ = 30 und σ = 5 mit dem Schieber für x prüfen, wie hoch die Kurve bei x = 25, 35, 40 und 50 ist.</li>
   </ul>
 </section>
+<p class="heim"><a class="heimknopf" href="../../index.html" target="_top">⌂ Zum Material Daten und Zufall</a></p>
 </main>
 
 <script src="../_teile/applet.js"></script>
+<script>
+// In der Werkstatt eingebettet braucht es den Rueckweg nicht -- dort
+// fuehrt die Seite darum herum zurueck.
+if (window.self !== window.top) document.querySelector('.heim').hidden = true;
+</script>
 <script>
 // Drehbuch 8-H1: Glocke mit Schiebern fuer mu, sigma und x (Hoehe der
 // Kurve an der Stelle x), Anzeige der Flaeche. Die y-Achse bleibt fest,
