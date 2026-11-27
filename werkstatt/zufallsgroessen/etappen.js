@@ -3591,7 +3591,25 @@ function zgrRechne(eingabe){
     if (!t) throw 0;
     if (t.z !== undefined) return {w: parseFloat(t.z), t: t.z};
     if (t.o === '('){ const v = summe(); if (!sieh() || sieh().o !== ')') throw 0; nimm(); return {w: v.w, t: '(' + v.t + ')'}; }
-    if (t.o === '√'){ const v = potenz(); if (v.w < 0) throw 0; return {w: Math.sqrt(v.w), t: '√' + v.t}; }
+    // FEHLERBEHOBEN (2026-11-27, Rike, gefunden in Kapitel 8): «√2 · 0.5»
+    // zog nur die 2 unter die Wurzel; man musste Klammern setzen und
+    // wusste das nicht. Ursache: √ nahm nur die naechste Potenz. Jetzt:
+    // Steht nach √ eine Klammer, wirkt √ auf die Klammer; sonst auf das
+    // ganze Produkt bis zum naechsten + oder - (Text dann mit Klammer).
+    if (t.o === '√'){
+      if (sieh() && sieh().o === '('){ const v = potenz(); if (v.w < 0) throw 0; return {w: Math.sqrt(v.w), t: '√' + v.t}; }
+      let v = potenz(), mehr = false;
+      while (sieh() && ['*', ':', '/'].includes(sieh().o)){
+        const o = nimm().o, w = potenz();
+        if (o !== '*' && w.w === 0) throw 0;
+        mehr = true;
+        v = o === '*' ? {w: v.w * w.w, t: v.t + ' · ' + w.t}
+          : o === '/' ? {w: v.w / w.w, t: v.t + '/' + w.t}
+          : {w: v.w / w.w, t: v.t + ' : ' + w.t};
+      }
+      if (v.w < 0) throw 0;
+      return {w: Math.sqrt(v.w), t: '√' + (mehr ? '(' + v.t + ')' : v.t)};
+    }
     if (t.o === '-'){ const v = potenz(); return {w: -v.w, t: '−' + v.t}; }
     throw 0;
   }
