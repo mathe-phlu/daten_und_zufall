@@ -1,0 +1,130 @@
+<!doctype html>
+<html lang="de-CH">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Applet: Was passiert, wenn das wahre p wandert?</title>
+<link rel="stylesheet" href="../_teile/applet.css">
+<style>
+svg.bild .h0{fill:none;stroke:var(--matt);stroke-width:2;stroke-dasharray:6 5}
+svg.bild .grenze{stroke:var(--tinte);stroke-width:2}
+svg.bild .band{fill:var(--grau)}
+.wahl{display:flex;flex-wrap:wrap;gap:.4rem 1.2rem;margin-top:.8rem;font-size:.95rem}
+.wahl label{cursor:pointer}
+.wahl input{accent-color:var(--aktion)}
+</style>
+</head>
+<body>
+<main>
+<h1>Was passiert, wenn das wahre p wandert?</h1>
+<p class="zu">Zu Teil 5 «Irrtum vorbehalten» · Würfel, n = 300 Würfe, X = Anzahl Einsen, H₀: p = 1/6</p>
+
+<div class="blatt">
+  <svg class="bild" id="bild" role="img" aria-label="Glocke unter der Nullhypothese gestrichelt, Annahmebereich als Band, dazu die Glocke des wahren p; ihre Fläche im Annahmebereich ist der Fehler 2. Art"></svg>
+  <div class="regler" id="regler"></div>
+  <div class="wahl" role="radiogroup" aria-label="Signifikanzniveau">
+    <label><input type="radio" name="alpha" value="5" checked> α = 5 %: Annahmebereich 37 bis 63</label>
+    <label><input type="radio" name="alpha" value="1"> α = 1 %: Annahmebereich 33 bis 67</label>
+  </div>
+  <div class="anzeige" aria-live="polite">
+    <p>Wahre Glocke: μ = 300 · p = <strong id="mu"></strong> · σ = √(300 · p · (1 − p)) ≈ <strong id="sigma"></strong></p>
+    <p id="urteil"></p>
+  </div>
+</div>
+
+<section class="auftrag">
+  <h2>Selber probieren</h2>
+  <ul>
+    <li>Der Annahmebereich bleibt 37 bis 63. Das wahre p näher an 1/6 schieben (etwa 0,18) und weiter weg (etwa 0,25): Wird die Fläche der wahren Glocke im Annahmebereich, also der Fehler 2. Art, grösser oder kleiner?</li>
+    <li>Und wenn das wahre p kleiner als 1/6 ist?</li>
+    <li>Zum Weiterdenken: Was ändert sich, wenn strenger getestet wird, mit α = 1 %?</li>
+  </ul>
+</section>
+<p class="heim"><a class="heimknopf" href="../../index.html" target="_top">⌂ Zum Material Daten und Zufall</a></p>
+</main>
+
+<script src="../_teile/applet.js"></script>
+<script>
+// In der Werkstatt eingebettet braucht es den Rueckweg nicht -- dort
+// fuehrt die Seite darum herum zurueck.
+if (window.self !== window.top) document.querySelector('.heim').hidden = true;
+</script>
+<script>
+// Drehbuch 8-08, Pause «Was passiert, wenn das wahre p wandert?» (3:22).
+// Im Drehbuch stand «Keine Applets, die Animation loest es auf»; Rike
+// wollte am 28.11.2026 doch eines zum Ausprobieren.
+// Fest: die Glocke unter H0 (p = 1/6, gestrichelt) und der Annahmebereich
+// 37..63 (alpha 5 %, wie im Video) bzw. 33..67 (alpha 1 %, Abschnitt
+// «Strenger testen»). Beweglich: die Glocke des wahren p, ihre Flaeche im
+// Annahmebereich gefuellt. Die Prozentzahl rechnet exakt binomial
+// P(a <= X <= b), wie die Zahlen im Video: 0,18 -> 92 %, 0,22 -> 37 %,
+// 0,25 -> 6 %; mit 33..67 bei 0,22 -> 59 %. Die Kurvenhoehe ist echt,
+// nicht nachskaliert.
+const N = 300, P0 = 1 / 6;
+const BEREICH = { 5: [37, 63], 1: [33, 67] };
+const ber = { x0: 10, x1: 110, y0: 0, y1: 0.08 };
+const svg = document.getElementById('bild');
+const k = achsen(svg, {
+  b: 760, h: 380, rand: { l: 56, r: 24, o: 14, u: 52 }, ...ber,
+  xMarken: [10, 20, 30, 40, 50, 60, 70, 80, 90, 100, 110],
+  yMarken: [0, 0.02, 0.04, 0.06, 0.08], yStellen: 2, xName: 'X'
+});
+const band = k.el('rect', { class: 'band', height: 10 });
+const bandText = k.el('text', { 'text-anchor': 'middle' });
+const flaeche = k.el('path', { fill: 'var(--flaeche)' });
+const h0 = k.el('path', { class: 'h0' });
+const kurve = k.el('path', { class: 'kurve', style: 'stroke:var(--aktion)' });
+const gL = k.el('line', { class: 'grenze' });
+const gR = k.el('line', { class: 'grenze' });
+const gLt = k.el('text', { 'text-anchor': 'middle', style: 'fill:var(--tinte)' });
+const gRt = k.el('text', { 'text-anchor': 'middle', style: 'fill:var(--tinte)' });
+const h0t = k.el('text', { 'text-anchor': 'middle' });
+const wt = k.el('text', { 'text-anchor': 'middle', style: 'fill:var(--aktion);font-weight:500' });
+
+const f0 = (x) => phi(x, N * P0, Math.sqrt(N * P0 * (1 - P0)));
+h0.setAttribute('d', pfad(f0, k.X, k.Y, ber.x0, ber.x1, 600));
+h0t.setAttribute('x', k.X(N * P0) - 52); h0t.setAttribute('y', k.Y(f0(N * P0)) - 4);
+h0t.textContent = 'H₀: p = 1/6';
+
+// Binomialwahrscheinlichkeit P(a <= X <= b) fuer B(N; p), ueber
+// Logarithmen, damit 300 Faktoren nicht ueberlaufen.
+const LF = [0]; for (let i = 1; i <= N; i++) LF[i] = LF[i - 1] + Math.log(i);
+function binom(p, a, b) {
+  let s = 0;
+  for (let x = a; x <= b; x++) s += Math.exp(LF[N] - LF[x] - LF[N - x] + x * Math.log(p) + (N - x) * Math.log(1 - p));
+  return s;
+}
+
+const ort = document.getElementById('regler');
+const p = schieber(ort, { name: 'p', label: 'wahres p', min: 0.10, max: 0.30, schritt: 0.01, wert: 0.22, stellen: 2, bei: zeichnen });
+for (const r of document.querySelectorAll('input[name=alpha]')) r.addEventListener('change', zeichnen);
+
+function zeichnen() {
+  const alpha = document.querySelector('input[name=alpha]:checked').value;
+  const [a, b] = BEREICH[alpha];
+  const P = p.wert, M = N * P, S = Math.sqrt(N * P * (1 - P));
+  const f = (x) => phi(x, M, S);
+  kurve.setAttribute('d', pfad(f, k.X, k.Y, ber.x0, ber.x1, 800));
+  flaeche.setAttribute('d', `M${k.X(a)} ${k.Y(0)}` + pfad(f, k.X, k.Y, a, b, 300).replace(/^M/, 'L') + `L${k.X(b)} ${k.Y(0)}Z`);
+  for (const [l, t, x] of [[gL, gLt, a], [gR, gRt, b]]) {
+    l.setAttribute('x1', k.X(x)); l.setAttribute('x2', k.X(x));
+    l.setAttribute('y1', k.Y(0)); l.setAttribute('y2', k.Y(ber.y1));
+    t.setAttribute('x', k.X(x)); t.setAttribute('y', k.Y(ber.y1) + 12); t.textContent = x;
+  }
+  band.setAttribute('x', k.X(a)); band.setAttribute('width', k.X(b) - k.X(a));
+  band.setAttribute('y', k.Y(0) + 24);
+  bandText.setAttribute('x', k.X((a + b) / 2)); bandText.setAttribute('y', k.Y(0) + 48);
+  bandText.textContent = 'Annahmebereich';
+  wt.setAttribute('x', k.X(M) + 46); wt.setAttribute('y', Math.max(k.Y(f(M)) - 4, k.Y(ber.y1) + 28));
+  wt.textContent = 'wahres p';
+  document.getElementById('mu').textContent = zahl(M, 1);
+  document.getElementById('sigma').textContent = zahl(S, 2);
+  const beta = binom(P, a, b);
+  document.getElementById('urteil').innerHTML = Math.abs(P - P0) < 0.005
+    ? `Hier ist das wahre p fast 1/6, H₀ ist also (beinahe) richtig. Im Annahmebereich landen wir in ${zahl(beta * 100, 0)} % der Fälle, und das ist dann kein Fehler.`
+    : `Im Annahmebereich ${a} bis ${b} liegen bei diesem wahren p <strong>≈ ${zahl(beta * 100, 0)} %</strong>. So oft behalten wir H₀ bei, obwohl sie falsch ist: <strong>Fehler 2. Art ≈ ${zahl(beta * 100, 0)} %</strong>.`;
+}
+zeichnen();
+</script>
+</body>
+</html>
